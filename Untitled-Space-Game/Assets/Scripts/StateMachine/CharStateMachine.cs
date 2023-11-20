@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEngine.UI;
-using UnityEngine.Animations;
+// using TMPro;
+// using Unity.VisualScripting;
+// using UnityEngine.UI;
+// using UnityEngine.Animations;
 
 public class CharStateMachine : MonoBehaviour
 {
@@ -691,13 +691,7 @@ public class CharStateMachine : MonoBehaviour
     [SerializeField] float _newFov;
     [SerializeField] float _oldFov;
 
-
-    [SerializeField] float _fovThreshold;
-    [SerializeField] bool _fovTimer;
-    [SerializeField] float _maxFov;
-
-
-    private void Awake()
+    private void OnEnable()
     {
         DontDestroyOnLoad(this);
         Application.targetFrameRate = 60;
@@ -717,9 +711,9 @@ public class CharStateMachine : MonoBehaviour
         playerInput.actions.FindAction("Aim").performed += OnAim;
         playerInput.actions.FindAction("Aim").canceled += OnAim;
 
-        playerInput.actions.FindAction("Shoot").started += OnShoot;
-        playerInput.actions.FindAction("Shoot").performed += OnShoot;
-        playerInput.actions.FindAction("Shoot").canceled += OnShoot;
+        // playerInput.actions.FindAction("Shoot").started += OnShoot;
+        // playerInput.actions.FindAction("Shoot").performed += OnShoot;
+        // playerInput.actions.FindAction("Shoot").canceled += OnShoot;
 
         _states = new CharStateFactory(this);
         _currentState = _states.Grounded();
@@ -730,113 +724,113 @@ public class CharStateMachine : MonoBehaviour
 
         WallClingTime = MaxWallClingTime;
 
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.visible = false;
+        // Cursor.lockState = CursorLockMode.Locked;
 
-        _playerCam = FindObjectOfType<Camera>().transform;
+        // _playerCam = FindObjectOfType<Camera>().transform;
     }
 
     private void Update()
     {
-        _movementSpeed = Rb.velocity.magnitude;
-        if (_movementSpeed < 3 && _speedLines != null)
-        {
+        // _movementSpeed = Rb.velocity.magnitude;
+        // if (_movementSpeed < 3 && _speedLines != null)
+        // {
 
-            _speedLines.SetFloat("_Alpha", 0);
-            // _cinemachineWalk.m_Lens.FieldOfView = Mathf.Lerp(_oldFov, 60, 1);
+        //     _speedLines.SetFloat("_Alpha", 0);
+        //     // _cinemachineWalk.m_Lens.FieldOfView = Mathf.Lerp(_oldFov, 60, 1);
 
-        }
-        else if (_speedLines != null)
-        {
-            _speedLines.SetFloat("_Alpha", 0.5f);
+        // }
+        // else if (_speedLines != null)
+        // {
+        //     _speedLines.SetFloat("_Alpha", 0.5f);
 
-            SmoothFov(MoveForce);
-        }
+        //     SmoothFov(MoveForce);
+        // }
 
-        _upCheck = CheckUpSlide();
-
-
-        if (Input.GetKey(KeyCode.P))
-        {
-            Debug.Log(_currentState.ToString());
-        }
-
-        VaultCheck();
-
-        if (_isShoot)
-        {
-            CheckForGrapple();
-        }
-
-        CurrentMovement = (Orientation.forward * CurrentMovementInput.y).normalized + (Orientation.right * CurrentMovementInput.x).normalized;
-
-        _currentState.UpdateStates();
-
-        IsGrounded = CheckGrounded();
-        PlayerAnimator.SetBool("OnGround", IsGrounded);
-
-        IsSloped = CheckSloped();
-
-        CheckForWall();
-        CheckWallDirection();
-        // _isWallAngle = CheckWallAngle();
-
-        if (IsAim)
-        {
-            // _cinemachineAim.enabled = true;
-            // _cinemachineWalk.LookAt = _aimTransform;
-            // _cinemachineWalk.Follow = _aimTransform;
-        }
-        else
-        {
-            // _cinemachineAim.enabled = false;
-            // _cinemachineWalk.LookAt = this.transform;
-            // _cinemachineWalk.Follow = this.transform;
+        // _upCheck = CheckUpSlide();
 
 
-        }
+        // if (Input.GetKey(KeyCode.P))
+        // {
+        //     Debug.Log(_currentState.ToString());
+        // }
 
-        if (CanStartWallTimer)
-        {
-            WallClingTime -= Time.deltaTime;
-        }
+        // VaultCheck();
+
+        // if (_isShoot)
+        // {
+        //     CheckForGrapple();
+        // }
+
+        // CurrentMovement = (Orientation.forward * CurrentMovementInput.y).normalized + (Orientation.right * CurrentMovementInput.x).normalized;
+
+        // _currentState.UpdateStates();
+
+        // IsGrounded = CheckGrounded();
+        // PlayerAnimator.SetBool("OnGround", IsGrounded);
+
+        // IsSloped = CheckSloped();
+
+        // CheckForWall();
+        // CheckWallDirection();
+        // // _isWallAngle = CheckWallAngle();
+
+        // if (IsAim)
+        // {
+        //     // _cinemachineAim.enabled = true;
+        //     // _cinemachineWalk.LookAt = _aimTransform;
+        //     // _cinemachineWalk.Follow = _aimTransform;
+        // }
+        // else
+        // {
+        //     // _cinemachineAim.enabled = false;
+        //     // _cinemachineWalk.LookAt = this.transform;
+        //     // _cinemachineWalk.Follow = this.transform;
 
 
-        if (IsGrounded || IsSloped)
-        {
-            Rb.drag = GroundDrag;
-        }
-        else if (!IsSloped && !IsGrounded)
-        {
-            Rb.drag = 0;
-        }
+        // }
 
-        HandleStrafeSpeed();
-        SpeedControl();
+        // if (CanStartWallTimer)
+        // {
+        //     WallClingTime -= Time.deltaTime;
+        // }
 
-        if (Mathf.Abs(DesiredMoveForce - LastDesiredMoveForce) > 0f && MoveForce != 0)
-        {
-            StopAllCoroutines();
-            StartCoroutine(SmoovMoov());
-        }
-        else
-        {
-            MoveForce = DesiredMoveForce;
-        }
 
-        LastDesiredMoveForce = DesiredMoveForce;
+        // if (IsGrounded || IsSloped)
+        // {
+        //     Rb.drag = GroundDrag;
+        // }
+        // else if (!IsSloped && !IsGrounded)
+        // {
+        //     Rb.drag = 0;
+        // }
+
+        // HandleStrafeSpeed();
+        // SpeedControl();
+
+        // if (Mathf.Abs(DesiredMoveForce - LastDesiredMoveForce) > 0f && MoveForce != 0)
+        // {
+        //     StopAllCoroutines();
+        //     StartCoroutine(SmoovMoov());
+        // }
+        // else
+        // {
+        //     MoveForce = DesiredMoveForce;
+        // }
+
+        // LastDesiredMoveForce = DesiredMoveForce;
     }
 
     #region MonoBehaviours
 
     private void FixedUpdate()
     {
-        _currentState.FixedUpdateStates();
+        // _currentState.FixedUpdateStates();
     }
 
     private void Lateupdate()
     {
-        _currentState.LateUpdateStates();
+        // _currentState.LateUpdateStates();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -884,10 +878,10 @@ public class CharStateMachine : MonoBehaviour
         _isAim = context.ReadValueAsButton();
     }
 
-    void OnShoot(InputAction.CallbackContext context)
-    {
-        _isShoot = context.ReadValueAsButton();
-    }
+    // void OnShoot(InputAction.CallbackContext context)
+    // {
+    //     _isShoot = context.ReadValueAsButton();
+    // }
 
     #endregion
 
@@ -1041,28 +1035,28 @@ public class CharStateMachine : MonoBehaviour
         return Vector3.ProjectOnPlane(direction, _slopeHit.normal).normalized;
     }
 
-    private void OnDrawGizmos()
-    {
-        Debug.DrawRay(transform.position, Orientation.forward, Color.black);
+    // private void OnDrawGizmos()
+    // {
+    //     Debug.DrawRay(transform.position, Orientation.forward, Color.black);
 
-        if (WallRight)
-        {
-            Debug.DrawRay(transform.position, Orientation.right, Color.green);
-        }
-        else
-        {
-            Debug.DrawRay(transform.position, Orientation.right, Color.red);
-        }
+    //     if (WallRight)
+    //     {
+    //         Debug.DrawRay(transform.position, Orientation.right, Color.green);
+    //     }
+    //     else
+    //     {
+    //         Debug.DrawRay(transform.position, Orientation.right, Color.red);
+    //     }
 
-        if (WallLeft)
-        {
-            Debug.DrawRay(transform.position, -Orientation.right, Color.green);
-        }
-        else
-        {
-            Debug.DrawRay(transform.position, -Orientation.right, Color.red);
-        }
-    }
+    //     if (WallLeft)
+    //     {
+    //         Debug.DrawRay(transform.position, -Orientation.right, Color.green);
+    //     }
+    //     else
+    //     {
+    //         Debug.DrawRay(transform.position, -Orientation.right, Color.red);
+    //     }
+    // }
 
 
     #endregion
