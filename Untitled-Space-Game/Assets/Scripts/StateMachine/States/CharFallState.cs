@@ -12,7 +12,6 @@ public class CharFallState : CharBaseState
         InitializeSubState();
         Ctx.IsAired = true;
         Ctx.MoveMultiplier = Ctx.AirSpeed;
-        Ctx.ForceSlowDownRate = 1;
     }
 
     public override void ExitState()
@@ -41,7 +40,7 @@ public class CharFallState : CharBaseState
         {
             SetSubState(Factory.Idle());
         }
-        else if (Ctx.IsMove && !Ctx.IsSlide)
+        else if (Ctx.IsMove)
         {
             SetSubState(Factory.Walk());
         }
@@ -53,22 +52,9 @@ public class CharFallState : CharBaseState
         {
             SwitchState(Factory.Grounded());
         }
-        else if (Ctx.IsJump && Ctx.VaultLow && !Ctx.VaultMedium)
-        {
-            SwitchState(Factory.Vaulted());
-        }
         else if (Ctx.IsSloped)
         {
             SwitchState(Factory.Sloped());
-        }
-        else if (Ctx.IsWalled && !(Ctx.WallLeft && Ctx.CurrentMovementInput.x > 0) && !(Ctx.WallRight && Ctx.CurrentMovementInput.x < 0) && Ctx.IsMove)
-        // else if (Ctx.IsWalled && !(Ctx.WallLeft && Ctx.CurrentMovementInput.x > 0) && !(Ctx.WallRight && Ctx.CurrentMovementInput.x < 0) && Ctx.IsMove && Ctx.IsWallAngle)
-        {
-            SwitchState(Factory.Walled());
-        }
-        else if (Ctx.IsGrappled && Ctx.IsShoot && Ctx.GrappleHooks > 0)
-        {
-            SwitchState(Factory.Grappled());
         }
     }
 }

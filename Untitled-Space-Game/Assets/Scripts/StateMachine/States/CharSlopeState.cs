@@ -31,7 +31,7 @@ public class CharSlopeState : CharBaseState
             Ctx.MoveMultiplier = 2f;
         }
 
-        if (Ctx.Rb.velocity.y > 0 || Ctx.Rb.velocity.y > 0 || Ctx.IsSliding)
+        if (Ctx.Rb.velocity.y > 0 || Ctx.Rb.velocity.y > 0)
         {
             Ctx.Rb.AddForce(Vector3.down * 80f, ForceMode.Force);
         }
@@ -52,17 +52,9 @@ public class CharSlopeState : CharBaseState
         {
             SetSubState(Factory.Idle());
         }
-        else if (Ctx.IsMove && !Ctx.IsSlide)
+        else if (Ctx.IsMove)
         {
             SetSubState(Factory.Walk());
-        }
-        else if (Ctx.IsSlide && Ctx.IsMove)
-        {
-            SetSubState(Factory.Slide());
-        }
-        else if (Ctx.IsAired)
-        {
-            SetSubState(Factory.Fall());
         }
     }
 
@@ -76,7 +68,7 @@ public class CharSlopeState : CharBaseState
         {
             SwitchState(Factory.Fall());
         }
-        else if (Ctx.IsJump && !Ctx.IsSlide)
+        else if (Ctx.IsJump)
         {
             SwitchState(Factory.Jump());
         }

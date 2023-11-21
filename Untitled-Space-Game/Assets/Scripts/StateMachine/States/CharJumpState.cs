@@ -22,7 +22,6 @@ public class CharJumpState : CharBaseState
     public override void ExitState()
     {
         Ctx.IsJumping = false;
-        Ctx.IsForced = false;
         Ctx.IsExitingSlope = false;
         Ctx.PlayerAnimator.SetBool("Jump", false);
     }
@@ -47,7 +46,7 @@ public class CharJumpState : CharBaseState
         {
             SetSubState(Factory.Idle());
         }
-        else if (Ctx.IsMove && !Ctx.IsSlide)
+        else if (Ctx.IsMove)
         {
             SetSubState(Factory.Walk());
         }
@@ -71,9 +70,6 @@ public class CharJumpState : CharBaseState
 
     void HandleJump()
     {
-        Ctx.IsForced = true;
-        Ctx.ExtraForce = 21;
-
         Ctx.Rb.velocity = new Vector3(Ctx.Rb.velocity.x, 0f, Ctx.Rb.velocity.z);
         Ctx.Rb.AddForce(Ctx.JumpMent * Ctx.JumpForce, ForceMode.Impulse);
     }

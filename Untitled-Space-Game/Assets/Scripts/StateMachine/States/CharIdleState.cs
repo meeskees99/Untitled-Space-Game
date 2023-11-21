@@ -27,13 +27,9 @@ public class CharIdleState : CharBaseState
 
     public override void CheckSwitchStates()
     {
-        if (Ctx.IsMove && !Ctx.IsSlide)
+        if (Ctx.IsMove)
         {
             SwitchState(Factory.Walk());
-        }
-        else if (Ctx.IsMove && Ctx.IsSlide)
-        {
-            SwitchState(Factory.Slide());
         }
     }
 }

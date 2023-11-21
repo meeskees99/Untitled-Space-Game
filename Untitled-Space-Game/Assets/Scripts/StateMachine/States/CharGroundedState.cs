@@ -10,16 +10,10 @@ public class CharGroundedState : CharBaseState
     {
         InitializeSubState();
         Ctx.MoveMultiplier = 1f;
-        Ctx.CanStartWallTimer = false;
-        Ctx.WallClingTime = Ctx.MaxWallClingTime;
-        Ctx.ForceSlowDownRate = 5;
         Ctx.IsAired = false;
         Ctx.DesiredMoveForce = Ctx.MoveSpeed;
         Ctx.IsJumpTime = Ctx.MaxJumpTime;
         Ctx.JumpMent = new Vector3(0, 1, 0);
-
-
-        Ctx.GrappleHooks = 1;
 
         if (Ctx.MoveForce < Ctx.MoveSpeed)
         {
@@ -54,13 +48,9 @@ public class CharGroundedState : CharBaseState
         {
             SetSubState(Factory.Idle());
         }
-        else if (Ctx.IsMove && !Ctx.IsSlide)
+        else if (Ctx.IsMove)
         {
             SetSubState(Factory.Walk());
-        }
-        else if (Ctx.IsMove && Ctx.IsSlide && Ctx.MoveForce >= Ctx.MoveSpeed && !Ctx.IsAired)
-        {
-            SetSubState(Factory.Slide());
         }
     }
 
@@ -70,10 +60,6 @@ public class CharGroundedState : CharBaseState
         {
             SwitchState(Factory.Fall());
         }
-        else if (Ctx.IsJump && Ctx.VaultLow && !Ctx.VaultMedium)
-        {
-            SwitchState(Factory.Vaulted());
-        }
         else if (Ctx.IsJump)
         {
             SwitchState(Factory.Jump());
@@ -81,10 +67,6 @@ public class CharGroundedState : CharBaseState
         else if (Ctx.IsSloped)
         {
             SwitchState(Factory.Sloped());
-        }
-        else if (Ctx.IsGrappled && Ctx.IsShoot && Ctx.GrappleHooks > 0)
-        {
-            SwitchState(Factory.Grappled());
         }
     }
 }
