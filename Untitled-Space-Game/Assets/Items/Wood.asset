@@ -12,10 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40cf36ca5d3001944853338ef8be7a8d, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: 
-  tile: {fileID: 0}
-  range: {x: 5, y: 4}
-  type: 0
-  actionType: 0
+  itemID: 2
   stackable: 1
   image: {fileID: 21300000, guid: cb0be92a1645a7c48a26aa4a8ebdb7d8, type: 3}
   maxStack: 64
