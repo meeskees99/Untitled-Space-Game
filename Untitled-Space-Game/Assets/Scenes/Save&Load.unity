@@ -1028,6 +1028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fileName: data.game
+  _useEncryption: 0
 --- !u!4 &1605789082
 Transform:
   m_ObjectHideFlags: 0
@@ -1698,13 +1699,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1871208256}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.2148733, y: 0.19742784, z: -0.15555069, w: 0.9437456}
+  m_LocalPosition: {x: -1.77, y: 0.5, z: -2.52}
+  m_LocalScale: {x: 3.14, y: 1.9, z: 0.45}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -20.13, y: 27.91, z: -23.77}
 --- !u!114 &1871208261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1717,7 +1718,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d2128fe8d2ea5d4fade5f505b1c2099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cubePosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1956162417
 GameObject:
   m_ObjectHideFlags: 0
