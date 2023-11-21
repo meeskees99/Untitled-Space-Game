@@ -33,7 +33,8 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDragHandler
 
         if (transform.childCount == 0)
         {
-            heldItem.parentAfterDrag = transform;
+            if (heldItem != null)
+                heldItem.parentAfterDrag = transform;
         }
         else
         {

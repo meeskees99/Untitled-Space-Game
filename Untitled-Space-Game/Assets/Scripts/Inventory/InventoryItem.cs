@@ -16,6 +16,13 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public bool isDragging;
 
+    InventoryManager inventoryManager;
+
+    private void Start()
+    {
+        inventoryManager = InventoryManager.Instance;
+    }
+
     public void InitializeItem(Item newItem)
     {
         item = newItem;
@@ -59,12 +66,14 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (isDragging)
         {
             Debug.DrawRay(transform.position, Vector3.back, Color.red);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Debug.DrawRay(Input.mousePosition, Vector3.forward, Color.green);
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 Debug.Log("Mouse 1");
                 RaycastHit hit;
 
-                if (Physics.Raycast(transform.position, Vector3.back, out hit, Mathf.Infinity))
+                if (Physics.Raycast(ray, out hit, 100))
                 {
                     Debug.Log("Dropping Item In Slot...");
                     InventorySlot slot;

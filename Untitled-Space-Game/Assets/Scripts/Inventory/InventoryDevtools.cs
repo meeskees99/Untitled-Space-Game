@@ -7,6 +7,11 @@ public class InventoryDevtools : MonoBehaviour
     public InventoryManager inventoryManager;
     public Item[] itemToPickup;
 
+    private void Start()
+    {
+        inventoryManager = InventoryManager.Instance;
+    }
+
     public void PickupItem(int id)
     {
         bool result = inventoryManager.AddItem(itemToPickup[id]);
