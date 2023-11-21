@@ -53,8 +53,6 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistenceObj.LoadData(gameData);
         }
-
-        Debug.Log("Loaded cube position " + gameData.cubePosition);
     }
 
     public void SaveGame()
@@ -64,8 +62,6 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistenceObj.SaveData(ref gameData);
         }
-
-        Debug.Log("Saved cube position " + gameData.cubePosition);
 
         // save that data to a file using the file data handler
         dataHandler.Save(gameData);
@@ -86,5 +82,10 @@ public class DataPersistenceManager : MonoBehaviour
         IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistence>();
 
         return new List<IDataPersistence>(dataPersistenceObjects);
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveGame();
     }
 }

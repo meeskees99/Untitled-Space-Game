@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
 
-    public InventorySlot[] inventorySlots;
+    [SerializeField] List<InventorySlot> inventorySlots = new();
 
-    public InventorySlot[] toolbarSlots;
+    [SerializeField] InventorySlot[] toolbarSlots;
 
     [SerializeField] GameObject _inventoryItemPrefab;
 
     int selectedSlot = -1;
+
+    [SerializeField] List<ItemInfo> itemsInInventory = new();
+
+    [SerializeField] Item[] allItems;
+
+    // public Dictionary<Item, int> itemAmounts = new();
+
 
     private void Start()
     {
@@ -28,6 +36,11 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            UpdateItemsInfoList();
+        }
+
         if (Input.inputString != null)
         {
             bool isNumber = int.TryParse(Input.inputString, out int number);
@@ -60,7 +73,7 @@ public class InventoryManager : MonoBehaviour
     public bool AddItem(Item item)
     {
         //Check for stackable slot
-        for (int i = 0; i < inventorySlots.Length; i++)
+        for (int i = 0; i < inventorySlots.Count; i++)
         {
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
@@ -72,7 +85,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
         //Check for empty Slot
-        for (int i = 0; i < inventorySlots.Length; i++)
+        for (int i = 0; i < inventorySlots.Count; i++)
         {
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
@@ -115,5 +128,41 @@ public class InventoryManager : MonoBehaviour
             return item;
         }
         return null;
+    }
+
+    public void UpdateItemsInfoList()
+    {
+        itemsInInventory.Clear();
+        for (int i = 0; i < allItems.Length; i++)
+        {
+            int amount = GetTotalItemAmount(inventorySlots, allItems[i]);
+            itemsInInventory.Add(new(allItems[i], amount));
+        }
+    }
+
+    static int GetTotalItemAmount(List<InventorySlot> list, Item item)
+    {
+
+        int result = 0;
+        foreach (var itm in list)
+        {
+            if (itm.transform.childCount > 0)
+            {
+                InventoryItem thisItem = itm.GetComponentInChildren<InventoryItem>();
+
+                HashSet<Item> items = list.Select(o => thisItem.item).ToHashSet();
+                if (thisItem != null)
+                {
+                    if (thisItem.item != item)
+                    {
+                        continue;
+                    }
+
+                    result += thisItem.count;
+                }
+            }
+        }
+
+        return result;
     }
 }
