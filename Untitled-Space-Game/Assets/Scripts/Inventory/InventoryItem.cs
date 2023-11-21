@@ -14,6 +14,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public int count = 1;
     [HideInInspector] public Transform parentAfterDrag;
 
+    public bool isDragging;
+
     public void InitializeItem(Item newItem)
     {
         item = newItem;
@@ -33,16 +35,51 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         image.raycastTarget = false;
         parentAfterDrag = transform.parent;
         transform.SetParent(transform.root);
+        transform.position = new Vector3(transform.position.x, transform.position.y, 5);
+        isDragging = true;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = Input.mousePosition;
+        transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         image.raycastTarget = true;
         transform.SetParent(parentAfterDrag);
+        transform.position = parentAfterDrag.position;
+        isDragging = false;
+    }
+
+
+    private void Update()
+    {
+
+        if (isDragging)
+        {
+            Debug.DrawRay(transform.position, Vector3.back, Color.red);
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                Debug.Log("Mouse 1");
+                RaycastHit hit;
+
+                if (Physics.Raycast(transform.position, Vector3.back, out hit, Mathf.Infinity))
+                {
+                    Debug.Log("Dropping Item In Slot...");
+                    InventorySlot slot;
+                    hit.transform.TryGetComponent<InventorySlot>(out slot);
+                    if (slot != null)
+                    {
+                        slot.AddItemToSlot(this);
+                        Debug.Log($"Dropped Item In Slot {slot.name}");
+                    }
+                    else
+                    {
+                        Debug.Log("No Slot Found!");
+                    }
+                }
+            }
+        }
     }
 }

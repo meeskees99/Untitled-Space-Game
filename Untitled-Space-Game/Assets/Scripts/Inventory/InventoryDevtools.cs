@@ -19,4 +19,30 @@ public class InventoryDevtools : MonoBehaviour
             Debug.Log("Can't Add Item");
         }
     }
+
+    public void GetSelectedItem()
+    {
+        Item currentItem = inventoryManager.GetSelectedItem(false);
+        if (currentItem != null)
+        {
+            print($"Currently Holding {currentItem.name}");
+        }
+        else
+        {
+            Debug.Log("No Item Being Held");
+        }
+    }
+
+    public void UseSelectedItem()
+    {
+        Item currentItem = inventoryManager.GetSelectedItem(true);
+        if (currentItem != null)
+        {
+            print($"Used Item: {currentItem.name}");
+        }
+        else
+        {
+            Debug.Log("No Item To Use!");
+        }
+    }
 }

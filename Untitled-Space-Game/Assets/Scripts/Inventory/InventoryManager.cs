@@ -6,7 +6,43 @@ public class InventoryManager : MonoBehaviour
 {
     public InventorySlot[] inventorySlots;
 
+    public InventorySlot[] toolbarSlots;
+
     [SerializeField] GameObject _inventoryItemPrefab;
+
+    int selectedSlot = -1;
+
+
+    private void Update()
+    {
+        if (Input.inputString != null)
+        {
+            bool isNumber = int.TryParse(Input.inputString, out int number);
+            if (isNumber && number > 0 && number < 3)
+            {
+                ChangeSelectedSlot(number - 1);
+            }
+        }
+    }
+
+    void ChangeSelectedSlot(int newSlot)
+    {
+        if (selectedSlot == newSlot)
+        {
+            toolbarSlots[selectedSlot].Deselect();
+            selectedSlot = -1;
+            return;
+        }
+
+        if (selectedSlot >= 0)
+        {
+            toolbarSlots[selectedSlot].Deselect();
+        }
+
+        toolbarSlots[newSlot].Select();
+        selectedSlot = newSlot;
+    }
+
 
     public bool AddItem(Item item)
     {
@@ -41,5 +77,30 @@ public class InventoryManager : MonoBehaviour
         GameObject newItemGO = Instantiate(_inventoryItemPrefab, slot.transform);
         InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
         inventoryItem.InitializeItem(item);
+    }
+
+    public Item GetSelectedItem(bool use)
+    {
+        if (selectedSlot == -1) return null;
+        InventorySlot slot = toolbarSlots[selectedSlot];
+        InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+        if (itemInSlot != null)
+        {
+            Item item = itemInSlot.item;
+            if (use)
+            {
+                itemInSlot.count--;
+                if (itemInSlot.count <= 0)
+                {
+                    Destroy(itemInSlot.gameObject);
+                }
+                else
+                {
+                    itemInSlot.RefreshCount();
+                }
+            }
+            return item;
+        }
+        return null;
     }
 }
