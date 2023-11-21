@@ -22,11 +22,11 @@ public class CharStateMachine : MonoBehaviour
         get { return _playerObj; }
     }
 
-    [SerializeField] Animator _playerAnimator;
-    public Animator PlayerAnimator
-    {
-        get { return _playerAnimator; }
-    }
+    // [SerializeField] Animator _playerAnimator;
+    // public Animator PlayerAnimator
+    // {
+    //     get { return _playerAnimator; }
+    // }
 
     [SerializeField] Transform _playerCam;
     public Transform PlayerCam
@@ -58,6 +58,41 @@ public class CharStateMachine : MonoBehaviour
     public Collider[] Colliders
     {
         get { return _colliders; }
+    }
+
+    #endregion
+
+    [Header("Inputs")]
+    #region Inputs
+
+    [SerializeField] bool _isMove;
+    public bool IsMove
+    {
+        get { return _isMove; }
+    }
+
+    [SerializeField] bool _isRun;
+    public bool IsRun
+    {
+        get { return _isRun; }
+    }
+
+    [SerializeField] bool _isJump;
+    public bool IsJump
+    {
+        get { return _isJump; }
+    }
+
+    [SerializeField] bool _isCrouch;
+    public bool IsCrouch
+    {
+        get { return _isCrouch; }
+    }
+
+    [SerializeField] bool _isShoot;
+    public bool IsShoot
+    {
+        get { return _isShoot; }
     }
 
     #endregion
@@ -121,7 +156,7 @@ public class CharStateMachine : MonoBehaviour
     public bool IsGrounded
     {
         get { return _isGrounded; }
-        set { _isGrounded = value; }
+        // set { _isGrounded = value; }
     }
 
     [SerializeField] LayerMask _groundLayer;
@@ -137,6 +172,87 @@ public class CharStateMachine : MonoBehaviour
 
     #endregion
 
+    [Header("SlopeCheck")]
+    #region SlopeCheck
+
+    [SerializeField] bool _isSloped;
+    public bool IsSloped
+    {
+        get { return _isSloped; }
+        // set { _isSloped = value; }
+    }
+
+    [SerializeField] bool _isExitingSlope;
+    public bool IsExitingSlope
+    {
+        get { return _isExitingSlope; }
+        set { _isExitingSlope = value; }
+    }
+
+    public RaycastHit _slopeHit;
+
+    [SerializeField] float _maxSlopeAngle;
+
+    [SerializeField] float _playerHeight;
+
+    #endregion
+
+    [Header("Running")]
+    #region Running
+
+    [SerializeField] float _maxStamina;
+    public float MaxStamina
+    {
+        get { return _maxStamina; }
+        set { _maxStamina = value; }
+    }
+
+    [SerializeField] float _stamina;
+    public float Stamina
+    {
+        get { return _stamina; }
+        set { _stamina = value; }
+    }
+
+    [SerializeField] float _staminaDecreaseRate;
+    public float StaminaDecreaseRate
+    {
+        get { return _staminaDecreaseRate; }
+    }
+
+    [SerializeField] float _staminaIncreaseRate;
+    public float StaminaIncreaseRate
+    {
+        get { return _staminaIncreaseRate; }
+    }
+
+    [SerializeField] bool _decreaseStamina;
+    public bool DecreaseStamina
+    {
+        get { return _decreaseStamina; }
+        set { _decreaseStamina = value; }
+    }
+
+    #endregion
+
+    [Header("Exhaust")]
+    #region Exhaust
+
+    [SerializeField] float _maxExhaustTime;
+    public float MaxExhastTime
+    {
+        get { return _maxExhaustTime; }
+    }
+
+    [SerializeField] float _exhaustTime;
+    public float ExhaustTime
+    {
+        get { return _exhaustTime; }
+        set { _exhaustTime = value; }
+    }
+
+    #endregion
+
     [Header("Jumping")]
     #region Jumping
 
@@ -144,13 +260,6 @@ public class CharStateMachine : MonoBehaviour
     public float JumpForce
     {
         get { return _jumpForce; }
-    }
-
-    [SerializeField] Vector3 _jumpMent;
-    public Vector3 JumpMent
-    {
-        get { return _jumpMent; }
-        set { _jumpMent = value; }
     }
 
     [SerializeField] float _maxJumpTime;
@@ -168,60 +277,45 @@ public class CharStateMachine : MonoBehaviour
 
     #endregion
 
-    [Header("SlopeCheck")]
-    #region SlopeCheck
+    [Header("Crouching")]
+    #region Crouching
 
-    [SerializeField] bool _isSloped;
-    public bool IsSloped
+    [SerializeField] bool _crouchUp;
+    public bool CrouchUp
     {
-        get { return _isSloped; }
-        set { _isSloped = value; }
-    }
-    [SerializeField] bool _isExitingSlope;
-    public bool IsExitingSlope
-    {
-        get { return _isExitingSlope; }
-        set { _isExitingSlope = value; }
+        get { return _crouchUp; }
     }
 
-    public RaycastHit _slopeHit;
-
-    [SerializeField] float _maxSlopeAngle;
-
-    [SerializeField] float _playerHeight;
-
-    #endregion
-
-    [Header("Inputs")]
-    #region Inputs
-
-    [SerializeField] bool _isMove;
-    public bool IsMove
-    {
-        get { return _isMove; }
-    }
-
-    [SerializeField] bool _isJump;
-    public bool IsJump
-    {
-        get { return _isJump; }
-    }
-
-    [SerializeField] bool _isShoot;
-    public bool IsShoot
-    {
-        get { return _isShoot; }
-    }
+    private RaycastHit _crouchUpHit;
+    private float _crouchUpLenght;
 
     #endregion
 
     [Header("Speeds")]
     #region Speeds
 
-    [SerializeField] float _moveSpeed;
-    public float MoveSpeed
+    [SerializeField] float _walkSpeed;
+    public float WalkSpeed
     {
-        get { return _moveSpeed; }
+        get { return _walkSpeed; }
+    }
+
+    [SerializeField] float _runSpeed;
+    public float RunSpeed
+    {
+        get { return _runSpeed; }
+    }
+
+    [SerializeField] float _exhaustSpeed;
+    public float ExhaustSpeed
+    {
+        get { return _exhaustSpeed; }
+    }
+
+    [SerializeField] float _crouchSpeed;
+    public float CrouchSpeed
+    {
+        get { return _crouchSpeed; }
     }
 
     [SerializeField] float _airSpeed;
@@ -281,12 +375,12 @@ public class CharStateMachine : MonoBehaviour
 
     #endregion
 
+
     #endregion
 
     private void OnEnable()
     {
-        DontDestroyOnLoad(this);
-        Application.targetFrameRate = 60;
+        // DontDestroyOnLoad(this);
         playerInput.actions.FindAction("Move").started += OnMovement;
         playerInput.actions.FindAction("Move").performed += OnMovement;
         playerInput.actions.FindAction("Move").canceled += OnMovement;
@@ -295,14 +389,23 @@ public class CharStateMachine : MonoBehaviour
         playerInput.actions.FindAction("Jump").performed += OnJump;
         playerInput.actions.FindAction("Jump").canceled += OnJump;
 
-        playerInput.actions.FindAction("Shoot").started += OnShoot;
-        playerInput.actions.FindAction("Shoot").performed += OnShoot;
-        playerInput.actions.FindAction("Shoot").canceled += OnShoot;
+        playerInput.actions.FindAction("Run").started += OnRun;
+        playerInput.actions.FindAction("Run").performed += OnRun;
+        playerInput.actions.FindAction("Run").canceled += OnRun;
+
+        playerInput.actions.FindAction("Crouch").started += OnCrouch;
+        playerInput.actions.FindAction("Crouch").performed += OnCrouch;
+        playerInput.actions.FindAction("Crouch").canceled += OnCrouch;
+
+        // playerInput.actions.FindAction("Shoot").started += OnShoot;
+        // playerInput.actions.FindAction("Shoot").performed += OnShoot;
+        // playerInput.actions.FindAction("Shoot").canceled += OnShoot;
 
         _states = new CharStateFactory(this);
         _currentState = _states.Grounded();
         _currentState.EnterState();
         _isGrounded = true;
+        _stamina = _maxStamina;
 
         MoveForce = DesiredMoveForce;
 
@@ -315,7 +418,7 @@ public class CharStateMachine : MonoBehaviour
         _movementSpeed = Rb.velocity.magnitude;
 
 
-        if (Input.GetKey(KeyCode.P))
+        if (Input.GetKey(KeyCode.O))
         {
             Debug.Log(_currentState.ToString());
         }
@@ -324,9 +427,22 @@ public class CharStateMachine : MonoBehaviour
 
         // PlayerAnimator.SetBool("OnGround", IsGrounded);
 
-        IsGrounded = CheckGrounded();
-        IsSloped = CheckSloped();
-        // _upCheck = CheckUpCrouch();
+        _isGrounded = CheckGrounded();
+        _isSloped = CheckSloped();
+        _crouchUp = CheckCrouchUp();
+
+        if (_decreaseStamina)
+        {
+            _stamina -= _staminaDecreaseRate * Time.deltaTime;
+        }
+        else if (_stamina < _maxStamina)
+        {
+            _stamina += _staminaIncreaseRate * Time.deltaTime;
+        }
+        else if (_stamina > _maxStamina)
+        {
+            _stamina = _maxStamina;
+        }
 
         if (IsGrounded || IsSloped)
         {
@@ -339,7 +455,7 @@ public class CharStateMachine : MonoBehaviour
 
         SpeedControl();
 
-        if (Mathf.Abs(DesiredMoveForce - LastDesiredMoveForce) > 0f && MoveForce != 0)
+        if (Mathf.Abs(DesiredMoveForce - LastDesiredMoveForce) > 4f && MoveForce != 0)
         {
             StopAllCoroutines();
             StartCoroutine(SmoovMoov());
@@ -357,7 +473,7 @@ public class CharStateMachine : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // _currentState.FixedUpdateStates();
+        _currentState.FixedUpdateStates();
     }
 
     private void Lateupdate()
@@ -400,10 +516,20 @@ public class CharStateMachine : MonoBehaviour
         _isJump = context.ReadValueAsButton();
     }
 
-    void OnShoot(InputAction.CallbackContext context)
+    void OnCrouch(InputAction.CallbackContext context)
     {
-        _isShoot = context.ReadValueAsButton();
+        _isCrouch = context.ReadValueAsButton();
     }
+
+    void OnRun(InputAction.CallbackContext context)
+    {
+        _isRun = context.ReadValueAsButton();
+    }
+
+    // void OnShoot(InputAction.CallbackContext context)
+    // {
+    //     _isShoot = context.ReadValueAsButton();
+    // }
 
     #endregion
 
@@ -460,17 +586,17 @@ public class CharStateMachine : MonoBehaviour
 
     #endregion    
 
-    // public bool CheckUpCrouch()
-    // {
-    //     if (Physics.Raycast(_colliders[1].transform.position, _colliders[1].transform.up, out _slideUpCheckHit, _upcheckLenght, _slideLayer))
-    //     {
-    //         return true;
-    //     }
-    //     else
-    //     {
-    //         return false;
-    //     }
-    // }
+    public bool CheckCrouchUp()
+    {
+        if (Physics.Raycast(_colliders[1].transform.position, _colliders[1].transform.up, out _crouchUpHit, _crouchUpLenght))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     private void SpeedControl()
     {

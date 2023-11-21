@@ -11,25 +11,22 @@ public class CharGroundedState : CharBaseState
         InitializeSubState();
         Ctx.MoveMultiplier = 1f;
         Ctx.IsAired = false;
-        Ctx.DesiredMoveForce = Ctx.MoveSpeed;
+        Ctx.DesiredMoveForce = Ctx.WalkSpeed;
         Ctx.IsJumpTime = Ctx.MaxJumpTime;
-        Ctx.JumpMent = new Vector3(0, 1, 0);
 
-        if (Ctx.MoveForce < Ctx.MoveSpeed)
+        if (Ctx.MoveForce < Ctx.WalkSpeed)
         {
-            Ctx.MoveForce = Ctx.MoveSpeed;
+            Ctx.MoveForce = Ctx.WalkSpeed;
         }
     }
 
-    public override void ExitState()
-    {
-    }
+    public override void ExitState() { }
 
     #region MonoBehaveiours
 
     public override void UpdateState()
     {
-        Ctx.PlayerAnimator.SetFloat("Running", Ctx.MovementSpeed);
+        // Ctx.PlayerAnimator.SetFloat("Running", Ctx.MovementSpeed);
         Ctx.Movement = Ctx.CurrentMovement.normalized;
     }
 
@@ -44,13 +41,22 @@ public class CharGroundedState : CharBaseState
 
     public override void InitializeSubState()
     {
-        if (!Ctx.IsMove)
+        if (!Ctx.IsMove && !Ctx.IsCrouch)
         {
             SetSubState(Factory.Idle());
         }
-        else if (Ctx.IsMove)
+        else if (Ctx.IsMove && !Ctx.IsCrouch && !Ctx.IsRun)
         {
             SetSubState(Factory.Walk());
+        }
+        else if (Ctx.IsMove && !Ctx.IsCrouch && Ctx.IsRun)
+        {
+            Debug.Log("ground > run");
+            SetSubState(Factory.Run());
+        }
+        else if (Ctx.IsCrouch)
+        {
+            SetSubState(Factory.Crouch());
         }
     }
 

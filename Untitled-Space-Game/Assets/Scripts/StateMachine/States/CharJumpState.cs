@@ -10,10 +10,11 @@ public class CharJumpState : CharBaseState
     public override void EnterState()
     {
         InitializeSubState();
+        Debug.Log("JUMP ENTER");
 
         Ctx.IsJumping = true;
 
-        Ctx.PlayerAnimator.SetBool("Jump", true);
+        // Ctx.PlayerAnimator.SetBool("Jump", true);
         Ctx.IsExitingSlope = true;
 
         HandleJump();
@@ -23,7 +24,7 @@ public class CharJumpState : CharBaseState
     {
         Ctx.IsJumping = false;
         Ctx.IsExitingSlope = false;
-        Ctx.PlayerAnimator.SetBool("Jump", false);
+        // Ctx.PlayerAnimator.SetBool("Jump", false);
     }
 
     #region MonoBehaveiours
@@ -71,7 +72,7 @@ public class CharJumpState : CharBaseState
     void HandleJump()
     {
         Ctx.Rb.velocity = new Vector3(Ctx.Rb.velocity.x, 0f, Ctx.Rb.velocity.z);
-        Ctx.Rb.AddForce(Ctx.JumpMent * Ctx.JumpForce, ForceMode.Impulse);
+        Ctx.Rb.AddForce(Vector3.up * Ctx.JumpForce, ForceMode.Impulse);
     }
 
     void HandleJumpTime()

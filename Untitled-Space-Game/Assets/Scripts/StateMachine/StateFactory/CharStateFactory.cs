@@ -2,16 +2,15 @@ using System.Collections.Generic;
 
 enum CharStates
 {
-    Grounded,
-    Fall,
-    Sloped,
-    Idle,
-    Jump,
-    Walk,
-    // Slide,
-    // Walled,
-    // Grappled,
-    // Vaulted,
+    GROUNDED,
+    FALL,
+    SLOPED,
+    IDLE,
+    WALK,
+    RUN,
+    EXHAUST,
+    JUMP,
+    CROUCH,
 }
 
 public class CharStateFactory
@@ -22,41 +21,60 @@ public class CharStateFactory
     public CharStateFactory(CharStateMachine currentContext)
     {
         _context = currentContext;
-        _states[CharStates.Grounded] = new CharGroundedState(_context, this);
-        _states[CharStates.Fall] = new CharFallState(_context, this);
-        _states[CharStates.Sloped] = new CharSlopeState(_context, this);
-        _states[CharStates.Idle] = new CharIdleState(_context, this);
-        _states[CharStates.Walk] = new CharWalkState(_context, this);
-        _states[CharStates.Jump] = new CharJumpState(_context, this);
+        _states[CharStates.GROUNDED] = new CharGroundedState(_context, this);
+        _states[CharStates.FALL] = new CharFallState(_context, this);
+        _states[CharStates.SLOPED] = new CharSlopeState(_context, this);
+        _states[CharStates.IDLE] = new CharIdleState(_context, this);
+        _states[CharStates.WALK] = new CharWalkState(_context, this);
+        _states[CharStates.RUN] = new CharRunState(_context, this);
+        _states[CharStates.EXHAUST] = new CharExhaustState(_context, this);
+        _states[CharStates.JUMP] = new CharJumpState(_context, this);
+        _states[CharStates.CROUCH] = new CharCrouchState(_context, this);
+
     }
 
     public CharBaseState Grounded()
     {
-        return _states[CharStates.Grounded];
+        return _states[CharStates.GROUNDED];
     }
 
     public CharBaseState Fall()
     {
-        return _states[CharStates.Fall];
+        return _states[CharStates.FALL];
     }
 
     public CharBaseState Sloped()
     {
-        return _states[CharStates.Sloped];
+        return _states[CharStates.SLOPED];
     }
 
     public CharBaseState Idle()
     {
-        return _states[CharStates.Idle];
+        return _states[CharStates.IDLE];
     }
 
     public CharBaseState Walk()
     {
-        return _states[CharStates.Walk];
+        return _states[CharStates.WALK];
+    }
+
+    public CharBaseState Run()
+    {
+        return _states[CharStates.RUN];
+    }
+
+    public CharBaseState Exhaust()
+    {
+        return _states[CharStates.EXHAUST];
     }
 
     public CharBaseState Jump()
     {
-        return _states[CharStates.Jump];
+        return _states[CharStates.JUMP];
+    }
+
+    public CharBaseState Crouch()
+    {
+        return _states[CharStates.CROUCH];
     }
 }

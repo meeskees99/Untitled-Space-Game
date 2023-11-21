@@ -11,8 +11,6 @@ public class CharSlopeState : CharBaseState
     {
         InitializeSubState();
         Ctx.Rb.useGravity = false;
-
-        Ctx.JumpMent = new Vector3(0, 1, 0);
     }
 
     public override void ExitState()
@@ -48,14 +46,14 @@ public class CharSlopeState : CharBaseState
 
     public override void InitializeSubState()
     {
-        if (!Ctx.IsMove)
-        {
-            SetSubState(Factory.Idle());
-        }
-        else if (Ctx.IsMove)
-        {
-            SetSubState(Factory.Walk());
-        }
+        // if (!Ctx.IsMove)
+        // {
+        //     SetSubState(Factory.Idle());
+        // }
+        // else if (Ctx.IsMove)
+        // {
+        //     SetSubState(Factory.Walk());
+        // }
     }
 
     public override void CheckSwitchStates()

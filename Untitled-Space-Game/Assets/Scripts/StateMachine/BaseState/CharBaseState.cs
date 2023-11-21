@@ -79,6 +79,7 @@ public abstract class CharBaseState
             _currentSubState.LateUpdateState();
         }
     }
+
     protected void SwitchState(CharBaseState newState)
     {
         ExitState();
@@ -91,6 +92,7 @@ public abstract class CharBaseState
         }
         else if (_currentSuperState != null)
         {
+            Debug.Log("superstate with " + newState);
             _currentSuperState.SetSubState(newState);
         }
     }

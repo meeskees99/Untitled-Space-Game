@@ -28,13 +28,13 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
             ""id"": ""cd6b5686-294d-4dd2-bfde-f5b36cee9a85"",
             ""actions"": [
                 {
-                    ""name"": ""Jump"",
-                    ""type"": ""Button"",
-                    ""id"": ""613c73bd-a686-4f29-9372-ae46ef6076f5"",
-                    ""expectedControlType"": ""Button"",
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""1bcebffa-4a53-4ea1-81ff-6d8cdce68831"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Camera"",
@@ -46,54 +46,27 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Move"",
-                    ""type"": ""Value"",
-                    ""id"": ""1bcebffa-4a53-4ea1-81ff-6d8cdce68831"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Slide"",
+                    ""name"": ""Jump"",
                     ""type"": ""Button"",
-                    ""id"": ""aa6b38f9-1968-4dd3-b89c-005c40733e96"",
+                    ""id"": ""613c73bd-a686-4f29-9372-ae46ef6076f5"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Aim"",
+                    ""name"": ""Crouch"",
                     ""type"": ""Button"",
-                    ""id"": ""5db4e944-531b-43e1-9819-06a8154148b2"",
+                    ""id"": ""8644ff45-2a74-4c4c-bdc8-70973e771efb"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Shoot"",
+                    ""name"": ""Run"",
                     ""type"": ""Button"",
-                    ""id"": ""68ee6fc9-c815-458e-b257-4bb09cfb4547"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Reset"",
-                    ""type"": ""Button"",
-                    ""id"": ""6c87a696-6ef2-47a4-806c-bf8072423026"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Next"",
-                    ""type"": ""Button"",
-                    ""id"": ""74583cc8-dbea-4586-a380-ba810cfc90e5"",
+                    ""id"": ""324ffcb6-0f89-47d6-8f69-35910d15069b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -101,17 +74,6 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""e790e407-9fca-4853-9a0a-b3741a6fc951"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": ""2D Vector"",
                     ""id"": ""95b2c658-2019-401a-b305-10f7d147efed"",
@@ -169,89 +131,34 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4ca93ad1-3434-4a3b-9286-b3c87b797614"",
-                    ""path"": ""<Keyboard>/shift"",
+                    ""id"": ""e790e407-9fca-4853-9a0a-b3741a6fc951"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Slide"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c5c81b1f-5385-425e-8701-da41a61597d6"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""id"": ""8b5f5cfb-1d13-4ade-a367-624f7a57277b"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""549a0564-afee-4bf3-ab59-d8401aedd98b"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Slide"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2329365d-b1eb-406a-83b2-b6293c1d3afe"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Aim"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""316b91b7-3955-4ee6-ad1f-3f3d75bed8dc"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Aim"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""45416b44-c5f8-4bd2-8190-a83264ddbe68"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Shoot"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a9ec1926-c60f-4afb-809f-aace8162659d"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Shoot"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""431e7516-50ef-42a4-a4f2-22ec735667ff"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Reset"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""30ed9548-2b86-4782-aaf6-529f9ea6ec15"",
-                    ""path"": ""<Keyboard>/n"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Next"",
+                    ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -274,6 +181,17 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
                     ""processors"": ""InvertVector2(invertX=false,invertY=false)"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e830a5a8-a944-43e1-a525-9432675286b6"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -340,14 +258,11 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
 }");
         // Game
         m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
-        m_Game_Jump = m_Game.FindAction("Jump", throwIfNotFound: true);
-        m_Game_Camera = m_Game.FindAction("Camera", throwIfNotFound: true);
         m_Game_Move = m_Game.FindAction("Move", throwIfNotFound: true);
-        m_Game_Slide = m_Game.FindAction("Slide", throwIfNotFound: true);
-        m_Game_Aim = m_Game.FindAction("Aim", throwIfNotFound: true);
-        m_Game_Shoot = m_Game.FindAction("Shoot", throwIfNotFound: true);
-        m_Game_Reset = m_Game.FindAction("Reset", throwIfNotFound: true);
-        m_Game_Next = m_Game.FindAction("Next", throwIfNotFound: true);
+        m_Game_Camera = m_Game.FindAction("Camera", throwIfNotFound: true);
+        m_Game_Jump = m_Game.FindAction("Jump", throwIfNotFound: true);
+        m_Game_Crouch = m_Game.FindAction("Crouch", throwIfNotFound: true);
+        m_Game_Run = m_Game.FindAction("Run", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Newaction = m_Menu.FindAction("New action", throwIfNotFound: true);
@@ -412,26 +327,20 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
     // Game
     private readonly InputActionMap m_Game;
     private List<IGameActions> m_GameActionsCallbackInterfaces = new List<IGameActions>();
-    private readonly InputAction m_Game_Jump;
-    private readonly InputAction m_Game_Camera;
     private readonly InputAction m_Game_Move;
-    private readonly InputAction m_Game_Slide;
-    private readonly InputAction m_Game_Aim;
-    private readonly InputAction m_Game_Shoot;
-    private readonly InputAction m_Game_Reset;
-    private readonly InputAction m_Game_Next;
+    private readonly InputAction m_Game_Camera;
+    private readonly InputAction m_Game_Jump;
+    private readonly InputAction m_Game_Crouch;
+    private readonly InputAction m_Game_Run;
     public struct GameActions
     {
         private @NewControls m_Wrapper;
         public GameActions(@NewControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Jump => m_Wrapper.m_Game_Jump;
-        public InputAction @Camera => m_Wrapper.m_Game_Camera;
         public InputAction @Move => m_Wrapper.m_Game_Move;
-        public InputAction @Slide => m_Wrapper.m_Game_Slide;
-        public InputAction @Aim => m_Wrapper.m_Game_Aim;
-        public InputAction @Shoot => m_Wrapper.m_Game_Shoot;
-        public InputAction @Reset => m_Wrapper.m_Game_Reset;
-        public InputAction @Next => m_Wrapper.m_Game_Next;
+        public InputAction @Camera => m_Wrapper.m_Game_Camera;
+        public InputAction @Jump => m_Wrapper.m_Game_Jump;
+        public InputAction @Crouch => m_Wrapper.m_Game_Crouch;
+        public InputAction @Run => m_Wrapper.m_Game_Run;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -441,58 +350,40 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_GameActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_GameActionsCallbackInterfaces.Add(instance);
-            @Jump.started += instance.OnJump;
-            @Jump.performed += instance.OnJump;
-            @Jump.canceled += instance.OnJump;
-            @Camera.started += instance.OnCamera;
-            @Camera.performed += instance.OnCamera;
-            @Camera.canceled += instance.OnCamera;
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @Slide.started += instance.OnSlide;
-            @Slide.performed += instance.OnSlide;
-            @Slide.canceled += instance.OnSlide;
-            @Aim.started += instance.OnAim;
-            @Aim.performed += instance.OnAim;
-            @Aim.canceled += instance.OnAim;
-            @Shoot.started += instance.OnShoot;
-            @Shoot.performed += instance.OnShoot;
-            @Shoot.canceled += instance.OnShoot;
-            @Reset.started += instance.OnReset;
-            @Reset.performed += instance.OnReset;
-            @Reset.canceled += instance.OnReset;
-            @Next.started += instance.OnNext;
-            @Next.performed += instance.OnNext;
-            @Next.canceled += instance.OnNext;
+            @Camera.started += instance.OnCamera;
+            @Camera.performed += instance.OnCamera;
+            @Camera.canceled += instance.OnCamera;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
+            @Crouch.started += instance.OnCrouch;
+            @Crouch.performed += instance.OnCrouch;
+            @Crouch.canceled += instance.OnCrouch;
+            @Run.started += instance.OnRun;
+            @Run.performed += instance.OnRun;
+            @Run.canceled += instance.OnRun;
         }
 
         private void UnregisterCallbacks(IGameActions instance)
         {
-            @Jump.started -= instance.OnJump;
-            @Jump.performed -= instance.OnJump;
-            @Jump.canceled -= instance.OnJump;
-            @Camera.started -= instance.OnCamera;
-            @Camera.performed -= instance.OnCamera;
-            @Camera.canceled -= instance.OnCamera;
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @Slide.started -= instance.OnSlide;
-            @Slide.performed -= instance.OnSlide;
-            @Slide.canceled -= instance.OnSlide;
-            @Aim.started -= instance.OnAim;
-            @Aim.performed -= instance.OnAim;
-            @Aim.canceled -= instance.OnAim;
-            @Shoot.started -= instance.OnShoot;
-            @Shoot.performed -= instance.OnShoot;
-            @Shoot.canceled -= instance.OnShoot;
-            @Reset.started -= instance.OnReset;
-            @Reset.performed -= instance.OnReset;
-            @Reset.canceled -= instance.OnReset;
-            @Next.started -= instance.OnNext;
-            @Next.performed -= instance.OnNext;
-            @Next.canceled -= instance.OnNext;
+            @Camera.started -= instance.OnCamera;
+            @Camera.performed -= instance.OnCamera;
+            @Camera.canceled -= instance.OnCamera;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
+            @Crouch.started -= instance.OnCrouch;
+            @Crouch.performed -= instance.OnCrouch;
+            @Crouch.canceled -= instance.OnCrouch;
+            @Run.started -= instance.OnRun;
+            @Run.performed -= instance.OnRun;
+            @Run.canceled -= instance.OnRun;
         }
 
         public void RemoveCallbacks(IGameActions instance)
@@ -576,14 +467,11 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
     }
     public interface IGameActions
     {
-        void OnJump(InputAction.CallbackContext context);
-        void OnCamera(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
-        void OnSlide(InputAction.CallbackContext context);
-        void OnAim(InputAction.CallbackContext context);
-        void OnShoot(InputAction.CallbackContext context);
-        void OnReset(InputAction.CallbackContext context);
-        void OnNext(InputAction.CallbackContext context);
+        void OnCamera(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnCrouch(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
