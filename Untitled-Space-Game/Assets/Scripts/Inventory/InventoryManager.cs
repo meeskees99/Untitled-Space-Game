@@ -85,14 +85,7 @@ public class InventoryManager : MonoBehaviour
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
 
-            for (int x = 0; x < inventorySlots[i].disAllowedItems.Length; x++)
-            {
-                if (inventorySlots[i].disAllowedItems[x] == allItems[itemId])
-                {
-                    return false;
-                }
 
-            }
             if (itemInSlot != null && itemInSlot.item == allItems[itemId] && itemInSlot.count < itemInSlot.item.maxStack)
             {
                 itemInSlot.count++;
@@ -103,6 +96,14 @@ public class InventoryManager : MonoBehaviour
         //Check for empty Slot
         for (int i = 0; i < inventorySlots.Count; i++)
         {
+            for (int x = 0; x < inventorySlots[i].disAllowedItems.Length; x++)
+            {
+                if (inventorySlots[i].disAllowedItems[x] == allItems[itemId])
+                {
+                    Debug.Log("Can't Spawn This Item Here As it Is BlackListed");
+                    return false;
+                }
+            }
             int slot = i;
             InventoryItem itemInSlot = inventorySlots[slot].GetComponentInChildren<InventoryItem>();
             if (itemInSlot == null)
