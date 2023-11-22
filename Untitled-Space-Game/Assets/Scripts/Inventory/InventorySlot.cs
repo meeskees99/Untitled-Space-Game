@@ -125,7 +125,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
         {
             return;
         }
-        Debug.Log("do spawn");
+
         InventoryManager.Instance.SpawnNewItem(data.itemId[slotId], data.itemAmount[slotId], this.slotId);
     }
 
@@ -133,6 +133,8 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
     {
         if (itemInThisSlot == null)
         {
+            data.itemId[slotId] = -1;
+            data.itemAmount[slotId] = 0;
             return;
         }
 
