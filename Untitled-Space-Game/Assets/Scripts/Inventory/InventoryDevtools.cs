@@ -7,6 +7,8 @@ public class InventoryDevtools : MonoBehaviour
     public InventoryManager inventoryManager;
     public Item[] itemToPickup;
 
+    public int spawnAmount = 1;
+
     private void Start()
     {
         inventoryManager = InventoryManager.Instance;
@@ -14,7 +16,7 @@ public class InventoryDevtools : MonoBehaviour
 
     public void PickupItem(int id)
     {
-        bool result = inventoryManager.AddItem(itemToPickup[id]);
+        bool result = inventoryManager.AddItem(id, spawnAmount);
         if (result)
         {
             Debug.Log("Item Added");

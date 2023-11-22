@@ -28,6 +28,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         item = newItem;
         image.sprite = newItem.image;
         RefreshCount();
+        GetComponentInParent<InventorySlot>().itemInThisSlot = this;
     }
 
     public void RefreshCount()
@@ -39,16 +40,20 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        InventorySlot slot = transform.GetComponentInParent<InventorySlot>();
+        slot.itemInThisSlot = null;
         image.raycastTarget = false;
         parentAfterDrag = transform.parent;
         transform.SetParent(transform.root);
         transform.position = new Vector3(transform.position.x, transform.position.y, 5);
         isDragging = true;
+        InventoryManager.Instance.heldItem = eventData.pointerDrag.GetComponent<InventoryItem>();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5);
+        InventoryManager.Instance.heldItem = eventData.pointerDrag.GetComponent<InventoryItem>();
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -57,6 +62,12 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.SetParent(parentAfterDrag);
         transform.position = parentAfterDrag.position;
         isDragging = false;
+        InventoryManager.Instance.heldItem = null;
+    }
+
+    public void SetItemParent(Transform parent)
+    {
+        transform.SetParent(parent);
     }
 
 

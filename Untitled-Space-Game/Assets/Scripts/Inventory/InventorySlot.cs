@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour, IDropHandler, IDragHandler
+public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
 {
+    public int slotId;
+
     public Image image;
     public Color selectedColor, notSelectedColor;
 
-    InventoryItem heldItem;
-    InventoryItem itemInThisSlot;
+    public InventoryItem itemInThisSlot;
+
+    public Item[] disAllowedItems;
+
 
     private void Awake()
     {
@@ -29,43 +34,59 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDragHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        heldItem = eventData.pointerDrag.GetComponent<InventoryItem>();
+        // if (heldItem == null)
+        for (int i = 0; i < disAllowedItems.Length; i++)
+        {
+            if (InventoryManager.Instance.heldItem.item == disAllowedItems[i])
+            {
+                Debug.Log("This Item Is Not Allowed In This Slot! Change This In The Inspector");
+                return;
+            }
+        }
 
         if (transform.childCount == 0)
         {
-            if (heldItem != null)
-                heldItem.parentAfterDrag = transform;
+            if (InventoryManager.Instance.heldItem != null)
+            {
+                InventoryManager.Instance.heldItem.parentAfterDrag = transform;
+                InventoryManager.Instance.heldItem.SetItemParent(transform);
+                itemInThisSlot = transform.GetChild(0).GetComponent<InventoryItem>();
+                InventoryManager.Instance.heldItem = null;
+            }
+
         }
         else
         {
             itemInThisSlot = transform.GetChild(0).GetComponent<InventoryItem>();
-            if (itemInThisSlot.count < itemInThisSlot.item.maxStack)
+
+            if (InventoryManager.Instance.heldItem.item == itemInThisSlot.item)
             {
-                if (heldItem.item == itemInThisSlot.item)
+                if (itemInThisSlot.count < itemInThisSlot.item.maxStack)
                 {
                     int spaceLeft = itemInThisSlot.item.maxStack - itemInThisSlot.count;
-                    int overFlow = heldItem.count - spaceLeft;
+                    int overFlow = InventoryManager.Instance.heldItem.count - spaceLeft;
                     if (overFlow > 0)
                     {
-                        heldItem.count = overFlow;
+                        InventoryManager.Instance.heldItem.count = overFlow;
                         itemInThisSlot.count = itemInThisSlot.item.maxStack;
                         itemInThisSlot.RefreshCount();
-                        heldItem.RefreshCount();
+                        InventoryManager.Instance.heldItem.RefreshCount();
                         return;
                     }
-                    itemInThisSlot.count += heldItem.count;
-                    Destroy(heldItem.gameObject);
+                    itemInThisSlot.count += InventoryManager.Instance.heldItem.count;
+                    Destroy(InventoryManager.Instance.heldItem.gameObject);
                     itemInThisSlot.RefreshCount();
                 }
                 else
                 {
-                    Debug.Log("You Can't Stack These Items Together!");
+                    Debug.Log("This Slot Has Reached It's Max Stack!");
                 }
             }
             else
             {
-                Debug.Log("This Slot Has Reached It's Max Stack!");
+                Debug.Log("You Can't Stack These Items Together!");
             }
+
         }
     }
 
@@ -73,7 +94,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDragHandler
     {
         // heldItem = eventData.pointerDrag.GetComponent<InventoryItem>();
         itemInThisSlot = transform.GetChild(0).GetComponent<InventoryItem>();
-        if (heldItem.item == itemInThisSlot.item)
+        if (InventoryManager.Instance.heldItem.item == itemInThisSlot.item)
         {
             if (itemInThisSlot.count < itemInThisSlot.item.maxStack)
             {
@@ -98,8 +119,24 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDragHandler
         }
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public void LoadData(GameData data)
     {
-        heldItem = eventData.pointerDrag.GetComponent<InventoryItem>();
+        if (data.itemId[slotId] == -1)
+        {
+            return;
+        }
+        Debug.Log("do spawn");
+        InventoryManager.Instance.SpawnNewItem(data.itemId[slotId], data.itemAmount[slotId], this.slotId);
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        if (itemInThisSlot == null)
+        {
+            return;
+        }
+
+        data.itemId[slotId] = itemInThisSlot.item.itemID;
+        data.itemAmount[slotId] = itemInThisSlot.count;
     }
 }

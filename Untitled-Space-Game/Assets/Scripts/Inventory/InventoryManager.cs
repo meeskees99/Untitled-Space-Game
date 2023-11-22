@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
 
-    [SerializeField] List<InventorySlot> inventorySlots = new();
+    public List<InventorySlot> inventorySlots = new();
 
     [SerializeField] InventorySlot[] toolbarSlots;
 
@@ -19,10 +20,12 @@ public class InventoryManager : MonoBehaviour
 
     [SerializeField] Item[] allItems;
 
+    public InventoryItem heldItem;
+
     // public Dictionary<Item, int> itemAmounts = new();
 
 
-    private void Start()
+    private void Awake()
     {
         if (Instance != null)
         {
@@ -70,14 +73,27 @@ public class InventoryManager : MonoBehaviour
     }
 
 
-    public bool AddItem(Item item)
+    public bool AddItem(int itemId, int amount)
     {
+        if (itemId < 0)
+        {
+            return false;
+        }
         //Check for stackable slot
         for (int i = 0; i < inventorySlots.Count; i++)
         {
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-            if (itemInSlot != null && itemInSlot.item == item && itemInSlot.count < itemInSlot.item.maxStack)
+
+            for (int x = 0; x < inventorySlots[i].disAllowedItems.Length; x++)
+            {
+                if (inventorySlots[i].disAllowedItems[x] == allItems[itemId])
+                {
+                    return false;
+                }
+
+            }
+            if (itemInSlot != null && itemInSlot.item == allItems[itemId] && itemInSlot.count < itemInSlot.item.maxStack)
             {
                 itemInSlot.count++;
                 itemInSlot.RefreshCount();
@@ -87,22 +103,28 @@ public class InventoryManager : MonoBehaviour
         //Check for empty Slot
         for (int i = 0; i < inventorySlots.Count; i++)
         {
-            InventorySlot slot = inventorySlots[i];
-            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            int slot = i;
+            InventoryItem itemInSlot = inventorySlots[slot].GetComponentInChildren<InventoryItem>();
             if (itemInSlot == null)
             {
-                SpawnNewItem(item, slot);
+                SpawnNewItem(itemId, amount, slot);
                 return true;
             }
         }
         return false;
     }
 
-    void SpawnNewItem(Item item, InventorySlot slot)
+    public void SpawnNewItem(int itemID, int itemCount, int slotID)
     {
-        GameObject newItemGO = Instantiate(_inventoryItemPrefab, slot.transform);
+        GameObject newItemGO = Instantiate(_inventoryItemPrefab, inventorySlots[slotID].transform);
         InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
-        inventoryItem.InitializeItem(item);
+        inventoryItem.count = itemCount;
+        inventoryItem.InitializeItem(allItems[itemID]);
+    }
+
+    public void LoadItemsInInventory()
+    {
+
     }
 
     public Item GetSelectedItem(bool use)
@@ -165,4 +187,6 @@ public class InventoryManager : MonoBehaviour
 
         return result;
     }
+
+
 }
