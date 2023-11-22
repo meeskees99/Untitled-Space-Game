@@ -16,7 +16,7 @@ public class InventoryManager : MonoBehaviour
 
     int selectedSlot = -1;
 
-    [SerializeField] List<ItemInfo> itemsInInventory = new();
+    public List<ItemInfo> itemsInInventory = new();
 
     [SerializeField] Item[] allItems;
 
