@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Recources/Recource")]
-public class Recource : ScriptableObject
+public class Resource : ScriptableObject
 {
     public Item item;
     public float mineDuration = 3f;

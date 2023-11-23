@@ -390,6 +390,7 @@ public class CharStateMachine : MonoBehaviour, IDataPersistence
     [SerializeField] RaycastHit _toolHit;
     [SerializeField] LayerMask _gatherMask;
 
+    [SerializeField] float _gatherTime;
 
     #endregion
 
@@ -459,6 +460,11 @@ public class CharStateMachine : MonoBehaviour, IDataPersistence
         if (IsHotbar > 0)
         {
             Debug.Log("scroll down");
+        }
+
+        if (_isShoot)
+        {
+
         }
 
         if (Input.GetKey(KeyCode.O))
@@ -632,7 +638,44 @@ public class CharStateMachine : MonoBehaviour, IDataPersistence
         return Vector3.ProjectOnPlane(direction, _slopeHit.normal).normalized;
     }
 
-    #endregion    
+    #endregion
+
+    private void CheckTool()
+    {
+        // if (InventoryManager.Instance.)
+    }
+
+    private void WeaponTool()
+    {
+        // TODO - make weapon variables
+        // float rayDistance = _toolRange += Vector3.Distance(_playerCam.transform.position, _playerObj.transform.position);
+        // if (Physics.Raycast(_playerCam.position, Vector3.forward, out _toolHit, rayDistance, _gatherMask))
+        // {
+
+        // }
+    }
+
+    private void GatherTool()
+    {
+        float rayDistance = _toolRange += Vector3.Distance(_playerCam.transform.position, _playerObj.transform.position);
+        if (Physics.Raycast(_playerCam.position, Vector3.forward, out _toolHit, rayDistance, _gatherMask))
+        {
+            if (_gatherTime == -1)
+            {
+                _gatherTime = _toolHit.transform.GetComponent<ResourceVein>().Resource.mineDuration;
+            }
+            else
+            {
+                _gatherTime -= Time.deltaTime;
+
+                if (_gatherTime <= 0)
+                {
+                    InventoryManager.Instance.AddItem(_toolHit.transform.GetComponent<ResourceVein>().Resource.item.itemID, _toolHit.transform.GetComponent<ResourceVein>().Resource.recourceAmount);
+                    _gatherTime = _toolHit.transform.GetComponent<ResourceVein>().Resource.mineDuration;
+                }
+            }
+        }
+    }
 
     public bool CheckCrouchUp()
     {
