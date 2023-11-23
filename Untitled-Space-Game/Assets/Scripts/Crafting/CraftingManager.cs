@@ -71,6 +71,11 @@ public class CraftingManager : MonoBehaviour
                 }
             }
             InventoryManager.Instance.AddItem(selectedRecipeToCraft.itemToCraft.itemID, selectedRecipeToCraft.amountToCraft);
+            for (int i = 0; i < selectedRecipeToCraft.itemsNeeded.Length; i++)
+            {
+                InventoryManager.Instance.UseItem(selectedRecipeToCraft.itemsNeeded[i].item.itemID, selectedRecipeToCraft.itemsNeeded[i].amount);
+            }
+
         }
         else
         {

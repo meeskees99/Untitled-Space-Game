@@ -102,6 +102,7 @@ public class InventoryManager : MonoBehaviour
             {
                 itemInSlot.count++;
                 itemInSlot.RefreshCount();
+                UpdateItemsInfoList();
                 return true;
             }
         }
@@ -113,6 +114,7 @@ public class InventoryManager : MonoBehaviour
                 if (inventorySlots[i].disAllowedItems[x] == allItems[itemId])
                 {
                     Debug.Log("Can't Spawn This Item Here As it Is BlackListed");
+                    UpdateItemsInfoList();
                     return false;
                 }
             }
@@ -124,6 +126,7 @@ public class InventoryManager : MonoBehaviour
                 return true;
             }
         }
+        UpdateItemsInfoList();
         return false;
     }
 
@@ -133,11 +136,50 @@ public class InventoryManager : MonoBehaviour
         InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
         inventoryItem.count = itemCount;
         inventoryItem.InitializeItem(allItems[itemID]);
+        UpdateItemsInfoList();
     }
 
-    public void LoadItemsInInventory()
+    public void UseItem(int itemID, int itemCount)
     {
+        int itemsLeft = itemCount;
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            if (itemsLeft == 0)
+            {
+                break;
+            }
+            if (itemsLeft < 0)
+            {
+                Debug.LogError("Removed Too Many Items!");
+            }
+            InventorySlot slot = inventorySlots[i];
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
 
+            for (int z = 0; z < allItems.Length; z++)
+            {
+                if (allItems[z].itemID == itemID)
+                {
+                    if (itemInSlot != null && itemInSlot.item == allItems[z])
+                    {
+                        if (itemInSlot.count >= itemCount)
+                        {
+                            itemInSlot.count -= itemCount;
+                            itemsLeft -= itemCount;
+                            break;
+                        }
+                        else
+                        {
+                            itemsLeft -= itemInSlot.count;
+                            itemInSlot.count = 0;
+                        }
+
+                        itemInSlot.RefreshCount();
+                        UpdateItemsInfoList();
+                    }
+                }
+            }
+
+        }
     }
 
     public Item GetSelectedItem(bool use)
