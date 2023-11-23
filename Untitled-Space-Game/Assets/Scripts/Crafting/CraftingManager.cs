@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CraftingManager : MonoBehaviour
 {
@@ -11,6 +13,10 @@ public class CraftingManager : MonoBehaviour
 
     public Transform recipeListTransform;
     public GameObject itemPrefab;
+
+    [Header("Recipe Selection")]
+    [SerializeField] GameObject imagePrefab;
+    [SerializeField] Transform imageListTransform;
 
     void Awake()
     {
@@ -26,6 +32,10 @@ public class CraftingManager : MonoBehaviour
 
     public void SelectCraftingRecipe(Recipe recipe)
     {
+        for (int i = imageListTransform.childCount; i > 0; i--)
+        {
+            Destroy(imageListTransform.GetChild(i - 1).gameObject);
+        }
         if (recipe == null)
         {
             Debug.Log("No Recipe Selected");
@@ -33,6 +43,13 @@ public class CraftingManager : MonoBehaviour
         }
         selectedRecipeToCraft = recipe;
         Debug.Log($"Selected Recipe {recipe}");
+
+        for (int i = 0; i < recipe.itemsNeeded.Length; i++)
+        {
+            GameObject spawnedImage = Instantiate(imagePrefab, imageListTransform);
+            spawnedImage.GetComponent<Image>().sprite = recipe.itemsNeeded[i].item.image;
+            spawnedImage.transform.GetChild(0).GetComponent<TMP_Text>().text = recipe.itemsNeeded[i].amount.ToString();
+        }
     }
 
     public void CraftItem()

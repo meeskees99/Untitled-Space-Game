@@ -11,4 +11,8 @@ public class Item : ScriptableObject
     [Header("Both")]
     public Sprite image;
     public int maxStack = 1;
+
+    [Header("Gameplayer Settings")]
+    public bool isTool;
+    public bool isPlacable;
 }
