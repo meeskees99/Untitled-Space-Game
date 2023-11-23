@@ -28,6 +28,7 @@ public class CraftingManager : MonoBehaviour
             return;
         }
         selectedRecipeToCraft = recipe;
+        Debug.Log($"Selected Recipe {recipe}");
     }
 
     public void CraftItem()
@@ -48,7 +49,11 @@ public class CraftingManager : MonoBehaviour
                     }
                 }
             }
+            InventoryManager.Instance.AddItem(selectedRecipeToCraft.itemToCraft.itemID, selectedRecipeToCraft.amountToCraft);
         }
-        InventoryManager.Instance.AddItem(selectedRecipeToCraft.itemToCraft.itemID, selectedRecipeToCraft.amountToCraft);
+        else
+        {
+            Debug.Log("No Recipe Selected");
+        }
     }
 }
