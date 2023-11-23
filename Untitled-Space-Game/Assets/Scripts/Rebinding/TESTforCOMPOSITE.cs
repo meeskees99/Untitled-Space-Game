@@ -8,11 +8,11 @@ public class TESTforCOMPOSITE : MonoBehaviour
 {
     [SerializeField] CharStateMachine _charController;
 
-    [SerializeField] InputActionReference inputActionReference; //this is on the SO
+    [SerializeField] InputActionReference[] _inputActionReferences; //this is on the SO
 
-    [SerializeField] bool excludeMouse = true;
+    [SerializeField] bool _excludeMouse = true;
 
-    [SerializeField] int selectedBindingBtn;
+    [SerializeField] int _selectedBindingBtn;
 
     [SerializeField] InputBinding.DisplayStringOptions displayStringOptions;
     [Header("Binding Info - DO NOT EDIT")]
@@ -21,20 +21,26 @@ public class TESTforCOMPOSITE : MonoBehaviour
 
     private int bindingIndex;
 
-    private string actionName;
+    [SerializeField] string[] _actionName;
 
     [Header("UI Fields")]
-    [SerializeField] TMP_Text actionText;
-    [SerializeField] Button rebindButton;
-    [SerializeField] TMP_Text rebindText;
-    [SerializeField] Button resetButton;
+    // [SerializeField] TMP_Text actionText;
+    [SerializeField] TMP_Text[] _rebindText;
+
+    [SerializeField] TMP_Text[] compositeRebindText;
+
+    // [SerializeField] Button[] rebindButton;
+    // [SerializeField] Button resetButton;
 
     private void OnEnable()
     {
         if (_charController != null)
         {
             print(_charController);
-            TESTINPUTforCOMPOSITE.LoadBindingOverride(actionName);
+            for (int i = 0; i < _actionName.Length; i++)
+            {
+                TESTINPUTforCOMPOSITE.LoadBindingOverride(_actionName[i]);
+            }
             GetBindingInfo();
             UpdateUI();
         }
@@ -60,43 +66,65 @@ public class TESTforCOMPOSITE : MonoBehaviour
 
     private void GetBindingInfo()
     {
-        if (inputActionReference.action != null)
-            actionName = inputActionReference.action.name;
-
-        if (inputActionReference.action.bindings.Count > selectedBindingBtn)
+        for (int i = 0; i < _inputActionReferences.Length; i++)
         {
-            inputBinding = inputActionReference.action.bindings[selectedBindingBtn];
-            bindingIndex = selectedBindingBtn;
+            if (_inputActionReferences[i].action != null)
+                _actionName[i] = _inputActionReferences[i].action.name;
+
+            if (_inputActionReferences[i].action.bindings.Count > _selectedBindingBtn)
+            {
+                inputBinding = _inputActionReferences[i].action.bindings[_selectedBindingBtn];
+                bindingIndex = _selectedBindingBtn;
+            }
         }
+
     }
 
     private void UpdateUI()
     {
-        if (actionText != null)
-            actionText.text = actionName;
+        // if (actionText != null)
+        //     actionText.text = actionName;
 
-        if (rebindText != null)
+
+        for (int i = 0; i < _rebindText.Length; i++)
         {
-            if (Application.isPlaying)
+            if (_rebindText != null)
             {
-                print(actionName);
-                print(_charController);
-                print(bindingIndex + " bindingIndex");
-                rebindText.text = TESTINPUTforCOMPOSITE.GetBindingName(actionName, bindingIndex);
+                if (Application.isPlaying)
+                {
+                    print(_actionName);
+                    print(_charController);
+                    print(bindingIndex + " bindingIndex");
+                    _rebindText[i].text = TESTINPUTforCOMPOSITE.GetBindingName(_actionName[i], bindingIndex);
+                }
+                else
+                    _rebindText[i].text = _inputActionReferences[i].action.GetBindingDisplayString(bindingIndex);
+
             }
-            else
-                rebindText.text = inputActionReference.action.GetBindingDisplayString(bindingIndex);
         }
     }
 
     public void DoRebind(int btnIndex)
     {
-        Debug.Log("hai");
-        // btnIndex++;
-        TESTINPUTforCOMPOSITE.StartRebind(actionName, btnIndex, rebindText, excludeMouse);
+        TESTINPUTforCOMPOSITE.StartRebind(_actionName[btnIndex], btnIndex, _rebindText[btnIndex], _excludeMouse);
     }
 
-    private void ResetBinding(int btnIndex)
+    public void GetBtnIndex(int btnIndex)
+    {
+        bindingIndex = btnIndex;
+    }
+    public void DoCompositeRebind(string actionName)
+    {
+        TESTINPUTforCOMPOSITE.StartRebind(actionName, bindingIndex, compositeRebindText[bindingIndex], _excludeMouse);
+    }
+
+    public void ResetBinding(int btnIndex)
+    {
+        TESTINPUTforCOMPOSITE.ResetBinding(_actionName[btnIndex], btnIndex);
+        UpdateUI();
+    }
+
+    public void ResetCompositeBinding(int btnIndex, string actionName)
     {
         TESTINPUTforCOMPOSITE.ResetBinding(actionName, btnIndex);
         UpdateUI();

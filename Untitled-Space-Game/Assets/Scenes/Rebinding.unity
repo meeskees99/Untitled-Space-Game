@@ -219,7 +219,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Jump
+  m_text: Move
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -647,9 +647,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1061892170}
         m_TargetAssemblyTypeName: TESTforCOMPOSITE, Assembly-CSharp
-        m_MethodName: DoRebind
+        m_MethodName: GetBtnIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -657,6 +657,18 @@ MonoBehaviour:
           m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1061892170}
+        m_TargetAssemblyTypeName: TESTforCOMPOSITE, Assembly-CSharp
+        m_MethodName: DoCompositeRebind
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Move
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &136192272
@@ -2699,7 +2711,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: /
+  m_text: Z
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2833,7 +2845,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: W/A/S/D
+  m_text: Y/G/H/J
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3234,7 +3246,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: W/A/S/D
+  m_text: Y/G/H/J
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3679,11 +3691,11 @@ RectTransform:
   - {fileID: 1771740125}
   - {fileID: 1236763444}
   - {fileID: 558497507}
-  - {fileID: 648151370}
   - {fileID: 19261449}
   - {fileID: 623289449}
   - {fileID: 1320032745}
   - {fileID: 176495587}
+  - {fileID: 648151370}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3716,24 +3728,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _charController: {fileID: 1257780433}
-  inputActionReference: {fileID: -552677683719618422, guid: 48e8b518112b8844a87e9c7d4c8c40b2,
-    type: 3}
-  excludeMouse: 1
-  selectedBindingBtn: 0
+  _inputActionReferences:
+  - {fileID: -552677683719618422, guid: 48e8b518112b8844a87e9c7d4c8c40b2, type: 3}
+  - {fileID: -5405145133786370522, guid: 48e8b518112b8844a87e9c7d4c8c40b2, type: 3}
+  - {fileID: 6843844303390236540, guid: 48e8b518112b8844a87e9c7d4c8c40b2, type: 3}
+  - {fileID: 8743197934302689349, guid: 48e8b518112b8844a87e9c7d4c8c40b2, type: 3}
+  - {fileID: 8743197934302689349, guid: 48e8b518112b8844a87e9c7d4c8c40b2, type: 3}
+  - {fileID: 8743197934302689349, guid: 48e8b518112b8844a87e9c7d4c8c40b2, type: 3}
+  - {fileID: 8743197934302689349, guid: 48e8b518112b8844a87e9c7d4c8c40b2, type: 3}
+  _excludeMouse: 1
+  _selectedBindingBtn: 0
   displayStringOptions: 0
   inputBinding:
-    m_Name: 
-    m_Id: e790e407-9fca-4853-9a0a-b3741a6fc951
-    m_Path: <Keyboard>/space
+    m_Name: 2D Vector
+    m_Id: 95b2c658-2019-401a-b305-10f7d147efed
+    m_Path: 2DVector
     m_Interactions: 
     m_Processors: 
-    m_Groups: Keyboard&Mouse
-    m_Action: Jump
-    m_Flags: 0
-  actionText: {fileID: 48478649}
-  rebindButton: {fileID: 1803572425}
-  rebindText: {fileID: 1016520751}
-  resetButton: {fileID: 1692829419}
+    m_Groups: 
+    m_Action: Move
+    m_Flags: 4
+  _actionName:
+  - Jump
+  - Run
+  - Crouch
+  - Move
+  - Move
+  - Move
+  - Move
+  _rebindText:
+  - {fileID: 1016520751}
+  - {fileID: 216523330}
+  - {fileID: 826734841}
+  compositeRebindText:
+  - {fileID: 1800418641}
+  - {fileID: 842503121}
+  - {fileID: 1753548751}
+  - {fileID: 1009212378}
 --- !u!114 &1061892171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4306,14 +4337,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 1257780432}
   _playerObj: {fileID: 0}
-  _playerAnimator: {fileID: 0}
-  _grappleLr: {fileID: 0}
-  _aimTransform: {fileID: 0}
   _playerCam: {fileID: 0}
-  _speedLines: {fileID: 0}
   _orientation: {fileID: 0}
   _rb: {fileID: 0}
   _colliders: []
+  _isMove: 0
+  _isRun: 0
+  _isJump: 0
+  _isCrouch: 0
+  _isShoot: 0
+  _isHotbar: 0
   _currentMovementInput: {x: 0, y: 0}
   _currentMovement: {x: 0, y: 0, z: 0}
   _movement: {x: 0, y: 0, z: 0}
@@ -4321,44 +4354,6 @@ MonoBehaviour:
   _moveForce: 0
   _desiredMoveForce: 0
   _lastDesiredMoveForce: 0
-  _jumpForce: 0
-  _jumpMent: {x: 0, y: 0, z: 0}
-  _maxJumpTime: 0
-  _isJumpTime: 0
-  _lowestSlideSpeed: 0
-  _upCheck: 0
-  _slideLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  _upcheckLenght: 0
-  _isWalled: 0
-  _wallRight: 0
-  _wallLeft: 0
-  _wallLeftRight: 0
-  _wallLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  _wallCheckDistance: 0
-  _wallNormal: {x: 0, y: 0, z: 0}
-  _wallForward: {x: 0, y: 0, z: 0}
-  _maxWallAngle: 0
-  _wallRunDownForce: 0
-  _canStartWallTimer: 0
-  _maxWallClingTime: 0
-  _wallClingTime: 0
-  _currentWall: {fileID: 0}
-  _previousWall: {fileID: 0}
-  _isGrappled: 0
-  _grappleLenght: 0
-  _grappleDetectionRadius: 0
-  _grappleLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  _grappleDirection: {x: 0, y: 0, z: 0}
-  _grappleHooks: 0
-  _grappleDelay: 0
-  _maxGrappleDelay: 0
-  _finishedGrapple: 0
   _isGrounded: 0
   _groundLayer:
     serializedVersion: 2
@@ -4370,47 +4365,33 @@ MonoBehaviour:
   _isExitingSlope: 0
   _maxSlopeAngle: 0
   _playerHeight: 0
-  _vaultCheckDistance: 0
-  _vaultLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  _vaultLow: 0
-  _vaultMedium: 0
-  _vaultHigh: 0
-  _lowVaultOffset: 0
-  _mediumVaultOffset: 0
-  _highVaultOffset: 0
-  _vaultObj: {fileID: 0}
-  _isVaulted: 0
-  _isMove: 0
-  _isSlide: 0
-  _isJump: 0
-  _isAim: 0
-  _isShoot: 0
-  _moveSpeed: 0
+  _maxStamina: 0
+  _stamina: 0
+  _staminaDecreaseRate: 0
+  _staminaIncreaseRate: 0
+  _decreaseStamina: 0
+  _maxExhaustTime: 0
+  _exhaustTime: 0
+  _jumpForce: 0
+  _maxJumpTime: 0
+  _isJumpTime: 0
+  _crouchUp: 0
+  _walkSpeed: 0
+  _runSpeed: 0
+  _exhaustSpeed: 0
+  _crouchSpeed: 0
   _airSpeed: 0
-  _slideSpeed: 0
-  _slideSpeedDecrease: 0
-  _slopeSlideSpeed: 0
-  _wallRunSpeed: 0
-  _grappleSpeed: 0
-  _grapplePoint: {x: 0, y: 0, z: 0}
-  _strafeSpeedMultiplier: 0
   _speedIncreaseMultiplier: 0
   _slopeSpeedIncreaseMultiplier: 0
   _grappleSpeedIncreaseMultiplier: 0
   _moveMultiplier: 0
   _isAired: 0
-  _isSliding: 0
-  _isWallRunning: 0
-  _isGrappling: 0
   _isJumping: 0
-  _isForced: 0
-  _extraForce: 0
-  _forceSlowDownRate: 0
-  _hasDied: 0
-  _newFov: 0
-  _oldFov: 0
+  _toolRange: 0
+  _gatherMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _gatherTime: 0
 --- !u!1 &1292976017
 GameObject:
   m_ObjectHideFlags: 0
@@ -5308,7 +5289,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: W/A/S/D
+  m_text: Y/G/H/J
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5424,6 +5405,143 @@ RectTransform:
   m_AnchoredPosition: {x: 100, y: 172.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1776799995
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1776799999}
+  - component: {fileID: 1776799998}
+  - component: {fileID: 1776799997}
+  - component: {fileID: 1776799996}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1776799996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776799995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
+--- !u!81 &1776799997
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776799995}
+  m_Enabled: 1
+--- !u!20 &1776799998
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776799995}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &1776799999
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776799995}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 742.12885, y: 523.10175, z: -8.76429}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1800418638
 GameObject:
   m_ObjectHideFlags: 0
@@ -5489,7 +5607,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: F/A/S/D
+  m_text: Y/G/H/J
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5908,9 +6026,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1061892170}
         m_TargetAssemblyTypeName: TESTforCOMPOSITE, Assembly-CSharp
-        m_MethodName: DoRebind
+        m_MethodName: GetBtnIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5918,6 +6036,18 @@ MonoBehaviour:
           m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1061892170}
+        m_TargetAssemblyTypeName: TESTforCOMPOSITE, Assembly-CSharp
+        m_MethodName: DoCompositeRebind
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Move
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1868033010
@@ -6308,9 +6438,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1061892170}
         m_TargetAssemblyTypeName: TESTforCOMPOSITE, Assembly-CSharp
-        m_MethodName: DoRebind
+        m_MethodName: GetBtnIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6318,6 +6448,18 @@ MonoBehaviour:
           m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1061892170}
+        m_TargetAssemblyTypeName: TESTforCOMPOSITE, Assembly-CSharp
+        m_MethodName: DoCompositeRebind
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Move
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1969411666
@@ -6479,9 +6621,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1061892170}
         m_TargetAssemblyTypeName: TESTforCOMPOSITE, Assembly-CSharp
-        m_MethodName: DoRebind
+        m_MethodName: GetBtnIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6489,6 +6631,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1061892170}
+        m_TargetAssemblyTypeName: TESTforCOMPOSITE, Assembly-CSharp
+        m_MethodName: DoCompositeRebind
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Move
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &2006630644
@@ -6901,3 +7055,4 @@ SceneRoots:
   - {fileID: 1257780429}
   - {fileID: 1061892168}
   - {fileID: 259127481}
+  - {fileID: 1776799999}

@@ -53,11 +53,11 @@ public class TESTINPUTforCOMPOSITE : MonoBehaviour
             return;
         }
 
-        if (action.bindings[bindingIndex].isComposite)
+        if (action.bindings[bindingIndex + 1].isPartOfComposite)
         {
             Debug.Log("hui");
             var firstPartIndex = bindingIndex + 1;
-
+            bindingIndex += 1;
             //print(bindingIndex);
             //print(firstPartIndex);
 
@@ -102,9 +102,12 @@ public class TESTINPUTforCOMPOSITE : MonoBehaviour
 
             if (allCompositeParts)
             {
+                Debug.Log("DO REBIND AGAIN");
                 var nextBindingIndex = bindingIndex + 1;
-                if (nextBindingIndex < actionToRebind.bindings.Count && actionToRebind.bindings[nextBindingIndex].isComposite)
+                if (nextBindingIndex < actionToRebind.bindings.Count && actionToRebind.bindings[nextBindingIndex].isPartOfComposite)
+                {
                     DoRebind(actionToRebind, nextBindingIndex, statusText, allCompositeParts, excludeMouse);
+                }
             }
 
             SaveBindingOverride(actionToRebind);
