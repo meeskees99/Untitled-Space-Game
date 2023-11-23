@@ -6,7 +6,11 @@ public class CraftingManager : MonoBehaviour
 {
     public static CraftingManager Instance;
 
+    [SerializeField] Recipe[] allRecipes;
     public Recipe selectedRecipeToCraft;
+
+    public Transform recipeListTransform;
+    public GameObject itemPrefab;
 
     void Awake()
     {
@@ -55,5 +59,17 @@ public class CraftingManager : MonoBehaviour
         {
             Debug.Log("No Recipe Selected");
         }
+    }
+
+    public void RecipeButton(int index)
+    {
+        AddRecipe(allRecipes[index]);
+    }
+
+    void AddRecipe(Recipe recipe)
+    {
+        GameObject spawnedRecipe = Instantiate(itemPrefab, recipeListTransform);
+        spawnedRecipe.GetComponent<CraftButton>().recipe = recipe;
+        spawnedRecipe.GetComponent<CraftButton>().UpdateRecipeUI();
     }
 }

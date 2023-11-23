@@ -72,6 +72,18 @@ public class InventoryManager : MonoBehaviour
         selectedSlot = newSlot;
     }
 
+    public Item GetSelectedItem()
+    {
+        if (selectedSlot > -1)
+        {
+            return toolbarSlots[selectedSlot].itemInThisSlot.item;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
 
     public bool AddItem(int itemId, int amount)
     {

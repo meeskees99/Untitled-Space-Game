@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CraftButton : MonoBehaviour
 {
@@ -8,6 +10,18 @@ public class CraftButton : MonoBehaviour
 
     bool isSelected;
     [SerializeField] GameObject selectedObj;
+    [SerializeField] TMP_Text resourceText;
+    [SerializeField] Image itemImage;
+
+    void Start()
+    {
+        itemImage.sprite = recipe.itemToCraft.image;
+        resourceText.text = "";
+        for (int i = 0; i < recipe.itemsNeeded.Length; i++)
+        {
+            resourceText.text += $"{recipe.itemsNeeded[i].amount} {recipe.itemsNeeded[i].item.name}\n";
+        }
+    }
 
     public void SelectRecipe()
     {
@@ -22,6 +36,16 @@ public class CraftButton : MonoBehaviour
             selectedObj.SetActive(false);
             isSelected = false;
             CraftingManager.Instance.SelectCraftingRecipe(null);
+        }
+    }
+
+    public void UpdateRecipeUI()
+    {
+        itemImage.sprite = recipe.itemToCraft.image;
+        resourceText.text = "";
+        for (int i = 0; i < recipe.itemsNeeded.Length; i++)
+        {
+            resourceText.text += $"{recipe.itemsNeeded[i].amount} {recipe.itemsNeeded[i].item.name}\n";
         }
     }
 }

@@ -77,8 +77,8 @@ public class UiManager : MonoBehaviour
                 {
                     Debug.Log("Found A Child");
                     inventorySlotImages[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
-                    // if(inventorySlotImages[i].GetComponent<)
-                    inventorySlotImages[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                    if (inventorySlotImages[i].GetComponent<InventorySlot>().itemInThisSlot.count > 1)
+                        inventorySlotImages[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
                 }
             }
         }
