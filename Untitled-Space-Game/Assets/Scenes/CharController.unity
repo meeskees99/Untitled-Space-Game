@@ -178,52 +178,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!1 &596252527
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 596252529}
-  - component: {fileID: 596252528}
-  m_Layer: 0
-  m_Name: DataPersistenceManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &596252528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 596252527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc5c871b673dc6a46ad09a986035d58f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fileName: data.game
-  _useEncryption: 1
---- !u!4 &596252529
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 596252527}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5491834, y: 3.051695, z: 1.2332501}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &660015116
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,6 +707,7 @@ MonoBehaviour:
   _isJump: 0
   _isCrouch: 0
   _isShoot: 0
+  _isHotbar: 0
   _currentMovementInput: {x: 0, y: 0}
   _currentMovement: {x: 0, y: 0, z: 0}
   _movement: {x: 0, y: 0, z: 0}
@@ -912,6 +867,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 324ffcb6-0f89-47d6-8f69-35910d15069b
     m_ActionName: Game/Run[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6472b9b9-8046-4616-b95f-7de08eab91c3
+    m_ActionName: Game/Hotbar[/Mouse/scroll/down,/Mouse/scroll/up]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Game
@@ -1040,4 +999,3 @@ SceneRoots:
   - {fileID: 8951745564711663182}
   - {fileID: 1135326217}
   - {fileID: 1726189638}
-  - {fileID: 596252529}

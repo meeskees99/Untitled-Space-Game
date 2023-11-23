@@ -71,6 +71,15 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Hotbar"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""6472b9b9-8046-4616-b95f-7de08eab91c3"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -194,6 +203,17 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a103995-3fa1-412e-ad71-8b8e90c25309"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Hotbar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -263,6 +283,7 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
         m_Game_Jump = m_Game.FindAction("Jump", throwIfNotFound: true);
         m_Game_Crouch = m_Game.FindAction("Crouch", throwIfNotFound: true);
         m_Game_Run = m_Game.FindAction("Run", throwIfNotFound: true);
+        m_Game_Hotbar = m_Game.FindAction("Hotbar", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Newaction = m_Menu.FindAction("New action", throwIfNotFound: true);
@@ -332,6 +353,7 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Game_Jump;
     private readonly InputAction m_Game_Crouch;
     private readonly InputAction m_Game_Run;
+    private readonly InputAction m_Game_Hotbar;
     public struct GameActions
     {
         private @NewControls m_Wrapper;
@@ -341,6 +363,7 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Game_Jump;
         public InputAction @Crouch => m_Wrapper.m_Game_Crouch;
         public InputAction @Run => m_Wrapper.m_Game_Run;
+        public InputAction @Hotbar => m_Wrapper.m_Game_Hotbar;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -365,6 +388,9 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
             @Run.started += instance.OnRun;
             @Run.performed += instance.OnRun;
             @Run.canceled += instance.OnRun;
+            @Hotbar.started += instance.OnHotbar;
+            @Hotbar.performed += instance.OnHotbar;
+            @Hotbar.canceled += instance.OnHotbar;
         }
 
         private void UnregisterCallbacks(IGameActions instance)
@@ -384,6 +410,9 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
             @Run.started -= instance.OnRun;
             @Run.performed -= instance.OnRun;
             @Run.canceled -= instance.OnRun;
+            @Hotbar.started -= instance.OnHotbar;
+            @Hotbar.performed -= instance.OnHotbar;
+            @Hotbar.canceled -= instance.OnHotbar;
         }
 
         public void RemoveCallbacks(IGameActions instance)
@@ -472,6 +501,7 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnHotbar(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

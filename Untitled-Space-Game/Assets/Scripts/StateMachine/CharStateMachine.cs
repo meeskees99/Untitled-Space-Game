@@ -95,6 +95,13 @@ public class CharStateMachine : MonoBehaviour, IDataPersistence
         get { return _isShoot; }
     }
 
+    [SerializeField] float _isHotbar;
+    public float IsHotbar
+    {
+        get { return _isHotbar; }
+        set { _isHotbar = value; }
+    }
+
     #endregion
 
     [Header("Movement")]
@@ -375,6 +382,16 @@ public class CharStateMachine : MonoBehaviour, IDataPersistence
 
     #endregion
 
+    [Header("MultiTool")]
+    #region MultiTool
+
+    [SerializeField] float _toolRange;
+
+    [SerializeField] RaycastHit _toolHit;
+    [SerializeField] LayerMask _gatherMask;
+
+
+    #endregion
 
     #endregion
 
@@ -414,9 +431,9 @@ public class CharStateMachine : MonoBehaviour, IDataPersistence
         playerInput.actions.FindAction("Crouch").performed += OnCrouch;
         playerInput.actions.FindAction("Crouch").canceled += OnCrouch;
 
-        // playerInput.actions.FindAction("Shoot").started += OnShoot;
-        // playerInput.actions.FindAction("Shoot").performed += OnShoot;
-        // playerInput.actions.FindAction("Shoot").canceled += OnShoot;
+        playerInput.actions.FindAction("Hotbar").started += OnHotbar;
+        playerInput.actions.FindAction("Hotbar").performed += OnHotbar;
+        playerInput.actions.FindAction("Hotbar").canceled += OnHotbar;
 
         _states = new CharStateFactory(this);
         _currentState = _states.Grounded();
@@ -434,6 +451,15 @@ public class CharStateMachine : MonoBehaviour, IDataPersistence
     {
         _movementSpeed = Rb.velocity.magnitude;
 
+
+        if (_isHotbar < 0)
+        {
+            Debug.Log("scroll up");
+        }
+        if (IsHotbar > 0)
+        {
+            Debug.Log("scroll down");
+        }
 
         if (Input.GetKey(KeyCode.O))
         {
@@ -541,6 +567,11 @@ public class CharStateMachine : MonoBehaviour, IDataPersistence
     void OnRun(InputAction.CallbackContext context)
     {
         _isRun = context.ReadValueAsButton();
+    }
+
+    void OnHotbar(InputAction.CallbackContext context)
+    {
+        _isHotbar = context.ReadValue<float>();
     }
 
     // void OnShoot(InputAction.CallbackContext context)
