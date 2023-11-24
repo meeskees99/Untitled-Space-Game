@@ -6,34 +6,34 @@ using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
     [Header("Things To Disable When Not Opened")]
-    [SerializeField] Image inventoryBackgroundImage;
-    [SerializeField] Button inventoryBackgroundButton;
-    [SerializeField] Image inventoryImage;
-    [SerializeField] Image[] inventorySlotImages;
+    [SerializeField] Image _inventoryBackgroundImage;
+    [SerializeField] Button _inventoryBackgroundButton;
+    [SerializeField] Image _inventoryImage;
+    [SerializeField] Image[] _inventorySlotImages;
 
-    [SerializeField] GameObject craftingPanel;
+    [SerializeField] GameObject _craftingPanel;
 
     [Header("Settings")]
-    bool inventoryShown;
-    bool craftingShown;
+    bool _craftingShown;
+    public bool inventoryShown { get; private set; }
 
 
-    bool initializedUI;
+    bool _initializedUI;
 
 
     // Update is called once per frame
     void Update()
     {
-        if (!initializedUI)
+        if (!_initializedUI)
         {
-            initializedUI = true;
-            for (int i = 0; i < inventorySlotImages.Length; i++)
+            _initializedUI = true;
+            for (int i = 0; i < _inventorySlotImages.Length; i++)
             {
-                if (inventorySlotImages[i].transform.childCount > 0)
+                if (_inventorySlotImages[i].transform.childCount > 0)
                 {
                     Debug.Log("Found A Child");
-                    inventorySlotImages[i].transform.GetChild(0).GetComponent<Image>().enabled = false;
-                    inventorySlotImages[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+                    _inventorySlotImages[i].transform.GetChild(0).GetComponent<Image>().enabled = false;
+                    _inventorySlotImages[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
                 }
             }
         }
@@ -42,43 +42,43 @@ public class UiManager : MonoBehaviour
 
     public void ToggleInventory()
     {
-        if (craftingShown)
+        if (_craftingShown)
         {
-            craftingPanel.SetActive(false);
-            craftingShown = false;
+            _craftingPanel.SetActive(false);
+            _craftingShown = false;
         }
         if (inventoryShown)
         {
             inventoryShown = false;
-            inventoryBackgroundButton.enabled = false;
-            inventoryBackgroundImage.enabled = false;
-            inventoryImage.enabled = false;
-            for (int i = 0; i < inventorySlotImages.Length; i++)
+            _inventoryBackgroundButton.enabled = false;
+            _inventoryBackgroundImage.enabled = false;
+            _inventoryImage.enabled = false;
+            for (int i = 0; i < _inventorySlotImages.Length; i++)
             {
-                inventorySlotImages[i].enabled = false;
-                if (inventorySlotImages[i].transform.childCount > 0)
+                _inventorySlotImages[i].enabled = false;
+                if (_inventorySlotImages[i].transform.childCount > 0)
                 {
                     Debug.Log("Found A Child");
-                    inventorySlotImages[i].transform.GetChild(0).GetComponent<Image>().enabled = false;
-                    inventorySlotImages[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+                    _inventorySlotImages[i].transform.GetChild(0).GetComponent<Image>().enabled = false;
+                    _inventorySlotImages[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
                 }
             }
         }
         else
         {
             inventoryShown = true;
-            inventoryBackgroundButton.enabled = true;
-            inventoryBackgroundImage.enabled = true;
-            inventoryImage.enabled = true;
-            for (int i = 0; i < inventorySlotImages.Length; i++)
+            _inventoryBackgroundButton.enabled = true;
+            _inventoryBackgroundImage.enabled = true;
+            _inventoryImage.enabled = true;
+            for (int i = 0; i < _inventorySlotImages.Length; i++)
             {
-                inventorySlotImages[i].enabled = true;
-                if (inventorySlotImages[i].transform.childCount > 0)
+                _inventorySlotImages[i].enabled = true;
+                if (_inventorySlotImages[i].transform.childCount > 0)
                 {
                     Debug.Log("Found A Child");
-                    inventorySlotImages[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
-                    if (inventorySlotImages[i].GetComponent<InventorySlot>().itemInThisSlot.count > 1)
-                        inventorySlotImages[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                    _inventorySlotImages[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
+                    if (_inventorySlotImages[i].GetComponent<InventorySlot>().itemInThisSlot.count > 1)
+                        _inventorySlotImages[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
                 }
             }
         }
@@ -89,29 +89,29 @@ public class UiManager : MonoBehaviour
         if (inventoryShown)
         {
             inventoryShown = false;
-            inventoryBackgroundButton.enabled = false;
-            inventoryBackgroundImage.enabled = false;
-            inventoryImage.enabled = false;
-            for (int i = 0; i < inventorySlotImages.Length; i++)
+            _inventoryBackgroundButton.enabled = false;
+            _inventoryBackgroundImage.enabled = false;
+            _inventoryImage.enabled = false;
+            for (int i = 0; i < _inventorySlotImages.Length; i++)
             {
-                inventorySlotImages[i].enabled = false;
-                if (inventorySlotImages[i].transform.childCount > 0)
+                _inventorySlotImages[i].enabled = false;
+                if (_inventorySlotImages[i].transform.childCount > 0)
                 {
                     Debug.Log("Found A Child");
-                    inventorySlotImages[i].transform.GetChild(0).GetComponent<Image>().enabled = false;
-                    inventorySlotImages[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+                    _inventorySlotImages[i].transform.GetChild(0).GetComponent<Image>().enabled = false;
+                    _inventorySlotImages[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
                 }
             }
         }
-        if (craftingShown)
+        if (_craftingShown)
         {
-            craftingPanel.SetActive(false);
-            craftingShown = false;
+            _craftingPanel.SetActive(false);
+            _craftingShown = false;
         }
         else
         {
-            craftingPanel.SetActive(true);
-            craftingShown = true;
+            _craftingPanel.SetActive(true);
+            _craftingShown = true;
         }
     }
 }

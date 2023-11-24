@@ -10,7 +10,7 @@ public class InventoryManager : MonoBehaviour
 
     public List<InventorySlot> inventorySlots = new();
 
-    [SerializeField] InventorySlot[] toolbarSlots;
+    [SerializeField] InventorySlot[] _toolbarSlots;
 
     [SerializeField] GameObject _inventoryItemPrefab;
 
@@ -18,10 +18,10 @@ public class InventoryManager : MonoBehaviour
 
     public List<ItemInfo> itemsInInventory = new();
 
-    [SerializeField] Item[] allItems;
+    [SerializeField] Item[] _allItems;
 
     public InventoryItem heldItem;
-
+    [SerializeField] UiManager _uiManager;
 
     private void Awake()
     {
@@ -56,17 +56,17 @@ public class InventoryManager : MonoBehaviour
     {
         if (selectedSlot == newSlot)
         {
-            toolbarSlots[selectedSlot].Deselect();
+            _toolbarSlots[selectedSlot].Deselect();
             selectedSlot = -1;
             return;
         }
 
         if (selectedSlot >= 0)
         {
-            toolbarSlots[selectedSlot].Deselect();
+            _toolbarSlots[selectedSlot].Deselect();
         }
 
-        toolbarSlots[newSlot].Select();
+        _toolbarSlots[newSlot].Select();
         selectedSlot = newSlot;
     }
 
@@ -74,7 +74,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (selectedSlot > -1)
         {
-            return toolbarSlots[selectedSlot].itemInThisSlot.item;
+            return _toolbarSlots[selectedSlot].itemInThisSlot.item;
         }
         else
         {
@@ -96,11 +96,14 @@ public class InventoryManager : MonoBehaviour
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
 
 
-            if (itemInSlot != null && itemInSlot.item == allItems[itemId] && itemInSlot.count < itemInSlot.item.maxStack)
+            if (itemInSlot != null && itemInSlot.item == _allItems[itemId] && itemInSlot.count < itemInSlot.item.maxStack)
             {
                 itemInSlot.count++;
                 itemInSlot.RefreshCount();
-                UpdateItemsInfoList();
+                if (_uiManager.inventoryShown)
+                {
+                    UpdateItemsInfoList();
+                }
                 return true;
             }
         }
@@ -109,7 +112,7 @@ public class InventoryManager : MonoBehaviour
         {
             for (int x = 0; x < inventorySlots[i].disAllowedItems.Length; x++)
             {
-                if (inventorySlots[i].disAllowedItems[x] == allItems[itemId])
+                if (inventorySlots[i].disAllowedItems[x] == _allItems[itemId])
                 {
                     Debug.Log("Can't Spawn This Item Here As it Is BlackListed");
                     UpdateItemsInfoList();
@@ -124,7 +127,10 @@ public class InventoryManager : MonoBehaviour
                 return true;
             }
         }
-        UpdateItemsInfoList();
+        if (_uiManager.inventoryShown)
+        {
+            UpdateItemsInfoList();
+        }
         return false;
     }
 
@@ -133,15 +139,18 @@ public class InventoryManager : MonoBehaviour
         GameObject newItemGO = Instantiate(_inventoryItemPrefab, inventorySlots[slotID].transform);
         InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
         inventoryItem.count = itemCount;
-        for (int i = 0; i < allItems.Length; i++)
+        for (int i = 0; i < _allItems.Length; i++)
         {
-            if (allItems[i].itemID == itemID)
+            if (_allItems[i].itemID == itemID)
             {
-                inventoryItem.InitializeItem(allItems[i]);
+                inventoryItem.InitializeItem(_allItems[i]);
                 break;
             }
         }
-        UpdateItemsInfoList();
+        if (_uiManager.inventoryShown)
+        {
+            UpdateItemsInfoList();
+        }
     }
 
     public void UseItem(int itemID, int itemCount)
@@ -160,11 +169,11 @@ public class InventoryManager : MonoBehaviour
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
 
-            for (int z = 0; z < allItems.Length; z++)
+            for (int z = 0; z < _allItems.Length; z++)
             {
-                if (allItems[z].itemID == itemID)
+                if (_allItems[z].itemID == itemID)
                 {
-                    if (itemInSlot != null && itemInSlot.item == allItems[z])
+                    if (itemInSlot != null && itemInSlot.item == _allItems[z])
                     {
                         if (itemInSlot.count >= itemCount)
                         {
@@ -190,7 +199,7 @@ public class InventoryManager : MonoBehaviour
     public Item GetSelectedItem(bool use)
     {
         if (selectedSlot == -1) return null;
-        InventorySlot slot = toolbarSlots[selectedSlot];
+        InventorySlot slot = _toolbarSlots[selectedSlot];
         InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
         if (itemInSlot != null)
         {
@@ -215,10 +224,10 @@ public class InventoryManager : MonoBehaviour
     public void UpdateItemsInfoList()
     {
         itemsInInventory.Clear();
-        for (int i = 0; i < allItems.Length; i++)
+        for (int i = 0; i < _allItems.Length; i++)
         {
-            int amount = GetTotalItemAmount(inventorySlots, allItems[i]);
-            itemsInInventory.Add(new(allItems[i], amount));
+            int amount = GetTotalItemAmount(inventorySlots, _allItems[i]);
+            itemsInInventory.Add(new(_allItems[i], amount));
         }
     }
 
