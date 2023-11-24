@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40cf36ca5d3001944853338ef8be7a8d, type: 3}
   m_Name: RawMetal
   m_EditorClassIdentifier: 
-  itemID: 7
+  itemID: 3
   stackable: 1
   image: {fileID: 21300000, guid: bb1fff7229b96564cbe783289f2d319d, type: 3}
-  maxStack: 1
+  maxStack: 5
   isTool: 0
   isPlacable: 0

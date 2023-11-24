@@ -95,16 +95,15 @@ public class InventoryManager : MonoBehaviour
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
 
-
-            if (itemInSlot != null && itemInSlot.item == _allItems[itemId] && itemInSlot.count < itemInSlot.item.maxStack)
+            for (int j = 0; j < _allItems.Length; j++)
             {
-                itemInSlot.count++;
-                itemInSlot.RefreshCount();
-                if (_uiManager.inventoryShown)
+                if (itemInSlot != null && itemInSlot.item == _allItems[j] && itemInSlot.count < itemInSlot.item.maxStack)
                 {
+                    itemInSlot.count++;
+                    itemInSlot.RefreshCount();
                     UpdateItemsInfoList();
+                    return true;
                 }
-                return true;
             }
         }
         //Check for empty Slot
