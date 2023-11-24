@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3471226225158139212
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 23811427872261868}
+  - component: {fileID: 4736489283703529182}
+  m_Layer: 0
+  m_Name: CraftingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &23811427872261868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471226225158139212}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 355.45956, y: 856.0064, z: 3.7333953}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4736489283703529182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471226225158139212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5516ab2cd86f7144bfd12ad61ff9739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allRecipes:
+  - {fileID: 11400000, guid: 37630fe40c5664f40acee06705a06f4f, type: 2}
+  - {fileID: 11400000, guid: 0afc67476ca54b446afba7cf56d206c4, type: 2}
+  - {fileID: 11400000, guid: 4205c26546ef54c4eb0177e428479a13, type: 2}
+  selectedRecipeToCraft: {fileID: 0}
+  recipeListTransform: {fileID: 0}
+  itemPrefab: {fileID: 3676377195330422601, guid: fa27d49ce1144964bace52d8c6cc23b2,
+    type: 3}
+  imagePrefab: {fileID: 4364492874931862433, guid: 08eec6bf4d521b94dac80cfeaa1f0411,
+    type: 3}
+  imageListTransform: {fileID: 0}

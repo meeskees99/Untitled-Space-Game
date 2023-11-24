@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7352907499353183576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6156237381611841711}
+  - component: {fileID: 4286826745754973780}
+  - component: {fileID: 6725215984825499227}
+  m_Layer: 0
+  m_Name: InventoryManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6156237381611841711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7352907499353183576}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 448.98712, y: 549.7741, z: -1.2171965}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4286826745754973780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7352907499353183576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c446f4d11f9c5ed49ac345c9ee90eb40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  toolbarSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  _inventoryItemPrefab: {fileID: 4589494901010836183, guid: 3e6c481d9fc7a8f4cbf901e368c8fff2,
+    type: 3}
+  itemsInInventory: []
+  allItems:
+  - {fileID: 11400000, guid: 636bf93b265c2f14ab9e9364eda83fab, type: 2}
+  - {fileID: 11400000, guid: fc34cd0c33704dd40a714b9af99614bb, type: 2}
+  - {fileID: 11400000, guid: 9a99ddadd8361bf4da199a6a4fc5c02a, type: 2}
+  heldItem: {fileID: 0}
+--- !u!114 &6725215984825499227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7352907499353183576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ce2339a938097d4992d4d35d7057555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryManager: {fileID: 4286826745754973780}
+  itemToPickup:
+  - {fileID: 11400000, guid: 636bf93b265c2f14ab9e9364eda83fab, type: 2}
+  - {fileID: 11400000, guid: fc34cd0c33704dd40a714b9af99614bb, type: 2}
+  - {fileID: 11400000, guid: 9a99ddadd8361bf4da199a6a4fc5c02a, type: 2}
+  spawnAmount: 1
