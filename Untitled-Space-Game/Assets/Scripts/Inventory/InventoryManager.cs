@@ -195,31 +195,6 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public Item GetSelectedItem(bool use)
-    {
-        if (selectedSlot == -1) return null;
-        InventorySlot slot = _toolbarSlots[selectedSlot];
-        InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-        if (itemInSlot != null)
-        {
-            Item item = itemInSlot.item;
-            if (use)
-            {
-                itemInSlot.count--;
-                if (itemInSlot.count <= 0)
-                {
-                    Destroy(itemInSlot.gameObject);
-                }
-                else
-                {
-                    itemInSlot.RefreshCount();
-                }
-            }
-            return item;
-        }
-        return null;
-    }
-
     public void UpdateItemsInfoList()
     {
         itemsInInventory.Clear();
@@ -255,6 +230,5 @@ public class InventoryManager : MonoBehaviour
 
         return result;
     }
-
 
 }

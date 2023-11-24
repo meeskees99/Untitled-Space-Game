@@ -5,7 +5,6 @@ using UnityEngine;
 public class InventoryDevtools : MonoBehaviour
 {
     public InventoryManager inventoryManager;
-    public Item[] itemToPickup;
 
     public int spawnAmount = 1;
 
@@ -29,7 +28,7 @@ public class InventoryDevtools : MonoBehaviour
 
     public void GetSelectedItem()
     {
-        Item currentItem = inventoryManager.GetSelectedItem(false);
+        Item currentItem = inventoryManager.GetSelectedItem();
         if (currentItem != null)
         {
             print($"Currently Holding {currentItem.name}");
@@ -42,9 +41,10 @@ public class InventoryDevtools : MonoBehaviour
 
     public void UseSelectedItem()
     {
-        Item currentItem = inventoryManager.GetSelectedItem(true);
+        Item currentItem = inventoryManager.GetSelectedItem();
         if (currentItem != null)
         {
+            inventoryManager.UseItem(inventoryManager.GetSelectedItem().itemID, 1);
             print($"Used Item: {currentItem.name}");
         }
         else

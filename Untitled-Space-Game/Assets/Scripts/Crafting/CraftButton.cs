@@ -9,18 +9,16 @@ public class CraftButton : MonoBehaviour
     public Recipe recipe;
 
     bool isSelected;
-    [SerializeField] GameObject selectedObj;
-    [SerializeField] TMP_Text itemNameText;
-    [SerializeField] Image itemImage;
-
-    // [SerializeField] GameObject imagePrefab;
+    [SerializeField] GameObject _selectedObj;
+    [SerializeField] TMP_Text _itemNameText;
+    [SerializeField] Image _itemImage;
 
     void Start()
     {
         if (recipe != null)
         {
-            itemImage.sprite = recipe.itemToCraft.image;
-            itemNameText.text = recipe.itemToCraft.name;
+            _itemImage.sprite = recipe.itemToCraft.image;
+            _itemNameText.text = recipe.itemToCraft.name;
         }
     }
 
@@ -29,13 +27,13 @@ public class CraftButton : MonoBehaviour
         UpdateRecipeUI();
         if (!isSelected)
         {
-            selectedObj.SetActive(true);
+            _selectedObj.SetActive(true);
             isSelected = true;
             CraftingManager.Instance.SelectCraftingRecipe(recipe);
         }
         else
         {
-            selectedObj.SetActive(false);
+            _selectedObj.SetActive(false);
             isSelected = false;
             CraftingManager.Instance.SelectCraftingRecipe(null);
         }
@@ -48,13 +46,7 @@ public class CraftButton : MonoBehaviour
             Debug.Log("Could Not Update RecipeUI As There Is No Recipe Attatched To " + gameObject.name);
             return;
         }
-        itemImage.sprite = recipe.itemToCraft.image;
-        itemNameText.text = recipe.itemToCraft.name;
-        // for (int i = 0; i < recipe.itemsNeeded.Length; i++)
-        // {
-        //     // resourceText.text += $"{recipe.itemsNeeded[i].amount} {recipe.itemsNeeded[i].item.name}\n";
-        //     // GameObject newImage = Instantiate(imagePrefab, transform);
-        //     // newImage.GetComponent<Image>().sprite = recipe.itemsNeeded[i].item.image;
-        // }
+        _itemImage.sprite = recipe.itemToCraft.image;
+        _itemNameText.text = recipe.itemToCraft.name;
     }
 }
