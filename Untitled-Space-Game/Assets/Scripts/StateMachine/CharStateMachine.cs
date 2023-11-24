@@ -646,6 +646,10 @@ public class CharStateMachine : MonoBehaviour, IDataPersistence
 
     private void CheckTool()
     {
+        if (InventoryManager.Instance.GetSelectedItem() == null)
+        {
+            return;
+        }
         if (InventoryManager.Instance.GetSelectedItem().name == "Pickaxe")
         {
             GatherTool();
