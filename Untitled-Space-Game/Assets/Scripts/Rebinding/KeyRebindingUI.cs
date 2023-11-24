@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class TESTINPUTforCOMPOSITE : MonoBehaviour
+public class KeyRebindingUI : MonoBehaviour
 {
     private static CharStateMachine _charController;
 

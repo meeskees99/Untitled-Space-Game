@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
-public class TESTforCOMPOSITE : MonoBehaviour
+
+public class KeyRebinding : MonoBehaviour
 {
     [SerializeField] CharStateMachine _charController;
 
@@ -39,20 +40,20 @@ public class TESTforCOMPOSITE : MonoBehaviour
             print(_charController);
             for (int i = 0; i < _actionName.Length; i++)
             {
-                TESTINPUTforCOMPOSITE.LoadBindingOverride(_actionName[i]);
+                KeyRebindingUI.LoadBindingOverride(_actionName[i]);
             }
             GetBindingInfo();
             UpdateUI();
         }
 
-        TESTINPUTforCOMPOSITE.rebindComplete += UpdateUI;
-        TESTINPUTforCOMPOSITE.rebindCanceled += UpdateUI;
+        KeyRebindingUI.rebindComplete += UpdateUI;
+        KeyRebindingUI.rebindCanceled += UpdateUI;
     }
 
     private void OnDisable()
     {
-        TESTINPUTforCOMPOSITE.rebindComplete -= UpdateUI;
-        TESTINPUTforCOMPOSITE.rebindCanceled -= UpdateUI;
+        KeyRebindingUI.rebindComplete -= UpdateUI;
+        KeyRebindingUI.rebindCanceled -= UpdateUI;
     }
 
     private void OnValidate()
@@ -95,7 +96,7 @@ public class TESTforCOMPOSITE : MonoBehaviour
                     print(_actionName);
                     print(_charController);
                     print(bindingIndex + " bindingIndex");
-                    _rebindText[i].text = TESTINPUTforCOMPOSITE.GetBindingName(_actionName[i], bindingIndex);
+                    _rebindText[i].text = KeyRebindingUI.GetBindingName(_actionName[i], bindingIndex);
                 }
                 else
                     _rebindText[i].text = _inputActionReferences[i].action.GetBindingDisplayString(bindingIndex);
@@ -106,7 +107,7 @@ public class TESTforCOMPOSITE : MonoBehaviour
 
     public void DoRebind(int btnIndex)
     {
-        TESTINPUTforCOMPOSITE.StartRebind(_actionName[btnIndex], btnIndex, _rebindText[btnIndex], _excludeMouse);
+        KeyRebindingUI.StartRebind(_actionName[btnIndex], btnIndex, _rebindText[btnIndex], _excludeMouse);
     }
 
     public void GetBtnIndex(int btnIndex)
@@ -115,18 +116,18 @@ public class TESTforCOMPOSITE : MonoBehaviour
     }
     public void DoCompositeRebind(string actionName)
     {
-        TESTINPUTforCOMPOSITE.StartRebind(actionName, bindingIndex, compositeRebindText[bindingIndex], _excludeMouse);
+        KeyRebindingUI.StartRebind(actionName, bindingIndex, compositeRebindText[bindingIndex], _excludeMouse);
     }
 
     public void ResetBinding(int btnIndex)
     {
-        TESTINPUTforCOMPOSITE.ResetBinding(_actionName[btnIndex], btnIndex);
+        KeyRebindingUI.ResetBinding(_actionName[btnIndex], btnIndex);
         UpdateUI();
     }
 
     public void ResetCompositeBinding(int btnIndex, string actionName)
     {
-        TESTINPUTforCOMPOSITE.ResetBinding(actionName, btnIndex);
+        KeyRebindingUI.ResetBinding(actionName, btnIndex);
         UpdateUI();
     }
 }

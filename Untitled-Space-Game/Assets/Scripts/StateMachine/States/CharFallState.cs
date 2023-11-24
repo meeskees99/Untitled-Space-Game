@@ -36,14 +36,14 @@ public class CharFallState : CharBaseState
 
     public override void InitializeSubState()
     {
-        // if (!Ctx.IsMove)
-        // {
-        //     SetSubState(Factory.Idle());
-        // }
-        // else if (Ctx.IsMove)
-        // {
-        //     SetSubState(Factory.Walk());
-        // }
+        if (!Ctx.IsMove)
+        {
+            SetSubState(Factory.Idle());
+        }
+        else if (Ctx.IsMove)
+        {
+            SetSubState(Factory.Walk());
+        }
     }
 
     public override void CheckSwitchStates()

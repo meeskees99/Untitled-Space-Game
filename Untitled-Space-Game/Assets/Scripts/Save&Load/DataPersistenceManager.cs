@@ -11,9 +11,9 @@ public class DataPersistenceManager : MonoBehaviour
 
     public static DataPersistenceManager instance { get; private set; }
 
-    private GameData gameData;
-    private List<IDataPersistence> dataPersistenceObjects;
-    private FileDataHandler dataHandler;
+    private GameData _gameData;
+    private List<IDataPersistence> _dataPersistenceObjects;
+    private FileDataHandler _dataHandler;
 
     private void Awake()
     {
@@ -27,44 +27,44 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void Start()
     {
-        this.dataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _useEncryption);
-        this.dataPersistenceObjects = FindAllDataPersistenceObjects();
+        this._dataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _useEncryption);
+        this._dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
     }
 
     public void NewGame()
     {
-        this.gameData = new GameData();
+        this._gameData = new GameData();
     }
 
     public void LoadGame()
     {
         // TODO - load any saved data from a file using the data handler
-        this.gameData = dataHandler.Load();
+        this._gameData = _dataHandler.Load();
 
-        if (this.gameData == null)
+        if (this._gameData == null)
         {
             Debug.Log("No game data was found starting new game");
             NewGame();
         }
 
         // push the loaded data to all other script that need it
-        foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+        foreach (IDataPersistence dataPersistenceObj in _dataPersistenceObjects)
         {
-            dataPersistenceObj.LoadData(gameData);
+            dataPersistenceObj.LoadData(_gameData);
         }
     }
 
     public void SaveGame()
     {
         // pass the data to other scripts so they can update it
-        foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+        foreach (IDataPersistence dataPersistenceObj in _dataPersistenceObjects)
         {
-            dataPersistenceObj.SaveData(ref gameData);
+            dataPersistenceObj.SaveData(ref _gameData);
         }
 
         // save that data to a file using the file data handler
-        dataHandler.Save(gameData);
+        _dataHandler.Save(_gameData);
     }
 
     public void SaveBtn()
