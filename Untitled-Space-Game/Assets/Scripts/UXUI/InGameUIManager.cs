@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UiManager : MonoBehaviour
+public class InGameUIManager : MonoBehaviour
 {
     [Header("Things To Disable When Not Opened")]
     [SerializeField] Image _inventoryBackgroundImage;
