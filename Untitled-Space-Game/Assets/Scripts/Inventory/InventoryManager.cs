@@ -22,8 +22,6 @@ public class InventoryManager : MonoBehaviour
 
     public InventoryItem heldItem;
 
-    // public Dictionary<Item, int> itemAmounts = new();
-
 
     private void Awake()
     {
@@ -135,7 +133,14 @@ public class InventoryManager : MonoBehaviour
         GameObject newItemGO = Instantiate(_inventoryItemPrefab, inventorySlots[slotID].transform);
         InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
         inventoryItem.count = itemCount;
-        inventoryItem.InitializeItem(allItems[itemID]);
+        for (int i = 0; i < allItems.Length; i++)
+        {
+            if (allItems[i].itemID == itemID)
+            {
+                inventoryItem.InitializeItem(allItems[i]);
+                break;
+            }
+        }
         UpdateItemsInfoList();
     }
 
