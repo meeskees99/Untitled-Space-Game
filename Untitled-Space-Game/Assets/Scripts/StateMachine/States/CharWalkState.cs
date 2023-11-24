@@ -6,7 +6,6 @@ public class CharWalkState : CharBaseState
 
     public override void EnterState()
     {
-        Debug.Log("ENTER WALK");
         Ctx.DesiredMoveForce = Ctx.WalkSpeed;
 
         if (Ctx.MoveForce > Ctx.WalkSpeed)
@@ -54,7 +53,6 @@ public class CharWalkState : CharBaseState
 
     private void WalkMovement()
     {
-        Debug.Log("WALK");
         Ctx.Rb.AddForce(Ctx.Movement * Ctx.MoveForce * 10f * Ctx.MoveMultiplier, ForceMode.Force);
     }
 }

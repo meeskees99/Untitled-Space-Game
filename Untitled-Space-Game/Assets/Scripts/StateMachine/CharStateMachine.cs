@@ -436,6 +436,10 @@ public class CharStateMachine : MonoBehaviour, IDataPersistence
         playerInput.actions.FindAction("Hotbar").performed += OnHotbar;
         playerInput.actions.FindAction("Hotbar").canceled += OnHotbar;
 
+        playerInput.actions.FindAction("Shoot").started += OnShoot;
+        playerInput.actions.FindAction("Shoot").performed += OnShoot;
+        playerInput.actions.FindAction("Shoot").canceled += OnShoot;
+
         _states = new CharStateFactory(this);
         _currentState = _states.Grounded();
         _currentState.EnterState();
@@ -464,7 +468,7 @@ public class CharStateMachine : MonoBehaviour, IDataPersistence
 
         if (_isShoot)
         {
-
+            CheckTool();
         }
 
         if (Input.GetKey(KeyCode.O))
@@ -580,10 +584,10 @@ public class CharStateMachine : MonoBehaviour, IDataPersistence
         _isHotbar = context.ReadValue<float>();
     }
 
-    // void OnShoot(InputAction.CallbackContext context)
-    // {
-    //     _isShoot = context.ReadValueAsButton();
-    // }
+    void OnShoot(InputAction.CallbackContext context)
+    {
+        _isShoot = context.ReadValueAsButton();
+    }
 
     #endregion
 
@@ -642,7 +646,10 @@ public class CharStateMachine : MonoBehaviour, IDataPersistence
 
     private void CheckTool()
     {
-        // if (InventoryManager.Instance.)
+        if (InventoryManager.Instance.GetSelectedItem().name == "Pickaxe")
+        {
+            GatherTool();
+        }
     }
 
     private void WeaponTool()
@@ -657,7 +664,7 @@ public class CharStateMachine : MonoBehaviour, IDataPersistence
 
     private void GatherTool()
     {
-        float rayDistance = _toolRange += Vector3.Distance(_playerCam.transform.position, _playerObj.transform.position);
+        float rayDistance = _toolRange + Vector3.Distance(_playerCam.transform.position, _playerObj.transform.position);
         if (Physics.Raycast(_playerCam.position, Vector3.forward, out _toolHit, rayDistance, _gatherMask))
         {
             if (_gatherTime == -1)
