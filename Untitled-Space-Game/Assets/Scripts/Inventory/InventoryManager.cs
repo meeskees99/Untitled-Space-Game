@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -113,7 +114,16 @@ public class InventoryManager : MonoBehaviour
                 itemInSlot.count++;
                 itemInSlot.RefreshCount();
                 UpdateItemsInfoList();
-
+                if (!_uiManager.inventoryShown)
+                {
+                    if (!slot.isHudSlot)
+                        itemInSlot.transform.GetChild(0).gameObject.SetActive(false);
+                }
+                else
+                {
+                    if (!slot.isHudSlot)
+                        itemInSlot.transform.GetChild(0).gameObject.SetActive(true);
+                }
                 return true;
             }
 
@@ -121,15 +131,13 @@ public class InventoryManager : MonoBehaviour
         //Check for empty Slot
         for (int i = 0; i < inventorySlots.Count; i++)
         {
-            for (int x = 0; x < inventorySlots[i].disAllowedItems.Length; x++)
+            if (inventorySlots[i].isHudSlot && !itemToSpawn.canBeInHudSlot)
             {
-                if (inventorySlots[i].disAllowedItems[x] == itemToSpawn)
-                {
-                    Debug.Log("Can't Spawn This Item Here As it Is BlackListed");
-                    UpdateItemsInfoList();
-                    return false;
-                }
+                Debug.Log("Can't Spawn This Item Here As it Is BlackListed");
+                UpdateItemsInfoList();
+                return false;
             }
+
             int slot = i;
             InventoryItem itemInSlot = inventorySlots[slot].GetComponentInChildren<InventoryItem>();
             if (itemInSlot == null)
@@ -158,7 +166,7 @@ public class InventoryManager : MonoBehaviour
                 break;
             }
         }
-        if (!_uiManager.inventoryShown)
+        if (!_uiManager.inventoryShown && !inventorySlots[slotID].isHudSlot)
         {
             inventoryItem.GetComponent<Image>().enabled = false;
             inventoryItem.transform.GetChild(0).gameObject.SetActive(false);

@@ -14,8 +14,9 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
 
     public InventoryItem itemInThisSlot;
 
-    public Item[] disAllowedItems;
+    // public Item[] disAllowedItems;
 
+    public bool isHudSlot;
 
     private void Awake()
     {
@@ -34,15 +35,12 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
 
     public void OnDrop(PointerEventData eventData)
     {
-        // if (heldItem == null)
-        for (int i = 0; i < disAllowedItems.Length; i++)
+        if (isHudSlot && !InventoryManager.Instance.heldItem.item.canBeInHudSlot)
         {
-            if (InventoryManager.Instance.heldItem.item == disAllowedItems[i])
-            {
-                Debug.Log("This Item Is Not Allowed In This Slot! Change This In The Inspector");
-                return;
-            }
+            Debug.Log("This Item Is Not Allowed In This Slot! Change This In The Inspector");
+            return;
         }
+
 
         if (transform.childCount == 0)
         {

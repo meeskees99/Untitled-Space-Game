@@ -688,6 +688,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2685158494688537615, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
+        type: 3}
+      propertyPath: isHudSlot
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2751647924730546036, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -762,6 +767,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3627724050182309554, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
+        type: 3}
+      propertyPath: isHudSlot
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3966419587530188106, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
         type: 3}

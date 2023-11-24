@@ -11,6 +11,7 @@ public class Item : ScriptableObject
     [Header("Both")]
     public Sprite image;
     public int maxStack = 1;
+    public bool canBeInHudSlot = false;
 
     [Header("Gameplayer Settings")]
     public bool isTool;
