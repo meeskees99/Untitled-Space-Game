@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -21,7 +22,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] Item[] _allItems;
 
     public InventoryItem heldItem;
-    [SerializeField] UiManager _uiManager;
+    [SerializeField] InGameUIManager _uiManager;
+
+    [SerializeField] Item itemToSpawn;
 
     private void Awake()
     {
@@ -87,7 +90,16 @@ public class InventoryManager : MonoBehaviour
     {
         if (itemId < 0)
         {
+            itemToSpawn = null;
             return false;
+        }
+        for (int i = 0; i < _allItems.Length; i++)
+        {
+            if (_allItems[i].itemID == itemId)
+            {
+                itemToSpawn = _allItems[i];
+                Debug.Log($"Adding Item {_allItems[i]}");
+            }
         }
         //Check for stackable slot
         for (int i = 0; i < inventorySlots.Count; i++)
@@ -95,23 +107,23 @@ public class InventoryManager : MonoBehaviour
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
 
-            for (int j = 0; j < _allItems.Length; j++)
+
+            if (itemInSlot != null && itemInSlot.item == itemToSpawn && itemInSlot.count < itemInSlot.item.maxStack)
             {
-                if (itemInSlot != null && itemInSlot.item == _allItems[j] && itemInSlot.count < itemInSlot.item.maxStack)
-                {
-                    itemInSlot.count++;
-                    itemInSlot.RefreshCount();
-                    UpdateItemsInfoList();
-                    return true;
-                }
+                itemInSlot.count++;
+                itemInSlot.RefreshCount();
+                UpdateItemsInfoList();
+
+                return true;
             }
+
         }
         //Check for empty Slot
         for (int i = 0; i < inventorySlots.Count; i++)
         {
             for (int x = 0; x < inventorySlots[i].disAllowedItems.Length; x++)
             {
-                if (inventorySlots[i].disAllowedItems[x] == _allItems[itemId])
+                if (inventorySlots[i].disAllowedItems[x] == itemToSpawn)
                 {
                     Debug.Log("Can't Spawn This Item Here As it Is BlackListed");
                     UpdateItemsInfoList();
@@ -126,10 +138,9 @@ public class InventoryManager : MonoBehaviour
                 return true;
             }
         }
-        if (_uiManager.inventoryShown)
-        {
-            UpdateItemsInfoList();
-        }
+
+        UpdateItemsInfoList();
+
         return false;
     }
 
@@ -142,14 +153,17 @@ public class InventoryManager : MonoBehaviour
         {
             if (_allItems[i].itemID == itemID)
             {
+                Debug.Log($"Id was found as {_allItems[i].itemID}. Initializing Item {_allItems[i]}");
                 inventoryItem.InitializeItem(_allItems[i]);
                 break;
             }
         }
-        if (_uiManager.inventoryShown)
+        if (!_uiManager.inventoryShown)
         {
-            UpdateItemsInfoList();
+            inventoryItem.GetComponent<Image>().enabled = false;
+            inventoryItem.transform.GetChild(0).gameObject.SetActive(false);
         }
+        UpdateItemsInfoList();
     }
 
     public void UseItem(int itemID, int itemCount)
