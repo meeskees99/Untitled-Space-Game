@@ -447,9 +447,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recipe: {fileID: 11400000, guid: 37630fe40c5664f40acee06705a06f4f, type: 2}
-  selectedObj: {fileID: 132473411614203562}
-  itemNameText: {fileID: 7036200811784780654}
-  itemImage: {fileID: 6221318261298773706}
+  _selectedObj: {fileID: 132473411614203562}
+  _itemNameText: {fileID: 7036200811784780654}
+  _itemImage: {fileID: 6221318261298773706}
 --- !u!1 &7044931449970065769
 GameObject:
   m_ObjectHideFlags: 0

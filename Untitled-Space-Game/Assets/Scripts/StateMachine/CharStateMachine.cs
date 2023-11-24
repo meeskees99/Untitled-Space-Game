@@ -529,7 +529,7 @@ public class CharStateMachine : MonoBehaviour, IDataPersistence
         _currentState.FixedUpdateStates();
     }
 
-    private void Lateupdate()
+    private void LateUpdate()
     {
         // _currentState.LateUpdateStates();
     }
