@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using System.Linq;
 
 public class MainMenuUIManager : MonoBehaviour
 // , IDataPersistence
@@ -32,7 +33,10 @@ public class MainMenuUIManager : MonoBehaviour
     [SerializeField] GameObject _loadGamePanel;
 
     [SerializeField] List<string> _profileIds = new List<string>();
-    [SerializeField] SaveSlot[] _saveSlots;
+
+    [SerializeField] Transform _saveSlotParent;
+    [SerializeField] GameObject _saveSlotPrefab;
+    [SerializeField] List<SaveSlot> _saveSlots = new List<SaveSlot>();
 
     #endregion
 
@@ -67,22 +71,21 @@ public class MainMenuUIManager : MonoBehaviour
     private void Awake()
     {
         _profileIds = DataPersistenceManager.instance.GetAllProfileIds();
-        _saveSlots = FindObjectsOfType<SaveSlot>();
-
-        print("profile id count: " + _profileIds.Count + " save slot lenght: " + _saveSlots.Length);
+        _saveSlots = FindObjectsOfType<SaveSlot>().Select(SaveSlot => SaveSlot).ToList();
+        _saveSlots.Reverse();
 
         if (_profileIds.Count > 0)
         {
-            for (int i = 0; i < _saveSlots.Length; i++)
+            for (int i = 0; i < _profileIds.Count; i++)
             {
-                if (_profileIds.Count > i)
-                {
-                    _saveSlots[i].ProfileId = _profileIds[i];
-                }
-                else
-                {
-                    Debug.LogError("OOPS");
-                }
+                _saveSlots.Add(Instantiate(_saveSlotPrefab).GetComponent<SaveSlot>());
+            }
+            for (int i = 0; i < _saveSlots.Count; i++)
+            {
+                int index = i;
+                _saveSlots[index].ProfileId = _profileIds[index];
+                _saveSlots[index].SaveFileButton.onClick.AddListener(delegate { LoadSaveFileButton(_saveSlots[index]); });
+
             }
         }
 
@@ -97,7 +100,6 @@ public class MainMenuUIManager : MonoBehaviour
         {
             GameData profileData = null;
             profilesGameData.TryGetValue(saveSlot.ProfileId, out profileData);
-            Debug.Log("saveSlot profileId: " + saveSlot.ProfileId);
             saveSlot.SetData(profileData);
         }
     }
@@ -108,15 +110,20 @@ public class MainMenuUIManager : MonoBehaviour
         {
             _continueButton.interactable = false;
         }
+
+        // for (int i = 0; i < _saveSlots.Count; i++)
+        // {
+        //     _saveSlots[i].transform.SetParent(_saveSlotParent);
+        // }
     }
 
-    private void DisableMenuButtons()
-    {
-        foreach (SaveSlot saveSlot in _saveSlots)
-        {
-            saveSlot.SetInteractable(false);
-        }
-    }
+    // private void DisableMenuButtons()
+    // {
+    //     foreach (SaveSlot saveSlot in _saveSlots)
+    //     {
+    //         saveSlot.SetInteractable(false);
+    //     }
+    // }
 
     // public void LoadData(GameData data)
     // {
@@ -150,6 +157,8 @@ public class MainMenuUIManager : MonoBehaviour
 
     public void LoadSaveFileButton(SaveSlot saveSlot)
     {
+        Debug.Log("load save: " + saveSlot.ProfileId);
+
         DataPersistenceManager.instance.ChangeSelectedProfileId(saveSlot.ProfileId);
 
         // DataPersistenceManager.instance.NewGame();

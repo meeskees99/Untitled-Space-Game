@@ -17,6 +17,10 @@ public class SaveSlot : MonoBehaviour
 
     [Header("Content")]
     [SerializeField] Button _saveFileButton;
+    public Button SaveFileButton
+    {
+        get { return _saveFileButton; }
+    }
     [SerializeField] TMP_Text _saveFileNameTxt;
     [SerializeField] TMP_Text _saveFileLastPlayedTxt;
 
@@ -34,8 +38,13 @@ public class SaveSlot : MonoBehaviour
         }
     }
 
-    public void SetInteractable(bool interactable)
+    private void Start()
     {
-        _saveFileButton.interactable = interactable;
+        this.transform.SetParent(GameObject.FindGameObjectWithTag("TEST").transform);
     }
+
+    // public void SetInteractable(bool interactable)
+    // {
+    //     _saveFileButton.interactable = interactable;
+    // }
 }
