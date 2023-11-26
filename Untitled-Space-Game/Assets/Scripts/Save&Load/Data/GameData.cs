@@ -10,7 +10,7 @@ public class GameData
     // public Vector3 playerPosition;
     // public Quaternion playerRotation;
 
-    public string saveFileName;
+    // public string saveFileName;
     // public int saveLastPlayed;
 
 

@@ -31,6 +31,7 @@ public class MainMenuUIManager : MonoBehaviour
     #region Load Game
     [SerializeField] GameObject _loadGamePanel;
 
+    [SerializeField] List<string> _profileIds = new List<string>();
     [SerializeField] SaveSlot[] _saveSlots;
 
     #endregion
@@ -65,17 +66,38 @@ public class MainMenuUIManager : MonoBehaviour
 
     private void Awake()
     {
+        _profileIds = DataPersistenceManager.instance.GetAllProfileIds();
         _saveSlots = FindObjectsOfType<SaveSlot>();
+
+        print("profile id count: " + _profileIds.Count + " save slot lenght: " + _saveSlots.Length);
+
+        if (_profileIds.Count > 0)
+        {
+            for (int i = 0; i < _saveSlots.Length; i++)
+            {
+                if (_profileIds.Count > i)
+                {
+                    _saveSlots[i].ProfileId = _profileIds[i];
+                }
+                else
+                {
+                    Debug.LogError("OOPS");
+                }
+            }
+        }
+
+        LoadSaveFiles();
     }
 
-    public void Active()
+    public void LoadSaveFiles()
     {
         Dictionary<string, GameData> profilesGameData = DataPersistenceManager.instance.GetAllProfilesGameData();
 
         foreach (SaveSlot saveSlot in _saveSlots)
         {
             GameData profileData = null;
-            profilesGameData.TryGetValue(saveSlot.GetProfileId(), out profileData);
+            profilesGameData.TryGetValue(saveSlot.ProfileId, out profileData);
+            Debug.Log("saveSlot profileId: " + saveSlot.ProfileId);
             saveSlot.SetData(profileData);
         }
     }
@@ -86,8 +108,6 @@ public class MainMenuUIManager : MonoBehaviour
         {
             _continueButton.interactable = false;
         }
-
-        Active();
     }
 
     private void DisableMenuButtons()
@@ -130,7 +150,7 @@ public class MainMenuUIManager : MonoBehaviour
 
     public void LoadSaveFileButton(SaveSlot saveSlot)
     {
-        DataPersistenceManager.instance.ChangeSelectedProfileId(saveSlot.GetProfileId());
+        DataPersistenceManager.instance.ChangeSelectedProfileId(saveSlot.ProfileId);
 
         // DataPersistenceManager.instance.NewGame();
 

@@ -120,6 +120,36 @@ public class FileDataHandler
         return profileDictionary;
     }
 
+    public List<string> LoadAllProfileIds()
+    {
+        IEnumerable<DirectoryInfo> dirInfos = new DirectoryInfo(_dataDirPath).EnumerateDirectories();
+        List<string> profileIds = new List<string>();
+        foreach (DirectoryInfo dirInfo in dirInfos)
+        {
+            string profileId = dirInfo.Name;
+
+            string fullPath = Path.Combine(_dataDirPath, profileId, _dataFileName);
+
+            if (!File.Exists(fullPath))
+            {
+                Debug.LogWarning("Skipping directory when loading all profiles because it does not contain data: " + profileId);
+                continue;
+            }
+
+            GameData profileData = Load(profileId);
+            if (profileData != null)
+            {
+                profileIds.Add(profileId);
+            }
+            else
+            {
+                Debug.LogError("Tried to load profile but something went wrong. profileID: " + profileId);
+            }
+        }
+
+        return profileIds;
+    }
+
     public string GetMostRecentlyUpdatedProfileId()
     {
         string mostRecentProfileId = null;

@@ -9,6 +9,11 @@ public class SaveSlot : MonoBehaviour
 {
     [Header("Profile")]
     [SerializeField] string _profileId = "";
+    public string ProfileId
+    {
+        get { return _profileId; }
+        set { _profileId = value; }
+    }
 
     [Header("Content")]
     [SerializeField] Button _saveFileButton;
@@ -24,14 +29,9 @@ public class SaveSlot : MonoBehaviour
         }
         else
         {
-            _saveFileNameTxt.text = data.saveFileName;
+            _saveFileNameTxt.text = _profileId;
             _saveFileLastPlayedTxt.text = "Last played: " + DateTime.FromBinary(data.lastUpdated).ToString();
         }
-    }
-
-    public string GetProfileId()
-    {
-        return this._profileId;
     }
 
     public void SetInteractable(bool interactable)

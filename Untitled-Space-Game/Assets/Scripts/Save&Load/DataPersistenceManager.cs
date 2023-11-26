@@ -149,4 +149,9 @@ public class DataPersistenceManager : MonoBehaviour
     {
         return _dataHandler.LoadAllProfiles();
     }
+
+    public List<string> GetAllProfileIds()
+    {
+        return _dataHandler.LoadAllProfileIds();
+    }
 }

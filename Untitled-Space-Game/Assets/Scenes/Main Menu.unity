@@ -8332,7 +8332,13 @@ MonoBehaviour:
   _saveFileInputfield: {fileID: 1474733294}
   _saveFileName: 
   _loadGamePanel: {fileID: 1508633849}
-  _saveSlots: []
+  _profileIds: []
+  _saveSlots:
+  - {fileID: 660419341}
+  - {fileID: 1362004962}
+  - {fileID: 1345977844}
+  - {fileID: 1479999724}
+  - {fileID: 49699036}
   _settingsPanel: {fileID: 1416635244}
   _audioPanel: {fileID: 1825941335}
   _videoPanel: {fileID: 1586873312}
