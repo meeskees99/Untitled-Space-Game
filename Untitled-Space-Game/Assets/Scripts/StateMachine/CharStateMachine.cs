@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 // using UnityEngine.UI;
 // using UnityEngine.Animations;
 
-public class CharStateMachine : MonoBehaviour, IDataPersistence
+public class CharStateMachine : MonoBehaviour
+// , IDataPersistence
 {
     #region Variables
 
@@ -396,22 +397,17 @@ public class CharStateMachine : MonoBehaviour, IDataPersistence
 
     #endregion
 
-    public void LoadData(GameData data)
-    {
-        Debug.Log("Load PLAYER");
+    // public void LoadData(GameData data)
+    // {
+    //     this.Rb.position = data.playerPosition;
+    //     this.transform.rotation = data.playerRotation;
+    // }
 
-        Debug.Log(data.playerPosition + " position");
-        Debug.Log(data.playerRotation + " rotation");
-
-        this.Rb.position = data.playerPosition;
-        this.transform.rotation = data.playerRotation;
-    }
-
-    public void SaveData(ref GameData data)
-    {
-        data.playerPosition = this.transform.position;
-        data.playerRotation = this.transform.rotation;
-    }
+    // public void SaveData(ref GameData data)
+    // {
+    //     data.playerPosition = this.transform.position;
+    //     data.playerRotation = this.transform.rotation;
+    // }
 
     private void OnEnable()
     {
@@ -457,14 +453,14 @@ public class CharStateMachine : MonoBehaviour, IDataPersistence
         _movementSpeed = Rb.velocity.magnitude;
 
 
-        if (_isHotbar < 0)
-        {
-            Debug.Log("scroll up");
-        }
-        if (IsHotbar > 0)
-        {
-            Debug.Log("scroll down");
-        }
+        // if (_isHotbar < 0)
+        // {
+        //     Debug.Log("scroll up");
+        // }
+        // if (IsHotbar > 0)
+        // {
+        //     Debug.Log("scroll down");
+        // }
 
         if (_isShoot)
         {
@@ -646,6 +642,10 @@ public class CharStateMachine : MonoBehaviour, IDataPersistence
 
     private void CheckTool()
     {
+        if (InventoryManager.Instance == null)
+        {
+            return;
+        }
         if (InventoryManager.Instance.GetSelectedItem() == null)
         {
             return;

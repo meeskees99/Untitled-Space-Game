@@ -8,9 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Save&Load.unity
     guid: 565a505dfddf4114181615b1a35287ca
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 276c524b1c1bf81409cf5e89786b9500
+  - enabled: 1
+    path: Assets/Scenes/Inventory.unity
+    guid: 6da77196a838eff4d89b34b9fe0fee58
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: da16e2689fef4ca4a98fed019b47efae,
       type: 2}
