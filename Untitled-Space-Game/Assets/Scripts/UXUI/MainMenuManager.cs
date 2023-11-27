@@ -78,7 +78,7 @@ public class MainMenuUIManager : MonoBehaviour
         {
             for (int i = 0; i < _profileIds.Count; i++)
             {
-                _saveSlots.Add(Instantiate(_saveSlotPrefab).GetComponent<SaveSlot>());
+                _saveSlots.Add(Instantiate(_saveSlotPrefab, _saveSlotParent).GetComponent<SaveSlot>());
             }
             for (int i = 0; i < _saveSlots.Count; i++)
             {

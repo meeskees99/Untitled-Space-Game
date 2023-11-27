@@ -34,13 +34,8 @@ public class SaveSlot : MonoBehaviour
         else
         {
             _saveFileNameTxt.text = _profileId;
-            _saveFileLastPlayedTxt.text = "Last played: " + DateTime.FromBinary(data.lastUpdated).ToString();
+            _saveFileLastPlayedTxt.text = DateTime.FromBinary(data.lastUpdated).ToString();
         }
-    }
-
-    private void Start()
-    {
-        this.transform.SetParent(GameObject.FindGameObjectWithTag("TEST").transform);
     }
 
     // public void SetInteractable(bool interactable)

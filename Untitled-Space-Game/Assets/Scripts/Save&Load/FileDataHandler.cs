@@ -124,6 +124,13 @@ public class FileDataHandler
     {
         IEnumerable<DirectoryInfo> dirInfos = new DirectoryInfo(_dataDirPath).EnumerateDirectories();
         List<string> profileIds = new List<string>();
+
+        List<string> orderdProfileIds = new List<string>();
+
+        Dictionary<string, GameData> profilesGameData = LoadAllProfiles();
+
+        List<GameData> profilesGameDataOrder = new List<GameData>();
+
         foreach (DirectoryInfo dirInfo in dirInfos)
         {
             string profileId = dirInfo.Name;
@@ -145,9 +152,54 @@ public class FileDataHandler
             {
                 Debug.LogError("Tried to load profile but something went wrong. profileID: " + profileId);
             }
+
+            foreach (KeyValuePair<string, GameData> pair in profilesGameData)
+            {
+                if (orderdProfileIds.Count == profileIds.Count)
+                {
+                    break;
+                }
+                int count = 0;
+                GameData gameData = pair.Value;
+
+                if (profilesGameDataOrder.Count != 0)
+                {
+                    foreach (var orderdGamdata in profilesGameDataOrder)
+                    {
+                        Debug.Log("gameData.lastUpdated: " + gameData.lastUpdated.ToString() + " \norderdGameData.lastUpdated: " + orderdGamdata.lastUpdated.ToString());
+                        if (gameData.lastUpdated < orderdGamdata.lastUpdated)
+                        {
+                            profilesGameDataOrder.Insert(count, gameData);
+                            orderdProfileIds.Insert(count, profileId);
+                            Debug.Log("inserted at count: " + count);
+                            break;
+                        }
+                        else
+                        {
+                            count++;
+                            if (count == profilesGameDataOrder.Count)
+                            {
+                                profilesGameDataOrder.Add(gameData);
+                                orderdProfileIds.Add(profileId);
+                                break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    profilesGameDataOrder.Add(gameData);
+                    orderdProfileIds.Add(profileId);
+                }
+            }
         }
 
-        return profileIds;
+
+
+
+
+
+        return orderdProfileIds;
     }
 
     public string GetMostRecentlyUpdatedProfileId()
