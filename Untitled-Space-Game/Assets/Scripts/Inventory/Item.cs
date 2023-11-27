@@ -16,4 +16,6 @@ public class Item : ScriptableObject
     [Header("Gameplayer Settings")]
     public bool isTool;
     public bool isPlacable;
+    public bool isFuel;
+    public float fuelTime = 2;
 }

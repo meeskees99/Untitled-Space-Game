@@ -20,7 +20,7 @@ public class InventoryManager : MonoBehaviour
 
     public List<ItemInfo> itemsInInventory = new();
 
-    [SerializeField] Item[] _allItems;
+    public Item[] _allItems;
 
     public InventoryItem heldItem;
     [SerializeField] InGameUIManager _uiManager;

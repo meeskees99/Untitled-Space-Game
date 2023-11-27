@@ -16,5 +16,8 @@ MonoBehaviour:
   stackable: 1
   image: {fileID: 21300000, guid: df040072a8f4db844839d37e094a0b8e, type: 3}
   maxStack: 64
+  canBeInHudSlot: 0
   isTool: 0
   isPlacable: 0
+  isFuel: 1
+  fuelTime: 4
