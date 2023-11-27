@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
+using UnityEditor.Rendering;
 
 public class FileDataHandler
 {
@@ -159,46 +160,64 @@ public class FileDataHandler
                 {
                     break;
                 }
-                int count = 0;
+
                 GameData gameData = pair.Value;
 
-                if (profilesGameDataOrder.Count != 0)
+                if (!profilesGameDataOrder.Contains(gameData))
                 {
-                    foreach (var orderdGamdata in profilesGameDataOrder)
+                    if (profilesGameDataOrder.Count != 0)
                     {
-                        Debug.Log("gameData.lastUpdated: " + gameData.lastUpdated.ToString() + " \norderdGameData.lastUpdated: " + orderdGamdata.lastUpdated.ToString());
-                        if (gameData.lastUpdated < orderdGamdata.lastUpdated)
+                        bool inserted = false;
+                        foreach (var orderdGamdata in profilesGameDataOrder)
                         {
-                            profilesGameDataOrder.Insert(count, gameData);
-                            orderdProfileIds.Insert(count, profileId);
-                            Debug.Log("inserted at count: " + count);
-                            break;
-                        }
-                        else
-                        {
-                            count++;
-                            if (count == profilesGameDataOrder.Count)
+                            if (!profilesGameDataOrder.Contains(gameData))
                             {
-                                profilesGameDataOrder.Add(gameData);
-                                orderdProfileIds.Add(profileId);
+                                if (orderdGamdata == gameData)
+                                {
+                                    continue;
+                                }
+                                if (DateTime.FromBinary(gameData.lastUpdated) > DateTime.FromBinary(orderdGamdata.lastUpdated))
+                                {
+                                    for (int i = 0; i < profilesGameDataOrder.Count; i++)
+                                    {
+                                        if (profilesGameDataOrder[i] == orderdGamdata)
+                                        {
+                                            int count = i;
+                                            profilesGameDataOrder.Insert(count, gameData);
+                                            orderdProfileIds.Insert(count, profileId);
+                                            count = profilesGameDataOrder.Count;
+                                            inserted = true;
+                                            break;
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                Debug.Log("cant add: " + gameData.gameDifficulty);
                                 break;
                             }
                         }
+                        if (!inserted)
+                        {
+                            profilesGameDataOrder.Add(gameData);
+                            orderdProfileIds.Add(profileId);
+                        }
+                    }
+                    else
+                    {
+                        profilesGameDataOrder.Add(gameData);
+                        orderdProfileIds.Add(profileId);
+                        break;
                     }
                 }
                 else
                 {
-                    profilesGameDataOrder.Add(gameData);
-                    orderdProfileIds.Add(profileId);
+                    Debug.Log("cant add: " + gameData.gameDifficulty);
                 }
             }
         }
-
-
-
-
-
-
         return orderdProfileIds;
     }
 
