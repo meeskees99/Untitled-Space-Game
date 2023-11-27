@@ -6739,6 +6739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3513c6e3ea6d644995538d04a20695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sceneToLoad: Game
   _continueButton: {fileID: 1106022784}
   _newGamePanel: {fileID: 2093570997}
   gameDifficulty: 0

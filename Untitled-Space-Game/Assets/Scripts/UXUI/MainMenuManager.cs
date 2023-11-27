@@ -9,6 +9,9 @@ using System.Linq;
 public class MainMenuUIManager : MonoBehaviour
 // , IDataPersistence
 {
+    [Header("SceneToLoad")]
+    [SerializeField] string _sceneToLoad;
+
     [Header("Continue")]
     #region Continue
     [SerializeField] Button _continueButton;
@@ -110,11 +113,6 @@ public class MainMenuUIManager : MonoBehaviour
         {
             _continueButton.interactable = false;
         }
-
-        // for (int i = 0; i < _saveSlots.Count; i++)
-        // {
-        //     _saveSlots[i].transform.SetParent(_saveSlotParent);
-        // }
     }
 
     // private void DisableMenuButtons()
@@ -141,7 +139,7 @@ public class MainMenuUIManager : MonoBehaviour
         // DisableMenuButtons();
         DataPersistenceManager.instance.LoadGame();
 
-        SceneManager.LoadSceneAsync("Inventory");
+        SceneManager.LoadSceneAsync(_sceneToLoad);
     }
 
     #region Load Game
@@ -163,7 +161,7 @@ public class MainMenuUIManager : MonoBehaviour
 
         // DataPersistenceManager.instance.NewGame();
 
-        SceneManager.LoadSceneAsync("Inventory");
+        SceneManager.LoadSceneAsync(_sceneToLoad);
     }
 
     #endregion
@@ -260,7 +258,7 @@ public class MainMenuUIManager : MonoBehaviour
 
         DataPersistenceManager.instance.NewGame();
 
-        SceneManager.LoadSceneAsync("Inventory");
+        SceneManager.LoadSceneAsync(_sceneToLoad);
     }
 
 
