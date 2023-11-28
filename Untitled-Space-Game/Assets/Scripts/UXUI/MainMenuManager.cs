@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.EventSystems;
 
 public class MainMenuUIManager : MonoBehaviour
 // , IDataPersistence
@@ -21,6 +22,8 @@ public class MainMenuUIManager : MonoBehaviour
     [Header("New Game")]
     #region New Game
     [SerializeField] GameObject _newGamePanel;
+    [SerializeField] GameObject _firstNewGameButton;
+
     public int gameDifficulty;
 
     [SerializeField] GameObject _classicDifficultySelected;
@@ -34,6 +37,7 @@ public class MainMenuUIManager : MonoBehaviour
     [Header("Load Game")]
     #region Load Game
     [SerializeField] GameObject _loadGamePanel;
+    [SerializeField] GameObject _firstLoadButton;
 
     [SerializeField] List<string> _profileIds = new List<string>();
 
@@ -46,10 +50,19 @@ public class MainMenuUIManager : MonoBehaviour
     [Header("Settings")]
     #region Settings
     [SerializeField] GameObject _settingsPanel;
+    [SerializeField] GameObject _firstSettingsButton;
 
+    [Header("Audio")]
     [SerializeField] GameObject _audioPanel;
+    [SerializeField] GameObject _firstAudioButton;
+
+    [Header("Video")]
     [SerializeField] GameObject _videoPanel;
+    [SerializeField] GameObject _firstVideoButton;
+
+    [Header("Controls")]
     [SerializeField] GameObject _controlsPanel;
+    [SerializeField] GameObject _firstControlsButton;
 
     #endregion
 
@@ -74,8 +87,8 @@ public class MainMenuUIManager : MonoBehaviour
     private void Awake()
     {
         _profileIds = DataPersistenceManager.instance.GetAllProfileIds();
-        _saveSlots = FindObjectsOfType<SaveSlot>().Select(SaveSlot => SaveSlot).ToList();
-        _saveSlots.Reverse();
+
+        // _continueButton.navigation.mode = Navigation.Mode.Explicit;
 
         if (_profileIds.Count > 0)
         {
@@ -88,9 +101,10 @@ public class MainMenuUIManager : MonoBehaviour
                 int index = i;
                 _saveSlots[index].ProfileId = _profileIds[index];
                 _saveSlots[index].SaveFileButton.onClick.AddListener(delegate { LoadSaveFileButton(_saveSlots[index]); });
-
             }
         }
+
+        _firstLoadButton = _saveSlots[0].gameObject;
 
         LoadSaveFiles();
     }
@@ -112,6 +126,31 @@ public class MainMenuUIManager : MonoBehaviour
         if (!DataPersistenceManager.instance.HasGameData())
         {
             _continueButton.interactable = false;
+        }
+
+        for (int i = 0; i < _saveSlots.Count; i++)
+        {
+            Navigation currentNav = new Navigation();
+            currentNav.mode = Navigation.Mode.Explicit;
+
+            if (i == 0)
+            {
+                currentNav.selectOnUp = _saveSlots[_saveSlots.Count - 1].SaveFileButton;
+                currentNav.selectOnDown = _saveSlots[i + 1].SaveFileButton;
+                _saveSlots[i].SaveFileButton.navigation = currentNav;
+            }
+            else if (i == _saveSlots.Count - 1)
+            {
+                currentNav.selectOnUp = _saveSlots[i - 1].SaveFileButton;
+                currentNav.selectOnDown = _saveSlots[0].SaveFileButton;
+                _saveSlots[i].SaveFileButton.navigation = currentNav;
+            }
+            else
+            {
+                currentNav.selectOnUp = _saveSlots[i - 1].SaveFileButton;
+                currentNav.selectOnDown = _saveSlots[i + 1].SaveFileButton;
+                _saveSlots[i].SaveFileButton.navigation = currentNav;
+            }
         }
     }
 
@@ -142,74 +181,16 @@ public class MainMenuUIManager : MonoBehaviour
         SceneManager.LoadSceneAsync(_sceneToLoad);
     }
 
-    #region Load Game
-
-    public void LoadGameButton()
-    {
-        _loadGamePanel.SetActive(!_loadGamePanel.activeSelf);
-        _newGamePanel.SetActive(false);
-        _settingsPanel.SetActive(false);
-        _creditsPanel.SetActive(false);
-        // _quitPanel.SetActive(false);
-    }
-
-    public void LoadSaveFileButton(SaveSlot saveSlot)
-    {
-        Debug.Log("load save: " + saveSlot.ProfileId);
-
-        DataPersistenceManager.instance.ChangeSelectedProfileId(saveSlot.ProfileId);
-
-        // DataPersistenceManager.instance.NewGame();
-
-        SceneManager.LoadSceneAsync(_sceneToLoad);
-    }
-
-    #endregion
-
-    #region Settings
-
-    public void SettingsButton()
-    {
-        _settingsPanel.SetActive(!_settingsPanel.activeSelf);
-        _newGamePanel.SetActive(false);
-        _loadGamePanel.SetActive(false);
-        _creditsPanel.SetActive(false);
-        //_quitPanel.SetActive(false);
-    }
-
-    public void AudioPanelButton()
-    {
-        // _audioPanel.SetActive(!_audioPanel.activeSelf);
-        _audioPanel.SetActive(true);
-        _videoPanel.SetActive(false);
-        _controlsPanel.SetActive(false);
-    }
-
-    public void VideoPanelButton()
-    {
-        // _videoPanel.SetActive(!_videoPanel.activeSelf);
-        _videoPanel.SetActive(true);
-        _audioPanel.SetActive(false);
-        _controlsPanel.SetActive(false);
-    }
-
-    public void ControlsPanelButton()
-    {
-        // _controlsPanel.SetActive(!_controlsPanel.activeSelf);
-        _controlsPanel.SetActive(true);
-        _videoPanel.SetActive(false);
-        _audioPanel.SetActive(false);
-    }
-
-    #endregion
-
-    #region Panel Buttons
-
     #region New Game
 
     public void NewGameButton()
     {
+        Debug.Log("NEW GAME");
         _newGamePanel.SetActive(!_newGamePanel.activeSelf);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_firstNewGameButton);
+
         _loadGamePanel.SetActive(false);
         _settingsPanel.SetActive(false);
         _creditsPanel.SetActive(false);
@@ -263,6 +244,89 @@ public class MainMenuUIManager : MonoBehaviour
 
 
     #endregion
+
+    #region Load Game
+
+    public void LoadGameButton()
+    {
+        _loadGamePanel.SetActive(!_loadGamePanel.activeSelf);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_firstLoadButton);
+
+        _newGamePanel.SetActive(false);
+        _settingsPanel.SetActive(false);
+        _creditsPanel.SetActive(false);
+        // _quitPanel.SetActive(false);
+    }
+
+    public void LoadSaveFileButton(SaveSlot saveSlot)
+    {
+        Debug.Log("load save: " + saveSlot.ProfileId);
+
+        DataPersistenceManager.instance.ChangeSelectedProfileId(saveSlot.ProfileId);
+
+        // DataPersistenceManager.instance.NewGame();
+
+        SceneManager.LoadSceneAsync(_sceneToLoad);
+    }
+
+    #endregion
+
+    #region Settings
+
+    public void SettingsButton()
+    {
+        _settingsPanel.SetActive(!_settingsPanel.activeSelf);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_firstSettingsButton);
+
+        _newGamePanel.SetActive(false);
+        _loadGamePanel.SetActive(false);
+        _creditsPanel.SetActive(false);
+        //_quitPanel.SetActive(false);
+    }
+
+    public void AudioPanelButton()
+    {
+        // _audioPanel.SetActive(!_audioPanel.activeSelf);
+        _audioPanel.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_firstAudioButton);
+
+        _videoPanel.SetActive(false);
+        _controlsPanel.SetActive(false);
+    }
+
+    public void VideoPanelButton()
+    {
+        // _videoPanel.SetActive(!_videoPanel.activeSelf);
+        _videoPanel.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_firstVideoButton);
+
+        _audioPanel.SetActive(false);
+        _controlsPanel.SetActive(false);
+    }
+
+    public void ControlsPanelButton()
+    {
+        // _controlsPanel.SetActive(!_controlsPanel.activeSelf);
+        _controlsPanel.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_firstControlsButton);
+
+        _videoPanel.SetActive(false);
+        _audioPanel.SetActive(false);
+    }
+
+    #endregion
+
+    #region Panel Buttons
 
     public void CreditsButton()
     {
