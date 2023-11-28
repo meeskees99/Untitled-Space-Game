@@ -84,11 +84,21 @@ public class MainMenuUIManager : MonoBehaviour
 
     // #endregion
 
-    private void Awake()
+    public void LoadSaveFiles()
+    {
+        Dictionary<string, GameData> profilesGameData = DataPersistenceManager.instance.GetAllProfilesGameData();
+
+        foreach (SaveSlot saveSlot in _saveSlots)
+        {
+            GameData profileData = null;
+            profilesGameData.TryGetValue(saveSlot.ProfileId, out profileData);
+            saveSlot.SetData(profileData);
+        }
+    }
+
+    private void Start()
     {
         _profileIds = DataPersistenceManager.instance.GetAllProfileIds();
-
-        // _continueButton.navigation.mode = Navigation.Mode.Explicit;
 
         if (_profileIds.Count > 0)
         {
@@ -104,25 +114,13 @@ public class MainMenuUIManager : MonoBehaviour
             }
         }
 
-        _firstLoadButton = _saveSlots[0].gameObject;
+        if (_saveSlots.Count != 0)
+        {
+            _firstLoadButton = _saveSlots[0].gameObject;
+        }
 
         LoadSaveFiles();
-    }
 
-    public void LoadSaveFiles()
-    {
-        Dictionary<string, GameData> profilesGameData = DataPersistenceManager.instance.GetAllProfilesGameData();
-
-        foreach (SaveSlot saveSlot in _saveSlots)
-        {
-            GameData profileData = null;
-            profilesGameData.TryGetValue(saveSlot.ProfileId, out profileData);
-            saveSlot.SetData(profileData);
-        }
-    }
-
-    private void Start()
-    {
         if (!DataPersistenceManager.instance.HasGameData())
         {
             _continueButton.interactable = false;
