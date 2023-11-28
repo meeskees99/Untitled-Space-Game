@@ -8,113 +8,77 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
 {
+    [Header("Slot Settings")]
     public int slotId;
 
     public Image image;
     public Color selectedColor, notSelectedColor;
 
-    public InventoryItem itemInThisSlot;
+    [SerializeField] InventoryItem _itemInThisSlot;
 
-
-
-    public float fuelLeft;
-
+    [Header("Slot Type")]
     public bool isHudSlot;
     public bool isMachineSlot;
     public bool isFuelSlot;
 
+    bool fuelTimeInitialized;
+    public float fuelLeft;
 
     private void Awake()
     {
         Deselect();
     }
 
-    bool fuelTimeInitialized;
-
-    public void Smelt()
+    public bool HandleFuel()
     {
-        if (isFuelSlot && itemInThisSlot != null)
+        if (!fuelTimeInitialized && _itemInThisSlot != null)
         {
-            if (itemInThisSlot.item.isFuel)
+            if (_itemInThisSlot.count > 1)
             {
-                if (!fuelTimeInitialized)
-                {
-                    fuelLeft = itemInThisSlot.item.fuelTime;
-                    fuelTimeInitialized = true;
-                }
-                if (fuelLeft > 0)
-                {
-                    fuelLeft -= Time.deltaTime;
-                }
-                else
-                {
-                    if (itemInThisSlot.count > 1)
-                    {
-                        itemInThisSlot.count--;
-                        fuelLeft = itemInThisSlot.item.fuelTime;
-                    }
-                    else
-                    {
-                        fuelTimeInitialized = false;
-                        Destroy(itemInThisSlot.gameObject);
-                    }
-                }
+                _itemInThisSlot.count--;
+                _itemInThisSlot.RefreshCount();
+                fuelLeft = _itemInThisSlot.item.fuelTime;
+                fuelTimeInitialized = true;
+            }
+            else
+            {
+                fuelLeft = _itemInThisSlot.item.fuelTime;
+                fuelTimeInitialized = true;
+                Destroy(_itemInThisSlot.gameObject);
+            }
+            fuelTimeInitialized = true;
+            return true;
+        }
+        else if (_itemInThisSlot == null && fuelLeft > 0)
+        {
+            if (fuelLeft > 0)
+            {
+                fuelLeft -= Time.deltaTime;
+                return true;
             }
             else
             {
                 fuelTimeInitialized = false;
-                Debug.Log("This Item Cannot Be Used As Fuel");
             }
+            Debug.Log("This Item Cannot Be Used As Fuel");
         }
-        else
+        else if (_itemInThisSlot != null && fuelTimeInitialized)
         {
-            fuelTimeInitialized = false;
-            Debug.Log("Smelter Needs Fuel");
-        }
-    }
-
-    public bool Mine()
-    {
-        if (isFuelSlot && itemInThisSlot != null)
-        {
-            if (itemInThisSlot.item.isFuel)
+            if (fuelLeft > 0)
             {
-                if (!fuelTimeInitialized)
-                {
-                    fuelLeft = itemInThisSlot.item.fuelTime;
-                    fuelTimeInitialized = true;
-                }
-                if (fuelLeft > 0)
-                {
-                    fuelLeft -= Time.deltaTime;
-                    return true;
-                }
-                else
-                {
-                    if (itemInThisSlot.count > 1)
-                    {
-                        itemInThisSlot.count--;
-                        fuelLeft = itemInThisSlot.item.fuelTime;
-                        return true;
-                    }
-                    else
-                    {
-                        fuelTimeInitialized = false;
-                        Destroy(itemInThisSlot.gameObject);
-                        return false;
-                    }
-                }
+                fuelLeft -= Time.deltaTime;
+                return true;
             }
             else
             {
                 fuelTimeInitialized = false;
-                Debug.Log("This Item Cannot Be Used As Fuel");
+                return false;
             }
         }
-        else
+        else if (_itemInThisSlot == null && fuelLeft <= 0)
         {
             fuelTimeInitialized = false;
-            Debug.Log("Smelter Needs Fuel");
+            return false;
         }
         return false;
     }
@@ -138,7 +102,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
         }
         else if (isFuelSlot && !InventoryManager.Instance.heldItem.item.isFuel)
         {
-            itemInThisSlot = transform.GetChild(0).GetComponent<InventoryItem>();
+            _itemInThisSlot = transform.GetChild(0).GetComponent<InventoryItem>();
             Debug.Log("This Item Cannot Be Used As Fuel.");
             return;
         }
@@ -154,32 +118,32 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
             {
                 InventoryManager.Instance.heldItem.parentAfterDrag = transform;
                 InventoryManager.Instance.heldItem.SetItemParent(transform);
-                itemInThisSlot = transform.GetChild(0).GetComponent<InventoryItem>();
+                _itemInThisSlot = transform.GetChild(0).GetComponent<InventoryItem>();
                 InventoryManager.Instance.heldItem = null;
             }
 
         }
         else
         {
-            itemInThisSlot = transform.GetChild(0).GetComponent<InventoryItem>();
+            _itemInThisSlot = transform.GetChild(0).GetComponent<InventoryItem>();
 
-            if (InventoryManager.Instance.heldItem.item == itemInThisSlot.item)
+            if (InventoryManager.Instance.heldItem.item == _itemInThisSlot.item)
             {
-                if (itemInThisSlot.count < itemInThisSlot.item.maxStack)
+                if (_itemInThisSlot.count < _itemInThisSlot.item.maxStack)
                 {
-                    int spaceLeft = itemInThisSlot.item.maxStack - itemInThisSlot.count;
+                    int spaceLeft = _itemInThisSlot.item.maxStack - _itemInThisSlot.count;
                     int overFlow = InventoryManager.Instance.heldItem.count - spaceLeft;
                     if (overFlow > 0)
                     {
                         InventoryManager.Instance.heldItem.count = overFlow;
-                        itemInThisSlot.count = itemInThisSlot.item.maxStack;
-                        itemInThisSlot.RefreshCount();
+                        _itemInThisSlot.count = _itemInThisSlot.item.maxStack;
+                        _itemInThisSlot.RefreshCount();
                         InventoryManager.Instance.heldItem.RefreshCount();
                         return;
                     }
-                    itemInThisSlot.count += InventoryManager.Instance.heldItem.count;
+                    _itemInThisSlot.count += InventoryManager.Instance.heldItem.count;
                     Destroy(InventoryManager.Instance.heldItem.gameObject);
-                    itemInThisSlot.RefreshCount();
+                    _itemInThisSlot.RefreshCount();
                 }
                 else
                 {
@@ -198,18 +162,18 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
     public void AddItemToSlot(InventoryItem inventoryItem)
     {
         // heldItem = eventData.pointerDrag.GetComponent<InventoryItem>();
-        itemInThisSlot = transform.GetChild(0).GetComponent<InventoryItem>();
-        if (InventoryManager.Instance.heldItem.item == itemInThisSlot.item)
+        _itemInThisSlot = transform.GetChild(0).GetComponent<InventoryItem>();
+        if (InventoryManager.Instance.heldItem.item == _itemInThisSlot.item)
         {
-            if (itemInThisSlot.count < itemInThisSlot.item.maxStack)
+            if (_itemInThisSlot.count < _itemInThisSlot.item.maxStack)
             {
-                itemInThisSlot.count++;
+                _itemInThisSlot.count++;
                 inventoryItem.count--;
                 if (inventoryItem.count <= 0)
                 {
                     Destroy(inventoryItem.gameObject);
                 }
-                itemInThisSlot.RefreshCount();
+                _itemInThisSlot.RefreshCount();
                 inventoryItem.RefreshCount();
                 Debug.Log("SuccesFully Added Item To Slot: " + gameObject.name);
             }
@@ -236,14 +200,24 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
-        if (itemInThisSlot == null)
+        if (_itemInThisSlot == null)
         {
             data.itemId[slotId] = -1;
             data.itemAmount[slotId] = 0;
             return;
         }
 
-        data.itemId[slotId] = itemInThisSlot.item.itemID;
-        data.itemAmount[slotId] = itemInThisSlot.count;
+        data.itemId[slotId] = _itemInThisSlot.item.itemID;
+        data.itemAmount[slotId] = _itemInThisSlot.count;
+    }
+
+    public InventoryItem GetInventoryItem()
+    {
+        return _itemInThisSlot;
+    }
+
+    public void SetInventoryItem(InventoryItem newItem)
+    {
+        _itemInThisSlot = newItem;
     }
 }

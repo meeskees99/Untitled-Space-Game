@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DiggingMachine : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class DiggingMachine : MonoBehaviour
     [SerializeField] InventorySlot itemSlot;
     [SerializeField] InventorySlot fuelSlot;
     [SerializeField] GameObject _inventoryItemPrefab;
+    public Slider fuelLeftSlider;
     [SerializeField] bool isDigging;
 
 
@@ -21,7 +23,9 @@ public class DiggingMachine : MonoBehaviour
     private void Start()
     {
         currentMineProgression = miningSpeed;
+        InGameUIManager.Instance.SetMinerUIInfo();
     }
+
 
     void Update()
     {
@@ -35,31 +39,47 @@ public class DiggingMachine : MonoBehaviour
         }
         else
         {
-            if (currentMineProgression < 0 && fuelSlot.itemInThisSlot != null)
+            if (currentMineProgression > 0)
             {
-                bool result = fuelSlot.Mine();
+                bool result = fuelSlot.HandleFuel();
                 isDigging = result;
+                if (fuelSlot.GetInventoryItem() != null)
+                {
+                    if (fuelLeftSlider != null)
+                        fuelLeftSlider.maxValue = fuelSlot.GetInventoryItem().item.fuelTime;
+                    else
+                    {
+                        InGameUIManager.Instance.SetMinerUIInfo();
+                        Debug.LogError("fuelLeftSlider == null");
+                    }
+                }
+
                 if (result)
                 {
                     currentMineProgression -= Time.deltaTime;
+                    if (fuelLeftSlider != null)
+                        fuelLeftSlider.value = fuelSlot.fuelLeft;
+                    else
+                    {
+                        InGameUIManager.Instance.SetMinerUIInfo();
+                        Debug.LogError("fuelLeftSlider == null");
+                    }
                 }
                 else
                 {
+                    if (currentMineProgression < 0.05)
+                    {
+                        currentMineProgression = 0;
+                    }
                     Debug.Log("Smelter Needs Fuel");
                 }
-
-            }
-            else if (currentMineProgression <= 0 && fuelSlot.itemInThisSlot != null)
-            {
-                currentMineProgression = miningSpeed;
-                AddMachineItem();
             }
             else if (currentMineProgression <= 0)
             {
                 currentMineProgression = miningSpeed;
                 AddMachineItem();
             }
-            else if (currentMineProgression > 0 && fuelSlot.itemInThisSlot == null)
+            else if (currentMineProgression < 0)
             {
                 Debug.Log("Machine Has No Fuel AND Is Not Mining");
             }
@@ -68,10 +88,10 @@ public class DiggingMachine : MonoBehaviour
 
     public void AddMachineItem()
     {
-        if (itemSlot.itemInThisSlot != null)
+        if (itemSlot.GetInventoryItem() != null)
         {
-            itemSlot.itemInThisSlot.count += collectedResource.recourceAmount;
-            itemSlot.itemInThisSlot.RefreshCount();
+            itemSlot.GetInventoryItem().count += collectedResource.recourceAmount;
+            itemSlot.GetInventoryItem().RefreshCount();
         }
         else
         {
@@ -83,9 +103,9 @@ public class DiggingMachine : MonoBehaviour
     public void SpawnMachineItem(Item item, int amount)
     {
         GameObject newItemGO = Instantiate(_inventoryItemPrefab, itemSlot.transform);
-        itemSlot.itemInThisSlot = newItemGO.GetComponent<InventoryItem>();
+        itemSlot.SetInventoryItem(newItemGO.GetComponent<InventoryItem>());
 
-        itemSlot.itemInThisSlot.count = amount;
-        itemSlot.itemInThisSlot.InitializeItem(item);
+        itemSlot.GetInventoryItem().count = amount;
+        itemSlot.GetInventoryItem().InitializeItem(item);
     }
 }

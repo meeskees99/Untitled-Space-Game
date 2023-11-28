@@ -28,7 +28,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         item = newItem;
         image.sprite = newItem.image;
         RefreshCount();
-        GetComponentInParent<InventorySlot>().itemInThisSlot = this;
+        GetComponentInParent<InventorySlot>().SetInventoryItem(this);
     }
 
     public void RefreshCount()
@@ -42,7 +42,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnBeginDrag(PointerEventData eventData)
     {
         InventorySlot slot = transform.GetComponentInParent<InventorySlot>();
-        slot.itemInThisSlot = null;
+        slot.SetInventoryItem(null);
         image.raycastTarget = false;
         parentAfterDrag = transform.parent;
         transform.SetParent(transform.root);
