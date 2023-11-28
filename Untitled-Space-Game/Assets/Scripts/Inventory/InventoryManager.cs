@@ -13,6 +13,7 @@ public class InventoryManager : MonoBehaviour
     public List<InventorySlot> inventorySlots = new();
 
     [SerializeField] InventorySlot[] _toolbarSlots;
+    [SerializeField] InventorySlot[] _miningSlots;
 
     [SerializeField] GameObject _inventoryItemPrefab;
 
@@ -174,10 +175,27 @@ public class InventoryManager : MonoBehaviour
         UpdateItemsInfoList();
     }
 
+    public void SpawnNewItemMining(int itemID, int itemCount, int slotID)
+    {
+        GameObject newItemGO = Instantiate(_inventoryItemPrefab, _miningSlots[slotID].transform);
+        InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
+        inventoryItem.count = itemCount;
+        for (int i = 0; i < _allItems.Length; i++)
+        {
+            if (_allItems[i].itemID == itemID)
+            {
+                Debug.Log($"Id was found as {_allItems[i].itemID}. Initializing Item {_allItems[i]}");
+                inventoryItem.InitializeItem(_allItems[i]);
+                break;
+            }
+        }
+        inventoryItem.RefreshCount();
+    }
+
     public void UseItem(int itemID, int itemCount)
     {
         int itemsLeft = itemCount;
-        for (int i = 0; i < inventorySlots.Count; i++)
+        for (int i = 0; i < _miningSlots.Length; i++)
         {
             if (itemsLeft == 0)
             {
@@ -187,7 +205,7 @@ public class InventoryManager : MonoBehaviour
             {
                 Debug.LogError("Removed Too Many Items!");
             }
-            InventorySlot slot = inventorySlots[i];
+            InventorySlot slot = _miningSlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
 
             for (int z = 0; z < _allItems.Length; z++)

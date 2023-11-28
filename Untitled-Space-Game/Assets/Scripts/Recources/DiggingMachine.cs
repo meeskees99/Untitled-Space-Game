@@ -16,13 +16,21 @@ public class DiggingMachine : MonoBehaviour
     [Header("Miner Settings")]
     [SerializeField] float miningRange = 3f;
     [SerializeField] LayerMask resourceLayer;
-    [SerializeField] float miningSpeed = 2f;
+    // [SerializeField] float miningSpeed = 2f;
 
     float currentMineProgression;
 
     private void Start()
     {
-        currentMineProgression = miningSpeed;
+        if (collectedResource == null)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, miningRange, resourceLayer))
+            {
+                collectedResource = hit.transform.GetComponent<ResourceVein>().Resource;
+                currentMineProgression = collectedResource.mineDuration;
+            }
+        }
         InGameUIManager.Instance.SetMinerUIInfo();
     }
 
@@ -35,10 +43,19 @@ public class DiggingMachine : MonoBehaviour
             if (Physics.Raycast(transform.position, Vector3.down, out hit, miningRange, resourceLayer))
             {
                 collectedResource = hit.transform.GetComponent<ResourceVein>().Resource;
+                currentMineProgression = collectedResource.mineDuration;
             }
         }
         else
         {
+            if (itemSlot.GetInventoryItem() != null)
+            {
+                if (itemSlot.GetInventoryItem().count == itemSlot.GetInventoryItem().item.maxStack)
+                {
+                    Debug.Log("Item Has Reached Max Stack! Remove It To Continue");
+                    return;
+                }
+            }
             if (currentMineProgression > 0)
             {
                 bool result = fuelSlot.HandleFuel();
@@ -50,7 +67,6 @@ public class DiggingMachine : MonoBehaviour
                     else
                     {
                         InGameUIManager.Instance.SetMinerUIInfo();
-                        Debug.LogError("fuelLeftSlider == null");
                     }
                 }
 
@@ -62,7 +78,6 @@ public class DiggingMachine : MonoBehaviour
                     else
                     {
                         InGameUIManager.Instance.SetMinerUIInfo();
-                        Debug.LogError("fuelLeftSlider == null");
                     }
                 }
                 else
@@ -71,17 +86,15 @@ public class DiggingMachine : MonoBehaviour
                     {
                         currentMineProgression = 0;
                     }
-                    Debug.Log("Smelter Needs Fuel");
                 }
             }
             else if (currentMineProgression <= 0)
             {
-                currentMineProgression = miningSpeed;
                 AddMachineItem();
             }
             else if (currentMineProgression < 0)
             {
-                Debug.Log("Machine Has No Fuel AND Is Not Mining");
+                Debug.LogError("Machine Has No Fuel AND Is Not Trying To Mine");
             }
         }
     }
@@ -97,7 +110,7 @@ public class DiggingMachine : MonoBehaviour
         {
             SpawnMachineItem(collectedResource.item, collectedResource.recourceAmount);
         }
-        currentMineProgression = miningSpeed;
+        currentMineProgression = collectedResource.mineDuration;
     }
 
     public void SpawnMachineItem(Item item, int amount)

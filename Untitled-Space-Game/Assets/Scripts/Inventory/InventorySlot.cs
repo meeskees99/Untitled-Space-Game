@@ -31,6 +31,11 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
 
     public bool HandleFuel()
     {
+        // if (_itemInThisSlot.count == _itemInThisSlot.item.maxStack)
+        // {
+        //     Debug.Log("Item Has Reached Max Stack! Remove It To Continue");
+        //     return false;
+        // }
         if (!fuelTimeInitialized && _itemInThisSlot != null)
         {
             if (_itemInThisSlot.count > 1)
@@ -188,14 +193,31 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
         }
     }
 
+    public InventoryItem GetInventoryItem()
+    {
+        return _itemInThisSlot;
+    }
+
+    public void SetInventoryItem(InventoryItem newItem)
+    {
+        _itemInThisSlot = newItem;
+    }
+
     public void LoadData(GameData data)
     {
         if (data.itemId[slotId] == -1)
         {
             return;
         }
-
-        InventoryManager.Instance.SpawnNewItem(data.itemId[slotId], data.itemAmount[slotId], this.slotId);
+        if (isMachineSlot || isFuelSlot)
+        {
+            InventoryManager.Instance.SpawnNewItemMining(data.itemId[slotId], data.itemAmount[slotId], this.slotId);
+            return;
+        }
+        else
+        {
+            InventoryManager.Instance.SpawnNewItem(data.itemId[slotId], data.itemAmount[slotId], this.slotId);
+        }
     }
 
     public void SaveData(ref GameData data)
@@ -211,13 +233,4 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
         data.itemAmount[slotId] = _itemInThisSlot.count;
     }
 
-    public InventoryItem GetInventoryItem()
-    {
-        return _itemInThisSlot;
-    }
-
-    public void SetInventoryItem(InventoryItem newItem)
-    {
-        _itemInThisSlot = newItem;
-    }
 }
