@@ -167,29 +167,36 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
     public void AddItemToSlot(InventoryItem inventoryItem)
     {
         // heldItem = eventData.pointerDrag.GetComponent<InventoryItem>();
-        _itemInThisSlot = transform.GetChild(0).GetComponent<InventoryItem>();
-        if (InventoryManager.Instance.heldItem.item == _itemInThisSlot.item)
+        if (_itemInThisSlot != null)
         {
-            if (_itemInThisSlot.count < _itemInThisSlot.item.maxStack)
+            if (inventoryItem == _itemInThisSlot.item)
             {
-                _itemInThisSlot.count++;
-                inventoryItem.count--;
-                if (inventoryItem.count <= 0)
+                if (_itemInThisSlot.count < _itemInThisSlot.item.maxStack)
                 {
-                    Destroy(inventoryItem.gameObject);
+                    _itemInThisSlot.count++;
+                    inventoryItem.count--;
+                    if (inventoryItem.count <= 0)
+                    {
+                        Destroy(inventoryItem.gameObject);
+                    }
+                    _itemInThisSlot.RefreshCount();
+                    inventoryItem.RefreshCount();
+                    Debug.Log("SuccesFully Added Item To Slot: " + gameObject.name);
                 }
-                _itemInThisSlot.RefreshCount();
-                inventoryItem.RefreshCount();
-                Debug.Log("SuccesFully Added Item To Slot: " + gameObject.name);
+                else
+                {
+                    Debug.Log("This Slot Has Reached It's Max Stack!");
+                }
             }
             else
             {
-                Debug.Log("This Slot Has Reached It's Max Stack!");
+                Debug.Log("You Can't Stack These Items Together!");
             }
         }
         else
         {
-            Debug.Log("You Can't Stack These Items Together!");
+            InventoryManager.Instance.SpawnNewItem(inventoryItem.item.itemID, 1, slotId);
+            Debug.Log("Succesfully Spawned New Item In Slot: " + gameObject.name);
         }
     }
 

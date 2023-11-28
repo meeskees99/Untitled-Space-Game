@@ -46,14 +46,14 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         image.raycastTarget = false;
         parentAfterDrag = transform.parent;
         transform.SetParent(transform.root);
-        transform.position = new Vector3(transform.position.x, transform.position.y, 5);
+        transform.position = new Vector3(transform.position.x, transform.position.y, -15);
         isDragging = true;
         InventoryManager.Instance.heldItem = eventData.pointerDrag.GetComponent<InventoryItem>();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5);
+        transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, -15);
         InventoryManager.Instance.heldItem = eventData.pointerDrag.GetComponent<InventoryItem>();
     }
 
@@ -71,34 +71,62 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.SetParent(parent);
     }
 
+    [Header("UI Raycasting")]
+    [SerializeField] GraphicRaycaster _raycaster;
+    PointerEventData _pointerEventData;
+    [SerializeField] EventSystem _eventSystem;
+    [SerializeField] RectTransform _canvasRect;
 
     private void Update()
     {
-
         if (isDragging)
         {
-            Debug.DrawRay(transform.position, Vector3.back, Color.red);
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Debug.DrawRay(Input.mousePosition, Vector3.forward, Color.green);
+            // Debug.DrawRay(transform.position, Vector3.back, Color.red);
+            // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            // Debug.DrawRay(Input.mousePosition, Vector3.forward, Color.green);
+            if (_raycaster == null)
+            {
+                _raycaster = FindObjectOfType<GraphicRaycaster>();
+            }
+            if (_eventSystem == null)
+            {
+                _eventSystem = FindObjectOfType<EventSystem>();
+            }
+            if (_canvasRect == null)
+            {
+                _canvasRect = GameObject.Find("PlayerCanvas").GetComponent<RectTransform>();
+            }
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
-                Debug.Log("Mouse 1");
-                RaycastHit hit;
+                _pointerEventData = new PointerEventData(_eventSystem);
+                _pointerEventData.position = transform.position;
 
-                if (Physics.Raycast(ray, out hit, 100))
+                List<RaycastResult> results = new();
+
+                _raycaster.Raycast(_pointerEventData, results);
+
+                Debug.Log($"Hit {results[0].gameObject.name}");
+                InventorySlot slot;
+                results[0].gameObject.transform.TryGetComponent<InventorySlot>(out slot);
+                if (slot != null)
                 {
-                    Debug.Log("Dropping Item In Slot...");
-                    InventorySlot slot;
-                    hit.transform.TryGetComponent<InventorySlot>(out slot);
-                    if (slot != null)
+                    slot.AddItemToSlot(this);
+                    Debug.Log($"Dropped Item In Slot {slot.name}");
+                }
+                else
+                {
+                    InventoryItem item;
+                    results[0].gameObject.transform.TryGetComponent<InventoryItem>(out item);
+                    if (item != null)
                     {
-                        slot.AddItemToSlot(this);
-                        Debug.Log($"Dropped Item In Slot {slot.name}");
+                        if (item.count < item.item.maxStack)
+                        {
+                            item.count++;
+                            item.RefreshCount();
+                        }
+                        return;
                     }
-                    else
-                    {
-                        Debug.Log("No Slot Found!");
-                    }
+                    Debug.Log("No Slot Found!");
                 }
             }
         }
