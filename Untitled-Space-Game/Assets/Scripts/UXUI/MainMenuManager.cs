@@ -183,7 +183,7 @@ public class MainMenuUIManager : MonoBehaviour
     public void ContinueButton()
     {
         // DisableMenuButtons();
-        DataPersistenceManager.instance.LoadGame();
+        DataPersistenceManager.instance.SaveGame();
 
         SceneManager.LoadSceneAsync(_sceneToLoad);
     }
@@ -271,9 +271,10 @@ public class MainMenuUIManager : MonoBehaviour
     {
         Debug.Log("load save: " + saveSlot.ProfileId);
 
+
         DataPersistenceManager.instance.ChangeSelectedProfileId(saveSlot.ProfileId);
 
-        // DataPersistenceManager.instance.NewGame();
+        DataPersistenceManager.instance.SaveGame();
 
         SceneManager.LoadSceneAsync(_sceneToLoad);
     }

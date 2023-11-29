@@ -9,6 +9,8 @@ public class TESTSCRIPTVOORPRESENTATIE : MonoBehaviour
 
     public void BackButton()
     {
+        DataPersistenceManager.instance.SaveGame();
+
         SceneManager.LoadSceneAsync(_sceneToLoad);
     }
 }
