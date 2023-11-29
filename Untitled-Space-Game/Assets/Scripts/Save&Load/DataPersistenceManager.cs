@@ -102,7 +102,7 @@ public class DataPersistenceManager : MonoBehaviour
         // pass the data to other scripts so they can update it
         foreach (IDataPersistence dataPersistenceObj in _dataPersistenceObjects)
         {
-            dataPersistenceObj.SaveData(_gameData);
+            dataPersistenceObj.SaveData(ref _gameData);
         }
 
         _gameData.lastUpdated = System.DateTime.Now.ToBinary();
