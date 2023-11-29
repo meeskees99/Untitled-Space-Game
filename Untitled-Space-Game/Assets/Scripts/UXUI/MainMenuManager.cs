@@ -133,9 +133,18 @@ public class MainMenuUIManager : MonoBehaviour
 
             if (i == 0)
             {
-                currentNav.selectOnUp = _saveSlots[_saveSlots.Count - 1].SaveFileButton;
-                currentNav.selectOnDown = _saveSlots[i + 1].SaveFileButton;
-                _saveSlots[i].SaveFileButton.navigation = currentNav;
+                if (_saveSlots.Count == 1)
+                {
+                    currentNav.selectOnUp = _saveSlots[i].SaveFileButton;
+                    currentNav.selectOnDown = _saveSlots[i].SaveFileButton;
+                    _saveSlots[i].SaveFileButton.navigation = currentNav;
+                }
+                else
+                {
+                    currentNav.selectOnUp = _saveSlots[_saveSlots.Count - 1].SaveFileButton;
+                    currentNav.selectOnDown = _saveSlots[i + 1].SaveFileButton;
+                    _saveSlots[i].SaveFileButton.navigation = currentNav;
+                }
             }
             else if (i == _saveSlots.Count - 1)
             {
