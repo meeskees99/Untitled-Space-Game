@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40cf36ca5d3001944853338ef8be7a8d, type: 3}
   m_Name: Clay
   m_EditorClassIdentifier: 
-  itemID: 0
+  itemID: 11
   stackable: 1
   image: {fileID: 21300000, guid: c026e835800e0094da2c4628ca67548e, type: 3}
   maxStack: 1
+  canBeInHudSlot: 0
   isTool: 0
   isPlacable: 0
+  isFuel: 0
+  fuelTime: 2

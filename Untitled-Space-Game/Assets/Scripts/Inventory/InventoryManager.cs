@@ -217,6 +217,9 @@ public class InventoryManager : MonoBehaviour
                         {
                             itemInSlot.count -= itemCount;
                             itemsLeft -= itemCount;
+                            Debug.Log($"Used {itemCount} {_allItems[z].name}");
+                            itemInSlot.RefreshCount();
+                            UpdateItemsInfoList();
                             break;
                         }
                         else
@@ -224,7 +227,7 @@ public class InventoryManager : MonoBehaviour
                             itemsLeft -= itemInSlot.count;
                             itemInSlot.count = 0;
                         }
-
+                        Debug.Log($"Used {itemCount} {_allItems[z].name}");
                         itemInSlot.RefreshCount();
                         UpdateItemsInfoList();
                     }
@@ -241,6 +244,11 @@ public class InventoryManager : MonoBehaviour
         {
             int amount = GetTotalItemAmount(inventorySlots, _allItems[i]);
             itemsInInventory.Add(new(_allItems[i], amount));
+        }
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            if (inventorySlots[i].GetInventoryItem() != null)
+                inventorySlots[i].GetInventoryItem().RefreshCount();
         }
     }
 

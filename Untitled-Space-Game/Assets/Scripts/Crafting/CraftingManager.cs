@@ -64,7 +64,7 @@ public class CraftingManager : MonoBehaviour
                     {
                         if (InventoryManager.Instance.itemsInInventory[y].amount < selectedRecipeToCraft.itemsNeeded[i].amount)
                         {
-                            Debug.Log("You don't have the resources to craft this item!");
+                            Debug.Log($"You don't have enough {selectedRecipeToCraft.itemsNeeded[i].item.name} to craft this item!");
                             return;
                         }
                     }
@@ -74,8 +74,9 @@ public class CraftingManager : MonoBehaviour
             for (int i = 0; i < selectedRecipeToCraft.itemsNeeded.Length; i++)
             {
                 InventoryManager.Instance.UseItem(selectedRecipeToCraft.itemsNeeded[i].item.itemID, selectedRecipeToCraft.itemsNeeded[i].amount);
+                Debug.Log("Harold IK EET NU ITEMS");
             }
-
+            InventoryManager.Instance.UpdateItemsInfoList();
         }
         else
         {

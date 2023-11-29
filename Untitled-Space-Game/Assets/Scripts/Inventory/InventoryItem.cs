@@ -10,7 +10,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public Image image;
     public TMP_Text countText;
 
-    [HideInInspector] public Item item;
+    public Item item;
     public int count = 1;
     [HideInInspector] public Transform parentAfterDrag;
 
@@ -64,6 +64,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.position = parentAfterDrag.position;
         isDragging = false;
         InventoryManager.Instance.heldItem = null;
+        InventoryManager.Instance.UpdateItemsInfoList();
     }
 
     public void SetItemParent(Transform parent)

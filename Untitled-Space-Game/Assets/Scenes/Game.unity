@@ -1130,6 +1130,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 609795382344283461, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 609795382344283461, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1322249109}
+    - target: {fileID: 609795382344283461, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PickupItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 609795382344283461, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 668405378510851422, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1289,6 +1309,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1593208201454426986, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
+        type: 3}
+      propertyPath: m_Name
+      value: Item (4)
       objectReference: {fileID: 0}
     - target: {fileID: 1605461902936869276, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
         type: 3}
@@ -2251,6 +2276,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828740861969344493, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
+        type: 3}
+      propertyPath: m_text
+      value: Grass
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828740861969344493, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 65.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828740861969344493, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8856888902214464304, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
         type: 3}
@@ -4545,7 +4585,7 @@ GameObject:
   - component: {fileID: 1463650143}
   - component: {fileID: 1463650146}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

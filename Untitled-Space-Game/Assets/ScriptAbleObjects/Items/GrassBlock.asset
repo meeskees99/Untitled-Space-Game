@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40cf36ca5d3001944853338ef8be7a8d, type: 3}
   m_Name: GrassBlock
   m_EditorClassIdentifier: 
-  tile: {fileID: 0}
-  range: {x: 5, y: 4}
-  type: 0
-  actionType: 0
+  itemID: 0
   stackable: 1
   image: {fileID: 2403724249865808194, guid: 1b39c0fe73f0433468e25eb21cfde7c2, type: 3}
   maxStack: 10
+  canBeInHudSlot: 0
+  isTool: 0
+  isPlacable: 0
+  isFuel: 0
+  fuelTime: 2
