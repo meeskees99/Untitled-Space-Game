@@ -122,9 +122,9 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
             if (InventoryManager.Instance.heldItem != null)
             {
                 InventoryManager.Instance.heldItem.parentAfterDrag = transform;
-                InventoryManager.Instance.heldItem.SetItemParent(transform);
-                _itemInThisSlot = transform.GetChild(0).GetComponent<InventoryItem>();
-                InventoryManager.Instance.heldItem = null;
+                //     InventoryManager.Instance.heldItem.SetItemParent(transform);
+                //     _itemInThisSlot = transform.GetChild(0).GetComponent<InventoryItem>();
+                //     InventoryManager.Instance.heldItem = null;
             }
 
         }
@@ -161,6 +161,8 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
             }
 
         }
+        // _itemInThisSlot.GetComponent<Image>().raycastTarget = true;
+        InventoryManager.Instance.UpdateItemsInfoList();
     }
 
 
@@ -227,7 +229,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
         }
     }
 
-    public void SaveData(ref GameData data)
+    public void SaveData(GameData data)
     {
         if (_itemInThisSlot == null)
         {

@@ -498,8 +498,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5c871b673dc6a46ad09a986035d58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initializeDataIfNull: 0
-  _fileName: Game.game
+  _initializeDataIfNull: 1
+  _fileName: data.game
   _useEncryption: 0
   _selectedProfileId: 
 --- !u!4 &179600607

@@ -50,7 +50,7 @@ public class DiggingMachine : MonoBehaviour
         {
             if (itemSlot.GetInventoryItem() != null)
             {
-                if (itemSlot.GetInventoryItem().count == itemSlot.GetInventoryItem().item.maxStack)
+                if (itemSlot.GetInventoryItem().count >= itemSlot.GetInventoryItem().item.maxStack)
                 {
                     Debug.Log("Item Has Reached Max Stack! Remove It To Continue");
                     return;

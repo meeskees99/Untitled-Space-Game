@@ -53,6 +53,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.position = new Vector3(transform.position.x, transform.position.y, -15);
         isDragging = true;
         InventoryManager.Instance.heldItem = eventData.pointerDrag.GetComponent<InventoryItem>();
+        InventoryManager.Instance.UpdateItemsInfoList();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -63,12 +64,34 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        image.raycastTarget = true;
-        transform.SetParent(parentAfterDrag);
-        transform.position = parentAfterDrag.position;
-        isDragging = false;
-        InventoryManager.Instance.heldItem = null;
-        InventoryManager.Instance.UpdateItemsInfoList();
+        if (parentAfterDrag.childCount == 0)
+        {
+            image.raycastTarget = true;
+            transform.SetParent(parentAfterDrag);
+            transform.position = parentAfterDrag.position;
+            isDragging = false;
+            InventoryManager.Instance.heldItem = null;
+            GetComponentInParent<InventorySlot>().SetInventoryItem(this);
+            InventoryManager.Instance.UpdateItemsInfoList();
+        }
+        else
+        {
+            Debug.Log($"{parentAfterDrag.name} already had a child!");
+            if (parentAfterDrag.GetComponent<InventorySlot>().GetInventoryItem().count + count <= item.maxStack)
+            {
+                parentAfterDrag.GetComponent<InventorySlot>().GetInventoryItem().count += count;
+            }
+            else
+            {
+
+                int overflow = parentAfterDrag.GetComponent<InventorySlot>().GetInventoryItem().count + count - parentAfterDrag.GetComponent<InventorySlot>().GetInventoryItem().item.maxStack;
+                parentAfterDrag.GetComponent<InventorySlot>().GetInventoryItem().count = item.maxStack;
+                InventoryManager.Instance.AddItem(item.itemID, overflow);
+            }
+            parentAfterDrag.GetComponent<InventorySlot>().GetInventoryItem().RefreshCount();
+            InventoryManager.Instance.UpdateItemsInfoList();
+            Destroy(gameObject);
+        }
     }
 
     public void SetItemParent(Transform parent)
@@ -86,9 +109,6 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         if (isDragging)
         {
-            // Debug.DrawRay(transform.position, Vector3.back, Color.red);
-            // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            // Debug.DrawRay(Input.mousePosition, Vector3.forward, Color.green);
             if (_raycaster == null)
             {
                 _raycaster = FindObjectOfType<GraphicRaycaster>();
