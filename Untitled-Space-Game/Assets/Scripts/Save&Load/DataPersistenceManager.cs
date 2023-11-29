@@ -42,18 +42,25 @@ public class DataPersistenceManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnLoaded;
+
     }
 
     private void OnDisable()
     {
-
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneUnloaded -= OnSceneUnLoaded;
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         this._dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
+    }
+
+    public void OnSceneUnLoaded(Scene scene)
+    {
+        SaveGame();
     }
 
     public void ChangeSelectedProfileId(string newProfileId)
@@ -102,7 +109,7 @@ public class DataPersistenceManager : MonoBehaviour
         // pass the data to other scripts so they can update it
         foreach (IDataPersistence dataPersistenceObj in _dataPersistenceObjects)
         {
-            dataPersistenceObj.SaveData(ref _gameData);
+            dataPersistenceObj.SaveData(_gameData);
         }
 
         _gameData.lastUpdated = System.DateTime.Now.ToBinary();
