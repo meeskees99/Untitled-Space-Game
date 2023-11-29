@@ -194,7 +194,7 @@ public class InventoryManager : MonoBehaviour
     public void UseItem(int itemID, int itemCount)
     {
         int itemsLeft = itemCount;
-        for (int i = 0; i < _miningSlots.Length; i++)
+        for (int i = 0; i < inventorySlots.Count; i++)
         {
             if (itemsLeft == 0)
             {
@@ -204,7 +204,7 @@ public class InventoryManager : MonoBehaviour
             {
                 Debug.LogError("Removed Too Many Items!");
             }
-            InventorySlot slot = _miningSlots[i];
+            InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
 
             for (int z = 0; z < _allItems.Length; z++)
