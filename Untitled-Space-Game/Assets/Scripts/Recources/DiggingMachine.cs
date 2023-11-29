@@ -6,17 +6,17 @@ using UnityEngine.UI;
 public class DiggingMachine : MonoBehaviour
 {
     [SerializeField] Resource collectedResource;
-    [SerializeField] InventorySlot itemSlot;
-    [SerializeField] InventorySlot fuelSlot;
-    [SerializeField] GameObject _inventoryItemPrefab;
-    public Slider fuelLeftSlider;
     [SerializeField] bool isDigging;
-
 
     [Header("Miner Settings")]
     [SerializeField] float miningRange = 3f;
     [SerializeField] LayerMask resourceLayer;
-    // [SerializeField] float miningSpeed = 2f;
+
+    [Header("MinerInventory")]
+    [SerializeField] InventorySlot itemSlot;
+    [SerializeField] InventorySlot fuelSlot;
+    [SerializeField] GameObject _inventoryItemPrefab;
+    public Slider fuelLeftSlider;
 
     float currentMineProgression;
 
