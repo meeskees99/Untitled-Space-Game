@@ -1,4 +1,6 @@
 using System.Collections;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 // using TMPro;
@@ -392,12 +394,23 @@ public class CharStateMachine : MonoBehaviour
     [Header("MultiTool")]
     #region MultiTool
 
-    [SerializeField] float _toolRange;
+    [SerializeField] float _camDistance;
 
+    [SerializeField] float _gatherTime;
+
+    [SerializeField] float _toolRange;
     [SerializeField] RaycastHit _toolHit;
     [SerializeField] LayerMask _gatherMask;
 
-    [SerializeField] float _gatherTime;
+    [SerializeField] GameObject _InteractPanel;
+    [SerializeField] TMP_Text _interactableTxt;
+
+
+    [SerializeField] float _interactableRadius;
+    [SerializeField] RaycastHit _interactableHit;
+    [SerializeField] float _interactableRange;
+    [SerializeField] LayerMask _interactableMask;
+
 
     #endregion
 
@@ -452,6 +465,8 @@ public class CharStateMachine : MonoBehaviour
         _stamina = _maxStamina;
 
         MoveForce = DesiredMoveForce;
+
+        _camDistance = Vector3.Distance(_playerCam.transform.position, _playerObj.transform.position);
 
         // Cursor.visible = false;
         // Cursor.lockState = CursorLockMode.Locked;
@@ -682,8 +697,8 @@ public class CharStateMachine : MonoBehaviour
 
     private void GatherTool()
     {
-        float rayDistance = _toolRange + Vector3.Distance(_playerCam.transform.position, _playerObj.transform.position);
-        if (Physics.Raycast(_playerCam.position, Vector3.forward, out _toolHit, rayDistance, _gatherMask))
+
+        if (Physics.Raycast(_playerCam.position, Vector3.forward, out _toolHit, _toolRange + _camDistance, _gatherMask))
         {
             if (_gatherTime == -1)
             {
@@ -760,6 +775,23 @@ public class CharStateMachine : MonoBehaviour
         }
 
         MoveForce = DesiredMoveForce;
+    }
+
+    private void CheckInteractable()
+    {
+        if (Physics.SphereCast(_playerCam.transform.position, _interactableRadius, Vector3.forward, out _interactableHit, _interactableRange + _camDistance, _interactableMask))
+        {
+            if (_interactableHit.transform.GetComponent<DroppedItem>())
+            {
+                _interactableTxt.text = "Press (E) to pick up " + _interactableHit.transform.GetComponent<DroppedItem>().amount + " " +
+                _interactableHit.transform.GetComponent<DroppedItem>().item.name;
+                _InteractPanel.SetActive(true);
+            }
+        }
+        else
+        {
+            _InteractPanel.SetActive(false);
+        }
     }
 
 }

@@ -27,10 +27,10 @@ public class DroppedItem : MonoBehaviour
         itemInfoUI.SetActive(value);
     }
 
-    private void Update()
-    {
-        pickupItemText.text = $"Press (E) To Pick Up {amount} {item.name}.";
-    }
+    // private void Update()
+    // {
+    //     pickupItemText.text = $"Press (E) To Pick Up {amount} {item.name}.";
+    // }
 
     private void OnTriggerEnter(Collider other)
     {
