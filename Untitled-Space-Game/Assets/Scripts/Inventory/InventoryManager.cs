@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
+    public GameObject player;
 
     public List<InventorySlot> inventorySlots = new();
 
@@ -37,6 +38,8 @@ public class InventoryManager : MonoBehaviour
         {
             Instance = this;
         }
+
+        player = FindObjectOfType<CharStateMachine>().gameObject;
     }
 
     private void Update()
@@ -149,6 +152,7 @@ public class InventoryManager : MonoBehaviour
 
         UpdateItemsInfoList();
 
+        DropItem(itemId, amount);
         return false;
     }
 
@@ -235,6 +239,23 @@ public class InventoryManager : MonoBehaviour
             }
 
         }
+    }
+
+    public void DropItem(int itemId, int amount)
+    {
+        Item itemToDrop;
+        for (int i = 0; i < _allItems.Length; i++)
+        {
+            if (itemId == _allItems[i].itemID)
+            {
+                itemToDrop = _allItems[i];
+                GameObject droppedItem = Instantiate(itemToDrop.itemPrefab, player.transform.position, Quaternion.identity);
+                droppedItem.transform.GetComponent<DroppedItem>().item = itemToDrop;
+                droppedItem.transform.GetComponent<DroppedItem>().amount = amount;
+                Debug.Log($"Succesfully Dropped {amount} {itemToDrop}.");
+            }
+        }
+
     }
 
     public void UpdateItemsInfoList()
