@@ -29,15 +29,7 @@ public class DroppedItem : MonoBehaviour
 
     private void Update()
     {
-        // if (player == null)
-        // {
-        //     player = FindObjectOfType<CharStateMachine>().transform;
-        // }
-        if (itemInfoUI.activeSelf)
-        {
-            itemInfoUI.transform.LookAt(Camera.main.transform);
-            pickupItemText.text = $"Press (E) To Pick Up {amount} {item.name}.";
-        }
+        pickupItemText.text = $"Press (E) To Pick Up {amount} {item.name}.";
     }
 
     private void OnTriggerEnter(Collider other)
@@ -47,6 +39,10 @@ public class DroppedItem : MonoBehaviour
             if (InventoryManager.Instance.HasSpace(item.itemID, amount))
             {
                 InventoryManager.Instance.AddItem(item.itemID, amount);
+            }
+            else
+            {
+                Debug.Log("Player Has No Space!");
             }
         }
     }
