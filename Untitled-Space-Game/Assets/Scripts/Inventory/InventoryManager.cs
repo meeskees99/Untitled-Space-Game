@@ -137,6 +137,7 @@ public class InventoryManager : MonoBehaviour
             if (inventorySlots[i].isHudSlot && !itemToSpawn.canBeInHudSlot)
             {
                 Debug.Log("Can't Spawn This Item Here As it Is BlackListed");
+                DropItem(itemId, amount);
                 UpdateItemsInfoList();
                 return false;
             }
@@ -297,6 +298,37 @@ public class InventoryManager : MonoBehaviour
         }
 
         return result;
+    }
+
+    public bool HasSpace(int itemId, int amount)
+    {
+        //Check For Stackable Slot
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            InventorySlot slot = inventorySlots[i];
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+
+            if (itemInSlot != null && itemInSlot.item == itemToSpawn && itemInSlot.count + amount < itemInSlot.item.maxStack)
+            {
+                return true;
+            }
+        }
+        //Check for empty Slot
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            if (inventorySlots[i].isHudSlot && !itemToSpawn.canBeInHudSlot)
+            {
+                return false;
+            }
+
+            int slot = i;
+            InventoryItem itemInSlot = inventorySlots[slot].GetComponentInChildren<InventoryItem>();
+            if (itemInSlot == null)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
