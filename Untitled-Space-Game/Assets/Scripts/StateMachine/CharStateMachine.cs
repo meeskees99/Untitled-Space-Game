@@ -72,6 +72,12 @@ public class CharStateMachine : MonoBehaviour
         get { return _isMove; }
     }
 
+    [SerializeField] Vector2 _isCam;
+    public Vector2 IsCam
+    {
+        get { return _isCam; }
+    }
+
     [SerializeField] bool _isRun;
     public bool IsRun
     {
@@ -436,6 +442,9 @@ public class CharStateMachine : MonoBehaviour
         playerInput.actions.FindAction("Shoot").performed += OnShoot;
         playerInput.actions.FindAction("Shoot").canceled += OnShoot;
 
+        playerInput.actions.FindAction("Camera").performed += OnCam;
+        playerInput.actions.FindAction("Camera").canceled += OnCam;
+
         _states = new CharStateFactory(this);
         _currentState = _states.Grounded();
         _currentState.EnterState();
@@ -583,6 +592,11 @@ public class CharStateMachine : MonoBehaviour
     void OnShoot(InputAction.CallbackContext context)
     {
         _isShoot = context.ReadValueAsButton();
+    }
+
+    void OnCam(InputAction.CallbackContext context)
+    {
+        _isCam = context.ReadValue<Vector2>();
     }
 
     #endregion

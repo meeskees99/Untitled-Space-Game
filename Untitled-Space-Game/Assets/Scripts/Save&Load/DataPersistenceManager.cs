@@ -42,14 +42,14 @@ public class DataPersistenceManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.sceneUnloaded += OnSceneUnLoaded;
+        // SceneManager.sceneUnloaded += OnSceneUnLoaded;
 
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        SceneManager.sceneUnloaded -= OnSceneUnLoaded;
+        // SceneManager.sceneUnloaded -= OnSceneUnLoaded;
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -58,10 +58,10 @@ public class DataPersistenceManager : MonoBehaviour
         LoadGame();
     }
 
-    public void OnSceneUnLoaded(Scene scene)
-    {
-        SaveGame();
-    }
+    // public void OnSceneUnLoaded(Scene scene)
+    // {
+    //     SaveGame();
+    // }
 
     public void ChangeSelectedProfileId(string newProfileId)
     {
@@ -116,6 +116,8 @@ public class DataPersistenceManager : MonoBehaviour
 
         // save that data to a file using the file data handler
         _dataHandler.Save(_gameData, _selectedProfileId);
+
+        Debug.Log("Save Game");
     }
 
     private void OnApplicationQuit()
