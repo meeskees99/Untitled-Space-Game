@@ -18,6 +18,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     InventoryManager inventoryManager;
 
+    bool dropOnDrop;
+
     private void Start()
     {
         inventoryManager = InventoryManager.Instance;
@@ -45,6 +47,11 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (dropOnDrop)
+        {
+            InventoryManager.Instance.DropItem(item.itemID, count);
+            Destroy(gameObject);
+        }
         InventorySlot slot = transform.GetComponentInParent<InventorySlot>();
         slot.SetInventoryItem(null);
         image.raycastTarget = false;
@@ -122,19 +129,18 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 _canvasRect = GameObject.Find("PlayerCanvas").GetComponent<RectTransform>();
             }
             List<RaycastResult> results = new();
-
+            _pointerEventData = new PointerEventData(_eventSystem);
+            _pointerEventData.position = transform.position;
             _raycaster.Raycast(_pointerEventData, results);
+
             if (results[0].gameObject.transform.GetComponent<Button>())
             {
-                inventoryManager.DropItem(item.itemID, count);
+                Debug.Log("DropOnDrop True");
+                dropOnDrop = true;
             }
+            dropOnDrop = false;
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
-                _pointerEventData = new PointerEventData(_eventSystem);
-                _pointerEventData.position = transform.position;
-
-
-
                 Debug.Log($"Hit {results[0].gameObject.name}");
                 InventorySlot slot;
                 results[0].gameObject.transform.TryGetComponent<InventorySlot>(out slot);
