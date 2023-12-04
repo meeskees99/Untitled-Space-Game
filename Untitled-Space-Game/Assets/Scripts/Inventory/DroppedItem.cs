@@ -34,7 +34,8 @@ public class DroppedItem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<CharStateMachine>())
+        print("On Enter Collided With " + other.gameObject.name);
+        if (other.GetComponentInParent<CharStateMachine>())
         {
             if (InventoryManager.Instance.HasSpace(item.itemID, amount))
             {

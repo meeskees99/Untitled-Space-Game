@@ -784,13 +784,29 @@ public class CharStateMachine : MonoBehaviour
 
     private void CheckInteractable()
     {
-        if (Physics.SphereCast(_playerCam.transform.position, _interactableRadius, Vector3.forward, out _interactableHit, _interactableRange + _camDistance, _interactableMask))
+        if (Physics.SphereCast(_playerCam.transform.position, _interactableRadius, _playerCam.transform.forward, out _interactableHit, _interactableRange + _camDistance, _interactableMask))
         {
             if (_interactableHit.transform.GetComponent<DroppedItem>())
             {
-                _interactableTxt.text = "Press (E) to pick up " + _interactableHit.transform.GetComponent<DroppedItem>().amount + " " +
-                _interactableHit.transform.GetComponent<DroppedItem>().item.name;
+                DroppedItem droppedItem = _interactableHit.transform.GetComponent<DroppedItem>();
+                _interactableTxt.text = "Press (E) to pick up " + droppedItem.amount + " " +
+                droppedItem.item.name;
                 _InteractPanel.SetActive(true);
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    if (InventoryManager.Instance.HasSpace(droppedItem.item.itemID, droppedItem.amount))
+                    {
+                        InventoryManager.Instance.AddItem(droppedItem.item.itemID, droppedItem.amount);
+                        Destroy(droppedItem.gameObject);
+                        Debug.Log($"Pressed E To Pick Up {droppedItem.amount} {droppedItem.item}");
+                    }
+                    else
+                    {
+                        Debug.Log($"[NO SPACE] Pressed E To Pick Up {droppedItem.amount} {droppedItem.item}, but had no room in inventory");
+                    }
+
+                }
             }
         }
         else

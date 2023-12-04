@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class InGameUIManager : MonoBehaviour
@@ -24,6 +25,8 @@ public class InGameUIManager : MonoBehaviour
 
 
     bool _initializedUI;
+
+    public bool mouseLocked;
 
     private void Awake()
     {
@@ -53,6 +56,19 @@ public class InGameUIManager : MonoBehaviour
                     _inventorySlotImages[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
                 }
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (mouseLocked)
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            mouseLocked = Cursor.lockState == CursorLockMode.Locked;
         }
     }
 

@@ -121,14 +121,19 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             {
                 _canvasRect = GameObject.Find("PlayerCanvas").GetComponent<RectTransform>();
             }
+            List<RaycastResult> results = new();
+
+            _raycaster.Raycast(_pointerEventData, results);
+            if (results[0].gameObject.transform.GetComponent<Button>())
+            {
+                inventoryManager.DropItem(item.itemID, count);
+            }
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 _pointerEventData = new PointerEventData(_eventSystem);
                 _pointerEventData.position = transform.position;
 
-                List<RaycastResult> results = new();
 
-                _raycaster.Raycast(_pointerEventData, results);
 
                 Debug.Log($"Hit {results[0].gameObject.name}");
                 InventorySlot slot;
