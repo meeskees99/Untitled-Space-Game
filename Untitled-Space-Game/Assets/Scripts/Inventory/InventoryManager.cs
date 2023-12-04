@@ -267,11 +267,11 @@ public class InventoryManager : MonoBehaviour
             int amount = GetTotalItemAmount(inventorySlots, _allItems[i]);
             itemsInInventory.Add(new(_allItems[i], amount));
         }
-        for (int i = 0; i < inventorySlots.Count; i++)
-        {
-            if (inventorySlots[i].GetInventoryItem() != null)
-                inventorySlots[i].GetInventoryItem().RefreshCount();
-        }
+        // for (int i = 0; i < inventorySlots.Count; i++)
+        // {
+        //     if (inventorySlots[i].GetInventoryItem() != null)
+        //         inventorySlots[i].GetInventoryItem().RefreshCount();
+        // }
     }
 
     static int GetTotalItemAmount(List<InventorySlot> list, Item item)

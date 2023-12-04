@@ -6165,7 +6165,7 @@ GameObject:
   - component: {fileID: 2203894973964866917}
   - component: {fileID: 5349159816981319631}
   m_Layer: 0
-  m_Name: Walk Cam
+  m_Name: Walk Cam (VirCam)
   m_TagString: CineMachine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

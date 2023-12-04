@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
 using UnityEngine.UI;
-using System.Linq;
+using TMPro;
+using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
 public class MainMenuUIManager : MonoBehaviour
@@ -354,4 +353,13 @@ public class MainMenuUIManager : MonoBehaviour
     }
 
     #endregion
+
+    public void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
+        Application.Quit();
+#endif
+    }
 }
