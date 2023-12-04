@@ -8,24 +8,24 @@ public class DroppedItem : MonoBehaviour
     public Item item;
     public int amount;
 
-    public GameObject itemInfoUI;
-    public TMP_Text pickupItemText;
+    // public GameObject itemInfoUI;
+    // public TMP_Text pickupItemText;
 
     Transform player;
 
     private void OnEnable()
     {
-        pickupItemText.text = $"Press (E) To Pick Up {amount} {item.name}.";
+        // pickupItemText.text = $"Press (E) To Pick Up {amount} {item.name}.";
         // if (player == null)
         // {
         //     player = FindObjectOfType<CharStateMachine>().transform;
         // }
     }
 
-    public void SetItemInfoUI(bool value)
-    {
-        itemInfoUI.SetActive(value);
-    }
+    // public void SetItemInfoUI(bool value)
+    // {
+    //     itemInfoUI.SetActive(value);
+    // }
 
     // private void Update()
     // {
@@ -43,6 +43,15 @@ public class DroppedItem : MonoBehaviour
             else
             {
                 Debug.Log("Player Has No Space!");
+            }
+        }
+        else if (other.GetComponent<DroppedItem>())
+        {
+            if (other.GetComponent<DroppedItem>().item == item)
+            {
+                amount += other.GetComponent<DroppedItem>().amount;
+                Destroy(other.gameObject);
+                Debug.Log("Merged Two Dropped Items Together");
             }
         }
     }

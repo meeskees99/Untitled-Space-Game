@@ -392,7 +392,7 @@ public class CharStateMachine : MonoBehaviour
     #endregion
 
     [Header("MultiTool")]
-    #region MultiTool
+    #region Interactions
 
     [SerializeField] float _camDistance;
 
@@ -402,9 +402,9 @@ public class CharStateMachine : MonoBehaviour
     [SerializeField] RaycastHit _toolHit;
     [SerializeField] LayerMask _gatherMask;
 
+    [Header("Interaction")]
     [SerializeField] GameObject _InteractPanel;
     [SerializeField] TMP_Text _interactableTxt;
-
 
     [SerializeField] float _interactableRadius;
     [SerializeField] RaycastHit _interactableHit;
