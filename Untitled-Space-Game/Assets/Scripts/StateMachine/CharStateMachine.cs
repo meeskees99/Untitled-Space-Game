@@ -489,8 +489,8 @@ public class CharStateMachine : MonoBehaviour
         if (_isShoot)
         {
             CheckTool();
-            CheckInteractable();
         }
+        CheckInteractable();
 
         if (Input.GetKey(KeyCode.O))
         {
@@ -720,6 +720,10 @@ public class CharStateMachine : MonoBehaviour
 
     public bool CheckCrouchUp()
     {
+        if (_colliders.Length == 0)
+        {
+            return false;
+        }
         if (Physics.Raycast(_colliders[1].transform.position, _colliders[1].transform.up, out _crouchUpHit, _crouchUpLenght))
         {
             return true;
