@@ -489,6 +489,7 @@ public class CharStateMachine : MonoBehaviour
         if (_isShoot)
         {
             CheckTool();
+            CheckInteractable();
         }
 
         if (Input.GetKey(KeyCode.O))
