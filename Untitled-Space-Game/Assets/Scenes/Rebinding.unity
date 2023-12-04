@@ -3380,7 +3380,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Space
+  m_text: O
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3603,7 +3603,6 @@ GameObject:
   - component: {fileID: 1061892167}
   - component: {fileID: 1061892166}
   - component: {fileID: 1061892165}
-  - component: {fileID: 1061892171}
   - component: {fileID: 1061892170}
   - component: {fileID: 1061892169}
   m_Layer: 5
@@ -3756,6 +3755,9 @@ MonoBehaviour:
   - Move
   - Move
   - Move
+  - UNGA
+  - UNGA
+  - UNGA
   _rebindText:
   - {fileID: 1016520751}
   - {fileID: 216523330}
@@ -3765,29 +3767,6 @@ MonoBehaviour:
   - {fileID: 842503121}
   - {fileID: 1753548751}
   - {fileID: 1009212378}
---- !u!114 &1061892171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1061892164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f61e37af89d08c46a7d99511d2b24d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputActionReference: []
-  _charController: {fileID: 0}
-  binding_OBJ: []
-  action: []
-  input_OBJ: []
-  input_TXT: []
-  waitForInput_OBJ: []
-  inputs: []
-  rebinds: []
-  reset_OBJ: []
-  canSave: 0
 --- !u!1 &1074196757
 GameObject:
   m_ObjectHideFlags: 0
@@ -4222,6 +4201,7 @@ GameObject:
   - component: {fileID: 1257780429}
   - component: {fileID: 1257780432}
   - component: {fileID: 1257780433}
+  - component: {fileID: 1257780434}
   m_Layer: 0
   m_Name: Charachter
   m_TagString: Untagged
@@ -4300,24 +4280,20 @@ MonoBehaviour:
     m_ActionName: Game/Camera[/Mouse/delta,/DualShock4GamepadHID/rightStick]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: aa6b38f9-1968-4dd3-b89c-005c40733e96
-    m_ActionName: Game/Slide[/Keyboard/shift,/DualShock4GamepadHID/leftShoulder]
+    m_ActionId: 8644ff45-2a74-4c4c-bdc8-70973e771efb
+    m_ActionName: Game/Crouch[/Keyboard/z]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 5db4e944-531b-43e1-9819-06a8154148b2
-    m_ActionName: Game/Aim[/Mouse/rightButton,/DualShock4GamepadHID/leftTrigger]
+    m_ActionId: 324ffcb6-0f89-47d6-8f69-35910d15069b
+    m_ActionName: Game/Run[/Keyboard/leftShift]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 68ee6fc9-c815-458e-b257-4bb09cfb4547
-    m_ActionName: Game/Shoot[/Mouse/leftButton,/DualShock4GamepadHID/rightTrigger]
+    m_ActionId: 6472b9b9-8046-4616-b95f-7de08eab91c3
+    m_ActionName: Game/Hotbar[/Mouse/scroll/y]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 6c87a696-6ef2-47a4-806c-bf8072423026
-    m_ActionName: Game/Reset[/Keyboard/r]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 74583cc8-dbea-4586-a380-ba810cfc90e5
-    m_ActionName: Game/Next[/Keyboard/n]
+    m_ActionId: f012e68b-2427-4220-9120-5f3fc80631ae
+    m_ActionName: Game/Shoot[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Game
@@ -4336,12 +4312,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 1257780432}
-  _playerObj: {fileID: 0}
-  _playerCam: {fileID: 0}
-  _orientation: {fileID: 0}
-  _rb: {fileID: 0}
+  _playerObj: {fileID: 1257780429}
+  _playerCam: {fileID: 1257780429}
+  _orientation: {fileID: 1257780429}
+  _rb: {fileID: 1257780434}
   _colliders: []
   _isMove: 0
+  _isCam: {x: 0, y: 0}
   _isRun: 0
   _isJump: 0
   _isCrouch: 0
@@ -4387,11 +4364,46 @@ MonoBehaviour:
   _moveMultiplier: 0
   _isAired: 0
   _isJumping: 0
+  _camDistance: 0
+  _gatherTime: 0
   _toolRange: 0
   _gatherMask:
     serializedVersion: 2
     m_Bits: 0
-  _gatherTime: 0
+  _InteractPanel: {fileID: 0}
+  _interactableTxt: {fileID: 0}
+  _interactableRadius: 0
+  _interactableRange: 0
+  _interactableMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!54 &1257780434
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257780428}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1292976017
 GameObject:
   m_ObjectHideFlags: 0

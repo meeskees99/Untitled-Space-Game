@@ -86,6 +86,78 @@ public class KeyRebinding : MonoBehaviour
         // if (actionText != null)
         //     actionText.text = actionName;
 
+        bool allchecked = false;
+        for (int i = 0; i <= _actionName.Length - 1; i++)
+        {
+            if (allchecked)
+            {
+                break;
+            }
+            if (i < _actionName.Length - 1)
+            {
+                if (_actionName[i] == _actionName[i + 1])
+                {
+                    int firstindex = i;
+
+                    Debug.Log("Is composite: " + firstindex);
+
+
+                    for (int j = firstindex; j < _actionName.Length - 1; j++)
+                    {
+                        if ((j + 1) != _actionName.Length - 1)
+                        {
+                            // Debug.Log(j + " " + _actionName.Length);
+                            if (_actionName[firstindex] == _actionName[j + 1])
+                            {
+                                // TODO - do the thing
+                                Debug.Log("Is part of composite: " + (j + 1) + " with: " + firstindex);
+
+                                // if ((j + 1) == )
+                            }
+                            else
+                            {
+                                if (_actionName[j + 1] == _actionName[j + 2])
+                                {
+                                    int nextindex = (j + 1);
+                                    firstindex = nextindex;
+                                    Debug.Log("Is composite: " + (j + 1));
+                                }
+                                else
+                                {
+                                    Debug.Log("Not a composite: " + (j + 1));
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (_actionName[firstindex] == _actionName[j + 1])
+                            {
+                                Debug.Log("Is part of composite: " + (j + 1) + " with: " + firstindex + " last");
+                                allchecked = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.Log("Not a composite");
+                }
+            }
+            // else if (i == _actionName.Length - 1)
+            // {
+            //     if (_actionName[i] == _actionName[i - 1])
+            //     {
+            //         // TODO - do the thing
+            //         Debug.Log("Is part composite: " + i);
+            //     }
+            //     else
+            //     {
+            //         Debug.Log("Not a composite: " + i + " with: " + (i + 1));
+            //     }
+            // }
+        }
+
 
         for (int i = 0; i < _rebindText.Length; i++)
         {
