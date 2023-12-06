@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Info")]
-    public static int CurrentEnemyCount;
+    public int currentEnemyCount;
     public List<GameObject> enemiesInScene = new();
     [SerializeField] GameObject player;
 
@@ -30,15 +30,18 @@ public class EnemySpawner : MonoBehaviour
         int randomSpawnAmount = Random.Range(_minSpawnAmountOnStart, _maxSpawnAmountOnStart);
         for (int i = 0; i < randomSpawnAmount; i++)
         {
-            bool result = SpawnNewEnemy();
-            if (result)
-            {
-                Debug.Log("Succesfully Spawned An Enemy");
-            }
-            else
-            {
-                result = SpawnNewEnemy();
-            }
+            // bool result = 
+
+            SpawnNewEnemy();
+
+            // if (result)
+            // {
+            //     Debug.Log("Succesfully Spawned An Enemy");
+            // }
+            // else
+            // {
+            //     result = SpawnNewEnemy();
+            // }
         }
 
         Debug.Log($"Spawned {randomSpawnAmount} enemies on start!");
@@ -46,24 +49,31 @@ public class EnemySpawner : MonoBehaviour
 
 
 
-    bool SpawnNewEnemy()
+    void SpawnNewEnemy()
     {
-        NavMesh.SamplePosition(transform.position, out _navMeshHit, Mathf.Infinity, _spawnLayer);
-        if (Vector3.Distance(_navMeshHit.position, player.transform.position) < _minSpawnDistanceFromPlayer)
+        bool canSpawn = false;
+        while (!canSpawn)
         {
-            return false;
+            NavMesh.SamplePosition(player.transform.position, out _navMeshHit, 200f, _spawnLayer);
+            if (Vector3.Distance(_navMeshHit.position, player.transform.position) < _minSpawnDistanceFromPlayer)
+            {
+                print("Couldn't spawn enemy here as it was too close to the player");
+                return;
+            }
+            canSpawn = true;
         }
 
         int i = Random.Range(0, _enemyTypes.Length);
-
-        GameObject spawnedEnemy = Instantiate(_enemyTypes[i], _navMeshHit.position, Quaternion.identity);
+        GameObject enemyToSpawn = _enemyTypes[i];
+        GameObject spawnedEnemy = Instantiate(enemyToSpawn);
+        spawnedEnemy.transform.position = _navMeshHit.position;
         enemiesInScene.Add(spawnedEnemy);
-        CurrentEnemyCount++;
-        return true;
+        // spawnedEnemy.GetComponent<NavMeshAgent>().enabled = true;
+        currentEnemyCount++;
     }
 
     public void RemoveEnemy()
     {
-        CurrentEnemyCount--;
+        currentEnemyCount--;
     }
 }

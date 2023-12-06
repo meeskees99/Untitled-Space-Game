@@ -36,9 +36,13 @@ public class Enemy : MonoBehaviour
             _movementSpeed = _enemyStats.movementSpeed;
             _stopDistance = _enemyStats.stopDistance;
             _walkRadius = _enemyStats.movementRadius;
+            if (_agent != null)
+            {
+                _agent.angularSpeed = _enemyStats.angularSpeed;
+                _agent.stoppingDistance = _stopDistance;
+                _agent.autoBraking = false;
+            }
 
-            _agent.angularSpeed = _enemyStats.angularSpeed;
-            _agent.stoppingDistance = _stopDistance;
 
             if (!_enemyStats.canJump)
                 _agent.areaMask = 1;
@@ -48,13 +52,22 @@ public class Enemy : MonoBehaviour
             Debug.LogError("You did not select any stats for " + gameObject.name);
         }
 
-        _agent.autoBraking = false;
         _enemySpawner = FindObjectOfType<EnemySpawner>();
+        if (_agent != null)
+            _agent.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_agent == null)
+        {
+            return;
+        }
+        else if (GetComponent<NavMeshAgent>().enabled == false)
+        {
+            return;
+        }
         PatrolToNextPoint();
 
         NavMeshHit hit;

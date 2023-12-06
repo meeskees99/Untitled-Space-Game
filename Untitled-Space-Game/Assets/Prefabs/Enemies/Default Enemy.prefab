@@ -150,6 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 780c11504a221734db8b3877127223af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentTravelTime: 0
+  _maxTravelTime: 15
   _walkabeLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -164,7 +166,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130471825295241938}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5

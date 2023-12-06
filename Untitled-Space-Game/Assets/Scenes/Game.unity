@@ -6397,6 +6397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d80f3debc9017de4c81cc38bc3ccf0ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentEnemyCount: 0
   enemiesInScene: []
   player: {fileID: 0}
   _spawnLayer:
@@ -6408,6 +6409,7 @@ MonoBehaviour:
   _maxSpawnAmountOnStart: 8
   _enemyTypes:
   - {fileID: 8341848710017158541, guid: 22eff6760b9b06e44a1d8e40b6a5c192, type: 3}
+  - {fileID: 8341848710017158541, guid: 08029d5a7f407c4409bc0e695025dcf5, type: 3}
 --- !u!1 &1912155690
 GameObject:
   m_ObjectHideFlags: 0
