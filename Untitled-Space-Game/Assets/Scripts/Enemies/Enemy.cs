@@ -4,7 +4,7 @@ using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyMovement : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     NavMeshAgent _agent;
 
@@ -24,6 +24,8 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] bool _stopPatrolling;
 
     GameObject player;
+
+    EnemySpawner _enemySpawner;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +49,7 @@ public class EnemyMovement : MonoBehaviour
         }
 
         _agent.autoBraking = false;
+        _enemySpawner = FindObjectOfType<EnemySpawner>();
     }
 
     // Update is called once per frame
@@ -183,5 +186,11 @@ public class EnemyMovement : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _walkRadius);
+    }
+
+    private void OnDestroy()
+    {
+        _enemySpawner.RemoveEnemy();
+        _enemySpawner.enemiesInScene.Remove(gameObject);
     }
 }
