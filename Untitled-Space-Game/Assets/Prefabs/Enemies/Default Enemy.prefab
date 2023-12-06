@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 1235280760983519955}
   - component: {fileID: 5377390095734334709}
   - component: {fileID: 4673201975027119373}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Default Enemy
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 5251546786664281263}
   - component: {fileID: 9098256924339273632}
   - component: {fileID: 1384020125540960957}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Front
   m_TagString: Player
   m_Icon: {fileID: 0}

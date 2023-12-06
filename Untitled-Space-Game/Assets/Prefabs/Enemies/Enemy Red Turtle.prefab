@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5188915985518584801}
   - component: {fileID: 6161842551668601730}
   - component: {fileID: 4293156003300509531}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Front
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -98,9 +98,9 @@ GameObject:
   - component: {fileID: 3734987774596926721}
   - component: {fileID: 1730877640705567364}
   - component: {fileID: 5355304180129750833}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Enemy Red Turtle
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -260,5 +260,5 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 1
-  m_WalkableMask: 1
+  m_WalkableMask: 5
   m_ObstacleAvoidanceType: 4

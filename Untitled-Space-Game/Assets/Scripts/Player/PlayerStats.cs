@@ -9,6 +9,7 @@ public class PlayerStats : MonoBehaviour
     public static float Oxygen;
     [SerializeField] float _currentHealth;
     [SerializeField] float _currentOxygen;
+    public static bool IsAlive;
 
 
     [Header("Health Settings")]
@@ -26,14 +27,25 @@ public class PlayerStats : MonoBehaviour
     public bool recievingOxygen;
     public bool healing;
 
+    void Start()
+    {
+        ResetStats();
+    }
+
     void Update()
     {
+        if (!IsAlive)
+        {
+            return;
+        }
+
         HandleOxygen();
         HandeHealth();
     }
 
     void HandleOxygen()
     {
+        _currentOxygen = Oxygen;
         if (!recievingOxygen)
         {
             if (Oxygen > 0)
@@ -60,7 +72,13 @@ public class PlayerStats : MonoBehaviour
 
     void HandeHealth()
     {
-        if (Oxygen > _minOxygenAmountForRegen)
+        _currentHealth = Health;
+        if (Health <= 0 && IsAlive)
+        {
+            Health = 0;
+            Die();
+        }
+        else if (Oxygen > _minOxygenAmountForRegen)
         {
             if (Health < _maxHealth)
             {
@@ -76,7 +94,43 @@ public class PlayerStats : MonoBehaviour
         else if (Oxygen <= 0)
         {
             healing = false;
-            Health -= _sufficationRate * Time.deltaTime;
+            if (Health > 0)
+            {
+                Health -= _sufficationRate * Time.deltaTime;
+            }
         }
+    }
+
+    public void TakeDamage(float dmgToDo)
+    {
+        if (dmgToDo > Health)
+        {
+            float overflow = dmgToDo - Health;
+            dmgToDo -= overflow;
+        }
+        Health -= dmgToDo;
+        if (Health < 0)
+        {
+            Health = 0;
+        }
+        Debug.Log($"Player Took {dmgToDo} damage!");
+    }
+
+    void Die()
+    {
+        Debug.Log("You Died!");
+        IsAlive = false;
+        if (InGameUIManager.Instance.deathPanel != null)
+        {
+            InGameUIManager.Instance.deathPanel.SetActive(true);
+        }
+    }
+
+    void ResetStats()
+    {
+        Health = _maxHealth;
+        Oxygen = _maxOxygen;
+        IsAlive = true;
+        Debug.Log("Reset Player Stats");
     }
 }

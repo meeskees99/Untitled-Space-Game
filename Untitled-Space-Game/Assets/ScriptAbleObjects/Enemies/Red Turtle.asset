@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 300
   attackDamage: 20
-  attackRadius: 10
+  attackRange: 3
+  attackRate: 2
+  chaseRadius: 7
+  chaseTime: 4
   movementSpeed: 2
   movementRadius: 6
+  angularSpeed: 160
   stopDistance: 0.5
+  canJump: 0

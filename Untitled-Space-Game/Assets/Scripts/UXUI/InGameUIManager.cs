@@ -19,6 +19,8 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] GameObject _miningPanel;
     [SerializeField] Slider _fuelLeftSlider;
 
+    public GameObject deathPanel;
+
     [Header("Settings")]
     bool _craftingShown;
     public bool inventoryShown { get; private set; }
