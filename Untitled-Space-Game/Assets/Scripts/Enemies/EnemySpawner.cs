@@ -54,19 +54,26 @@ public class EnemySpawner : MonoBehaviour
         bool canSpawn = false;
         while (!canSpawn)
         {
-            NavMesh.SamplePosition(player.transform.position, out _navMeshHit, 200f, _spawnLayer);
-            if (Vector3.Distance(_navMeshHit.position, player.transform.position) < _minSpawnDistanceFromPlayer)
+            if (NavMesh.SamplePosition(player.transform.position, out _navMeshHit, 200f, NavMesh.AllAreas))
             {
-                print("Couldn't spawn enemy here as it was too close to the player");
-                return;
+                if (Vector3.Distance(_navMeshHit.position, player.transform.position) < _minSpawnDistanceFromPlayer)
+                {
+                    print("Couldn't spawn enemy here as it was too close to the player");
+                    return;
+                }
+                else
+                {
+                    canSpawn = true;
+                }
             }
-            canSpawn = true;
         }
 
         int i = Random.Range(0, _enemyTypes.Length);
         GameObject enemyToSpawn = _enemyTypes[i];
         GameObject spawnedEnemy = Instantiate(enemyToSpawn);
-        spawnedEnemy.transform.position = _navMeshHit.position;
+        Vector3 spawnPos = _navMeshHit.position;
+        Debug.Log($"Spawnpos: {spawnPos}");
+        spawnedEnemy.transform.position = spawnPos;
         enemiesInScene.Add(spawnedEnemy);
         // spawnedEnemy.GetComponent<NavMeshAgent>().enabled = true;
         currentEnemyCount++;
