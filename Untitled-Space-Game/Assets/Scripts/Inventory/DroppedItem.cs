@@ -8,38 +8,31 @@ public class DroppedItem : MonoBehaviour
     public Item item;
     public int amount;
 
-    // public GameObject itemInfoUI;
-    // public TMP_Text pickupItemText;
+    [SerializeField] float pickUpDelay = 1.5f;
 
-    Transform player;
+    bool canPickup;
 
-    private void OnEnable()
+    private void Update()
     {
-        // pickupItemText.text = $"Press (E) To Pick Up {amount} {item.name}.";
-        // if (player == null)
-        // {
-        //     player = FindObjectOfType<CharStateMachine>().transform;
-        // }
+        if (pickUpDelay > 0)
+        {
+            pickUpDelay -= Time.deltaTime;
+        }
+        else
+        {
+            canPickup = true;
+        }
     }
-
-    // public void SetItemInfoUI(bool value)
-    // {
-    //     itemInfoUI.SetActive(value);
-    // }
-
-    // private void Update()
-    // {
-    //     pickupItemText.text = $"Press (E) To Pick Up {amount} {item.name}.";
-    // }
 
     private void OnTriggerEnter(Collider other)
     {
         print("On Enter Collided With " + other.gameObject.name);
-        if (other.GetComponentInParent<CharStateMachine>())
+        if (other.GetComponentInParent<CharStateMachine>() && canPickup)
         {
             if (InventoryManager.Instance.HasSpace(item.itemID, amount))
             {
                 InventoryManager.Instance.AddItem(item.itemID, amount);
+                Destroy(gameObject);
             }
             else
             {

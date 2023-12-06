@@ -71,7 +71,12 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (parentAfterDrag.childCount == 0)
+        if (dropOnDrop)
+        {
+            InventoryManager.Instance.DropItem(item.itemID, count);
+            Destroy(gameObject);
+        }
+        else if (parentAfterDrag.childCount == 0)
         {
             image.raycastTarget = true;
             transform.SetParent(parentAfterDrag);
@@ -137,6 +142,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             {
                 Debug.Log("DropOnDrop True");
                 dropOnDrop = true;
+                return;
             }
             dropOnDrop = false;
             if (Input.GetKeyDown(KeyCode.Mouse1))
