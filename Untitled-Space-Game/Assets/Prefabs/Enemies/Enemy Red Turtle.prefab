@@ -241,7 +241,7 @@ MonoBehaviour:
   _minWaitTime: 2
   _maxWaitTime: 6
   _enemyStats: {fileID: 11400000, guid: 6a8b35cd260f13346a02f365eab24f57, type: 2}
-  _stopPatrolling: 1
+  _stopPatrolling: 0
 --- !u!195 &5355304180129750833
 NavMeshAgent:
   m_ObjectHideFlags: 0

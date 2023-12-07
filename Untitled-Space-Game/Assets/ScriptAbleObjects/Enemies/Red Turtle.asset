@@ -16,10 +16,10 @@ MonoBehaviour:
   attackDamage: 20
   attackRange: 3
   attackRate: 2
-  chaseRadius: 7
+  chaseRadius: 10
   chaseTime: 4
   movementSpeed: 2
-  movementRadius: 6
+  movementRadius: 10
   angularSpeed: 160
   stopDistance: 0.5
   canJump: 0

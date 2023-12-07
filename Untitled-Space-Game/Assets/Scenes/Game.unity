@@ -23532,7 +23532,7 @@ MonoBehaviour:
   _maxOxygen: 50
   _oxygenDepletionRate: 0.5
   _oxygenRegenerationRate: 0.7
-  recievingOxygen: 0
+  recievingOxygen: 1
   healing: 0
 --- !u!1 &9134138401608971984
 GameObject:

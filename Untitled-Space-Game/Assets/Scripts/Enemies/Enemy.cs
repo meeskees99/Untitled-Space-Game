@@ -53,8 +53,8 @@ public class Enemy : MonoBehaviour
         }
 
         _enemySpawner = FindObjectOfType<EnemySpawner>();
-        if (_agent != null)
-            _agent.enabled = false;
+        // if (_agent != null)
+        //     _agent.enabled = false;
     }
 
     // Update is called once per frame
