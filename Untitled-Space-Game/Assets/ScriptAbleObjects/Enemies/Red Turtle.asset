@@ -22,4 +22,4 @@ MonoBehaviour:
   movementRadius: 10
   angularSpeed: 160
   stopDistance: 0.5
-  canJump: 0
+  canJump: 1
