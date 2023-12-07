@@ -7,12 +7,10 @@ using UnityEngine;
 public class GameData
 {
     public long lastUpdated;
-    // public Vector3 playerPosition;
-    // public Quaternion playerRotation;
 
-    // public string saveFileName;
-    // public int saveLastPlayed;
-
+    public List<Vector3> resourcePositions;
+    public List<Quaternion> resourceRotations;
+    public List<int> resourceIndex;
 
     public int[] itemId = new int[23];
     public int[] itemAmount = new int[23];
@@ -23,13 +21,14 @@ public class GameData
     {
         this.gameDifficulty = -1;
 
-        // this.playerPosition = Vector3.zero;
-        // this.playerRotation = Quaternion.identity;
-
         for (int i = 0; i < itemId.Length; i++)
         {
             this.itemId[i] = -1;
             this.itemAmount[i] = -1;
         }
+
+        this.resourceIndex.Clear();
+        this.resourcePositions.Clear();
+        this.resourceRotations.Clear();
     }
 }
