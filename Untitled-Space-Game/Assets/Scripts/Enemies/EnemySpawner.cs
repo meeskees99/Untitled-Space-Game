@@ -22,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int _minSpawnAmountOnStart, _maxSpawnAmountOnStart;
     [SerializeField] GameObject[] _enemyTypes;
 
-
+    int _spawnAttempts;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +39,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKey(KeyCode.H))
         {
             GetRandomPosition();
         }
@@ -64,19 +64,26 @@ public class EnemySpawner : MonoBehaviour
 
     void GetRandomPosition()
     {
-        NavMeshTriangulation navMeshTriangulation = NavMesh.CalculateTriangulation();
+        float xpos = Random.Range(player.transform.position.x - 100, 100 + player.transform.position.x);
+        float ypos = 0;
+        float zpos = Random.Range(player.transform.position.x - 100, 100 + player.transform.position.x);
 
-        int vertexIndex = Random.Range(0, navMeshTriangulation.vertices.Length);
+        Vector3 randomPos = new Vector3(xpos, ypos, zpos);
 
-        if (NavMesh.SamplePosition(navMeshTriangulation.vertices[vertexIndex], out _navMeshHit, 2f, NavMesh.AllAreas) &&
-        Vector3.Distance(navMeshTriangulation.vertices[vertexIndex], player.transform.position) > _minSpawnDistanceFromPlayer)
+        if (NavMesh.SamplePosition(randomPos, out _navMeshHit, 10f, NavMesh.AllAreas) &&
+        Vector3.Distance(randomPos, player.transform.position) > _minSpawnDistanceFromPlayer)
         {
+            Debug.Log("Found spawn position!");
+            _spawnAttempts = 0;
             SpawnNewEnemy(_navMeshHit.position);
         }
         else
         {
-            Debug.Log("Navmesh missed");
-            GetRandomPosition();
+            Debug.Log("Navmesh missed, attempt " + _spawnAttempts + " " + randomPos);
+            _spawnAttempts++;
+            if (_spawnAttempts < 20)
+                GetRandomPosition();
         }
     }
+
 }
