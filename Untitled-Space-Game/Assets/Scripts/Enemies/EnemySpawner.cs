@@ -26,6 +26,7 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        NavMeshManager.Instance.UpdateNavMesh();
         player = FindObjectOfType<PlayerStats>().gameObject;
 
         int randomSpawnAmount = Random.Range(_minSpawnAmountOnStart, _maxSpawnAmountOnStart);
