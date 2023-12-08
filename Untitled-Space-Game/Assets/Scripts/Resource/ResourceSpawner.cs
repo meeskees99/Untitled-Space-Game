@@ -64,6 +64,7 @@ public class ResourceSpawner : MonoBehaviour, IDataPersistence
 
             Debug.Log("Get random rot");
             _randomRot = GetRandomRotation();
+            Debug.Log($"Value saved in _randomRot: {_randomRot}");
 
 
 
@@ -109,7 +110,9 @@ public class ResourceSpawner : MonoBehaviour, IDataPersistence
     Quaternion GetRandomRotation()
     {
         Quaternion randomRot = Quaternion.identity;
-        randomRot.y = Random.Range(0, 361);
+        int random = Random.Range(0, 181);
+        randomRot.y = random;
+        Debug.Log(randomRot + " random rotation ");
         return randomRot;
     }
 
