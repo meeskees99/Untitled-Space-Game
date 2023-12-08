@@ -27,8 +27,8 @@ public class GameData
             this.itemAmount[i] = -1;
         }
 
-        this.resourceIndex.Clear();
-        this.resourcePositions.Clear();
-        this.resourceRotations.Clear();
+        this.resourceIndex = new List<int>();
+        this.resourcePositions = new List<Vector3>();
+        this.resourceRotations = new List<Quaternion>();
     }
 }
