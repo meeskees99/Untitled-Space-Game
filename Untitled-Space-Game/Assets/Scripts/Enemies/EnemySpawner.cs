@@ -74,13 +74,11 @@ public class EnemySpawner : MonoBehaviour
         if (NavMesh.SamplePosition(randomPos, out _navMeshHit, 10f, NavMesh.AllAreas) &&
         Vector3.Distance(randomPos, player.transform.position) > _minSpawnDistanceFromPlayer)
         {
-            Debug.Log("Found spawn position!");
             _spawnAttempts = 0;
             SpawnNewEnemy(_navMeshHit.position);
         }
         else
         {
-            Debug.Log("Navmesh missed, attempt " + _spawnAttempts + " " + randomPos);
             _spawnAttempts++;
             if (_spawnAttempts < 20)
                 GetRandomPosition();

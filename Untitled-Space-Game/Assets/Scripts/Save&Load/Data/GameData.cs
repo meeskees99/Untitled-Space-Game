@@ -9,7 +9,7 @@ public class GameData
     public long lastUpdated;
 
     public List<Vector3> resourcePositions;
-    public List<Quaternion> resourceRotations;
+    public List<Vector3> resourceRotations;
     public List<int> resourceIndex;
 
     public int[] itemId = new int[23];
@@ -29,6 +29,6 @@ public class GameData
 
         this.resourceIndex = new List<int>();
         this.resourcePositions = new List<Vector3>();
-        this.resourceRotations = new List<Quaternion>();
+        this.resourceRotations = new List<Vector3>();
     }
 }

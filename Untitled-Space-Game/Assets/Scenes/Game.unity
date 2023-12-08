@@ -20991,7 +20991,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resourcePrefabs:
   - {fileID: 1670279295205404173, guid: bfded2aac09750c408353fce98164aa4, type: 3}
-  - {fileID: 1670279295205404173, guid: bfded2aac09750c408353fce98164aa4, type: 3}
   floorMesh: []
   _resourceRotations: []
   _resourcePositions: []
@@ -20999,8 +20998,11 @@ MonoBehaviour:
   _minResourceDistance: 12
   _amountToSpawn: 5
   _randomPos: {x: 0, y: 0, z: 0}
-  _randomRot: {x: 0, y: 0, z: 0, w: 0}
+  _randomRot: {x: 0, y: 0, z: 0}
   _randomResourceIndex: 0
+  _terrainLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1912155690
 GameObject:
   m_ObjectHideFlags: 0
