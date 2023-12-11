@@ -11,6 +11,7 @@ public class MachinePlacement : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] float _placementRange;
+    [SerializeField] Vector3 _placementOffset;
     [SerializeField] LayerMask _placementMask;
     [SerializeField] Color _canPlaceColor;
     [SerializeField] Color _cantPlaceColor;
@@ -39,11 +40,11 @@ public class MachinePlacement : MonoBehaviour
                 {
                     _spawnedBlueprint = Instantiate(_machineBlueprintPrefabs[_selectedIndex]);
                 }
-                if (_hit.transform.gameObject.layer == _placementMask)
+                if (_hit.transform.gameObject.layer == LayerMask.NameToLayer("Resource"))
                 {
                     // TODO - make the thing turn blue
                     _spawnedBlueprint.transform.position = _hit.transform.position;
-                    _spawnedBlueprint.transform.GetComponentInChildren<Material>().color = _cantPlaceColor;
+                    _spawnedBlueprint.transform.GetComponentInChildren<MeshRenderer>().material.color = _canPlaceColor;
                     if (Input.GetKeyDown(KeyCode.Mouse0))
                     {
                         Destroy(_spawnedBlueprint);
@@ -54,7 +55,11 @@ public class MachinePlacement : MonoBehaviour
                 {
                     // TODO - make the thing turn red
                     _spawnedBlueprint.transform.position = _hit.point;
-                    _spawnedBlueprint.transform.GetComponentInChildren<Material>().color = _canPlaceColor;
+                    _spawnedBlueprint.transform.GetComponentInChildren<MeshRenderer>().material.color = _cantPlaceColor;
+                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        Destroy(_spawnedBlueprint);
+                    }
                 }
             }
             else
@@ -63,10 +68,22 @@ public class MachinePlacement : MonoBehaviour
             }
 
         }
+        else
+        {
+            if (_spawnedBlueprint != null)
+            {
+                Destroy(_spawnedBlueprint);
+            }
+        }
     }
 
     public void PickMachine(int machineIndex)
     {
+        if (_selectedIndex == machineIndex)
+        {
+            _selectedIndex = -1;
+            return;
+        }
         if (machineIndex < 0)
         {
             _selectedIndex = -1;
@@ -79,7 +96,8 @@ public class MachinePlacement : MonoBehaviour
 
     void PlaceMachine(Transform placePos)
     {
-        Instantiate(_machinePrefabs[_selectedIndex], placePos);
+        GameObject spawnedMachine = Instantiate(_machinePrefabs[_selectedIndex], placePos);
+        spawnedMachine.transform.position = _placementOffset;
 
         _selectedPrefab = null;
         _selectedIndex = -1;

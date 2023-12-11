@@ -5563,7 +5563,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 800, y: 250}
+  m_SizeDelta: {x: 500, y: 250}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &271416821
 MonoBehaviour:
@@ -37780,7 +37780,7 @@ MonoBehaviour:
   _resourcePositions: []
   _resourceIndex: 
   _minResourceDistance: 12
-  _amountToSpawn: 5000
+  _amountToSpawn: 500
   _randomPos: {x: 0, y: 0, z: 0}
   _randomRot: {x: 0, y: 0, z: 0}
   _randomResourceIndex: 0
@@ -42218,6 +42218,7 @@ MonoBehaviour:
   _jumpForce: 6
   _maxJumpTime: 0.3
   _isJumpTime: 0
+  _jumpTimer: 0
   _crouchUp: 0
   _walkSpeed: 7
   _runSpeed: 12
@@ -42744,6 +42745,7 @@ MonoBehaviour:
   _machineBlueprintPrefabs:
   - {fileID: 2802134608837746400, guid: d0ce1168123c3b14da6e62a86462cbc1, type: 3}
   _placementRange: 15
+  _placementOffset: {x: 0, y: 0, z: 0}
   _placementMask:
     serializedVersion: 2
     m_Bits: 128

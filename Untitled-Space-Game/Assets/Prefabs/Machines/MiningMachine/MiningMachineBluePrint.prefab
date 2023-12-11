@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 2573680648961385684}
   - component: {fileID: 5683988990747866929}
   - component: {fileID: 2526234201680394606}
-  - component: {fileID: 8076956960007390403}
   m_Layer: 0
   m_Name: Digger
   m_TagString: Untagged
@@ -140,26 +139,3 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &8076956960007390403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4971084397824814477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a390f7a32e28ec448abefbeb745878e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectedResource: {fileID: 0}
-  isDigging: 0
-  miningRange: 3
-  resourceLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  itemSlot: {fileID: 0}
-  fuelSlot: {fileID: 0}
-  _inventoryItemPrefab: {fileID: 4589494901010836183, guid: 3e6c481d9fc7a8f4cbf901e368c8fff2,
-    type: 3}
-  fuelLeftSlider: {fileID: 0}
