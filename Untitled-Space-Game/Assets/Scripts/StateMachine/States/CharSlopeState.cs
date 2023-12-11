@@ -29,15 +29,18 @@ public class CharSlopeState : CharBaseState
             Ctx.MoveMultiplier = 2f;
         }
 
-        if (Ctx.Rb.velocity.y > 0 || Ctx.Rb.velocity.y > 0)
-        {
-            Ctx.Rb.AddForce(Vector3.down * 80f, ForceMode.Force);
-        }
+
     }
 
     public override void FixedUpdateState()
     {
         CheckSwitchStates();
+
+        if (Ctx.Rb.velocity.y > 0 && !Ctx.IsExitingSlope && Ctx.JumpTimer == 0)
+        {
+            Debug.Log("downing force on your mom");
+            Ctx.Rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+        }
     }
 
     public override void LateUpdateState() { }
@@ -66,13 +69,14 @@ public class CharSlopeState : CharBaseState
         {
             SwitchState(Factory.Grounded());
         }
+        else if (Ctx.IsJump)
+        {
+            Ctx.IsExitingSlope = true;
+            SwitchState(Factory.Jump());
+        }
         else if (!Ctx.IsGrounded && !Ctx.IsSloped)
         {
             SwitchState(Factory.Fall());
-        }
-        else if (Ctx.IsJump)
-        {
-            SwitchState(Factory.Jump());
         }
     }
 }

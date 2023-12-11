@@ -45,8 +45,8 @@ public class ThirdPersonCam : MonoBehaviour
 
     void Update()
     {
-        Vector3 viewDir = _player.position - new Vector3(transform.position.x, _player.position.y, transform.position.z);
-        _orientation.forward = viewDir.normalized;
+        // Vector3 viewDir = _player.position - new Vector3(transform.position.x, _player.position.y, transform.position.z);
+        _orientation.forward = _playerObj.forward.normalized;
 
         float mouseY = _stateMachine.IsCam.y * _mouseSensitivity;
         float mouseX = _stateMachine.IsCam.x * _mouseSensitivity;

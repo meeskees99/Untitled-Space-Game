@@ -291,6 +291,13 @@ public class CharStateMachine : MonoBehaviour
         set { _isJumpTime = value; }
     }
 
+    [SerializeField] float _jumpTimer;
+    public float JumpTimer
+    {
+        get { return _jumpTimer; }
+        set { _jumpTimer = value; }
+    }
+
     #endregion
 
     [Header("Crouching")]
@@ -500,9 +507,17 @@ public class CharStateMachine : MonoBehaviour
         CurrentMovement = (Orientation.forward * CurrentMovementInput.y).normalized + (Orientation.right * CurrentMovementInput.x).normalized;
 
         // PlayerAnimator.SetBool("OnGround", IsGrounded);
+        if (_isJumpTime >= 0)
+        {
+            _isGrounded = CheckGrounded();
+            _isSloped = CheckSloped();
+        }
+        else
+        {
+            _isGrounded = false;
+            _isSloped = false;
+        }
 
-        _isGrounded = CheckGrounded();
-        _isSloped = CheckSloped();
         _crouchUp = CheckCrouchUp();
 
         if (_decreaseStamina)

@@ -55,11 +55,11 @@ public class CharJumpState : CharBaseState
 
     public override void CheckSwitchStates()
     {
-        if (Ctx.IsGrounded)
+        if (Ctx.IsGrounded && Ctx.JumpTimer >= 0)
         {
             SwitchState(Factory.Grounded());
         }
-        else if (Ctx.IsSloped)
+        else if (Ctx.IsSloped && Ctx.JumpTimer >= 0)
         {
             SwitchState(Factory.Sloped());
         }
@@ -71,19 +71,22 @@ public class CharJumpState : CharBaseState
 
     void HandleJump()
     {
+        Debug.Log("jump");
         Ctx.Rb.velocity = new Vector3(Ctx.Rb.velocity.x, 0f, Ctx.Rb.velocity.z);
         Ctx.Rb.AddForce(Vector3.up * Ctx.JumpForce, ForceMode.Impulse);
     }
 
+
+
     void HandleJumpTime()
     {
-        if (Ctx.IsJumpTime > 0)
+        if (Ctx.JumpTimer < Ctx.IsJumpTime)
         {
-            Ctx.IsJumpTime -= Time.deltaTime;
+            Ctx.JumpTimer += Time.deltaTime;
         }
-        else
+        else if (Ctx.JumpTimer >= Ctx.IsJumpTime)
         {
-            Ctx.IsJumpTime = 0;
+            Ctx.JumpTimer = 0;
         }
     }
 }
