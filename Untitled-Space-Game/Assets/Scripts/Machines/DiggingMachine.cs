@@ -5,65 +5,59 @@ using UnityEngine.UI;
 
 public class DiggingMachine : MonoBehaviour
 {
-    [SerializeField] Resource collectedResource;
-    [SerializeField] bool isDigging;
+    [SerializeField] Resource _collectedResource;
+    [SerializeField] bool _isDigging;
 
     [Header("Miner Settings")]
-    [SerializeField] float miningRange = 3f;
-    [SerializeField] LayerMask resourceLayer;
+    [SerializeField] float _miningRange = 3f;
+    [SerializeField] LayerMask _resourceLayer;
 
     [Header("MinerInventory")]
-    [SerializeField] InventorySlot itemSlot;
-    [SerializeField] InventorySlot fuelSlot;
+    [SerializeField] InventorySlot _itemSlot;
+    [SerializeField] InventorySlot _fuelSlot;
     [SerializeField] GameObject _inventoryItemPrefab;
     public Slider fuelLeftSlider;
 
-    float currentMineProgression;
+    float _currentMineProgression;
+
+    public InventorySlot ItemSlot { get { return _itemSlot; } set { _itemSlot = value; } }
+    public InventorySlot FuelSlot { get { return _fuelSlot; } set { _fuelSlot = value; } }
 
     private void Start()
     {
-        if (collectedResource == null)
+
+        if (_collectedResource == null)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, miningRange, resourceLayer))
-            {
-                collectedResource = hit.transform.GetComponent<ResourceVein>().Resource;
-                currentMineProgression = collectedResource.mineDuration;
-            }
+            _collectedResource = GetComponentInParent<ResourceVein>().Resource;
         }
-        InGameUIManager.Instance.SetMinerUIInfo();
+        MiningPanelManager.Instance.SetDiggerInfo(this);
     }
 
 
     void Update()
     {
-        if (collectedResource == null)
+        if (_collectedResource == null)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, miningRange, resourceLayer))
-            {
-                collectedResource = hit.transform.GetComponent<ResourceVein>().Resource;
-                currentMineProgression = collectedResource.mineDuration;
-            }
+            Debug.LogError("Miner Has No Resource To Gather!");
         }
         else
         {
-            if (itemSlot.GetInventoryItem() != null)
+            if (_itemSlot.GetInventoryItem() != null)
             {
-                if (itemSlot.GetInventoryItem().count >= itemSlot.GetInventoryItem().item.maxStack)
+                if (_itemSlot.GetInventoryItem().count >= _itemSlot.GetInventoryItem().item.maxStack)
                 {
                     Debug.Log("Item Has Reached Max Stack! Remove It To Continue");
                     return;
                 }
             }
-            if (currentMineProgression > 0)
+            if (_currentMineProgression > 0)
             {
-                bool result = fuelSlot.HandleFuel();
-                isDigging = result;
-                if (fuelSlot.GetInventoryItem() != null)
+                bool result = _fuelSlot.HandleFuel();
+                _isDigging = result;
+                if (_fuelSlot.GetInventoryItem() != null)
                 {
                     if (fuelLeftSlider != null)
-                        fuelLeftSlider.maxValue = fuelSlot.GetInventoryItem().item.fuelTime;
+                        fuelLeftSlider.maxValue = _fuelSlot.GetInventoryItem().item.fuelTime;
                     else
                     {
                         InGameUIManager.Instance.SetMinerUIInfo();
@@ -72,9 +66,9 @@ public class DiggingMachine : MonoBehaviour
 
                 if (result)
                 {
-                    currentMineProgression -= Time.deltaTime;
+                    _currentMineProgression -= Time.deltaTime;
                     if (fuelLeftSlider != null)
-                        fuelLeftSlider.value = fuelSlot.fuelLeft;
+                        fuelLeftSlider.value = _fuelSlot.fuelLeft;
                     else
                     {
                         InGameUIManager.Instance.SetMinerUIInfo();
@@ -82,17 +76,17 @@ public class DiggingMachine : MonoBehaviour
                 }
                 else
                 {
-                    if (currentMineProgression < 0.05)
+                    if (_currentMineProgression < 0.05)
                     {
-                        currentMineProgression = 0;
+                        _currentMineProgression = 0;
                     }
                 }
             }
-            else if (currentMineProgression <= 0)
+            else if (_currentMineProgression <= 0)
             {
                 AddMachineItem();
             }
-            else if (currentMineProgression < 0)
+            else if (_currentMineProgression < 0)
             {
                 Debug.LogError("Machine Has No Fuel AND Is Not Trying To Mine");
             }
@@ -101,24 +95,24 @@ public class DiggingMachine : MonoBehaviour
 
     public void AddMachineItem()
     {
-        if (itemSlot.GetInventoryItem() != null)
+        if (_itemSlot.GetInventoryItem() != null)
         {
-            itemSlot.GetInventoryItem().count += collectedResource.recourceAmount;
-            itemSlot.GetInventoryItem().RefreshCount();
+            _itemSlot.GetInventoryItem().count += _collectedResource.recourceAmount;
+            _itemSlot.GetInventoryItem().RefreshCount();
         }
         else
         {
-            SpawnMachineItem(collectedResource.item, collectedResource.recourceAmount);
+            SpawnMachineItem(_collectedResource.item, _collectedResource.recourceAmount);
         }
-        currentMineProgression = collectedResource.mineDuration;
+        _currentMineProgression = _collectedResource.mineDuration;
     }
 
     public void SpawnMachineItem(Item item, int amount)
     {
-        GameObject newItemGO = Instantiate(_inventoryItemPrefab, itemSlot.transform);
-        itemSlot.SetInventoryItem(newItemGO.GetComponent<InventoryItem>());
+        GameObject newItemGO = Instantiate(_inventoryItemPrefab, _itemSlot.transform);
+        _itemSlot.SetInventoryItem(newItemGO.GetComponent<InventoryItem>());
 
-        itemSlot.GetInventoryItem().count = amount;
-        itemSlot.GetInventoryItem().InitializeItem(item);
+        _itemSlot.GetInventoryItem().count = amount;
+        _itemSlot.GetInventoryItem().InitializeItem(item);
     }
 }

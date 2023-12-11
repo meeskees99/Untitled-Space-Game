@@ -804,23 +804,32 @@ public class CharStateMachine : MonoBehaviour
             if (_interactableHit.transform.GetComponent<DroppedItem>())
             {
                 DroppedItem droppedItem = _interactableHit.transform.GetComponent<DroppedItem>();
-                _interactableTxt.text = "Press (E) to pick up " + droppedItem.amount + " " +
-                droppedItem.item.name;
+                _interactableTxt.text = "Press (E) to pick up " + droppedItem._amount + " " +
+                droppedItem._item.name;
                 _InteractPanel.SetActive(true);
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    if (InventoryManager.Instance.HasSpace(droppedItem.item.itemID, droppedItem.amount))
+                    if (InventoryManager.Instance.HasSpace(droppedItem._item.itemID, droppedItem._amount))
                     {
-                        InventoryManager.Instance.AddItem(droppedItem.item.itemID, droppedItem.amount);
+                        InventoryManager.Instance.AddItem(droppedItem._item.itemID, droppedItem._amount);
                         Destroy(droppedItem.gameObject);
-                        Debug.Log($"Pressed E To Pick Up {droppedItem.amount} {droppedItem.item}");
+                        Debug.Log($"Pressed E To Pick Up {droppedItem._amount} {droppedItem._item}");
                     }
                     else
                     {
-                        Debug.Log($"[NO SPACE] Pressed E To Pick Up {droppedItem.amount} {droppedItem.item}, but had no room in inventory");
+                        Debug.Log($"[NO SPACE] Pressed E To Pick Up {droppedItem._amount} {droppedItem._item}, but had no room in inventory");
                     }
 
+                }
+            }
+            else if (_interactableHit.transform.GetComponent<DiggingMachine>())
+            {
+                _interactableTxt.text = "Press (E) to open miner";
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    MiningPanelManager.Instance.ToggleMiningPanel(_interactableHit.transform.GetComponent<DiggingMachine>());
+                    Debug.Log($"Pressed E To Open Mining Panel");
                 }
             }
         }

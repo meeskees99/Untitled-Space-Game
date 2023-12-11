@@ -5,33 +5,50 @@ using UnityEngine;
 
 public class DroppedItem : MonoBehaviour
 {
-    public Item item;
-    public int amount;
+    public Item _item;
+    public int _amount;
 
-    [SerializeField] float pickUpDelay = 1.5f;
+    [SerializeField] float _pickUpDelay = 1.5f;
+    [SerializeField] float _rotationSpeed;
+    [SerializeField] float _floatAmount;
 
-    bool canPickup;
+    bool _canPickup;
+
+    Transform _child;
+
+    GameObject _lastCollidedObject;
+
+    private void Start()
+    {
+        _child = GetComponentInChildren<Transform>();
+    }
 
     private void Update()
     {
-        if (pickUpDelay > 0)
+        if (_pickUpDelay > 0)
         {
-            pickUpDelay -= Time.deltaTime;
+            _pickUpDelay -= Time.deltaTime;
         }
         else
         {
-            canPickup = true;
+            _canPickup = true;
+            if (_lastCollidedObject != null && _lastCollidedObject.GetComponent<CharStateMachine>())
+            {
+                InventoryManager.Instance.AddItem(_item.itemID, _amount);
+                Destroy(gameObject);
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        print("On Enter Collided With " + other.gameObject.name);
-        if (other.GetComponentInParent<CharStateMachine>() && canPickup)
+        _lastCollidedObject = other.gameObject;
+        print("On Enter Triggered With " + other.gameObject.name);
+        if (other.GetComponentInParent<CharStateMachine>() && _canPickup)
         {
-            if (InventoryManager.Instance.HasSpace(item.itemID, amount))
+            if (InventoryManager.Instance.HasSpace(_item.itemID, _amount))
             {
-                InventoryManager.Instance.AddItem(item.itemID, amount);
+                InventoryManager.Instance.AddItem(_item.itemID, _amount);
                 Destroy(gameObject);
             }
             else
@@ -41,12 +58,16 @@ public class DroppedItem : MonoBehaviour
         }
         else if (other.GetComponent<DroppedItem>())
         {
-            if (other.GetComponent<DroppedItem>().item == item)
+            if (other.GetComponent<DroppedItem>()._item == _item)
             {
-                amount += other.GetComponent<DroppedItem>().amount;
+                _amount += other.GetComponent<DroppedItem>()._amount;
                 Destroy(other.gameObject);
                 Debug.Log("Merged Two Dropped Items Together");
             }
         }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        _lastCollidedObject = null;
     }
 }

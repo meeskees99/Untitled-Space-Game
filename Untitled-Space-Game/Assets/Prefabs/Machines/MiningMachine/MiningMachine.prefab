@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 5683988990747866929}
   - component: {fileID: 2526234201680394606}
   - component: {fileID: 8076956960007390403}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Digger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,14 +152,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a390f7a32e28ec448abefbeb745878e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectedResource: {fileID: 0}
-  isDigging: 0
-  miningRange: 3
-  resourceLayer:
+  _collectedResource: {fileID: 0}
+  _isDigging: 0
+  _miningRange: 3
+  _resourceLayer:
     serializedVersion: 2
-    m_Bits: 128
-  itemSlot: {fileID: 0}
-  fuelSlot: {fileID: 0}
+    m_Bits: 0
+  _itemSlot: {fileID: 0}
+  _fuelSlot: {fileID: 0}
   _inventoryItemPrefab: {fileID: 4589494901010836183, guid: 3e6c481d9fc7a8f4cbf901e368c8fff2,
     type: 3}
   fuelLeftSlider: {fileID: 0}

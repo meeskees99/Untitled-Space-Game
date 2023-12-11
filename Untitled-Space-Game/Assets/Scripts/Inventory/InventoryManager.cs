@@ -134,7 +134,7 @@ public class InventoryManager : MonoBehaviour
         //Check for empty Slot
         for (int i = 0; i < inventorySlots.Count; i++)
         {
-            if (inventorySlots[i].isHudSlot && !itemToSpawn.canBeInHudSlot)
+            if (inventorySlots[i].isHudSlot && !itemToSpawn.canBeInHudSlot && !itemToSpawn.isPlacable)
             {
                 Debug.Log("Can't Spawn This Item Here As it Is BlackListed");
                 DropItem(itemId, amount);
@@ -251,8 +251,8 @@ public class InventoryManager : MonoBehaviour
             {
                 itemToDrop = _allItems[i];
                 GameObject droppedItem = Instantiate(itemToDrop.itemPrefab, player.transform.position, Quaternion.identity);
-                droppedItem.transform.GetComponent<DroppedItem>().item = itemToDrop;
-                droppedItem.transform.GetComponent<DroppedItem>().amount = amount;
+                droppedItem.transform.GetComponent<DroppedItem>()._item = itemToDrop;
+                droppedItem.transform.GetComponent<DroppedItem>()._amount = amount;
                 Debug.Log($"Succesfully Dropped {amount} {itemToDrop}.");
             }
         }

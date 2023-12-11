@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1a1f391d27ae743843c3d422cfa505, type: 3}
   m_Name: Miner
   m_EditorClassIdentifier: 
-  itemToCraft: {fileID: 0}
-  itemsNeeded: []
-  amountToCraft: 0
+  itemToCraft: {fileID: 11400000, guid: f93fc59c24986be4390d898a56ebaec8, type: 2}
+  itemsNeeded:
+  - item: {fileID: 11400000, guid: a4685f8f3dc23a4448eafa43274fb0d3, type: 2}
+    amount: 5
+  amountToCraft: 1

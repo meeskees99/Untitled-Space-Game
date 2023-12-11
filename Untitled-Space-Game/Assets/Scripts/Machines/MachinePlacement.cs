@@ -12,7 +12,7 @@ public class MachinePlacement : MonoBehaviour
     [Header("Settings")]
     [SerializeField] float _placementRange;
     [SerializeField] Vector3 _placementOffset;
-    [SerializeField] LayerMask _placementMask;
+    [SerializeField] string _placementLayerName;
     [SerializeField] Color _canPlaceColor;
     [SerializeField] Color _cantPlaceColor;
 
@@ -40,7 +40,7 @@ public class MachinePlacement : MonoBehaviour
                 {
                     _spawnedBlueprint = Instantiate(_machineBlueprintPrefabs[_selectedIndex]);
                 }
-                if (_hit.transform.gameObject.layer == LayerMask.NameToLayer("Resource"))
+                if (_hit.transform.gameObject.layer == LayerMask.NameToLayer(_placementLayerName))
                 {
                     // TODO - make the thing turn blue
                     _spawnedBlueprint.transform.position = _hit.transform.position;
@@ -54,7 +54,7 @@ public class MachinePlacement : MonoBehaviour
                 else
                 {
                     // TODO - make the thing turn red
-                    _spawnedBlueprint.transform.position = _hit.point;
+                    _spawnedBlueprint.transform.position = _hit.point + _placementOffset;
                     _spawnedBlueprint.transform.GetComponentInChildren<MeshRenderer>().material.color = _cantPlaceColor;
                     if (Input.GetKeyDown(KeyCode.Mouse0))
                     {
@@ -97,7 +97,7 @@ public class MachinePlacement : MonoBehaviour
     void PlaceMachine(Transform placePos)
     {
         GameObject spawnedMachine = Instantiate(_machinePrefabs[_selectedIndex], placePos);
-        spawnedMachine.transform.position = _placementOffset;
+        spawnedMachine.transform.localPosition = _placementOffset;
 
         _selectedPrefab = null;
         _selectedIndex = -1;

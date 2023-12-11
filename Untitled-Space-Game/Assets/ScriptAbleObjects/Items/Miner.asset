@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Miner
   m_EditorClassIdentifier: 
   itemID: 1001
-  itemPrefab: {fileID: 2802134608837746400, guid: c80958d8b6fbe42418d1cdfa8b488c43,
+  itemPrefab: {fileID: 2802134608837746400, guid: fd2b532f94c14734ab26885ff3ff51d0,
     type: 3}
   stackable: 0
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 3b8db7241fc8ff54e9dea6fc64cfd7e5, type: 3}
   maxStack: 1
   canBeInHudSlot: 0
   isTool: 0

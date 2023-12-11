@@ -78,12 +78,7 @@ public class InGameUIManager : MonoBehaviour
     {
         if (_miningPanel.gameObject.activeInHierarchy)
         {
-            DiggingMachine[] diggingMachines = FindObjectsOfType<DiggingMachine>();
-            foreach (var digger in diggingMachines)
-            {
-                if (digger.fuelLeftSlider == null)
-                    digger.fuelLeftSlider = _fuelLeftSlider;
-            }
+            //
         }
     }
 
