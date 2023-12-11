@@ -9,41 +9,33 @@ public class KeyRebinding : MonoBehaviour
 {
     [SerializeField] CharStateMachine _charController;
 
-    [SerializeField] InputActionReference[] _inputActionReferences; //this is on the SO
+    [SerializeField] InputActionReference[] _inputActionReferences;
 
     [SerializeField] bool _excludeMouse = true;
 
     [SerializeField] int _selectedBindingBtn;
 
-    [SerializeField] InputBinding.DisplayStringOptions displayStringOptions;
+    [SerializeField] InputBinding.DisplayStringOptions _displayStringOptions;
+
     [Header("Binding Info - DO NOT EDIT")]
 
-    [SerializeField] InputBinding inputBinding;
-
-    private int bindingIndex;
+    private int _bindingIndex;
 
     [SerializeField] string[] _actionName;
 
     [Header("UI Fields")]
-    // [SerializeField] TMP_Text actionText;
     [SerializeField] TMP_Text[] _rebindText;
-
-    [SerializeField] TMP_Text[] compositeRebindText;
-
-    // [SerializeField] Button[] rebindButton;
-    // [SerializeField] Button resetButton;
 
     private void OnEnable()
     {
         if (_charController != null)
         {
-            print(_charController);
             for (int i = 0; i < _actionName.Length; i++)
             {
                 KeyRebindingUI.LoadBindingOverride(_actionName[i]);
             }
-            GetBindingInfo();
-            UpdateUI();
+            // GetBindingInfo();
+            // UpdateUI();
         }
 
         KeyRebindingUI.rebindComplete += UpdateUI;
@@ -59,122 +51,89 @@ public class KeyRebinding : MonoBehaviour
     private void OnValidate()
     {
         if (_charController == null)
-            return;
-
-        GetBindingInfo();
-        UpdateUI();
-    }
-
-    private void GetBindingInfo()
-    {
-        for (int i = 0; i < _inputActionReferences.Length; i++)
         {
-            if (_inputActionReferences[i].action != null)
-                _actionName[i] = _inputActionReferences[i].action.name;
-
-            if (_inputActionReferences[i].action.bindings.Count > _selectedBindingBtn)
-            {
-                inputBinding = _inputActionReferences[i].action.bindings[_selectedBindingBtn];
-                bindingIndex = _selectedBindingBtn;
-            }
+            return;
         }
 
+        // GetBindingInfo();
+        // UpdateUI();
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown("o"))
+        {
+            UpdateUI();
+        }
+    }
+
+    // private void GetBindingInfo()
+    // {
+    //     for (int i = 0; i < _inputActionReferences.Length; i++)
+    //     {
+    //         if (_inputActionReferences[i].action != null)
+    //         {
+    //             _actionName[i] = _inputActionReferences[i].action.name;
+    //         }
+    //         if (_inputActionReferences[i].action.bindings.Count > _selectedBindingBtn)
+    //         {
+    //             _inputBinding = _inputActionReferences[i].action.bindings[_selectedBindingBtn];
+    //             _bindingIndex = _selectedBindingBtn;
+    //         }
+    //     }
+    // }
 
     private void UpdateUI()
     {
-        // if (actionText != null)
-        //     actionText.text = actionName;
-
-        bool allchecked = false;
-        for (int i = 0; i <= _actionName.Length - 1; i++)
-        {
-            if (allchecked)
-            {
-                break;
-            }
-            if (i < _actionName.Length - 1)
-            {
-                if (_actionName[i] == _actionName[i + 1])
-                {
-                    int firstindex = i;
-
-                    Debug.Log("Is composite: " + firstindex);
-
-
-                    for (int j = firstindex; j < _actionName.Length - 1; j++)
-                    {
-                        if ((j + 1) != _actionName.Length - 1)
-                        {
-                            // Debug.Log(j + " " + _actionName.Length);
-                            if (_actionName[firstindex] == _actionName[j + 1])
-                            {
-                                // TODO - do the thing
-                                Debug.Log("Is part of composite: " + (j + 1) + " with: " + firstindex);
-
-                                // if ((j + 1) == )
-                            }
-                            else
-                            {
-                                if (_actionName[j + 1] == _actionName[j + 2])
-                                {
-                                    int nextindex = (j + 1);
-                                    firstindex = nextindex;
-                                    Debug.Log("Is composite: " + (j + 1));
-                                }
-                                else
-                                {
-                                    Debug.Log("Not a composite: " + (j + 1));
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (_actionName[firstindex] == _actionName[j + 1])
-                            {
-                                Debug.Log("Is part of composite: " + (j + 1) + " with: " + firstindex + " last");
-                                allchecked = true;
-                                break;
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    Debug.Log("Not a composite");
-                }
-            }
-            // else if (i == _actionName.Length - 1)
-            // {
-            //     if (_actionName[i] == _actionName[i - 1])
-            //     {
-            //         // TODO - do the thing
-            //         Debug.Log("Is part composite: " + i);
-            //     }
-            //     else
-            //     {
-            //         Debug.Log("Not a composite: " + i + " with: " + (i + 1));
-            //     }
-            // }
-        }
-
-
         for (int i = 0; i < _rebindText.Length; i++)
         {
             if (_rebindText != null)
             {
                 if (Application.isPlaying)
                 {
-                    print(_actionName);
-                    print(_charController);
-                    print(bindingIndex + " bindingIndex");
-                    _rebindText[i].text = KeyRebindingUI.GetBindingName(_actionName[i], bindingIndex);
+                    _rebindText[i].text = KeyRebindingUI.GetBindingName(_actionName[i], GetCorrectBinding(i, _actionName[i]));
                 }
-                else
-                    _rebindText[i].text = _inputActionReferences[i].action.GetBindingDisplayString(bindingIndex);
+                // else
+                // {
+                //     // _rebindText[i].text = _inputActionReferences[i].action.GetBindingDisplayString(_bindingIndex);
+                // }
 
             }
         }
+    }
+
+    int GetCorrectBinding(int IncorrectBinding, string bindingName)
+    {
+        Debug.Log("Incorrect Binding: " + IncorrectBinding);
+        InputAction action = _charController.PlayerInput.actions.FindAction(_actionName[IncorrectBinding]);
+
+        if (action.bindings[0].isComposite)
+        {
+            InputAction action2 = _charController.PlayerInput.actions.FindAction(_actionName[IncorrectBinding - 1]);
+            if (action2.bindings[0].isComposite)
+            {
+
+            }
+        }
+
+        // MAYBE SOMETHING LIKE THIS IDK YET ALMOST DONE THO :)
+
+        // for (int i = 0; i < _actionName.Length; i++)
+        // {
+        //     if (_actionName[i])
+        //         if (_actionName[i] == bindingName)
+        //         {
+        //             if (index == IncorrectBinding)
+        //             {
+        //                 index = (i - index * 2);
+        //                 Debug.Log(IncorrectBinding + bindingName + index);
+        //                 return index;
+        //             }
+        //             index++;
+        //         }
+        // }
+        Debug.Log(IncorrectBinding + bindingName + 0);
+        return 0;
     }
 
     public void DoRebind(int btnIndex)
@@ -184,11 +143,11 @@ public class KeyRebinding : MonoBehaviour
 
     public void GetBtnIndex(int btnIndex)
     {
-        bindingIndex = btnIndex;
+        _bindingIndex = btnIndex;
     }
     public void DoCompositeRebind(string actionName)
     {
-        KeyRebindingUI.StartRebind(actionName, bindingIndex, compositeRebindText[bindingIndex], _excludeMouse);
+        KeyRebindingUI.StartRebind(actionName, _bindingIndex, _rebindText[GetCorrectBinding(_bindingIndex, actionName)], _excludeMouse);
     }
 
     public void ResetBinding(int btnIndex)
@@ -201,5 +160,13 @@ public class KeyRebinding : MonoBehaviour
     {
         KeyRebindingUI.ResetBinding(actionName, btnIndex);
         UpdateUI();
+    }
+
+    public void SaveBindings()
+    {
+        for (int i = 0; i < _inputActionReferences.Length; i++)
+        {
+            KeyRebindingUI.SaveBindingOverride(_inputActionReferences[i]);
+        }
     }
 }
