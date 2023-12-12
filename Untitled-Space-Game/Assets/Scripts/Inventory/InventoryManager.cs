@@ -16,6 +16,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] InventorySlot[] _miningSlots;
 
     [SerializeField] GameObject _inventoryItemPrefab;
+    public GameObject InventoryItemPrefab { get { return _inventoryItemPrefab; } }
 
     int selectedSlot = -1;
 

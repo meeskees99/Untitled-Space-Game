@@ -12,6 +12,8 @@ public class MiningPanelManager : MonoBehaviour
     public InventorySlot fuelSlot;
     public Slider fuelLeftSlider;
 
+    public DiggingMachine currentDigger;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,13 +38,14 @@ public class MiningPanelManager : MonoBehaviour
     {
         Destroy(itemSlot.GetInventoryItem());
         Destroy(fuelSlot.GetInventoryItem());
-        if (diggingMachine.ItemSlot.GetInventoryItem() != null)
-        {
-            diggingMachine.AddMachineItem();
-            fuelSlot.AddItemToSlot(diggingMachine.FuelSlot.GetInventoryItem());
-            miningPanel.GetComponent<Canvas>().enabled = !miningPanel.GetComponent<Canvas>().enabled;
-            miningPanel.GetComponent<GraphicRaycaster>().enabled = !miningPanel.GetComponent<Canvas>().enabled;
-        }
 
+        if (diggingMachine.ItemType != null)
+            diggingMachine.AddMachineItem(false);
+        if (diggingMachine.FuelType != null)
+            diggingMachine.AddMachineItem(true, diggingMachine.FuelType);
+
+        miningPanel.GetComponent<Canvas>().enabled = !miningPanel.GetComponent<Canvas>().enabled;
+        miningPanel.GetComponent<GraphicRaycaster>().enabled = !miningPanel.GetComponent<GraphicRaycaster>().enabled;
+        currentDigger = diggingMachine;
     }
 }

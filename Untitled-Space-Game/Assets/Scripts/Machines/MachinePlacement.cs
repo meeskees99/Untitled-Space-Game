@@ -32,7 +32,7 @@ public class MachinePlacement : MonoBehaviour
     }
     void Update()
     {
-        if (_selectedIndex >= 0)
+        if (_selectedPrefab != null)
         {
             if (Physics.Raycast(_shootPos.position, _shootPos.forward, out _hit, _placementRange))
             {
@@ -87,10 +87,12 @@ public class MachinePlacement : MonoBehaviour
         if (machineIndex < 0)
         {
             _selectedIndex = -1;
+            _selectedPrefab = null;
         }
         else
         {
             _selectedIndex = machineIndex;
+            _selectedPrefab = _machinePrefabs[_selectedIndex];
         }
     }
 

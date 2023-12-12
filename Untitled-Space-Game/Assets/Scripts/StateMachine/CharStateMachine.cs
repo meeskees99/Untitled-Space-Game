@@ -418,6 +418,9 @@ public class CharStateMachine : MonoBehaviour
     [SerializeField] float _interactableRange;
     [SerializeField] LayerMask _interactableMask;
 
+    [SerializeField] bool _didUiInteraction;
+    public bool DidUiInteraction { get { return _didUiInteraction; } private set { _didUiInteraction = value; } }
+
 
     #endregion
 
@@ -825,17 +828,30 @@ public class CharStateMachine : MonoBehaviour
             }
             else if (_interactableHit.transform.GetComponent<DiggingMachine>())
             {
-                _interactableTxt.text = "Press (E) to open miner";
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     MiningPanelManager.Instance.ToggleMiningPanel(_interactableHit.transform.GetComponent<DiggingMachine>());
+                    _InteractPanel.SetActive(_InteractPanel.activeSelf);
+                    _didUiInteraction = !_didUiInteraction;
                     Debug.Log($"Pressed E To Open Mining Panel");
+                }
+                if (!_didUiInteraction)
+                {
+                    _interactableTxt.text = "Press (E) to open miner";
+                    _InteractPanel.SetActive(true);
+
+                }
+                else
+                {
+                    _interactableTxt.text = "";
+                    _InteractPanel.SetActive(false);
+
                 }
             }
         }
         else
         {
-            // _InteractPanel.SetActive(false);
+            _InteractPanel.SetActive(false);
         }
     }
 

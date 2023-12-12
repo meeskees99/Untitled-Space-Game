@@ -7,6 +7,10 @@ public class DiggingMachine : MonoBehaviour
 {
     [SerializeField] Resource _collectedResource;
     [SerializeField] bool _isDigging;
+    [SerializeField] Item _itemType;
+    [SerializeField] int _itemAmount;
+    [SerializeField] Item _fuelType;
+    [SerializeField] int _fuelAmount;
 
     [Header("Miner Settings")]
     [SerializeField] float _miningRange = 3f;
@@ -15,13 +19,14 @@ public class DiggingMachine : MonoBehaviour
     [Header("MinerInventory")]
     [SerializeField] InventorySlot _itemSlot;
     [SerializeField] InventorySlot _fuelSlot;
-    [SerializeField] GameObject _inventoryItemPrefab;
     public Slider fuelLeftSlider;
 
     float _currentMineProgression;
 
     public InventorySlot ItemSlot { get { return _itemSlot; } set { _itemSlot = value; } }
     public InventorySlot FuelSlot { get { return _fuelSlot; } set { _fuelSlot = value; } }
+    public Item FuelType { get { return _fuelType; } set { _fuelType = value; } }
+    public Item ItemType { get { return _itemType; } set { _itemType = value; } }
 
     private void Start()
     {
@@ -82,9 +87,9 @@ public class DiggingMachine : MonoBehaviour
                     }
                 }
             }
-            else if (_currentMineProgression <= 0)
+            else if (_currentMineProgression <= 0 && _fuelSlot.fuelLeft > 0)
             {
-                AddMachineItem();
+                AddMachineItem(false);
             }
             else if (_currentMineProgression < 0)
             {
@@ -93,26 +98,72 @@ public class DiggingMachine : MonoBehaviour
         }
     }
 
-    public void AddMachineItem()
+    public void AddMachineItem(bool isFuel, Item item = null, int amount = 0)
     {
-        if (_itemSlot.GetInventoryItem() != null)
+        if (!isFuel)
         {
-            _itemSlot.GetInventoryItem().count += _collectedResource.recourceAmount;
-            _itemSlot.GetInventoryItem().RefreshCount();
+            if (amount > 0)
+            {
+                SpawnMachineItem(item, amount);
+
+            }
+            else if (_itemSlot.GetInventoryItem() != null)
+            {
+                _itemSlot.GetInventoryItem().count += _collectedResource.recourceAmount;
+                _itemSlot.GetInventoryItem().RefreshCount();
+            }
+            else
+            {
+                SpawnMachineItem(_collectedResource.item, _collectedResource.recourceAmount);
+            }
+            _currentMineProgression = _collectedResource.mineDuration;
         }
         else
         {
-            SpawnMachineItem(_collectedResource.item, _collectedResource.recourceAmount);
+            if (amount > 0)
+            {
+                SpawnMachineFuel(item, amount);
+            }
+            else if (_fuelSlot.GetInventoryItem() != null && _fuelSlot.GetInventoryItem() == item)
+            {
+                _fuelSlot.GetInventoryItem().count += _collectedResource.recourceAmount;
+                _fuelSlot.GetInventoryItem().RefreshCount();
+            }
+            else
+            {
+                SpawnMachineFuel(item, _fuelAmount);
+            }
+            _currentMineProgression = _collectedResource.mineDuration;
         }
-        _currentMineProgression = _collectedResource.mineDuration;
+
     }
 
     public void SpawnMachineItem(Item item, int amount)
     {
-        GameObject newItemGO = Instantiate(_inventoryItemPrefab, _itemSlot.transform);
+        GameObject newItemGO = Instantiate(InventoryManager.Instance.InventoryItemPrefab, _itemSlot.transform);
         _itemSlot.SetInventoryItem(newItemGO.GetComponent<InventoryItem>());
 
         _itemSlot.GetInventoryItem().count = amount;
         _itemSlot.GetInventoryItem().InitializeItem(item);
+        _itemType = item;
+        _itemAmount = _itemSlot.GetInventoryItem().count;
+    }
+
+    void SpawnMachineFuel(Item item, int amount)
+    {
+        GameObject newItemGO = Instantiate(InventoryManager.Instance.InventoryItemPrefab, _fuelSlot.transform);
+        _fuelSlot.SetInventoryItem(newItemGO.GetComponent<InventoryItem>());
+
+        _fuelSlot.GetInventoryItem().count = amount;
+        _fuelSlot.GetInventoryItem().InitializeItem(item);
+        InitializeFuelType();
+    }
+
+    public void InitializeFuelType()
+    {
+        _fuelSlot.SetInventoryItem(_fuelSlot.transform.GetChild(0).GetComponent<InventoryItem>());
+        _fuelType = _fuelSlot.GetInventoryItem().item;
+        _fuelAmount = _fuelSlot.GetInventoryItem().count;
+        Debug.Log("Initialized fuel type: " + _fuelAmount + _fuelType);
     }
 }

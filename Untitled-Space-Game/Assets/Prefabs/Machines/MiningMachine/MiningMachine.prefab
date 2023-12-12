@@ -154,12 +154,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collectedResource: {fileID: 0}
   _isDigging: 0
+  _itemType: {fileID: 0}
+  _itemAmount: 0
+  _fuelType: {fileID: 0}
+  _fuelAmount: 0
   _miningRange: 3
   _resourceLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   _itemSlot: {fileID: 0}
   _fuelSlot: {fileID: 0}
-  _inventoryItemPrefab: {fileID: 4589494901010836183, guid: 3e6c481d9fc7a8f4cbf901e368c8fff2,
-    type: 3}
   fuelLeftSlider: {fileID: 0}

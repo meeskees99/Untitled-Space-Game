@@ -31,11 +31,6 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
 
     public bool HandleFuel()
     {
-        // if (_itemInThisSlot.count == _itemInThisSlot.item.maxStack)
-        // {
-        //     Debug.Log("Item Has Reached Max Stack! Remove It To Continue");
-        //     return false;
-        // }
         if (!fuelTimeInitialized && _itemInThisSlot != null)
         {
             if (_itemInThisSlot.count > 1)
@@ -107,7 +102,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
         }
         else if (isFuelSlot && !InventoryManager.Instance.heldItem.item.isFuel)
         {
-            _itemInThisSlot = transform.GetChild(0).GetComponent<InventoryItem>();
+            // _itemInThisSlot = transform.GetChild(0).GetComponent<InventoryItem>();
             Debug.Log("This Item Cannot Be Used As Fuel.");
             return;
         }
@@ -122,9 +117,9 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
             if (InventoryManager.Instance.heldItem != null)
             {
                 InventoryManager.Instance.heldItem.parentAfterDrag = transform;
-                //     InventoryManager.Instance.heldItem.SetItemParent(transform);
-                //     _itemInThisSlot = transform.GetChild(0).GetComponent<InventoryItem>();
-                //     InventoryManager.Instance.heldItem = null;
+                if (InventoryManager.Instance.heldItem.item.isFuel && isFuelSlot)
+                {
+                }
             }
 
         }

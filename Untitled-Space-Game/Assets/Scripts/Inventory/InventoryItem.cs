@@ -27,6 +27,11 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void InitializeItem(Item newItem)
     {
+        if (newItem == null)
+        {
+            Debug.LogError("No Item To Initialize!");
+            return;
+        }
         item = newItem;
         image.sprite = newItem.image;
         RefreshCount();
@@ -85,6 +90,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             InventoryManager.Instance.heldItem = null;
             GetComponentInParent<InventorySlot>().SetInventoryItem(this);
             InventoryManager.Instance.UpdateItemsInfoList();
+            MiningPanelManager.Instance.currentDigger.InitializeFuelType();
         }
         else
         {
@@ -95,7 +101,6 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             }
             else
             {
-
                 int overflow = parentAfterDrag.GetComponent<InventorySlot>().GetInventoryItem().count + count - parentAfterDrag.GetComponent<InventorySlot>().GetInventoryItem().item.maxStack;
                 parentAfterDrag.GetComponent<InventorySlot>().GetInventoryItem().count = item.maxStack;
                 InventoryManager.Instance.AddItem(item.itemID, overflow);

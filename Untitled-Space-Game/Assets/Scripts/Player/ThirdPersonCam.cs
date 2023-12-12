@@ -45,6 +45,8 @@ public class ThirdPersonCam : MonoBehaviour
 
     void Update()
     {
+        if (_stateMachine.DidUiInteraction)
+            return;
         // Vector3 viewDir = _player.position - new Vector3(transform.position.x, _player.position.y, transform.position.z);
         _orientation.forward = _playerObj.forward.normalized;
 
