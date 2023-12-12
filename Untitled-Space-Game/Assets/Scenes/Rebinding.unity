@@ -649,7 +649,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1061892170}
         m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
-        m_MethodName: DoKeyboardRebind
+        m_MethodName: KeyboardRebindBtn
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1982,7 +1982,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1061892170}
         m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
-        m_MethodName: DoKeyboardRebind
+        m_MethodName: KeyboardRebindBtn
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4474,6 +4474,7 @@ MonoBehaviour:
     _excludeMouse: 0
     _actionTxt: {fileID: 696289940}
   _controllerKeybinds: []
+  _combinedKeybinds: []
 --- !u!1 &1074196757
 GameObject:
   m_ObjectHideFlags: 0
@@ -4810,7 +4811,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1061892170}
         m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
-        m_MethodName: DoKeyboardRebind
+        m_MethodName: KeyboardRebindBtn
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5218,6 +5219,7 @@ MonoBehaviour:
   _interactableMask:
     serializedVersion: 2
     m_Bits: 0
+  _didUiInteraction: 0
 --- !u!54 &1257780434
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6616,7 +6618,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1061892170}
         m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
-        m_MethodName: DoKeyboardRebind
+        m_MethodName: KeyboardRebindBtn
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6883,7 +6885,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1061892170}
         m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
-        m_MethodName: DoKeyboardRebind
+        m_MethodName: KeyboardRebindBtn
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7150,7 +7152,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1061892170}
         m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
-        m_MethodName: DoKeyboardRebind
+        m_MethodName: KeyboardRebindBtn
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7283,7 +7285,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1061892170}
         m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
-        m_MethodName: DoKeyboardRebind
+        m_MethodName: KeyboardRebindBtn
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7454,7 +7456,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1061892170}
         m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
-        m_MethodName: DoKeyboardRebind
+        m_MethodName: KeyboardRebindBtn
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

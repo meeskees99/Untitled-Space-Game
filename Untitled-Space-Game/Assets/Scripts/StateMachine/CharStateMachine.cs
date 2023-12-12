@@ -851,7 +851,10 @@ public class CharStateMachine : MonoBehaviour
         }
         else
         {
-            _InteractPanel.SetActive(false);
+            if (_InteractPanel != null)
+            {
+                _InteractPanel.SetActive(false);
+            }
         }
     }
 
