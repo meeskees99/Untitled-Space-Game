@@ -648,25 +648,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1061892170}
-        m_TargetAssemblyTypeName: TESTforCOMPOSITE, Assembly-CSharp
-        m_MethodName: GetBtnIndex
+        m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
+        m_MethodName: DoKeyboardRebind
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1061892170}
-        m_TargetAssemblyTypeName: TESTforCOMPOSITE, Assembly-CSharp
-        m_MethodName: DoCompositeRebind
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: Move
           m_BoolArgument: 0
@@ -1150,6 +1138,95 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 216523328}
   m_CullTransparentMesh: 1
+--- !u!1 &231459495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 231459498}
+  - component: {fileID: 231459497}
+  - component: {fileID: 231459496}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &231459496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231459495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
+--- !u!114 &231459497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231459495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &231459498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231459495}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &240514675
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,25 +1981,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1061892170}
-        m_TargetAssemblyTypeName: TESTforCOMPOSITE, Assembly-CSharp
-        m_MethodName: GetBtnIndex
+        m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
+        m_MethodName: DoKeyboardRebind
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1061892170}
-        m_TargetAssemblyTypeName: TESTforCOMPOSITE, Assembly-CSharp
-        m_MethodName: DoCompositeRebind
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 7
           m_FloatArgument: 0
           m_StringArgument: Move
           m_BoolArgument: 0
@@ -2703,7 +2768,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1061892170}
         m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
-        m_MethodName: SaveBindings
+        m_MethodName: SaveKeyboardBindings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3342,7 +3407,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Z
+  m_text: Control
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4011,7 +4076,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: B
+  m_text: Space
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4359,55 +4424,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _charController: {fileID: 1257780433}
-  _keybinds:
+  _keyboardKeybinds:
   - _inputActionReference: {fileID: -552677683719618422, guid: 48e8b518112b8844a87e9c7d4c8c40b2,
       type: 3}
     _actionIndex: 0
     _actionName: Jump
-    _excludeMouse: 1
+    _excludeMouse: 0
     _actionTxt: {fileID: 1016520751}
   - _inputActionReference: {fileID: -5405145133786370522, guid: 48e8b518112b8844a87e9c7d4c8c40b2,
       type: 3}
     _actionIndex: 0
     _actionName: Run
-    _excludeMouse: 1
+    _excludeMouse: 0
     _actionTxt: {fileID: 216523330}
   - _inputActionReference: {fileID: 6843844303390236540, guid: 48e8b518112b8844a87e9c7d4c8c40b2,
       type: 3}
     _actionIndex: 0
     _actionName: Crouch
-    _excludeMouse: 1
+    _excludeMouse: 0
     _actionTxt: {fileID: 826734841}
   - _inputActionReference: {fileID: 8743197934302689349, guid: 48e8b518112b8844a87e9c7d4c8c40b2,
       type: 3}
     _actionIndex: 0
     _actionName: Move
-    _excludeMouse: 1
+    _excludeMouse: 0
     _actionTxt: {fileID: 1800418641}
   - _inputActionReference: {fileID: 8743197934302689349, guid: 48e8b518112b8844a87e9c7d4c8c40b2,
       type: 3}
     _actionIndex: 1
     _actionName: Move
-    _excludeMouse: 1
+    _excludeMouse: 0
     _actionTxt: {fileID: 842503121}
   - _inputActionReference: {fileID: 8743197934302689349, guid: 48e8b518112b8844a87e9c7d4c8c40b2,
       type: 3}
     _actionIndex: 2
     _actionName: Move
-    _excludeMouse: 1
+    _excludeMouse: 0
     _actionTxt: {fileID: 1753548751}
   - _inputActionReference: {fileID: 8743197934302689349, guid: 48e8b518112b8844a87e9c7d4c8c40b2,
       type: 3}
     _actionIndex: 3
     _actionName: Move
-    _excludeMouse: 1
+    _excludeMouse: 0
     _actionTxt: {fileID: 1009212378}
   - _inputActionReference: {fileID: 8743197934302689349, guid: 48e8b518112b8844a87e9c7d4c8c40b2,
       type: 3}
     _actionIndex: 4
     _actionName: Move
-    _excludeMouse: 1
+    _excludeMouse: 0
     _actionTxt: {fileID: 696289940}
+  _controllerKeybinds: []
 --- !u!1 &1074196757
 GameObject:
   m_ObjectHideFlags: 0
@@ -4744,7 +4810,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1061892170}
         m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
-        m_MethodName: DoRebind
+        m_MethodName: DoKeyboardRebind
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5068,8 +5134,8 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f012e68b-2427-4220-9120-5f3fc80631ae
     m_ActionName: Game/Shoot[/Mouse/leftButton]
-  m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Gamepad
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Game
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -6549,8 +6615,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1061892170}
-        m_TargetAssemblyTypeName: TESTforCOMPOSITE, Assembly-CSharp
-        m_MethodName: DoRebind
+        m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
+        m_MethodName: DoKeyboardRebind
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6816,25 +6882,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1061892170}
-        m_TargetAssemblyTypeName: TESTforCOMPOSITE, Assembly-CSharp
-        m_MethodName: GetBtnIndex
+        m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
+        m_MethodName: DoKeyboardRebind
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1061892170}
-        m_TargetAssemblyTypeName: TESTforCOMPOSITE, Assembly-CSharp
-        m_MethodName: DoCompositeRebind
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: Move
           m_BoolArgument: 0
@@ -7096,7 +7150,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1061892170}
         m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
-        m_MethodName: DoRebind
+        m_MethodName: DoKeyboardRebind
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7144,95 +7198,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875445348}
   m_CullTransparentMesh: 1
---- !u!1 &1926724350
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1926724353}
-  - component: {fileID: 1926724352}
-  - component: {fileID: 1926724351}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1926724351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1926724350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_MoveRepeatDelay: 0.5
-  m_MoveRepeatRate: 0.1
-  m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
-  m_CursorLockBehavior: 0
---- !u!114 &1926724352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1926724350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 1803572423}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &1926724353
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1926724350}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1969411663
 GameObject:
   m_ObjectHideFlags: 0
@@ -7317,25 +7282,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1061892170}
-        m_TargetAssemblyTypeName: TESTforCOMPOSITE, Assembly-CSharp
-        m_MethodName: GetBtnIndex
+        m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
+        m_MethodName: DoKeyboardRebind
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1061892170}
-        m_TargetAssemblyTypeName: TESTforCOMPOSITE, Assembly-CSharp
-        m_MethodName: DoCompositeRebind
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: Move
           m_BoolArgument: 0
@@ -7501,7 +7454,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1061892170}
         m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
-        m_MethodName: DoRebind
+        m_MethodName: DoKeyboardRebind
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7921,4 +7874,4 @@ SceneRoots:
   - {fileID: 1257780429}
   - {fileID: 1061892168}
   - {fileID: 1776799999}
-  - {fileID: 1926724353}
+  - {fileID: 231459498}

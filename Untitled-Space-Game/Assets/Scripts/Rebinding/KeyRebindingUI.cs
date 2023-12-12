@@ -41,6 +41,8 @@ public class KeyRebindingUI : MonoBehaviour
         Debug.Log(keybind._actionName + " " + keybind._actionIndex);
         InputAction action = _charController.PlayerInput.actions.FindAction(keybind._actionName);
 
+
+
         if (action == null)
         {
             return;
@@ -54,7 +56,7 @@ public class KeyRebindingUI : MonoBehaviour
             if (firstPartIndex < action.bindings.Count && action.bindings[firstPartIndex].isPartOfComposite)
             {
                 Debug.Log("DoExtraRebind");
-                DoRebind(action, keybind._actionIndex, keybind._actionTxt, true, keybind._excludeMouse);
+                DoRebind(action, keybind, true);
             }
         }
         else if (action.bindings.Count > keybind._actionIndex && action.bindings[keybind._actionIndex].isComposite)
@@ -64,32 +66,32 @@ public class KeyRebindingUI : MonoBehaviour
 
             if (firstPartIndex < action.bindings.Count && action.bindings[firstPartIndex].isPartOfComposite)
             {
-                DoRebind(action, keybind._actionIndex, keybind._actionTxt, true, keybind._excludeMouse);
+                DoRebind(action, keybind, true);
             }
         }
         else if (action.bindings.Count > keybind._actionIndex && action.bindings[keybind._actionIndex].isPartOfComposite)
         {
-            DoRebind(action, keybind._actionIndex, keybind._actionTxt, false, keybind._excludeMouse);
+            DoRebind(action, keybind, false);
         }
         else
         {
-            DoRebind(action, 0, keybind._actionTxt, false, keybind._excludeMouse);
+            DoRebind(action, keybind, false);
         }
     }
 
-    private static void DoRebind(InputAction actionToRebind, int bindingIndex, TMP_Text statusText, bool allCompositeParts, bool excludeMouse)
+    private static void DoRebind(InputAction actionToRebind, KeyRebinding.Keybind keybind, bool allCompositeParts)
     {
-        if (actionToRebind == null || bindingIndex < 0)
+        if (actionToRebind == null || keybind._actionIndex < 0)
         {
             return;
         }
-        statusText.text = $"Press a Button";
+        keybind._actionTxt.text = $"Press a Button";
 
         actionToRebind.Disable();
 
-        var rebind = actionToRebind.PerformInteractiveRebinding(bindingIndex);
+        var rebind = actionToRebind.PerformInteractiveRebinding(keybind._actionIndex);
 
-        // rebind.WithBindingGroup("Gamepad");
+        rebind.WithBindingGroup("Gamepad");
 
         rebind.OnComplete(operation =>
         {
@@ -98,10 +100,10 @@ public class KeyRebindingUI : MonoBehaviour
 
             if (allCompositeParts)
             {
-                var nextBindingIndex = bindingIndex + 1;
+                var nextBindingIndex = keybind._actionIndex + 1;
                 if (nextBindingIndex < actionToRebind.bindings.Count && actionToRebind.bindings[nextBindingIndex].isPartOfComposite)
                 {
-                    DoRebind(actionToRebind, nextBindingIndex, statusText, allCompositeParts, excludeMouse);
+                    DoRebind(actionToRebind, keybind, allCompositeParts);
                 }
             }
 
@@ -117,12 +119,12 @@ public class KeyRebindingUI : MonoBehaviour
         });
 
         rebind.WithCancelingThrough("<Keyboard>/escape");
-        if (excludeMouse)
+        if (keybind._excludeMouse)
         {
             rebind.WithControlsExcluding("Mouse");
         }
 
-        rebindStarted?.Invoke(actionToRebind, bindingIndex);
+        rebindStarted?.Invoke(actionToRebind, keybind._actionIndex);
         rebind.Start();
     }
 
@@ -138,16 +140,16 @@ public class KeyRebindingUI : MonoBehaviour
 
         if (action.bindings[keybind._actionIndex].isComposite)
         {
-            Debug.Log("IsComposite");
+            // Debug.Log("IsComposite: " + keybind._actionName);
             return action.GetBindingDisplayString(0);
         }
         else if (action.bindings[keybind._actionIndex].isPartOfComposite)
         {
-            Debug.Log("IsPartOfComposite");
+            // Debug.Log("IsPartOfComposite");
             return GetPartOfCompositeButton(keybind._actionIndex, action);
         }
-
-        return action.GetBindingDisplayString(0);
+        // Debug.Log(keybind._actionName + " " + keybind._actionIndex);
+        return action.GetBindingDisplayString(keybind._actionIndex);
     }
 
     public static string GetPartOfCompositeButton(int compositePartIndex, InputAction action)

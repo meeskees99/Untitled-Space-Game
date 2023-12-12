@@ -12,7 +12,8 @@ public class KeyRebinding : MonoBehaviour
 
     // [SerializeField] InputBinding.DisplayStringOptions _displayStringOptions;
 
-    [SerializeField] List<Keybind> _keybinds = new List<Keybind>();
+    [SerializeField] List<Keybind> _keyboardKeybinds = new List<Keybind>();
+    [SerializeField] List<Keybind> _controllerKeybinds = new List<Keybind>();
 
     [Serializable]
     public struct Keybind
@@ -31,16 +32,15 @@ public class KeyRebinding : MonoBehaviour
             _excludeMouse = excludeMouse;
             _actionTxt = actionTxt;
         }
-
     }
 
     private void OnEnable()
     {
         if (_charController != null)
         {
-            for (int i = 0; i < _keybinds.Count; i++)
+            for (int i = 0; i < _keyboardKeybinds.Count; i++)
             {
-                KeyRebindingUI.LoadBindingOverride(_keybinds[i]._actionName);
+                KeyRebindingUI.LoadBindingOverride(_keyboardKeybinds[i]._actionName);
             }
             UpdateUI();
         }
@@ -61,6 +61,7 @@ public class KeyRebinding : MonoBehaviour
         {
             return;
         }
+
         UpdateUI();
     }
 
@@ -68,57 +69,112 @@ public class KeyRebinding : MonoBehaviour
     {
         if (Input.GetKeyDown("o"))
         {
-            ResetBinding();
+            ResetKeyboardBindings();
         }
     }
 
     private void UpdateUI()
     {
-        for (int i = 0; i < _keybinds.Count; i++)
+        for (int i = 0; i < _keyboardKeybinds.Count; i++)
         {
-            if (_keybinds[i]._actionTxt != null)
+            if (_keyboardKeybinds[i]._actionTxt != null)
             {
                 if (Application.isPlaying)
                 {
-                    _keybinds[i]._actionTxt.text = KeyRebindingUI.GetBindingName(_keybinds[i]);
+                    _keyboardKeybinds[i]._actionTxt.text = KeyRebindingUI.GetBindingName(_keyboardKeybinds[i]);
                 }
                 else
                 {
-                    _keybinds[i]._actionTxt.text = KeyRebindingUI.GetBindingName(_keybinds[i]);
+                    _keyboardKeybinds[i]._actionTxt.text = KeyRebindingUI.GetBindingName(_keyboardKeybinds[i]);
+                }
+
+            }
+        }
+        for (int i = 0; i < _controllerKeybinds.Count; i++)
+        {
+            if (_controllerKeybinds[i]._actionTxt != null)
+            {
+                if (Application.isPlaying)
+                {
+                    _controllerKeybinds[i]._actionTxt.text = KeyRebindingUI.GetBindingName(_keyboardKeybinds[i]);
+                }
+                else
+                {
+                    _controllerKeybinds[i]._actionTxt.text = KeyRebindingUI.GetBindingName(_keyboardKeybinds[i]);
                 }
 
             }
         }
     }
 
-    public void DoRebind(int keybindIndex)
+
+    #region Keyboard
+
+    public void DoKeyboardRebind(int keybindIndex)
     {
-        KeyRebindingUI.StartRebind(_keybinds[keybindIndex]);
+        KeyRebindingUI.StartRebind(_keyboardKeybinds[keybindIndex]);
     }
 
-    public void ResetBinding()
+    public void ResetKeyboardBindings()
     {
-        for (int i = 0; i < _keybinds.Count; i++)
+        for (int i = 0; i < _keyboardKeybinds.Count; i++)
         {
-            KeyRebindingUI.ResetBinding(_keybinds[i]);
+            KeyRebindingUI.ResetBinding(_keyboardKeybinds[i]);
         }
         UpdateUI();
     }
 
-    public void ResetAllBindings()
+    public void ResetAllKeyboardBindings()
     {
-        for (int i = 0; i < _keybinds.Count; i++)
+        for (int i = 0; i < _keyboardKeybinds.Count; i++)
         {
-            KeyRebindingUI.LoadBindingOverride(_keybinds[i]._actionName);
+            KeyRebindingUI.LoadBindingOverride(_keyboardKeybinds[i]._actionName);
         }
         UpdateUI();
     }
 
-    public void SaveBindings()
+    public void SaveKeyboardBindings()
     {
-        for (int i = 0; i < _keybinds.Count; i++)
+        for (int i = 0; i < _keyboardKeybinds.Count; i++)
         {
-            KeyRebindingUI.SaveBindingOverride(_keybinds[i]._inputActionReference);
+            KeyRebindingUI.SaveBindingOverride(_keyboardKeybinds[i]._inputActionReference);
         }
     }
+
+    #endregion
+
+    #region Controller
+
+    public void DoControllerRebind(int keybindIndex)
+    {
+        KeyRebindingUI.StartRebind(_controllerKeybinds[keybindIndex]);
+    }
+
+    public void ResetControllerBindings()
+    {
+        for (int i = 0; i < _controllerKeybinds.Count; i++)
+        {
+            KeyRebindingUI.ResetBinding(_controllerKeybinds[i]);
+        }
+        UpdateUI();
+    }
+
+    public void ResetAllControllerBindings()
+    {
+        for (int i = 0; i < _controllerKeybinds.Count; i++)
+        {
+            KeyRebindingUI.LoadBindingOverride(_controllerKeybinds[i]._actionName);
+        }
+        UpdateUI();
+    }
+
+    public void SaveControllerBindings()
+    {
+        for (int i = 0; i < _controllerKeybinds.Count; i++)
+        {
+            KeyRebindingUI.SaveBindingOverride(_controllerKeybinds[i]._inputActionReference);
+        }
+    }
+
+    #endregion
 }
