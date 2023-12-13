@@ -16,6 +16,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public bool isDragging;
 
+    public InventorySlot lastInventorySlot;
+
     InventoryManager inventoryManager;
 
     bool dropOnDrop;
@@ -25,24 +27,28 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         inventoryManager = InventoryManager.Instance;
     }
 
-    public void InitializeItem(Item newItem)
+    public void InitializeItem(Item newItem, int amount)
     {
         if (newItem == null)
         {
             Debug.LogError("No Item To Initialize!");
             return;
         }
+        count = amount;
         item = newItem;
         image.sprite = newItem.image;
         RefreshCount();
         GetComponentInParent<InventorySlot>().SetInventoryItem(this);
+        lastInventorySlot = GetComponentInParent<InventorySlot>();
     }
 
     public void RefreshCount()
     {
         if (count == 0)
         {
+            Debug.Log("destroy");
             Destroy(gameObject);
+
         }
         countText.text = count.ToString();
         bool textActive = count > 1;
@@ -54,6 +60,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         if (dropOnDrop)
         {
+            Debug.Log("destroy");
+
             InventoryManager.Instance.DropItem(item.itemID, count);
             Destroy(gameObject);
         }
@@ -66,6 +74,16 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         isDragging = true;
         InventoryManager.Instance.heldItem = eventData.pointerDrag.GetComponent<InventoryItem>();
         InventoryManager.Instance.UpdateItemsInfoList();
+        if (lastInventorySlot.isMachineSlot)
+        {
+            MiningPanelManager.Instance.currentDigger.ItemAmount = 0;
+        }
+        if (lastInventorySlot.isFuelSlot)
+        {
+            MiningPanelManager.Instance.currentDigger.FuelAmount = 0;
+            MiningPanelManager.Instance.currentDigger.FuelType = null;
+            MiningPanelManager.Instance.currentDigger.FuelInitialized = false;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -79,6 +97,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (dropOnDrop)
         {
             InventoryManager.Instance.DropItem(item.itemID, count);
+            lastInventorySlot = null;
+
             Destroy(gameObject);
         }
         else if (parentAfterDrag.childCount == 0)
@@ -90,7 +110,17 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             InventoryManager.Instance.heldItem = null;
             GetComponentInParent<InventorySlot>().SetInventoryItem(this);
             InventoryManager.Instance.UpdateItemsInfoList();
-            MiningPanelManager.Instance.currentDigger.InitializeFuelType();
+            if (parentAfterDrag.GetComponent<InventorySlot>().isFuelSlot)
+            {
+                MiningPanelManager.Instance.currentDigger.InitializeFuelType();
+            }
+            Debug.Log(lastInventorySlot.isMachineSlot + " " + parentAfterDrag.GetComponent<InventorySlot>().isMachineSlot);
+            if (lastInventorySlot.isMachineSlot && !parentAfterDrag.GetComponent<InventorySlot>().isMachineSlot)
+            {
+                MiningPanelManager.Instance.currentDigger.ItemAmount = 0;
+                MiningPanelManager.Instance.currentDigger.InitializeFuelType();
+            }
+            lastInventorySlot = GetComponentInParent<InventorySlot>();
         }
         else
         {
@@ -105,8 +135,17 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 parentAfterDrag.GetComponent<InventorySlot>().GetInventoryItem().count = item.maxStack;
                 InventoryManager.Instance.AddItem(item.itemID, overflow);
             }
+            if (lastInventorySlot.isMachineSlot && !parentAfterDrag.GetComponent<InventorySlot>().isMachineSlot)
+            {
+                Debug.Log("myballs");
+                MiningPanelManager.Instance.currentDigger.ItemAmount = 0;
+                MiningPanelManager.Instance.currentDigger.InitializeFuelType();
+                Debug.Log("itch");
+            }
             parentAfterDrag.GetComponent<InventorySlot>().GetInventoryItem().RefreshCount();
             InventoryManager.Instance.UpdateItemsInfoList();
+            Debug.Log("destroy");
+
             Destroy(gameObject);
         }
     }
@@ -158,7 +197,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 if (slot != null)
                 {
                     slot.AddItemToSlot(this);
-                    Debug.Log($"Dropped Item In Slot {slot.name}");
+                    Debug.Log($"Dropped {item} In Slot {slot.name}");
                 }
                 else
                 {
@@ -168,8 +207,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                     {
                         if (item.count < item.item.maxStack)
                         {
-                            item.count++;
-                            item.RefreshCount();
+                            item.GetComponentInParent<InventorySlot>().AddItemToSlot(this);
                         }
                         return;
                     }
@@ -177,5 +215,10 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 }
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log($"{this.name} killed itself (cringe)");
     }
 }

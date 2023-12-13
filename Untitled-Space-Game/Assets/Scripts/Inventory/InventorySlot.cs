@@ -26,8 +26,6 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
         Deselect();
     }
 
-
-
     public void Select()
     {
         image.color = selectedColor;
@@ -47,7 +45,6 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
         }
         else if (isFuelSlot && !InventoryManager.Instance.heldItem.item.isFuel)
         {
-            // _itemInThisSlot = transform.GetChild(0).GetComponent<InventoryItem>();
             Debug.Log("This Item Cannot Be Used As Fuel.");
             return;
         }
@@ -64,7 +61,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
                 InventoryManager.Instance.heldItem.parentAfterDrag = transform;
                 if (InventoryManager.Instance.heldItem.item.isFuel && isFuelSlot)
                 {
-                    // MiningPanelManager.Instance.currentDigger.InitializeFuelType();
+
                 }
             }
 
@@ -112,19 +109,18 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
         // heldItem = eventData.pointerDrag.GetComponent<InventoryItem>();
         if (_itemInThisSlot != null)
         {
-            if (inventoryItem == _itemInThisSlot.item)
+            if (InventoryManager.Instance.heldItem.item == _itemInThisSlot.item)
             {
                 if (_itemInThisSlot.count < _itemInThisSlot.item.maxStack)
                 {
                     _itemInThisSlot.count++;
-                    inventoryItem.count--;
+                    InventoryManager.Instance.heldItem.count--;
                     if (inventoryItem.count <= 0)
                     {
-                        Destroy(inventoryItem.gameObject);
+                        Destroy(InventoryManager.Instance.heldItem.gameObject);
                     }
                     _itemInThisSlot.RefreshCount();
-                    inventoryItem.RefreshCount();
-                    Debug.Log("SuccesFully Added Item To Slot: " + gameObject.name);
+                    InventoryManager.Instance.heldItem.RefreshCount();
                 }
                 else
                 {
@@ -139,6 +135,9 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
         else
         {
             InventoryManager.Instance.SpawnNewItem(inventoryItem.item.itemID, 1, slotId);
+            InventoryManager.Instance.heldItem.count--;
+            InventoryManager.Instance.heldItem.RefreshCount();
+            Debug.Log($"{InventoryManager.Instance.heldItem.count}");
             Debug.Log("Succesfully Spawned New Item In Slot: " + gameObject.name);
         }
     }

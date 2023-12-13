@@ -168,7 +168,7 @@ public class InventoryManager : MonoBehaviour
             if (_allItems[i].itemID == itemID)
             {
                 Debug.Log($"Id was found as {_allItems[i].itemID}. Initializing Item {_allItems[i]}");
-                inventoryItem.InitializeItem(_allItems[i]);
+                inventoryItem.InitializeItem(_allItems[i], itemCount);
                 break;
             }
         }
@@ -190,7 +190,7 @@ public class InventoryManager : MonoBehaviour
             if (_allItems[i].itemID == itemID)
             {
                 Debug.Log($"Id was found as {_allItems[i].itemID}. Initializing Item {_allItems[i]}");
-                inventoryItem.InitializeItem(_allItems[i]);
+                inventoryItem.InitializeItem(_allItems[i], itemCount);
                 break;
             }
         }

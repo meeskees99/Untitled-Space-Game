@@ -74,15 +74,6 @@ public class InGameUIManager : MonoBehaviour
         }
     }
 
-    public void SetMinerUIInfo()
-    {
-        if (_miningPanel.gameObject.activeInHierarchy)
-        {
-            //
-        }
-    }
-
-
     public void ToggleInventory()
     {
         if (_craftingShown)

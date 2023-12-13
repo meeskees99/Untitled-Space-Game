@@ -58,16 +58,6 @@ public class KeyRebindingUI : MonoBehaviour
                 DoRebind(action, keybind, firstPartIndex, true);
             }
         }
-        // else if (action.bindings.Count > keybind._actionIndex && action.bindings[keybind._actionIndex].isComposite)
-        // {
-        //     var firstPartIndex = keybind._actionIndex + 1;
-        //     keybind._actionIndex += 1;
-
-        //     if (firstPartIndex < action.bindings.Count && action.bindings[firstPartIndex].isPartOfComposite)
-        //     {
-        //         DoRebind(action, keybind, keybind._actionIndex, true);
-        //     }
-        // }
         else if (action.bindings.Count > keybind._actionIndex && action.bindings[keybind._actionIndex].isPartOfComposite)
         {
             DoRebind(action, keybind, keybind._actionIndex, false);

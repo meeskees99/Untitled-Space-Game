@@ -66,6 +66,7 @@ public class DroppedItem : MonoBehaviour
             }
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
         _lastCollidedObject = null;
