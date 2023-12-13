@@ -36,16 +36,33 @@ public class MiningPanelManager : MonoBehaviour
 
     public void ToggleMiningPanel(DiggingMachine diggingMachine)
     {
-        Destroy(itemSlot.GetInventoryItem());
-        Destroy(fuelSlot.GetInventoryItem());
+        if (currentDigger == diggingMachine)
+        {
+            currentDigger = null;
+            if (itemSlot.GetInventoryItem() != null)
+                Destroy(itemSlot.GetInventoryItem().gameObject);
+            if (fuelSlot.GetInventoryItem() != null)
+                Destroy(fuelSlot.GetInventoryItem().gameObject);
+            miningPanel.GetComponent<Canvas>().enabled = !miningPanel.GetComponent<Canvas>().enabled;
+            miningPanel.GetComponent<GraphicRaycaster>().enabled = !miningPanel.GetComponent<GraphicRaycaster>().enabled;
+            return;
+        }
+        else
+        {
+            currentDigger = diggingMachine;
+            if (itemSlot.GetInventoryItem() != null)
+                Destroy(itemSlot.GetInventoryItem().gameObject);
+            if (fuelSlot.GetInventoryItem() != null)
+                Destroy(fuelSlot.GetInventoryItem().gameObject);
 
-        if (diggingMachine.ItemType != null)
-            diggingMachine.AddMachineItem(false);
-        if (diggingMachine.FuelType != null)
-            diggingMachine.AddMachineItem(true, diggingMachine.FuelType);
+            if (diggingMachine.ItemType != null)
+                diggingMachine.AddMachineItem(false);
+            if (diggingMachine.FuelType != null)
+                diggingMachine.AddMachineItem(true, diggingMachine.FuelType);
 
-        miningPanel.GetComponent<Canvas>().enabled = !miningPanel.GetComponent<Canvas>().enabled;
-        miningPanel.GetComponent<GraphicRaycaster>().enabled = !miningPanel.GetComponent<GraphicRaycaster>().enabled;
-        currentDigger = diggingMachine;
+            miningPanel.GetComponent<Canvas>().enabled = !miningPanel.GetComponent<Canvas>().enabled;
+            miningPanel.GetComponent<GraphicRaycaster>().enabled = !miningPanel.GetComponent<GraphicRaycaster>().enabled;
+        }
+
     }
 }

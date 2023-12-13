@@ -5,12 +5,16 @@ using UnityEngine.UI;
 
 public class DiggingMachine : MonoBehaviour
 {
+    [Header("")]
     [SerializeField] Resource _collectedResource;
     [SerializeField] bool _isDigging;
     [SerializeField] Item _itemType;
     [SerializeField] int _itemAmount;
     [SerializeField] Item _fuelType;
     [SerializeField] int _fuelAmount;
+
+    [SerializeField] bool _resourceInitialized;
+    [SerializeField] bool _fuelInitialized;
 
     [Header("Miner Settings")]
     [SerializeField] float _miningRange = 3f;
@@ -28,6 +32,8 @@ public class DiggingMachine : MonoBehaviour
     public Item FuelType { get { return _fuelType; } set { _fuelType = value; } }
     public Item ItemType { get { return _itemType; } set { _itemType = value; } }
 
+    [SerializeField] bool _fuelTimeInitialized;
+    [SerializeField] float _fuelLeft;
     private void Start()
     {
 
@@ -36,6 +42,62 @@ public class DiggingMachine : MonoBehaviour
             _collectedResource = GetComponentInParent<ResourceVein>().Resource;
         }
         MiningPanelManager.Instance.SetDiggerInfo(this);
+    }
+
+    public bool HandleFuel()
+    {
+        if (!_fuelTimeInitialized && _fuelSlot.GetInventoryItem() != null)
+        {
+            Debug.Log("USE ITEM");
+            _fuelSlot.UseItem();
+            if (_fuelSlot.GetInventoryItem() != null)
+            {
+                _fuelLeft = _fuelSlot.GetInventoryItem().item.fuelTime;
+            }
+            if (_fuelAmount > 0)
+            {
+                _fuelAmount--;
+            }
+            else
+            {
+                _fuelTimeInitialized = false;
+                return false;
+            }
+            _fuelTimeInitialized = true;
+            return true;
+        }
+        else if (_fuelSlot.GetInventoryItem() == null && _fuelLeft > 0)
+        {
+            if (_fuelLeft > 0)
+            {
+                _fuelLeft -= Time.deltaTime;
+                return true;
+            }
+            else
+            {
+                _fuelTimeInitialized = false;
+            }
+            Debug.Log("This Item Cannot Be Used As Fuel");
+        }
+        else if (_fuelSlot.GetInventoryItem() != null && _fuelTimeInitialized)
+        {
+            if (_fuelLeft > 0)
+            {
+                _fuelLeft -= Time.deltaTime;
+                return true;
+            }
+            else
+            {
+                _fuelTimeInitialized = false;
+                return false;
+            }
+        }
+        else if (_fuelSlot.GetInventoryItem() == null && _fuelLeft <= 0)
+        {
+            _fuelTimeInitialized = false;
+            return false;
+        }
+        return false;
     }
 
 
@@ -55,9 +117,13 @@ public class DiggingMachine : MonoBehaviour
                     return;
                 }
             }
+            else
+            {
+
+            }
             if (_currentMineProgression > 0)
             {
-                bool result = _fuelSlot.HandleFuel();
+                bool result = HandleFuel();
                 _isDigging = result;
                 if (_fuelSlot.GetInventoryItem() != null)
                 {
@@ -73,7 +139,7 @@ public class DiggingMachine : MonoBehaviour
                 {
                     _currentMineProgression -= Time.deltaTime;
                     if (fuelLeftSlider != null)
-                        fuelLeftSlider.value = _fuelSlot.fuelLeft;
+                        fuelLeftSlider.value = _fuelLeft;
                     else
                     {
                         InGameUIManager.Instance.SetMinerUIInfo();
@@ -87,9 +153,10 @@ public class DiggingMachine : MonoBehaviour
                     }
                 }
             }
-            else if (_currentMineProgression <= 0 && _fuelSlot.fuelLeft > 0)
+            else if (_currentMineProgression <= 0 && _fuelLeft > 0)
             {
-                AddMachineItem(false);
+                AddMachineItem(false, _itemType);
+                _itemAmount++;
             }
             else if (_currentMineProgression < 0)
             {
@@ -102,9 +169,9 @@ public class DiggingMachine : MonoBehaviour
     {
         if (!isFuel)
         {
-            if (amount > 0)
+            if (_itemAmount > 0 && _itemSlot.GetInventoryItem() == null)
             {
-                SpawnMachineItem(item, amount);
+                SpawnMachineItem(item, _itemAmount);
 
             }
             else if (_itemSlot.GetInventoryItem() != null)
@@ -145,7 +212,14 @@ public class DiggingMachine : MonoBehaviour
 
         _itemSlot.GetInventoryItem().count = amount;
         _itemSlot.GetInventoryItem().InitializeItem(item);
+
+        if (_resourceInitialized)
+        {
+            Debug.Log("Resource was already Initialized");
+            return;
+        }
         _itemType = item;
+        _resourceInitialized = true;
         _itemAmount = _itemSlot.GetInventoryItem().count;
     }
 
@@ -153,9 +227,15 @@ public class DiggingMachine : MonoBehaviour
     {
         GameObject newItemGO = Instantiate(InventoryManager.Instance.InventoryItemPrefab, _fuelSlot.transform);
         _fuelSlot.SetInventoryItem(newItemGO.GetComponent<InventoryItem>());
-
         _fuelSlot.GetInventoryItem().count = amount;
         _fuelSlot.GetInventoryItem().InitializeItem(item);
+        _fuelInitialized = true;
+
+        if (_fuelInitialized)
+        {
+            Debug.Log("Fuel was already Initialized");
+            return;
+        }
         InitializeFuelType();
     }
 

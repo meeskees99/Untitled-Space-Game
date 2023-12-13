@@ -21,67 +21,12 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
     public bool isMachineSlot;
     public bool isFuelSlot;
 
-    bool fuelTimeInitialized;
-    public float fuelLeft;
-
     private void Awake()
     {
         Deselect();
     }
 
-    public bool HandleFuel()
-    {
-        if (!fuelTimeInitialized && _itemInThisSlot != null)
-        {
-            if (_itemInThisSlot.count > 1)
-            {
-                _itemInThisSlot.count--;
-                _itemInThisSlot.RefreshCount();
-                fuelLeft = _itemInThisSlot.item.fuelTime;
-                fuelTimeInitialized = true;
-            }
-            else
-            {
-                fuelLeft = _itemInThisSlot.item.fuelTime;
-                fuelTimeInitialized = true;
-                Destroy(_itemInThisSlot.gameObject);
-            }
-            fuelTimeInitialized = true;
-            return true;
-        }
-        else if (_itemInThisSlot == null && fuelLeft > 0)
-        {
-            if (fuelLeft > 0)
-            {
-                fuelLeft -= Time.deltaTime;
-                return true;
-            }
-            else
-            {
-                fuelTimeInitialized = false;
-            }
-            Debug.Log("This Item Cannot Be Used As Fuel");
-        }
-        else if (_itemInThisSlot != null && fuelTimeInitialized)
-        {
-            if (fuelLeft > 0)
-            {
-                fuelLeft -= Time.deltaTime;
-                return true;
-            }
-            else
-            {
-                fuelTimeInitialized = false;
-                return false;
-            }
-        }
-        else if (_itemInThisSlot == null && fuelLeft <= 0)
-        {
-            fuelTimeInitialized = false;
-            return false;
-        }
-        return false;
-    }
+
 
     public void Select()
     {
@@ -119,6 +64,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
                 InventoryManager.Instance.heldItem.parentAfterDrag = transform;
                 if (InventoryManager.Instance.heldItem.item.isFuel && isFuelSlot)
                 {
+                    // MiningPanelManager.Instance.currentDigger.InitializeFuelType();
                 }
             }
 
@@ -205,6 +151,20 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
     public void SetInventoryItem(InventoryItem newItem)
     {
         _itemInThisSlot = newItem;
+    }
+
+    public void UseItem()
+    {
+        if (_itemInThisSlot.count > 1)
+        {
+            _itemInThisSlot.count--;
+            _itemInThisSlot.RefreshCount();
+        }
+        else
+        {
+            Destroy(_itemInThisSlot.gameObject);
+        }
+
     }
 
     public void LoadData(GameData data)
