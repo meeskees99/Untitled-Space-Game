@@ -12,6 +12,13 @@ public class MainMenuUIManager : MonoBehaviour
     [Header("SceneToLoad")]
     [SerializeField] string _sceneToLoad;
 
+    [Header("Menu Navigation")]
+    #region Menu Navigation
+
+
+
+    #endregion
+
     [Header("Continue")]
     #region Continue
     [SerializeField] Button _continueButton;

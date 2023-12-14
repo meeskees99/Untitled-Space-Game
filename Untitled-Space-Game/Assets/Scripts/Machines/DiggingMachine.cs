@@ -134,7 +134,7 @@ public class DiggingMachine : MonoBehaviour
         {
             fuelLeftSlider.value = _fuelLeft;
         }
-        else
+        else if (fuelLeftSlider == null && MiningPanelManager.Instance.currentDigger == this)
         {
             Debug.LogError("fuelLeftSlider == null!");
         }
