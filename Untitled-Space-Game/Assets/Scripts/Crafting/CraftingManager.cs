@@ -17,6 +17,8 @@ public class CraftingManager : MonoBehaviour
     [Header("Recipe Selection")]
     [SerializeField] GameObject imagePrefab;
     [SerializeField] Transform imageListTransform;
+    public CraftButton selectedButtonObject;
+    [SerializeField] List<Recipe> _currentRecipes = new();
 
     void Awake()
     {
@@ -30,7 +32,15 @@ public class CraftingManager : MonoBehaviour
         }
     }
 
-    public void SelectCraftingRecipe(Recipe recipe)
+    private void Start()
+    {
+        for (int i = 0; i < recipeListTransform.childCount; i++)
+        {
+            _currentRecipes.Add(recipeListTransform.GetChild(i).GetComponent<CraftButton>().recipe);
+        }
+    }
+
+    public void SelectCraftingRecipe(Recipe recipe, CraftButton button)
     {
         for (int i = imageListTransform.childCount; i > 0; i--)
         {
@@ -41,7 +51,10 @@ public class CraftingManager : MonoBehaviour
             Debug.Log("No Recipe Selected");
             return;
         }
+
         selectedRecipeToCraft = recipe;
+        selectedButtonObject = button;
+
         Debug.Log($"Selected Recipe {recipe}");
 
         for (int i = 0; i < recipe.itemsNeeded.Length; i++)
@@ -84,9 +97,26 @@ public class CraftingManager : MonoBehaviour
         }
     }
 
-    public void RecipeButton(int index)
+    public void RecipeButton(int itemID)
     {
-        AddRecipe(allRecipes[index]);
+        for (int r = 0; r < allRecipes.Length; r++)
+        {
+            if (allRecipes[r].itemToCraft.itemID == itemID)
+            {
+                if (_currentRecipes.Contains(allRecipes[r]))
+                {
+                    Debug.LogError($"There is already a recipe for {allRecipes[r]}");
+                    return;
+                }
+                else
+                {
+                    AddRecipe(allRecipes[r]);
+                    return;
+                }
+            }
+        }
+
+        Debug.LogError("Item Index Does Not Exist As Item");
     }
 
     void AddRecipe(Recipe recipe)
@@ -94,5 +124,6 @@ public class CraftingManager : MonoBehaviour
         GameObject spawnedRecipe = Instantiate(itemPrefab, recipeListTransform);
         spawnedRecipe.GetComponent<CraftButton>().recipe = recipe;
         spawnedRecipe.GetComponent<CraftButton>().UpdateRecipeUI();
+        _currentRecipes.Add(recipe);
     }
 }

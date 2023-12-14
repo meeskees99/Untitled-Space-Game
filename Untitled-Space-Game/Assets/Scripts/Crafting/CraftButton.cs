@@ -22,20 +22,22 @@ public class CraftButton : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        isSelected = CraftingManager.Instance.selectedButtonObject == this;
+        _selectedObj.SetActive(isSelected);
+    }
+
     public void SelectRecipe()
     {
         UpdateRecipeUI();
-        if (!isSelected)
+        if (CraftingManager.Instance.selectedButtonObject != this)
         {
-            _selectedObj.SetActive(true);
-            isSelected = true;
-            CraftingManager.Instance.SelectCraftingRecipe(recipe);
+            CraftingManager.Instance.SelectCraftingRecipe(recipe, this);
         }
         else
         {
-            _selectedObj.SetActive(false);
-            isSelected = false;
-            CraftingManager.Instance.SelectCraftingRecipe(null);
+            CraftingManager.Instance.SelectCraftingRecipe(null, null);
         }
     }
 

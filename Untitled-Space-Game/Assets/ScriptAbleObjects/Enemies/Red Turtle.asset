@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24dcdf054602e6741a4a176fe49c349a, type: 3}
   m_Name: Red Turtle
   m_EditorClassIdentifier: 
+  enemyName: Red Turtle
   health: 300
   attackDamage: 20
   attackRange: 3

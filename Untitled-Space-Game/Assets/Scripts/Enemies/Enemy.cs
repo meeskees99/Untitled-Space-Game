@@ -7,20 +7,31 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     NavMeshAgent _agent;
-
+    [Header("Debugging")]
     [SerializeField] float _currentTravelTime;
     [SerializeField] float _maxTravelTime = 15f;
 
-    [Header("Movement Options")]
-    [SerializeField] LayerMask _walkabeLayer;
-    float _movementSpeed = 5f;
-    float _stopDistance = 1f;
-    float _walkRadius;
-    [SerializeField] float _minWaitTime = 2f, _maxWaitTime = 6f;
+    [Header("Enemy Stats [DO NOT CHANGE(Recieves from Enemy Stats)]")]
+    [SerializeField] string _enemyName;
+    [SerializeField] int _health;
+    [SerializeField] int _attackDamage;
+    [SerializeField] float _attackRange;
+    [SerializeField] float _attackRate;
+    [SerializeField] float _chaseRadius;
+    [SerializeField] float _chaseTime;
+
+    [Header("Movement Stats [DO NOT CHANGE(Recieves from Enemy Stats)]")]
+    [SerializeField] float _movementSpeed;
+    [SerializeField] float _stopDistance;
+    [SerializeField] float _walkRadius;
 
     [Header("EnemyOptions")]
     [SerializeField] EnemyStats _enemyStats;
+    [SerializeField] LayerMask _walkabeLayer;
+    [Tooltip("Time Between Picking New Patrol Points")]
+    [SerializeField] float _minWaitTime = 2f, _maxWaitTime = 6f;
 
+    [Tooltip("Override Movement")]
     [SerializeField] bool _stopPatrolling;
 
     GameObject player;
@@ -33,6 +44,13 @@ public class Enemy : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         if (_enemyStats != null)
         {
+            _enemyName = _enemyStats.enemyName;
+            _health = _enemyStats.health;
+            _attackDamage = _enemyStats.attackDamage;
+            _attackRate = _enemyStats.attackRate;
+            _chaseRadius = _enemyStats.chaseRadius;
+            _chaseTime = _enemyStats.chaseTime;
+
             _movementSpeed = _enemyStats.movementSpeed;
             _stopDistance = _enemyStats.stopDistance;
             _walkRadius = _enemyStats.movementRadius;
@@ -49,12 +67,10 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            Debug.LogError("You did not select any stats for " + gameObject.name);
+            Debug.LogError("You did not select any stats for " + _enemyName);
         }
 
         _enemySpawner = FindObjectOfType<EnemySpawner>();
-        // if (_agent != null)
-        //     _agent.enabled = false;
     }
 
     // Update is called once per frame
@@ -99,15 +115,15 @@ public class Enemy : MonoBehaviour
         if (CheckPlayerInRange() != null)
         {
             if (chaseTimer <= 0)
-                chaseTimer = _enemyStats.chaseTime;
+                chaseTimer = _chaseTime;
 
-            if (_agent.remainingDistance < _enemyStats.attackRange)
+            if (_agent.remainingDistance < _attackRange)
             {
                 _currentTravelTime = 0;
                 if (attackTimer <= 0)
                 {
-                    attackTimer = _enemyStats.attackRate;
-                    player.GetComponent<PlayerStats>().TakeDamage(_enemyStats.attackDamage);
+                    attackTimer = _attackRate;
+                    player.GetComponent<PlayerStats>().TakeDamage(_attackDamage);
                 }
                 else
                 {
@@ -159,7 +175,6 @@ public class Enemy : MonoBehaviour
 
     void GoToNextPoint()
     {
-        //print("Going to next point");
         timer = Random.Range(_minWaitTime, _maxWaitTime);
 
         Vector3 randomDirection = Random.insideUnitSphere * _walkRadius;
@@ -203,6 +218,7 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
+        Debug.Log($"{_enemyName} was destroyed");
         _enemySpawner.RemoveEnemy();
         _enemySpawner.enemiesInScene.Remove(gameObject);
     }

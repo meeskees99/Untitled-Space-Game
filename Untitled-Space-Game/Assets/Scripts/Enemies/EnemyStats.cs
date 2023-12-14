@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Enemy/EnemyStats")]
 public class EnemyStats : ScriptableObject
 {
+    public string enemyName;
     [Header("Stats")]
     public int health = 100;
     public int attackDamage = 20;
