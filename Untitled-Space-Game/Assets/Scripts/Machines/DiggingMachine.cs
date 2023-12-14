@@ -58,7 +58,7 @@ public class DiggingMachine : MonoBehaviour
             {
                 if (FuelAmount == 0 && _fuelLeft <= 0)
                 {
-                    _fuelInitialized = false;
+                    _fuelTimeInitialized = false;
                     return false;
                 }
                 else if (FuelAmount > 0)
@@ -67,16 +67,21 @@ public class DiggingMachine : MonoBehaviour
                     _fuelAmount--;
                     _fuelLeft = _fuelType.fuelTime;
                     _fuelTimeInitialized = true;
-                    Debug.Log("Used Some Fuel, Fuel Left: " + FuelAmount);
+                    Debug.Log("Used Some Fuel, Fuel Items Left: " + FuelAmount);
+                    return true;
                 }
             }
             else
             {
                 if (FuelAmount == 0 && _fuelLeft <= 0)
                 {
+                    _fuelTimeInitialized = false;
                     return false;
                 }
                 _fuelAmount--;
+                _fuelLeft = _fuelType.fuelTime;
+                _fuelTimeInitialized = true;
+                return true;
             }
             if (_fuelType != null && _fuelAmount > 0 && _fuelLeft <= 0)
             {
@@ -92,6 +97,14 @@ public class DiggingMachine : MonoBehaviour
             _fuelTimeInitialized = true;
             return true;
         }
+        else if (_fuelType == null)
+        {
+            if (_fuelSlot.GetInventoryItem() != null)
+            {
+                InitializeFuelType();
+                return false;
+            }
+        }
         else if (_fuelLeft > 0)
         {
             _fuelLeft -= Time.deltaTime;
@@ -102,13 +115,14 @@ public class DiggingMachine : MonoBehaviour
         else if (_fuelLeft <= 0)
         {
             _fuelTimeInitialized = false;
+            return false;
         }
         else if (_fuelType == null && _fuelLeft <= 0)
         {
             _fuelTimeInitialized = false;
             return false;
         }
-        Debug.Log("This Item Cannot Be Used As Fuel");
+        Debug.Log("Digger Has No Fuel");
         return false;
     }
 
@@ -116,7 +130,14 @@ public class DiggingMachine : MonoBehaviour
     void Update()
     {
         if (fuelLeftSlider != null)
+        {
             fuelLeftSlider.value = _fuelLeft;
+            Debug.Log("UPDATING SLIDER VALUE TO: " + _fuelLeft);
+        }
+        else
+        {
+            Debug.LogError("fuelLeftSlider == null!");
+        }
         if (_collectedResource == null)
         {
             Debug.LogError("Miner Has No Resource To Gather!");
