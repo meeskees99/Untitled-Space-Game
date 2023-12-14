@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Save&Load.unity
     guid: 565a505dfddf4114181615b1a35287ca
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Inventory.unity
     guid: 6da77196a838eff4d89b34b9fe0fee58
   - enabled: 1
