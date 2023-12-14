@@ -40,21 +40,21 @@ public class DiggingMachine : MonoBehaviour
     [SerializeField] float _fuelLeft;
     private void Start()
     {
-
         if (_collectedResource == null)
         {
             _collectedResource = GetComponentInParent<ResourceVein>().Resource;
             _itemType = _collectedResource.item;
+            _currentMineProgression = _collectedResource.mineDuration;
         }
         MiningPanelManager.Instance.SetDiggerInfo(this);
     }
 
     public bool HandleFuel()
     {
-        if (!_fuelTimeInitialized && _fuelType != null)
+        if (!_fuelTimeInitialized && _fuelLeft <= 0)
         {
-            Debug.Log("USE ITEM");
-            if (MiningPanelManager.Instance.panelActive)
+            // Debug.Log("USE ITEM");
+            if (MiningPanelManager.Instance.panelActive && MiningPanelManager.Instance.currentDigger == this)
             {
                 if (FuelAmount == 0 && _fuelLeft <= 0)
                 {
@@ -129,19 +129,25 @@ public class DiggingMachine : MonoBehaviour
 
     void Update()
     {
-        if (fuelLeftSlider != null)
+        #region Debugging
+        if (fuelLeftSlider != null && MiningPanelManager.Instance.currentDigger == this)
         {
             fuelLeftSlider.value = _fuelLeft;
-            Debug.Log("UPDATING SLIDER VALUE TO: " + _fuelLeft);
         }
         else
         {
             Debug.LogError("fuelLeftSlider == null!");
         }
+        if (_fuelAmount == 0 && _fuelLeft <= 0)
+        {
+            _fuelType = null;
+            FuelInitialized = false;
+        }
         if (_collectedResource == null)
         {
             Debug.LogError("Miner Has No Resource To Gather!");
         }
+        #endregion
         else
         {
             if (_itemType != null)
@@ -151,6 +157,10 @@ public class DiggingMachine : MonoBehaviour
                     Debug.Log("Item Has Reached Max Stack! Remove It To Continue");
                     return;
                 }
+            }
+            if (MiningPanelManager.Instance.panelActive && _itemSlot.GetInventoryItem() != null && MiningPanelManager.Instance.currentDigger == this)
+            {
+                _itemAmount = _itemSlot.GetInventoryItem().count;
             }
             bool result = HandleFuel();
             if (_currentMineProgression >= 0)
@@ -176,10 +186,10 @@ public class DiggingMachine : MonoBehaviour
                     }
                 }
             }
-            else if (_currentMineProgression <= 0 && _fuelLeft > 0)
+            else if (_currentMineProgression <= 0 && _fuelLeft > 0 && _fuelTimeInitialized)
             {
                 AddMachineItem(false, _itemType);
-                Debug.Log("hei");
+                Debug.LogWarning($"Added Item {_itemType}");
             }
             else if (_currentMineProgression < 0 && _fuelLeft <= 0)
             {
@@ -192,7 +202,7 @@ public class DiggingMachine : MonoBehaviour
     {
         if (!isFuel)
         {
-            if (!MiningPanelManager.Instance.panelActive)
+            if (!MiningPanelManager.Instance.panelActive || MiningPanelManager.Instance.panelActive && MiningPanelManager.Instance.currentDigger != this)
             {
                 if (amount == 0)
                 {
@@ -207,12 +217,12 @@ public class DiggingMachine : MonoBehaviour
                 Debug.Log($"Added {amount} Item(s) When Panel Not Shown");
                 return;
             }
-            else
+            else if (MiningPanelManager.Instance.panelActive && MiningPanelManager.Instance.currentDigger == this)
             {
                 if (amount > 0 && _itemSlot.GetInventoryItem() == null)
                 {
                     SpawnMachineItem(item, amount);
-                    Debug.LogError($"Spawned {amount} {item}");
+                    Debug.Log($"Spawned {amount} {item}");
                 }
                 else if (_itemSlot.GetInventoryItem() != null)
                 {
@@ -233,9 +243,10 @@ public class DiggingMachine : MonoBehaviour
                 {
                     if (amount == 0)
                     {
-                        // SpawnMachineItem(_collectedResource.item, _collectedResource.recourceAmount);
-                        // Debug.LogError("I think this is wrong");
-                        Debug.Log("Had No resources to spawn");
+                        SpawnMachineItem(_collectedResource.item, _collectedResource.recourceAmount);
+                        // _itemAmount += _collectedResource.recourceAmount;
+                        Debug.Log("Spawned First Of " + _collectedResource.item);
+                        // Debug.Log("Had No resources to spawn");
                     }
                     else
                     {
@@ -257,7 +268,7 @@ public class DiggingMachine : MonoBehaviour
         }
         else
         {
-            if (!MiningPanelManager.Instance.panelActive)
+            if (!MiningPanelManager.Instance.panelActive || MiningPanelManager.Instance.panelActive && MiningPanelManager.Instance.currentDigger != this)
             {
                 if (amount == 0)
                 {
@@ -327,6 +338,10 @@ public class DiggingMachine : MonoBehaviour
 
     public void InitializeFuelType()
     {
+        if (_fuelSlot.GetInventoryItem() == null)
+        {
+            return;
+        }
         _fuelSlot.SetInventoryItem(_fuelSlot.transform.GetChild(0).GetComponent<InventoryItem>());
         _fuelType = _fuelSlot.GetInventoryItem().item;
         _fuelAmount = _fuelSlot.GetInventoryItem().count;

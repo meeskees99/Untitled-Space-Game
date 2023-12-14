@@ -81,8 +81,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (lastInventorySlot.isFuelSlot)
         {
             MiningPanelManager.Instance.currentDigger.FuelAmount = 0;
-            MiningPanelManager.Instance.currentDigger.FuelType = null;
-            MiningPanelManager.Instance.currentDigger.FuelInitialized = false;
+            // MiningPanelManager.Instance.currentDigger.FuelType = null;
+            // MiningPanelManager.Instance.currentDigger.FuelInitialized = false;
         }
     }
 
@@ -182,6 +182,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             _pointerEventData.position = transform.position;
             _raycaster.Raycast(_pointerEventData, results);
 
+            // next line gives error idk why
             if (results[0].gameObject.transform.GetComponent<Button>())
             {
                 Debug.Log("DropOnDrop True");
