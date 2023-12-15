@@ -572,7 +572,6 @@ public class CharStateMachine : MonoBehaviour
         }
 
         CurrentMovement = (Orientation.forward * CurrentMovementInput.y).normalized + (Orientation.right * CurrentMovementInput.x).normalized;
-
         PlayerAnimator.SetBool("OnGround", IsGrounded);
         if (_isJumpTime >= 0)
         {

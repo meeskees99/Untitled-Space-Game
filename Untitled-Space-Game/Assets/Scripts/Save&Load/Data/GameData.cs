@@ -20,12 +20,13 @@ public class GameData
     #endregion
 
     #region Machines
-    public int[] resourceId;
-    public List<int> itemAmounts = new();
+    public List<int> diggerVeinIndex = new();
+    // public int[] resourceId;
+    // public List<int> itemAmounts = new();
 
 
-    public int[] fuelId;
-    public List<int> fuelAmounts = new();
+    // public int[] fuelId;
+    // public List<int> fuelAmounts = new();
     #endregion
     public int gameDifficulty;
 
@@ -42,5 +43,7 @@ public class GameData
         this.resourceIndex = new List<int>();
         this.resourcePositions = new List<Vector3>();
         this.resourceRotations = new List<Vector3>();
+
+        this.diggerVeinIndex = new();
     }
 }

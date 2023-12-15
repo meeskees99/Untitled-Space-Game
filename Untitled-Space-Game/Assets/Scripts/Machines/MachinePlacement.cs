@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class MachinePlacement : MonoBehaviour
+public class MachinePlacement : MonoBehaviour, IDataPersistence
 {
+    [SerializeField] ResourceSpawner _resourceSpawner;
     [Header("Prefabs")]
     [SerializeField] GameObject[] _machinePrefabs;
     [SerializeField] GameObject[] _machineBlueprintPrefabs;
@@ -17,8 +18,10 @@ public class MachinePlacement : MonoBehaviour
     [SerializeField] Color _cantPlaceColor;
 
     [SerializeField] List<DiggingMachine> _placedDiggers = new();
+    [SerializeField] List<int> diggerVeinIndex = new();
 
     [SerializeField] Transform _shootPos;
+    bool _hasLoadData;
 
     RaycastHit _hit;
 
@@ -31,6 +34,14 @@ public class MachinePlacement : MonoBehaviour
     private void Start()
     {
         _selectedIndex = -1;
+
+        if (_hasLoadData)
+        {
+            for (int i = 0; i < diggerVeinIndex.Count; i++)
+            {
+                SpawnMachines(diggerVeinIndex[i]);
+            }
+        }
     }
     void Update()
     {
@@ -105,7 +116,30 @@ public class MachinePlacement : MonoBehaviour
 
         _placedDiggers.Add(spawnedMachine.GetComponent<DiggingMachine>());
 
+        diggerVeinIndex.Add(placePos.GetComponent<ResourceVein>().resourceIndex);
+
         _selectedPrefab = null;
         _selectedIndex = -1;
+    }
+
+    void SpawnMachines(int spawnIndex)
+    {
+        GameObject spawnedMachine = Instantiate(_machinePrefabs[0], _resourceSpawner._resourceGameObjects[spawnIndex].transform);
+        spawnedMachine.transform.localPosition = _placementOffset;
+    }
+
+    public void LoadData(GameData data)
+    {
+        diggerVeinIndex = data.diggerVeinIndex;
+
+        if (diggerVeinIndex.Count > 0)
+        {
+            _hasLoadData = true;
+        }
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.diggerVeinIndex = diggerVeinIndex;
     }
 }
