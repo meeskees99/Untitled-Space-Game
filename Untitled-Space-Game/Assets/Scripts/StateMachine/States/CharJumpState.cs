@@ -10,11 +10,11 @@ public class CharJumpState : CharBaseState
     public override void EnterState()
     {
         InitializeSubState();
-        Debug.Log("JUMP ENTER");
 
+        // Jump Animation should be true
         Ctx.IsJumping = true;
+        Ctx.PlayerAnimator.SetBool(Ctx.JumpingAnimation, Ctx.IsJumping);
 
-        // Ctx.PlayerAnimator.SetBool("Jump", true);
         Ctx.IsExitingSlope = true;
 
         HandleJump();
@@ -22,9 +22,11 @@ public class CharJumpState : CharBaseState
 
     public override void ExitState()
     {
+        // Jump Animation should be false
         Ctx.IsJumping = false;
+        Ctx.PlayerAnimator.SetBool(Ctx.JumpingAnimation, Ctx.IsJumping);
+
         Ctx.IsExitingSlope = false;
-        // Ctx.PlayerAnimator.SetBool("Jump", false);
     }
 
     #region MonoBehaveiours

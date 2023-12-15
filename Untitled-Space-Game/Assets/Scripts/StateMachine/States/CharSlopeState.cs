@@ -38,7 +38,6 @@ public class CharSlopeState : CharBaseState
 
         if (Ctx.Rb.velocity.y > 0 && !Ctx.IsExitingSlope && Ctx.JumpTimer == 0)
         {
-            Debug.Log("downing force on your mom");
             Ctx.Rb.AddForce(Vector3.down * 80f, ForceMode.Force);
         }
     }

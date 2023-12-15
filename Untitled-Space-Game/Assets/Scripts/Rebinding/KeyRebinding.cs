@@ -8,7 +8,8 @@ using System;
 
 public class KeyRebinding : MonoBehaviour
 {
-    [SerializeField] CharStateMachine _charController;
+    // [SerializeField] CharStateMachine ;
+    [SerializeField] PlayerInput _playerInput;
 
     // [SerializeField] InputBinding.DisplayStringOptions _displayStringOptions;
 
@@ -37,7 +38,7 @@ public class KeyRebinding : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_charController != null)
+        if (_playerInput != null)
         {
             for (int i = 0; i < _keyboardKeybinds.Count; i++)
             {
@@ -58,7 +59,7 @@ public class KeyRebinding : MonoBehaviour
 
     private void OnValidate()
     {
-        if (_charController == null)
+        if (_playerInput == null)
         {
             return;
         }
@@ -66,13 +67,13 @@ public class KeyRebinding : MonoBehaviour
         UpdateAllUI();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown("o"))
-        {
-            ResetKeyboardBindings();
-        }
-    }
+    // private void Update()
+    // {
+    //     if (Input.GetKeyDown("o"))
+    //     {
+    //         ResetKeyboardBindings();
+    //     }
+    // }
 
     private void UpdateAllUI()
     {
@@ -135,6 +136,18 @@ public class KeyRebinding : MonoBehaviour
     public void KeyboardRebindBtn(int keybindIndex)
     {
         KeyRebindingUI.StartRebind(_keyboardKeybinds[keybindIndex]);
+    }
+
+    public void ResetKeyboardBindingBtn(int keybindIndex)
+    {
+        KeyRebindingUI.ResetBinding(_keyboardKeybinds[keybindIndex]);
+        UpdateAllUI();
+    }
+
+    public void ReloadKeyboardBindingBtn(int keybindIndex)
+    {
+        KeyRebindingUI.LoadBindingOverride(_keyboardKeybinds[keybindIndex]._actionName);
+        UpdateAllUI();
     }
 
     public void ResetKeyboardBindings()

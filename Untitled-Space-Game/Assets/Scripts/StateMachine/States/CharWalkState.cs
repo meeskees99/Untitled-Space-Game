@@ -6,6 +6,10 @@ public class CharWalkState : CharBaseState
 
     public override void EnterState()
     {
+        // Walk Animation should be true
+        Ctx.IsWalking = true;
+        Ctx.PlayerAnimator.SetBool(Ctx.WalkingAnimation, Ctx.IsWalking);
+
         Ctx.DesiredMoveForce = Ctx.WalkSpeed;
 
         if (Ctx.MoveForce > Ctx.WalkSpeed)
@@ -14,7 +18,12 @@ public class CharWalkState : CharBaseState
         }
     }
 
-    public override void ExitState() { }
+    public override void ExitState()
+    {
+        // Walk Animation should be false
+        Ctx.IsWalking = false;
+        Ctx.PlayerAnimator.SetBool(Ctx.WalkingAnimation, Ctx.IsWalking);
+    }
 
     #region MonoBehaveiours
 

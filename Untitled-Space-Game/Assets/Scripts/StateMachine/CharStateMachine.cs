@@ -25,11 +25,11 @@ public class CharStateMachine : MonoBehaviour
         get { return _playerObj; }
     }
 
-    // [SerializeField] Animator _playerAnimator;
-    // public Animator PlayerAnimator
-    // {
-    //     get { return _playerAnimator; }
-    // }
+    [SerializeField] Animator _playerAnimator;
+    public Animator PlayerAnimator
+    {
+        get { return _playerAnimator; }
+    }
 
     [SerializeField] Transform _playerCam;
     public Transform PlayerCam
@@ -379,14 +379,20 @@ public class CharStateMachine : MonoBehaviour
 
     #endregion
 
-    [Header("States")]
-    #region States
+    [Header("Animation States")]
+    #region Animation States
 
-    [SerializeField] bool _isAired;
-    public bool IsAired
+    [SerializeField] bool _isFalling;
+    public bool IsFalling
     {
-        get { return _isAired; }
-        set { _isAired = value; }
+        get { return _isFalling; }
+        set { _isFalling = value; }
+    }
+
+    [SerializeField] string _fallingAnimation;
+    public string FallingAnimation
+    {
+        get { return _fallingAnimation; }
     }
 
     [SerializeField] bool _isJumping;
@@ -394,6 +400,64 @@ public class CharStateMachine : MonoBehaviour
     {
         get { return _isJumping; }
         set { _isJumping = value; }
+    }
+
+    [SerializeField] string _jumpingAnimation;
+    public string JumpingAnimation
+    {
+        get { return _jumpingAnimation; }
+    }
+
+    [SerializeField] bool _isWalking;
+    public bool IsWalking
+    {
+        get { return _isWalking; }
+        set { _isWalking = value; }
+    }
+
+    [SerializeField] string _walkingAnimation;
+    public string WalkingAnimation
+    {
+        get { return _walkingAnimation; }
+    }
+
+    [SerializeField] bool _isRunning;
+    public bool IsRunning
+    {
+        get { return _isRunning; }
+        set { _isRunning = value; }
+    }
+
+    [SerializeField] string _runningAnimation;
+    public string RunningAnimation
+    {
+        get { return _runningAnimation; }
+    }
+
+    [SerializeField] bool _isExhausted;
+    public bool IsExhausted
+    {
+        get { return _isExhausted; }
+        set { _isExhausted = value; }
+    }
+
+    [SerializeField] string _exhaustedAnimation;
+    public string ExhaustedAnimation
+    {
+        get { return _exhaustedAnimation; }
+    }
+
+    [SerializeField] bool _isCrouching;
+    public bool IsCrouching
+    {
+        get { return _isCrouching; }
+        set { _isCrouching = value; }
+    }
+
+    [SerializeField] string _crouchingAnimation;
+    public string CrouchingAnimation
+    {
+        get { return _crouchingAnimation; }
     }
 
     #endregion
@@ -509,7 +573,7 @@ public class CharStateMachine : MonoBehaviour
 
         CurrentMovement = (Orientation.forward * CurrentMovementInput.y).normalized + (Orientation.right * CurrentMovementInput.x).normalized;
 
-        // PlayerAnimator.SetBool("OnGround", IsGrounded);
+        PlayerAnimator.SetBool("OnGround", IsGrounded);
         if (_isJumpTime >= 0)
         {
             _isGrounded = CheckGrounded();
@@ -568,30 +632,30 @@ public class CharStateMachine : MonoBehaviour
         _currentState.FixedUpdateStates();
     }
 
-    private void LateUpdate()
-    {
-        // _currentState.LateUpdateStates();
-    }
+    // private void LateUpdate()
+    // {
+    //     // _currentState.LateUpdateStates();
+    // }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        // _currentState.OnTriggerEnterStates(other);
-    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     // _currentState.OnTriggerEnterStates(other);
+    // }
 
-    private void OnTriggerExit(Collider other)
-    {
-        // _currentState.OnTriggerExitStates(other);
-    }
+    // private void OnTriggerExit(Collider other)
+    // {
+    //     // _currentState.OnTriggerExitStates(other);
+    // }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        // _currentState.OnCollisionEnterStates(other);
-    }
+    // private void OnCollisionEnter(Collision other)
+    // {
+    //     // _currentState.OnCollisionEnterStates(other);
+    // }
 
-    private void OnCollisionExit(Collision other)
-    {
-        // _currentState.OnCollisionExitStates(other);
-    }
+    // private void OnCollisionExit(Collision other)
+    // {
+    //     // _currentState.OnCollisionExitStates(other);
+    // }
 
     #endregion
 

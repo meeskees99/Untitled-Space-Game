@@ -32,7 +32,6 @@ public class CharIdleState : CharBaseState
         }
         else if (Ctx.IsMove && Ctx.IsRun && !Ctx.IsCrouch && Ctx.Stamina > 0)
         {
-            Debug.Log("idle > run");
             SwitchState(Factory.Run());
         }
         else if (Ctx.IsCrouch)

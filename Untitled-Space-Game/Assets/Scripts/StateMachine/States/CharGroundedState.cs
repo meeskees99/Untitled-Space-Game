@@ -10,7 +10,7 @@ public class CharGroundedState : CharBaseState
     {
         InitializeSubState();
         Ctx.MoveMultiplier = 1f;
-        Ctx.IsAired = false;
+        Ctx.IsFalling = false;
         Ctx.DesiredMoveForce = Ctx.WalkSpeed;
         Ctx.IsJumpTime = Ctx.MaxJumpTime;
 

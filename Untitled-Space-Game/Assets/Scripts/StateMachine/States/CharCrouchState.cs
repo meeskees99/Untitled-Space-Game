@@ -6,7 +6,10 @@ public class CharCrouchState : CharBaseState
 
     public override void EnterState()
     {
-        Debug.Log("ENTER CROUCH");
+        // Crouch animation should be true
+        Ctx.IsCrouching = true;
+        Ctx.PlayerAnimator.SetBool(Ctx.CrouchingAnimation, Ctx.IsCrouching);
+
 
         Ctx.PlayerObj.localScale = new Vector3(1, 0.5f, 1);
 
@@ -20,6 +23,10 @@ public class CharCrouchState : CharBaseState
 
     public override void ExitState()
     {
+        // Crouch animation should be false
+        Ctx.IsCrouching = true;
+        Ctx.PlayerAnimator.SetBool(Ctx.CrouchingAnimation, Ctx.IsCrouching);
+
         Ctx.PlayerObj.localScale = new Vector3(1, 1, 1);
     }
 

@@ -6,7 +6,9 @@ public class CharRunState : CharBaseState
 
     public override void EnterState()
     {
-        Debug.Log("ENTER RUN");
+        // Run Animation should be true
+        Ctx.IsRunning = true;
+        Ctx.PlayerAnimator.SetBool(Ctx.RunningAnimation, Ctx.IsRunning);
 
         Ctx.DesiredMoveForce = Ctx.RunSpeed;
 
@@ -20,6 +22,10 @@ public class CharRunState : CharBaseState
 
     public override void ExitState()
     {
+        // Run Animation should be false
+        Ctx.IsRunning = false;
+        Ctx.PlayerAnimator.SetBool(Ctx.RunningAnimation, Ctx.IsRunning);
+
         Ctx.DecreaseStamina = false;
     }
 
