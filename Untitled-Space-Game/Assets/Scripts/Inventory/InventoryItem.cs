@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -182,7 +183,10 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             _pointerEventData.position = transform.position;
             _raycaster.Raycast(_pointerEventData, results);
 
-            // next line gives error idk why
+            if (results.Count <= 0)
+            {
+                return;
+            }
             if (results[0].gameObject.transform.GetComponent<Button>())
             {
                 Debug.Log("DropOnDrop True");
@@ -220,6 +224,6 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     private void OnDestroy()
     {
-        Debug.Log($"{this.name} killed itself (cringe)");
+        // Debug.Log($"{this.name} killed itself (cringe)");
     }
 }
