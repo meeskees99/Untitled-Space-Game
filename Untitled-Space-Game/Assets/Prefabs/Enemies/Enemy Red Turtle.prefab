@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 3734987774596926721}
   - component: {fileID: 1730877640705567364}
   - component: {fileID: 5355304180129750833}
+  - component: {fileID: 3730488474252869202}
   m_Layer: 0
   m_Name: Enemy Red Turtle
   m_TagString: Untagged
@@ -235,12 +236,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentTravelTime: 0
   _maxTravelTime: 15
+  _enemyName: 
+  _health: 0
+  _attackDamage: 0
+  _attackRange: 0
+  _attackRate: 0
+  _chaseRadius: 0
+  _chaseTime: 0
+  _movementSpeed: 0
+  _stopDistance: 0
+  _walkRadius: 0
+  _enemyStats: {fileID: 11400000, guid: 6a8b35cd260f13346a02f365eab24f57, type: 2}
   _walkabeLayer:
     serializedVersion: 2
     m_Bits: 64
   _minWaitTime: 2
   _maxWaitTime: 6
-  _enemyStats: {fileID: 11400000, guid: 6a8b35cd260f13346a02f365eab24f57, type: 2}
   _stopPatrolling: 0
 --- !u!195 &5355304180129750833
 NavMeshAgent:
@@ -264,3 +275,19 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 5
   m_ObstacleAvoidanceType: 4
+--- !u!208 &3730488474252869202
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8341848710017158541}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

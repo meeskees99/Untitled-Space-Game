@@ -16,6 +16,8 @@ public class MachinePlacement : MonoBehaviour
     [SerializeField] Color _canPlaceColor;
     [SerializeField] Color _cantPlaceColor;
 
+    [SerializeField] List<DiggingMachine> _placedDiggers = new();
+
     [SerializeField] Transform _shootPos;
 
     RaycastHit _hit;
@@ -100,6 +102,8 @@ public class MachinePlacement : MonoBehaviour
     {
         GameObject spawnedMachine = Instantiate(_machinePrefabs[_selectedIndex], placePos);
         spawnedMachine.transform.localPosition = _placementOffset;
+
+        _placedDiggers.Add(spawnedMachine.GetComponent<DiggingMachine>());
 
         _selectedPrefab = null;
         _selectedIndex = -1;

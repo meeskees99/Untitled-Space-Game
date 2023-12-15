@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DiggingMachine : MonoBehaviour
+public class DiggingMachine : MonoBehaviour, IDataPersistence
 {
     [Header("Info")]
     [SerializeField] Resource _collectedResource;
@@ -347,5 +347,15 @@ public class DiggingMachine : MonoBehaviour
         _fuelAmount = _fuelSlot.GetInventoryItem().count;
         Debug.Log("Initialized fuel type: " + _fuelAmount + " " + _fuelType);
         _fuelInitialized = true;
+    }
+
+    public void LoadData(GameData data)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void SaveData(GameData data)
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -16,8 +16,9 @@ public class EnemySpawner : MonoBehaviour
     NavMeshHit _navMeshHit;
     [SerializeField] LayerMask _spawnLayer;
 
-    [Header("Enemy")]
+    [Header("Spawn Settings")]
     [SerializeField] float _minSpawnDistanceFromPlayer = 30f;
+    [SerializeField] float _maxSpawnDistanceFromPlayer = 100f;
     [SerializeField] int preferedEnemyCount;
     [SerializeField] int _minSpawnAmountOnStart, _maxSpawnAmountOnStart;
     [SerializeField] GameObject[] _enemyTypes;
@@ -26,8 +27,9 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        NavMeshManager.Instance.UpdateNavMesh();
-        player = FindObjectOfType<PlayerStats>().gameObject;
+        // NavMeshManager.Instance.UpdateNavMesh();
+        if (player == null)
+            player = FindObjectOfType<PlayerStats>().gameObject;
 
         int randomSpawnAmount = Random.Range(_minSpawnAmountOnStart, _maxSpawnAmountOnStart);
         for (int i = 0; i < randomSpawnAmount; i++)
@@ -35,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
             GetRandomPosition();
         }
 
-        Debug.Log($"Spawned {randomSpawnAmount} enemies on start!");
+        Debug.Log($"Spawned {enemiesInScene.Count} enemies on start!");
     }
 
     private void Update()
@@ -65,9 +67,9 @@ public class EnemySpawner : MonoBehaviour
 
     void GetRandomPosition()
     {
-        float xpos = Random.Range(player.transform.position.x - 100, 100 + player.transform.position.x);
+        float xpos = Random.Range(player.transform.position.x - _maxSpawnDistanceFromPlayer, _maxSpawnDistanceFromPlayer + player.transform.position.x);
         float ypos = 0;
-        float zpos = Random.Range(player.transform.position.x - 100, 100 + player.transform.position.x);
+        float zpos = Random.Range(player.transform.position.x - _maxSpawnDistanceFromPlayer, _maxSpawnDistanceFromPlayer + player.transform.position.x);
 
         Vector3 randomPos = new Vector3(xpos, ypos, zpos);
 

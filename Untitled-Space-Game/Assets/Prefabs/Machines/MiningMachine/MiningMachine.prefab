@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 5683988990747866929}
   - component: {fileID: 2526234201680394606}
   - component: {fileID: 8076956960007390403}
+  - component: {fileID: 4747397740975584572}
   m_Layer: 8
   m_Name: Digger
   m_TagString: Untagged
@@ -158,6 +159,8 @@ MonoBehaviour:
   _itemAmount: 0
   _fuelType: {fileID: 0}
   _fuelAmount: 0
+  _resourceInitialized: 0
+  _fuelInitialized: 0
   _miningRange: 3
   _resourceLayer:
     serializedVersion: 2
@@ -165,3 +168,21 @@ MonoBehaviour:
   _itemSlot: {fileID: 0}
   _fuelSlot: {fileID: 0}
   fuelLeftSlider: {fileID: 0}
+  _fuelTimeInitialized: 0
+  _fuelLeft: 0
+--- !u!208 &4747397740975584572
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4971084397824814477}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 1.025, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.05, z: 0}
+  m_TimeToStationary: 0.5

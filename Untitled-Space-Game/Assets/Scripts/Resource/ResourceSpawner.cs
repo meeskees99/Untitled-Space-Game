@@ -21,7 +21,7 @@ public class ResourceSpawner : MonoBehaviour, IDataPersistence
     [SerializeField] NavMeshHit _navMeshHit;
 
     [SerializeField] Vector3 _randomPos;
-    [SerializeField] Vector3 _randomRot;
+    // [SerializeField] Vector3 _randomRot;
     [SerializeField] int _randomResourceIndex;
 
     RaycastHit _terrainHit;
@@ -65,7 +65,7 @@ public class ResourceSpawner : MonoBehaviour, IDataPersistence
     void CheckSpawnResource()
     {
         _randomPos = GetRandomPosition();
-        _randomRot = GetRandomRotation();
+        // _randomRot = GetRandomRotation();
         _randomResourceIndex = GetRandomResource();
 
         if (Physics.Raycast(_randomPos, Vector3.down, out _terrainHit, Mathf.Infinity, _terrainLayer))
@@ -91,12 +91,12 @@ public class ResourceSpawner : MonoBehaviour, IDataPersistence
         return randomPos;
     }
 
-    Vector3 GetRandomRotation()
-    {
-        Vector3 randomRot = new Vector3();
-        randomRot.y = Random.Range(0, 361);
-        return randomRot;
-    }
+    // Vector3 GetRandomRotation()
+    // {
+    //     Vector3 randomRot = new Vector3();
+    //     randomRot.y = Random.Range(0, 361);
+    //     return randomRot;
+    // }
 
     int GetRandomResource()
     {

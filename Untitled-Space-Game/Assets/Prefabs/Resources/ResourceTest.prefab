@@ -260,6 +260,7 @@ GameObject:
   - component: {fileID: 653951209686209843}
   - component: {fileID: 8552571534794409634}
   - component: {fileID: 4927135352823793613}
+  - component: {fileID: 7260349588475650038}
   m_Layer: 7
   m_Name: ResourceTest
   m_TagString: Untagged
@@ -325,6 +326,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.9789035, y: 0.212119, z: 1.054509}
   m_Center: {x: 0.03516081, y: -0.0004935339, z: -0.018868506}
+--- !u!208 &7260349588475650038
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670279295205404173}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.48945174, y: 0.1060595, z: 0.5272545}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.03516081, y: -0.0004935339, z: -0.01886851}
+  m_TimeToStationary: 0.5
 --- !u!1 &4303921918420144071
 GameObject:
   m_ObjectHideFlags: 0

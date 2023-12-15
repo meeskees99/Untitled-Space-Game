@@ -218,7 +218,7 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log($"{_enemyName} was destroyed");
+        // Debug.Log($"{_enemyName} was destroyed");
         _enemySpawner.RemoveEnemy();
         _enemySpawner.enemiesInScene.Remove(gameObject);
     }

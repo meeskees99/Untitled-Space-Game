@@ -8,13 +8,25 @@ public class GameData
 {
     public long lastUpdated;
 
+    #region Resources
     public List<Vector3> resourcePositions;
     public List<Vector3> resourceRotations;
     public List<int> resourceIndex;
+    #endregion
 
+    #region Inventory
     public int[] itemId = new int[23];
     public int[] itemAmount = new int[23];
+    #endregion
 
+    #region Machines
+    public int[] resourceId;
+    public List<int> itemAmounts = new();
+
+
+    public int[] fuelId;
+    public List<int> fuelAmounts = new();
+    #endregion
     public int gameDifficulty;
 
     public GameData()
