@@ -7788,6 +7788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc3a73d4893e50d4783b3e056e4533fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerInput: {fileID: 0}
   miningPanel: {fileID: 417064459}
   itemSlot: {fileID: 1541079270}
   fuelSlot: {fileID: 647428782}
@@ -8238,6 +8239,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 516378794}
+    - target: {fileID: 3402430684912650702, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 301
+      objectReference: {fileID: 0}
     - target: {fileID: 3493278075471695923, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -8351,7 +8357,7 @@ PrefabInstance:
     - target: {fileID: 5432743264667587301, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 201
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 5557697035433105949, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
         type: 3}
@@ -40086,6 +40092,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1923885567571685301, guid: cb8c93fd58847b54d918fa4e6fee0d46,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1923885567571685301, guid: cb8c93fd58847b54d918fa4e6fee0d46,
+        type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Game
+      objectReference: {fileID: 0}
     - target: {fileID: 3080552579979813999, guid: cb8c93fd58847b54d918fa4e6fee0d46,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -40135,6 +40151,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3163338748016036251, guid: cb8c93fd58847b54d918fa4e6fee0d46,
+        type: 3}
+      propertyPath: _runSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3163338748016036251, guid: cb8c93fd58847b54d918fa4e6fee0d46,
+        type: 3}
+      propertyPath: _walkSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3163338748016036251, guid: cb8c93fd58847b54d918fa4e6fee0d46,
+        type: 3}
+      propertyPath: _crouchSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3163338748016036251, guid: cb8c93fd58847b54d918fa4e6fee0d46,
         type: 3}

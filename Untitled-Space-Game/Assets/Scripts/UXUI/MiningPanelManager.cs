@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class MiningPanelManager : MonoBehaviour
 {
     public static MiningPanelManager Instance;
+    [SerializeField] PlayerInput _playerInput;
 
     public GameObject miningPanel;
     public InventorySlot itemSlot;
@@ -26,6 +28,11 @@ public class MiningPanelManager : MonoBehaviour
         else
         {
             Destroy(this.gameObject);
+        }
+
+        if (_playerInput == null)
+        {
+            _playerInput = FindObjectOfType<PlayerInput>();
         }
     }
 
@@ -48,6 +55,8 @@ public class MiningPanelManager : MonoBehaviour
             miningPanel.GetComponent<Canvas>().enabled = !miningPanel.GetComponent<Canvas>().enabled;
             miningPanel.GetComponent<GraphicRaycaster>().enabled = !miningPanel.GetComponent<GraphicRaycaster>().enabled;
             panelActive = miningPanel.GetComponent<GraphicRaycaster>().enabled;
+            _playerInput.currentActionMap = _playerInput.actions.FindActionMap("Game");
+            Debug.Log("Changed Actionmap To " + _playerInput.currentActionMap.name);
             return;
         }
         else
@@ -83,5 +92,10 @@ public class MiningPanelManager : MonoBehaviour
 
         }
 
+        if (panelActive)
+        {
+            _playerInput.currentActionMap = _playerInput.actions.FindActionMap("Menu");
+            Debug.Log("Changed Actionmap To " + _playerInput.currentActionMap.name);
+        }
     }
 }

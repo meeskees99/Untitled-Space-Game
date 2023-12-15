@@ -69,10 +69,14 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
                     // TODO - make the thing turn red
                     _spawnedBlueprint.transform.position = _hit.point + _placementOffset;
                     _spawnedBlueprint.transform.GetComponentInChildren<MeshRenderer>().material.color = _cantPlaceColor;
-                    if (Input.GetKeyDown(KeyCode.Mouse0))
-                    {
-                        Destroy(_spawnedBlueprint);
-                    }
+
+                    //UNCOMMENT IF YOU WANT TO STOP PLACING WHEN YOU MISS
+                    // if (Input.GetKeyDown(KeyCode.Mouse0))
+                    // {
+                    //     _selectedPrefab = null;
+                    //     _selectedIndex = -1;
+                    //     Destroy(_spawnedBlueprint);
+                    // }
                 }
             }
             else
@@ -95,6 +99,7 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
         if (_selectedIndex == machineIndex)
         {
             _selectedIndex = -1;
+            _selectedPrefab = null;
             return;
         }
         if (machineIndex < 0)
