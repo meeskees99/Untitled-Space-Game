@@ -11,7 +11,7 @@ public class CharFallState : CharBaseState
     {
         // Fall animation should be true
         Ctx.IsFalling = true;
-        Ctx.PlayerAnimator.SetBool(Ctx.FallingAnimation, Ctx.IsFalling);
+        Ctx.PlayerAnimator.SetBool(Ctx.FallingAnimation, !Ctx.IsFalling);
 
         InitializeSubState();
         Ctx.IsFalling = true;
@@ -22,7 +22,7 @@ public class CharFallState : CharBaseState
     {
         // Fall animation should be false
         Ctx.IsFalling = false;
-        Ctx.PlayerAnimator.SetBool(Ctx.FallingAnimation, Ctx.IsFalling);
+        Ctx.PlayerAnimator.SetBool(Ctx.FallingAnimation, !Ctx.IsFalling);
     }
 
     #region MonoBehaveiours

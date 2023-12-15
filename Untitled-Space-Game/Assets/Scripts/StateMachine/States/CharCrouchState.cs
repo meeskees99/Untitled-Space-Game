@@ -35,6 +35,17 @@ public class CharCrouchState : CharBaseState
     public override void UpdateState()
     {
         CheckSwitchStates();
+
+        if (Ctx.IsMove)
+        {
+            Ctx.IsWalking = true;
+            Ctx.PlayerAnimator.SetBool(Ctx.WalkingAnimation, Ctx.IsWalking);
+        }
+        else
+        {
+            Ctx.IsWalking = false;
+            Ctx.PlayerAnimator.SetBool(Ctx.WalkingAnimation, Ctx.IsWalking);
+        }
     }
 
     public override void LateUpdateState() { }
