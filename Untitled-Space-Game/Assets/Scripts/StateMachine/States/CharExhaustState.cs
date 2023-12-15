@@ -6,6 +6,10 @@ public class CharExhaustState : CharBaseState
 
     public override void EnterState()
     {
+        // exhaust animation should be true
+        Ctx.IsExhausted = true;
+        Ctx.PlayerAnimator.SetBool(Ctx.ExhaustedAnimation, Ctx.IsExhausted);
+
         Ctx.ExhaustTime = Ctx.MaxExhastTime;
 
         Ctx.DesiredMoveForce = Ctx.ExhaustSpeed;
@@ -18,6 +22,10 @@ public class CharExhaustState : CharBaseState
 
     public override void ExitState()
     {
+        // exhaust animation should be true
+        Ctx.IsExhausted = false;
+        Ctx.PlayerAnimator.SetBool(Ctx.ExhaustedAnimation, Ctx.IsExhausted);
+
         Ctx.ExhaustTime = Ctx.MaxExhastTime;
     }
 

@@ -11,7 +11,8 @@ using UnityEngine.UI;
 
 public class KeyRebindingUI : MonoBehaviour
 {
-    private static CharStateMachine _charController;
+    // private static CharStateMachine _playerInput;
+    private static PlayerInput _playerInput;
     public static NewControls inputActions;
     public static event Action rebindComplete;
     public static event Action rebindCanceled;
@@ -19,16 +20,16 @@ public class KeyRebindingUI : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_charController == null)
+        if (_playerInput == null)
         {
-            _charController = FindObjectOfType<CharStateMachine>();
+            _playerInput = FindObjectOfType<PlayerInput>();
         }
     }
     private void Awake()
     {
-        if (_charController == null)
+        if (_playerInput == null)
         {
-            _charController = FindObjectOfType<CharStateMachine>();
+            _playerInput = FindObjectOfType<PlayerInput>();
         }
         if (inputActions == null)
         {
@@ -39,7 +40,7 @@ public class KeyRebindingUI : MonoBehaviour
     public static void StartRebind(KeyRebinding.Keybind keybind)
     {
         Debug.Log(keybind._actionName + " " + keybind._actionIndex);
-        InputAction action = _charController.PlayerInput.actions.FindAction(keybind._actionName);
+        InputAction action = _playerInput.actions.FindAction(keybind._actionName);
 
 
 
@@ -119,13 +120,12 @@ public class KeyRebindingUI : MonoBehaviour
 
     public static string GetBindingName(KeyRebinding.Keybind keybind)
     {
-
-        if (_charController == null)
+        if (_playerInput == null)
         {
-            _charController = FindObjectOfType<CharStateMachine>();
+            _playerInput = FindObjectOfType<PlayerInput>();
         }
 
-        InputAction action = _charController.PlayerInput.actions.FindAction(keybind._actionName);
+        InputAction action = _playerInput.actions.FindAction(keybind._actionName);
 
         if (action.bindings[keybind._actionIndex].isComposite)
         {
@@ -134,7 +134,7 @@ public class KeyRebindingUI : MonoBehaviour
         }
         else if (action.bindings[keybind._actionIndex].isPartOfComposite)
         {
-            // Debug.Log("IsPartOfComposite");
+            Debug.Log("IsPartOfComposite: " + keybind._actionIndex);
             return GetPartOfCompositeButton(keybind._actionIndex, action);
         }
         // Debug.Log(keybind._actionName + " " + keybind._actionIndex);
@@ -186,7 +186,7 @@ public class KeyRebindingUI : MonoBehaviour
             inputActions = new NewControls();
         }
 
-        InputAction action = _charController.PlayerInput.actions.FindAction(actionName);
+        InputAction action = _playerInput.actions.FindAction(actionName);
 
         for (int i = 0; i < action.bindings.Count; i++)
         {
@@ -199,7 +199,7 @@ public class KeyRebindingUI : MonoBehaviour
 
     public static void ResetBinding(KeyRebinding.Keybind keybind)
     {
-        InputAction action = _charController.PlayerInput.actions.FindAction(keybind._actionName);
+        InputAction action = _playerInput.actions.FindAction(keybind._actionName);
 
         if (action == null || action.bindings.Count <= keybind._actionIndex)
         {
