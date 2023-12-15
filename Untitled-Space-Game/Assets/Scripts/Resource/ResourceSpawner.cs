@@ -7,18 +7,19 @@ public class ResourceSpawner : MonoBehaviour, IDataPersistence
 {
     [Header("Settings")]
     [SerializeField] GameObject[] _resourcePrefabs;
-    [SerializeField] Mesh[] floorMesh;
+    // [SerializeField] Mesh[] floorMesh;
 
     [Header("Save & Load")]
     [SerializeField] List<Vector3> _resourceRotations = new();
     [SerializeField] List<Vector3> _resourcePositions = new();
     [SerializeField] List<int> _resourceIndex = new();
+    public List<GameObject> _resourceGameObjects = new();
 
     [SerializeField] float _minResourceDistance;
 
     [SerializeField] int _amountToSpawn;
 
-    [SerializeField] NavMeshHit _navMeshHit;
+    // [SerializeField] NavMeshHit _navMeshHit;
 
     [SerializeField] Vector3 _randomPos;
     // [SerializeField] Vector3 _randomRot;
@@ -107,6 +108,8 @@ public class ResourceSpawner : MonoBehaviour, IDataPersistence
     void GenerateResource(Vector3 position, Vector3 rotation, int resourceIndex)
     {
         GameObject spawnedResource = Instantiate(_resourcePrefabs[resourceIndex]);
+        _resourceGameObjects.Add(spawnedResource);
+
         _resourceIndex.Add(resourceIndex);
 
         spawnedResource.transform.position = position;
@@ -114,15 +117,20 @@ public class ResourceSpawner : MonoBehaviour, IDataPersistence
 
         spawnedResource.transform.rotation = Quaternion.FromToRotation(Vector3.up, rotation);
         _resourceRotations.Add(rotation);
+
+        spawnedResource.GetComponent<ResourceVein>().resourceIndex = _resourceGameObjects.Count - 1;
     }
 
     void SpawnResource(Vector3 position, Vector3 rotation, int resourceIndex)
     {
         GameObject spawnedResource = Instantiate(_resourcePrefabs[resourceIndex]);
+        _resourceGameObjects.Add(spawnedResource);
 
         spawnedResource.transform.position = position;
 
         spawnedResource.transform.rotation = Quaternion.FromToRotation(Vector3.up, rotation);
+
+        spawnedResource.GetComponent<ResourceVein>().resourceIndex = _resourceGameObjects.Count - 1;
     }
 
     public void LoadData(GameData data)

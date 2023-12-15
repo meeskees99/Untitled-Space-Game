@@ -9,4 +9,8 @@ public class ResourceVein : MonoBehaviour
     {
         get { return _resource; }
     }
+
+    public int resourceIndex;
+
+
 }

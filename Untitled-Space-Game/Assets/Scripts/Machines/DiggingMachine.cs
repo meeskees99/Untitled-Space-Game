@@ -351,11 +351,14 @@ public class DiggingMachine : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        throw new System.NotImplementedException();
+        if (data.diggerVeinIndex.Count > 0)
+        {
+
+        }
     }
 
     public void SaveData(GameData data)
     {
-        throw new System.NotImplementedException();
+        // data.diggerVeinIndex.Add(diggerVeinIndex);
     }
 }

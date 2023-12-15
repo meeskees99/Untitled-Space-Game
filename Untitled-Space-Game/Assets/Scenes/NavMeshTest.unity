@@ -510,6 +510,7 @@ GameObject:
   m_Component:
   - component: {fileID: 530486969}
   - component: {fileID: 530486968}
+  - component: {fileID: 530486970}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -557,6 +558,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &530486970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530486967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6dc82ab720058a48a1b97afa3598ea6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourcePrefabs:
+  - {fileID: 1670279295205404173, guid: bfded2aac09750c408353fce98164aa4, type: 3}
+  _resourceRotations: []
+  _resourcePositions: []
+  _resourceIndex: 
+  _minResourceDistance: 0
+  _amountToSpawn: 0
+  _randomPos: {x: 0, y: 0, z: 0}
+  _randomResourceIndex: 0
+  _terrainLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _minSpawnRange: 0
+  _maxSpawnRange: 0
 --- !u!1 &1718885101
 GameObject:
   m_ObjectHideFlags: 0
