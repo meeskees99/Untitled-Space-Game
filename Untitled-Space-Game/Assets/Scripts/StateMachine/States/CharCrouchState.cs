@@ -11,7 +11,7 @@ public class CharCrouchState : CharBaseState
         Ctx.PlayerAnimator.SetBool(Ctx.CrouchingAnimation, Ctx.IsCrouching);
 
 
-        Ctx.PlayerObj.localScale = new Vector3(1, 0.5f, 1);
+        // Ctx.PlayerObj.localScale = new Vector3(1, 0.5f, 1);
 
         Ctx.DesiredMoveForce = Ctx.CrouchSpeed;
 
@@ -24,10 +24,10 @@ public class CharCrouchState : CharBaseState
     public override void ExitState()
     {
         // Crouch animation should be false
-        Ctx.IsCrouching = true;
+        Ctx.IsCrouching = false;
         Ctx.PlayerAnimator.SetBool(Ctx.CrouchingAnimation, Ctx.IsCrouching);
 
-        Ctx.PlayerObj.localScale = new Vector3(1, 1, 1);
+        // Ctx.PlayerObj.localScale = new Vector3(1, 1, 1);
     }
 
     #region MonoBehaveiours
