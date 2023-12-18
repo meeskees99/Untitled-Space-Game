@@ -186,7 +186,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 90
   m_CollisionDetection: 0
 --- !u!114 &680619008049859036
 MonoBehaviour:
@@ -200,8 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76ea3db29f1e4334e9424652eae30d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
-  amount: 0
-  pickUpDelay: 1.5
-  rotationSpeed: {x: 0, y: 0, z: 0}
-  floatAmount: 0
+  _item: {fileID: 0}
+  _amount: 0
+  _pickUpDelay: 1.5
+  _rotationSpeed: 0
+  _floatAmount: 0
