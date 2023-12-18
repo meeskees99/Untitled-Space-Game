@@ -82,9 +82,27 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Shoot"",
+                    ""name"": ""Use"",
                     ""type"": ""Button"",
                     ""id"": ""f012e68b-2427-4220-9120-5f3fc80631ae"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""079933af-5f45-4e56-bc3a-cda262cea395"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""df465f20-4cc1-4a69-b92d-bea62ea49823"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -187,7 +205,7 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Shoot"",
+                    ""action"": ""Use"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -245,6 +263,28 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dd5a39b3-40a9-49f5-85b4-c41e1717d964"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""443b74bd-507a-4265-aa26-891950fa9eea"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -565,7 +605,9 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
         m_Game_Crouch = m_Game.FindAction("Crouch", throwIfNotFound: true);
         m_Game_Run = m_Game.FindAction("Run", throwIfNotFound: true);
         m_Game_Hotbar = m_Game.FindAction("Hotbar", throwIfNotFound: true);
-        m_Game_Shoot = m_Game.FindAction("Shoot", throwIfNotFound: true);
+        m_Game_Use = m_Game.FindAction("Use", throwIfNotFound: true);
+        m_Game_Inventory = m_Game.FindAction("Inventory", throwIfNotFound: true);
+        m_Game_Interact = m_Game.FindAction("Interact", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Navigate = m_Menu.FindAction("Navigate", throwIfNotFound: true);
@@ -643,7 +685,9 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Game_Crouch;
     private readonly InputAction m_Game_Run;
     private readonly InputAction m_Game_Hotbar;
-    private readonly InputAction m_Game_Shoot;
+    private readonly InputAction m_Game_Use;
+    private readonly InputAction m_Game_Inventory;
+    private readonly InputAction m_Game_Interact;
     public struct GameActions
     {
         private @NewControls m_Wrapper;
@@ -654,7 +698,9 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_Game_Crouch;
         public InputAction @Run => m_Wrapper.m_Game_Run;
         public InputAction @Hotbar => m_Wrapper.m_Game_Hotbar;
-        public InputAction @Shoot => m_Wrapper.m_Game_Shoot;
+        public InputAction @Use => m_Wrapper.m_Game_Use;
+        public InputAction @Inventory => m_Wrapper.m_Game_Inventory;
+        public InputAction @Interact => m_Wrapper.m_Game_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -682,9 +728,15 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
             @Hotbar.started += instance.OnHotbar;
             @Hotbar.performed += instance.OnHotbar;
             @Hotbar.canceled += instance.OnHotbar;
-            @Shoot.started += instance.OnShoot;
-            @Shoot.performed += instance.OnShoot;
-            @Shoot.canceled += instance.OnShoot;
+            @Use.started += instance.OnUse;
+            @Use.performed += instance.OnUse;
+            @Use.canceled += instance.OnUse;
+            @Inventory.started += instance.OnInventory;
+            @Inventory.performed += instance.OnInventory;
+            @Inventory.canceled += instance.OnInventory;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IGameActions instance)
@@ -707,9 +759,15 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
             @Hotbar.started -= instance.OnHotbar;
             @Hotbar.performed -= instance.OnHotbar;
             @Hotbar.canceled -= instance.OnHotbar;
-            @Shoot.started -= instance.OnShoot;
-            @Shoot.performed -= instance.OnShoot;
-            @Shoot.canceled -= instance.OnShoot;
+            @Use.started -= instance.OnUse;
+            @Use.performed -= instance.OnUse;
+            @Use.canceled -= instance.OnUse;
+            @Inventory.started -= instance.OnInventory;
+            @Inventory.performed -= instance.OnInventory;
+            @Inventory.canceled -= instance.OnInventory;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IGameActions instance)
@@ -855,7 +913,9 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnHotbar(InputAction.CallbackContext context);
-        void OnShoot(InputAction.CallbackContext context);
+        void OnUse(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

@@ -16,8 +16,8 @@ public class CharStateMachine : MonoBehaviour
     [Header("Refrences")]
     #region Refrences
 
-    [SerializeField] private PlayerInput playerInput = null;
-    public PlayerInput PlayerInput => playerInput;
+    [SerializeField] PlayerInput _playerInput = null;
+    public PlayerInput PlayerInput => _playerInput;
 
     [SerializeField] Transform _playerObj;
     public Transform PlayerObj
@@ -462,32 +462,6 @@ public class CharStateMachine : MonoBehaviour
 
     #endregion
 
-    [Header("MultiTool")]
-    #region Interactions
-
-    [SerializeField] float _camDistance;
-
-    [SerializeField] float _gatherTime;
-
-    [SerializeField] float _toolRange;
-    [SerializeField] RaycastHit _toolHit;
-    [SerializeField] LayerMask _gatherMask;
-
-    [Header("Interaction")]
-    [SerializeField] GameObject _InteractPanel;
-    [SerializeField] TMP_Text _interactableTxt;
-
-    [SerializeField] float _interactableRadius;
-    [SerializeField] RaycastHit _interactableHit;
-    [SerializeField] float _interactableRange;
-    [SerializeField] LayerMask _interactableMask;
-
-    [SerializeField] bool _didUiInteraction;
-    public bool DidUiInteraction { get { return _didUiInteraction; } private set { _didUiInteraction = value; } }
-
-
-    #endregion
-
     #endregion
 
     // public void LoadData(GameData data)
@@ -505,32 +479,32 @@ public class CharStateMachine : MonoBehaviour
     private void OnEnable()
     {
         // DontDestroyOnLoad(this);
-        playerInput.actions.FindAction("Move").started += OnMovement;
-        playerInput.actions.FindAction("Move").performed += OnMovement;
-        playerInput.actions.FindAction("Move").canceled += OnMovement;
+        _playerInput.actions.FindAction("Move").started += OnMovement;
+        _playerInput.actions.FindAction("Move").performed += OnMovement;
+        _playerInput.actions.FindAction("Move").canceled += OnMovement;
 
-        playerInput.actions.FindAction("Jump").started += OnJump;
-        playerInput.actions.FindAction("Jump").performed += OnJump;
-        playerInput.actions.FindAction("Jump").canceled += OnJump;
+        _playerInput.actions.FindAction("Jump").started += OnJump;
+        _playerInput.actions.FindAction("Jump").performed += OnJump;
+        _playerInput.actions.FindAction("Jump").canceled += OnJump;
 
-        playerInput.actions.FindAction("Run").started += OnRun;
-        playerInput.actions.FindAction("Run").performed += OnRun;
-        playerInput.actions.FindAction("Run").canceled += OnRun;
+        _playerInput.actions.FindAction("Run").started += OnRun;
+        _playerInput.actions.FindAction("Run").performed += OnRun;
+        _playerInput.actions.FindAction("Run").canceled += OnRun;
 
-        playerInput.actions.FindAction("Crouch").started += OnCrouch;
-        playerInput.actions.FindAction("Crouch").performed += OnCrouch;
-        playerInput.actions.FindAction("Crouch").canceled += OnCrouch;
+        _playerInput.actions.FindAction("Crouch").started += OnCrouch;
+        _playerInput.actions.FindAction("Crouch").performed += OnCrouch;
+        _playerInput.actions.FindAction("Crouch").canceled += OnCrouch;
 
-        playerInput.actions.FindAction("Hotbar").started += OnHotbar;
-        playerInput.actions.FindAction("Hotbar").performed += OnHotbar;
-        playerInput.actions.FindAction("Hotbar").canceled += OnHotbar;
+        _playerInput.actions.FindAction("Hotbar").started += OnHotbar;
+        _playerInput.actions.FindAction("Hotbar").performed += OnHotbar;
+        _playerInput.actions.FindAction("Hotbar").canceled += OnHotbar;
 
-        playerInput.actions.FindAction("Shoot").started += OnShoot;
-        playerInput.actions.FindAction("Shoot").performed += OnShoot;
-        playerInput.actions.FindAction("Shoot").canceled += OnShoot;
+        _playerInput.actions.FindAction("Shoot").started += OnShoot;
+        _playerInput.actions.FindAction("Shoot").performed += OnShoot;
+        _playerInput.actions.FindAction("Shoot").canceled += OnShoot;
 
-        playerInput.actions.FindAction("Camera").performed += OnCam;
-        playerInput.actions.FindAction("Camera").canceled += OnCam;
+        _playerInput.actions.FindAction("Camera").performed += OnCam;
+        _playerInput.actions.FindAction("Camera").canceled += OnCam;
 
         _states = new CharStateFactory(this);
         _currentState = _states.Grounded();
@@ -539,8 +513,6 @@ public class CharStateMachine : MonoBehaviour
         _stamina = _maxStamina;
 
         MoveForce = DesiredMoveForce;
-
-        _camDistance = Vector3.Distance(_playerCam.transform.position, _playerObj.transform.position);
 
         // Cursor.visible = false;
         // Cursor.lockState = CursorLockMode.Locked;
@@ -560,11 +532,7 @@ public class CharStateMachine : MonoBehaviour
         //     Debug.Log("scroll down");
         // }
 
-        if (_isShoot)
-        {
-            CheckTool();
-        }
-        CheckInteractable();
+
 
         if (Input.GetKey(KeyCode.O))
         {
@@ -751,54 +719,6 @@ public class CharStateMachine : MonoBehaviour
 
     #endregion
 
-    private void CheckTool()
-    {
-        if (InventoryManager.Instance == null)
-        {
-            return;
-        }
-        if (InventoryManager.Instance.GetSelectedItem() == null)
-        {
-            return;
-        }
-        if (InventoryManager.Instance.GetSelectedItem().name == "Pickaxe")
-        {
-            GatherTool();
-        }
-    }
-
-    private void WeaponTool()
-    {
-        // TODO - make weapon variables
-        // float rayDistance = _toolRange += Vector3.Distance(_playerCam.transform.position, _playerObj.transform.position);
-        // if (Physics.Raycast(_playerCam.position, Vector3.forward, out _toolHit, rayDistance, _gatherMask))
-        // {
-
-        // }
-    }
-
-    private void GatherTool()
-    {
-
-        if (Physics.Raycast(_playerCam.position, Vector3.forward, out _toolHit, _toolRange + _camDistance, _gatherMask))
-        {
-            if (_gatherTime == -1)
-            {
-                _gatherTime = _toolHit.transform.GetComponent<ResourceVein>().Resource.mineDuration;
-            }
-            else
-            {
-                _gatherTime -= Time.deltaTime;
-
-                if (_gatherTime <= 0)
-                {
-                    InventoryManager.Instance.AddItem(_toolHit.transform.GetComponent<ResourceVein>().Resource.item.itemID, _toolHit.transform.GetComponent<ResourceVein>().Resource.recourceAmount);
-                    _gatherTime = _toolHit.transform.GetComponent<ResourceVein>().Resource.mineDuration;
-                }
-            }
-        }
-    }
-
     public bool CheckCrouchUp()
     {
         if (_colliders.Length == 0)
@@ -863,62 +783,5 @@ public class CharStateMachine : MonoBehaviour
         MoveForce = DesiredMoveForce;
     }
 
-    private void CheckInteractable()
-    {
-        if (Physics.SphereCast(_playerCam.transform.position, _interactableRadius, _playerCam.transform.forward, out _interactableHit, _interactableRange + _camDistance, _interactableMask))
-        {
-            if (_interactableHit.transform.GetComponent<DroppedItem>())
-            {
-                DroppedItem droppedItem = _interactableHit.transform.GetComponent<DroppedItem>();
-                _interactableTxt.text = "Press (E) to pick up " + droppedItem._amount + " " +
-                droppedItem._item.name;
-                _InteractPanel.SetActive(true);
-
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    if (InventoryManager.Instance.HasSpace(droppedItem._item.itemID, droppedItem._amount))
-                    {
-                        InventoryManager.Instance.AddItem(droppedItem._item.itemID, droppedItem._amount);
-                        Destroy(droppedItem.gameObject);
-                        Debug.Log($"Pressed E To Pick Up {droppedItem._amount} {droppedItem._item}");
-                    }
-                    else
-                    {
-                        Debug.Log($"[NO SPACE] Pressed E To Pick Up {droppedItem._amount} {droppedItem._item}, but had no room in inventory");
-                    }
-
-                }
-            }
-            else if (_interactableHit.transform.GetComponent<DiggingMachine>())
-            {
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    MiningPanelManager.Instance.ToggleMiningPanel(_interactableHit.transform.GetComponent<DiggingMachine>());
-                    _InteractPanel.SetActive(_InteractPanel.activeSelf);
-                    _didUiInteraction = !_didUiInteraction;
-                    Debug.Log($"Pressed E To Open Mining Panel");
-                }
-                if (!_didUiInteraction)
-                {
-                    _interactableTxt.text = "Press (E) to open miner";
-                    _InteractPanel.SetActive(true);
-
-                }
-                else
-                {
-                    _interactableTxt.text = "";
-                    _InteractPanel.SetActive(false);
-
-                }
-            }
-        }
-        else
-        {
-            if (_InteractPanel != null)
-            {
-                _InteractPanel.SetActive(false);
-            }
-        }
-    }
 
 }
