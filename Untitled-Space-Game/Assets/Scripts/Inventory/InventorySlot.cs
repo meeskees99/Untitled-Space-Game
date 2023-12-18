@@ -174,7 +174,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
         }
         if (isMachineSlot || isFuelSlot)
         {
-            InventoryManager.Instance.SpawnNewItemMining(data.itemId[slotId], data.itemAmount[slotId], this.slotId);
+            // InventoryManager.Instance.SpawnNewItemMining(data.itemId[slotId], data.itemAmount[slotId], this.slotId);
             return;
         }
         else
@@ -185,13 +185,20 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
 
     public void SaveData(GameData data)
     {
+        if (isMachineSlot || isFuelSlot)
+        {
+            //Not needed to save and load
+            return;
+        }
         if (_itemInThisSlot == null)
         {
+            Debug.Log("didnt find Item in slot: " + slotId);
+
             data.itemId[slotId] = -1;
             data.itemAmount[slotId] = 0;
             return;
         }
-
+        Debug.Log("found Item in slot: " + slotId);
         data.itemId[slotId] = _itemInThisSlot.item.itemID;
         data.itemAmount[slotId] = _itemInThisSlot.count;
     }

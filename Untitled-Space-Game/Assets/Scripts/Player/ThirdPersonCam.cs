@@ -9,18 +9,20 @@ using UnityEngine.InputSystem;
 
 public class ThirdPersonCam : MonoBehaviour
 {
-    [SerializeField]
-    private Transform _orientation,
-    _player,
-    _camHolder,
-    _playerObj,
-    _camTarget;
+    [SerializeField] PlayerInput _playerInput;
+    #region Transforms
+    [Header("Transforms")]
+    [SerializeField] Transform _orientation;
+    [SerializeField] Transform _player;
+    [SerializeField] Transform _playerObj;
+    // [SerializeField] Transform _camHolder;
+    [SerializeField] Transform _camTarget;
+    #endregion
 
-    [SerializeField]
-    private float _rotationSpeed;
+    [Header("")]
+    [SerializeField] private float _rotationSpeed;
 
-    [SerializeField]
-    private CharStateMachine _stateMachine;
+    [SerializeField] private CharStateMachine _stateMachine;
 
     [Header("Mouse Settings")]
     [SerializeField] float _mouseSensitivity;
@@ -45,8 +47,10 @@ public class ThirdPersonCam : MonoBehaviour
 
     void Update()
     {
-        if (_stateMachine.DidUiInteraction)
+        if (_playerInput.currentActionMap == _playerInput.actions.FindActionMap("Menu"))
+        {
             return;
+        }
         // Vector3 viewDir = _player.position - new Vector3(transform.position.x, _player.position.y, transform.position.z);
         _orientation.forward = _playerObj.forward.normalized;
 

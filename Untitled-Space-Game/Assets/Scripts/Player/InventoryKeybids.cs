@@ -18,7 +18,7 @@ public class InventoryKeybids : MonoBehaviour
 
     [SerializeField] float _toolRange;
     [SerializeField] RaycastHit _toolHit;
-    [SerializeField] LayerMask _gatherMask;
+    // [SerializeField] LayerMask _gatherMask;
 
     [Header("Interaction")]
     [SerializeField] GameObject _InteractPanel;
@@ -45,7 +45,7 @@ public class InventoryKeybids : MonoBehaviour
     private void OnEnable()
     {
         _playerInput.actions.FindAction("Inventory").started += OnInventory;
-        // _playerInput.actions.FindAction("Inventory").performed += OnInventory;
+        _playerInput.actions.FindAction("Inventory").performed += OnInventory;
         _playerInput.actions.FindAction("Inventory").canceled += OnInventory;
 
         _playerInput.actions.FindAction("Interact").started += OnInteract;
@@ -57,21 +57,23 @@ public class InventoryKeybids : MonoBehaviour
         _playerInput.actions.FindAction("Use").canceled += OnShoot;
     }
 
-    private void OnDisable()
-    {
-        _playerInput.actions.FindAction("Inventory").started -= OnInventory;
-        // _playerInput.actions.FindAction("Inventory").performed -= OnInventory;
-        _playerInput.actions.FindAction("Inventory").canceled -= OnInventory;
 
-        _playerInput.actions.FindAction("Interact").started -= OnInteract;
-        _playerInput.actions.FindAction("Interact").performed -= OnInteract;
-        _playerInput.actions.FindAction("Interact").canceled -= OnInteract;
 
-        _playerInput.actions.FindAction("Use").started -= OnShoot;
-        _playerInput.actions.FindAction("Use").performed -= OnShoot;
-        _playerInput.actions.FindAction("Use").canceled -= OnShoot;
+    // private void OnDisable()
+    // {
+    //     _playerInput.actions.FindAction("Inventory").started -= OnInventory;
+    //     _playerInput.actions.FindAction("Inventory").performed -= OnInventory;
+    //     _playerInput.actions.FindAction("Inventory").canceled -= OnInventory;
 
-    }
+    //     _playerInput.actions.FindAction("Interact").started -= OnInteract;
+    //     _playerInput.actions.FindAction("Interact").performed -= OnInteract;
+    //     _playerInput.actions.FindAction("Interact").canceled -= OnInteract;
+
+    //     _playerInput.actions.FindAction("Use").started -= OnShoot;
+    //     _playerInput.actions.FindAction("Use").performed -= OnShoot;
+    //     _playerInput.actions.FindAction("Use").canceled -= OnShoot;
+
+    // }
 
     private void Start()
     {
@@ -87,16 +89,15 @@ public class InventoryKeybids : MonoBehaviour
             {
                 _canToggleInventory = false;
                 InGameUIManager.Instance.ToggleInventory();
+                _playerInput.actions.FindAction("Inventory").started += OnInventory;
+                _playerInput.actions.FindAction("Inventory").canceled += OnInventory;
             }
         }
         else
         {
             _canToggleInventory = true;
         }
-        if (_onInteract)
-        {
-            CheckInteractable();
-        }
+        CheckInteractable();
         if (_onShoot)
         {
             CheckTool();
@@ -117,7 +118,7 @@ public class InventoryKeybids : MonoBehaviour
 
         if (InventoryManager.Instance.GetSelectedItem().name == "Pickaxe")
         {
-            if (Physics.Raycast(_playerCam.position, Vector3.forward, out _toolHit, _toolRange + _camDistance))
+            if (Physics.Raycast(_playerCam.position, _playerCam.forward, out _toolHit, _toolRange + _camDistance))
             {
                 if (_toolHit.transform.gameObject.layer == LayerMask.NameToLayer("Resource"))
                 {
@@ -133,21 +134,18 @@ public class InventoryKeybids : MonoBehaviour
 
     private void GatherTool()
     {
-        if (Physics.Raycast(_playerCam.position, Vector3.forward, out _toolHit, _toolRange + _camDistance, _gatherMask))
+        if (_gatherTime == -1)
         {
-            if (_gatherTime == -1)
-            {
-                _gatherTime = _toolHit.transform.GetComponent<ResourceVein>().Resource.mineDuration;
-            }
-            else
-            {
-                _gatherTime -= Time.deltaTime;
+            _gatherTime = _toolHit.transform.GetComponent<ResourceVein>().Resource.mineDuration;
+        }
+        else
+        {
+            _gatherTime -= Time.deltaTime;
 
-                if (_gatherTime <= 0)
-                {
-                    InventoryManager.Instance.AddItem(_toolHit.transform.GetComponent<ResourceVein>().Resource.item.itemID, _toolHit.transform.GetComponent<ResourceVein>().Resource.recourceAmount);
-                    _gatherTime = _toolHit.transform.GetComponent<ResourceVein>().Resource.mineDuration;
-                }
+            if (_gatherTime <= 0)
+            {
+                InventoryManager.Instance.AddItem(_toolHit.transform.GetComponent<ResourceVein>().Resource.item.itemID, _toolHit.transform.GetComponent<ResourceVein>().Resource.recourceAmount);
+                _gatherTime = _toolHit.transform.GetComponent<ResourceVein>().Resource.mineDuration;
             }
         }
     }
@@ -170,21 +168,21 @@ public class InventoryKeybids : MonoBehaviour
             if (_interactableHit.transform.GetComponent<DroppedItem>())
             {
                 DroppedItem droppedItem = _interactableHit.transform.GetComponent<DroppedItem>();
-                _interactableTxt.text = "Press (E) to pick up " + droppedItem._amount + " " +
+                _interactableTxt.text = $"Press ({_playerInput.actions.FindAction("Interact").GetBindingDisplayString()}) to pick up " + droppedItem._amount + " " +
                 droppedItem._item.name;
                 _InteractPanel.SetActive(true);
 
-                if (Input.GetKeyDown(KeyCode.E))
+                if (_onInteract)
                 {
                     if (InventoryManager.Instance.HasSpace(droppedItem._item.itemID, droppedItem._amount))
                     {
                         InventoryManager.Instance.AddItem(droppedItem._item.itemID, droppedItem._amount);
                         Destroy(droppedItem.gameObject);
-                        Debug.Log($"Pressed E To Pick Up {droppedItem._amount} {droppedItem._item}");
+                        Debug.Log($"Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Pick Up {droppedItem._amount} {droppedItem._item}");
                     }
                     else
                     {
-                        Debug.Log($"[NO SPACE] Pressed E To Pick Up {droppedItem._amount} {droppedItem._item}, but had no room in inventory");
+                        Debug.Log($"[NO SPACE] Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Pick Up {droppedItem._amount} {droppedItem._item}, but had no room in inventory");
                     }
 
                 }

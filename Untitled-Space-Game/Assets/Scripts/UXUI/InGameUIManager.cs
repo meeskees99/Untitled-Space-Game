@@ -83,6 +83,7 @@ public class InGameUIManager : MonoBehaviour
         }
         if (inventoryShown)
         {
+            FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Game");
             inventoryShown = false;
             _inventoryBackgroundButton.enabled = false;
             _inventoryBackgroundImage.enabled = false;
@@ -100,6 +101,7 @@ public class InGameUIManager : MonoBehaviour
         }
         else
         {
+            FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Menu");
             inventoryShown = true;
             _inventoryBackgroundButton.enabled = true;
             _inventoryBackgroundImage.enabled = true;
@@ -109,10 +111,14 @@ public class InGameUIManager : MonoBehaviour
                 _inventorySlotImages[i].enabled = true;
                 if (_inventorySlotImages[i].transform.childCount > 0)
                 {
-                    Debug.Log("Found A Child");
+                    Debug.Log($"Found A Child In InventorySlotImages[{i}]");
                     _inventorySlotImages[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
                     if (_inventorySlotImages[i].GetComponent<InventorySlot>().GetInventoryItem().count > 1)
+                    {
+                        //Check and pri nt
+                        Debug.Log($"Item Count:{_inventorySlotImages[i].GetComponent<InventorySlot>().GetInventoryItem().count}");
                         _inventorySlotImages[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                    }
                 }
             }
         }

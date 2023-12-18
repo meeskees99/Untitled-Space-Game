@@ -499,9 +499,9 @@ public class CharStateMachine : MonoBehaviour
         _playerInput.actions.FindAction("Hotbar").performed += OnHotbar;
         _playerInput.actions.FindAction("Hotbar").canceled += OnHotbar;
 
-        _playerInput.actions.FindAction("Shoot").started += OnShoot;
-        _playerInput.actions.FindAction("Shoot").performed += OnShoot;
-        _playerInput.actions.FindAction("Shoot").canceled += OnShoot;
+        // _playerInput.actions.FindAction("Shoot").started += OnShoot;
+        // _playerInput.actions.FindAction("Shoot").performed += OnShoot;
+        // _playerInput.actions.FindAction("Shoot").canceled += OnShoot;
 
         _playerInput.actions.FindAction("Camera").performed += OnCam;
         _playerInput.actions.FindAction("Camera").canceled += OnCam;

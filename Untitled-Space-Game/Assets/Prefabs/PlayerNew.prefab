@@ -334,7 +334,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5718662419128119718}
-  m_Material: {fileID: 13400000, guid: cc54e61441cfe194abda3932c0bebc12, type: 2}
+  m_Material: {fileID: 13400000, guid: 6c27623a7ae27784991a92d52a7e5ba1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -654,9 +654,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd6bb86110391a642994f98d30a3b7f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerInput: {fileID: 1923885567571685301}
   _orientation: {fileID: 212780261206863882}
   _player: {fileID: 3080552579979813999}
-  _camHolder: {fileID: 0}
   _playerObj: {fileID: 3080552579979813999}
   _camTarget: {fileID: 2697866585268316071}
   _rotationSpeed: 7
@@ -703,7 +703,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6741949321968535100}
-  m_Material: {fileID: 13400000, guid: cc54e61441cfe194abda3932c0bebc12, type: 2}
+  m_Material: {fileID: 13400000, guid: 6c27623a7ae27784991a92d52a7e5ba1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -734,6 +734,7 @@ GameObject:
   - component: {fileID: 3572630922453199389}
   - component: {fileID: 5780810857843024441}
   - component: {fileID: 5346347331115808523}
+  - component: {fileID: 7509776067065908285}
   m_Layer: 3
   m_Name: PlayerNew
   m_TagString: Player
@@ -749,7 +750,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7074930114202059153}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 479.90247, y: 8.755414, z: 359.29074}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -846,6 +847,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 092ddb62-44f9-4ed0-bb41-553e366a6a47
     m_ActionName: Menu/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 079933af-5f45-4e56-bc3a-cda262cea395
+    m_ActionName: Game/Inventory[/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: df465f20-4cc1-4a69-b92d-bea62ea49823
+    m_ActionName: Game/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Game
@@ -863,7 +872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aabb4cc0bef95b4a90940794ccd6c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 1923885567571685301}
+  _playerInput: {fileID: 1923885567571685301}
   _playerObj: {fileID: 8612339594470111087}
   _playerAnimator: {fileID: 7120952773097436498}
   _playerCam: {fileID: 3409230989293425413}
@@ -909,10 +918,10 @@ MonoBehaviour:
   _isJumpTime: 0
   _jumpTimer: 0
   _crouchUp: 0
-  _walkSpeed: 7
-  _runSpeed: 12
+  _walkSpeed: 3
+  _runSpeed: 6
   _exhaustSpeed: 5
-  _crouchSpeed: 4
+  _crouchSpeed: 3
   _airSpeed: 0.5
   _speedIncreaseMultiplier: 1.25
   _slopeSpeedIncreaseMultiplier: 2
@@ -930,20 +939,6 @@ MonoBehaviour:
   _exhaustedAnimation: Exhousted
   _isCrouching: 0
   _crouchingAnimation: Crouch
-  _camDistance: 0
-  _gatherTime: 0
-  _toolRange: 10
-  _gatherMask:
-    serializedVersion: 2
-    m_Bits: 128
-  _InteractPanel: {fileID: 0}
-  _interactableTxt: {fileID: 0}
-  _interactableRadius: 1
-  _interactableRange: 12
-  _interactableMask:
-    serializedVersion: 2
-    m_Bits: 256
-  _didUiInteraction: 0
 --- !u!54 &5266367729427077852
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1038,6 +1033,34 @@ MonoBehaviour:
   _placedDiggers: []
   diggerVeinIndex: 
   _shootPos: {fileID: 3409230989293425413}
+--- !u!114 &7509776067065908285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7074930114202059153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 822cb0a149cd2644aa5bffdb3ba6d1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerInput: {fileID: 1923885567571685301}
+  _playerCam: {fileID: 3409230989293425413}
+  _camDistance: 0
+  _gatherTime: -1
+  _toolRange: 8
+  _InteractPanel: {fileID: 0}
+  _interactableTxt: {fileID: 0}
+  _interactableRadius: 0
+  _interactableRange: 8
+  _interactableMask:
+    serializedVersion: 2
+    m_Bits: 256
+  _didUiInteraction: 0
+  _onInventory: 0
+  _onInteract: 0
+  _onShoot: 0
 --- !u!1 &7229411513331528388
 GameObject:
   m_ObjectHideFlags: 0
