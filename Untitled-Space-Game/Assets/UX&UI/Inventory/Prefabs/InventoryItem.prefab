@@ -228,3 +228,4 @@ MonoBehaviour:
   item: {fileID: 0}
   count: 1
   parentAfterDrag: {fileID: 0}
+  isDragging: 0
