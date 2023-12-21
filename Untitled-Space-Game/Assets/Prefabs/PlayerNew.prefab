@@ -855,6 +855,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: df465f20-4cc1-4a69-b92d-bea62ea49823
     m_ActionName: Game/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9e0c5a1f-ce11-41f6-912e-25b0a75f1b42
+    m_ActionName: Menu/Inventory[/Keyboard/i]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Game
