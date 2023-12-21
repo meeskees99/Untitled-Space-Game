@@ -11,6 +11,10 @@ using UnityEngine.InputSystem;
 public class CharStateMachine : MonoBehaviour
 // , IDataPersistence
 {
+    [SerializeField] bool _doDebugs;
+    public bool DoDebugs { get { return _doDebugs; } }
+
+
     #region Variables
 
     [Header("Refrences")]

@@ -69,7 +69,7 @@ public class EnemySpawner : MonoBehaviour
     {
         float xpos = Random.Range(player.transform.position.x - _maxSpawnDistanceFromPlayer, _maxSpawnDistanceFromPlayer + player.transform.position.x);
         float ypos = 0;
-        float zpos = Random.Range(player.transform.position.x - _maxSpawnDistanceFromPlayer, _maxSpawnDistanceFromPlayer + player.transform.position.x);
+        float zpos = Random.Range(player.transform.position.z - _maxSpawnDistanceFromPlayer, _maxSpawnDistanceFromPlayer + player.transform.position.z);
 
         Vector3 randomPos = new Vector3(xpos, ypos, zpos);
 

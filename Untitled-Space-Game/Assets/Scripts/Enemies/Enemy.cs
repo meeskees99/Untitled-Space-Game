@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,14 +12,24 @@ public class Enemy : MonoBehaviour
     [SerializeField] float _currentTravelTime;
     [SerializeField] float _maxTravelTime = 15f;
 
+    [Header("UI")]
+    [SerializeField] float _healthShowTime = 3f;
+    float _currentShowTime;
+
+    [SerializeField] float _canvasFollowRange = 7f;
+    [SerializeField] GameObject _canvasObject;
+    [SerializeField] Slider _healthSlider;
+
     [Header("Enemy Stats [DO NOT CHANGE(Recieves from Enemy Stats)]")]
     [SerializeField] string _enemyName;
-    [SerializeField] int _health;
+    [SerializeField] float _health;
     [SerializeField] int _attackDamage;
     [SerializeField] float _attackRange;
     [SerializeField] float _attackRate;
     [SerializeField] float _chaseRadius;
     [SerializeField] float _chaseTime;
+
+    public float Health { get { return _health; } private set { } }
 
     [Header("Movement Stats [DO NOT CHANGE(Recieves from Enemy Stats)]")]
     [SerializeField] float _movementSpeed;
@@ -34,7 +45,7 @@ public class Enemy : MonoBehaviour
     [Tooltip("Override Movement")]
     [SerializeField] bool _stopPatrolling;
 
-    GameObject player;
+    GameObject _player;
 
     EnemySpawner _enemySpawner;
 
@@ -63,6 +74,7 @@ public class Enemy : MonoBehaviour
                 _agent.autoBraking = false;
             }
 
+            _healthSlider.maxValue = _enemyStats.health;
 
             if (!_enemyStats.canJump)
                 _agent.areaMask = 1;
@@ -98,6 +110,34 @@ public class Enemy : MonoBehaviour
             DrawCircle(transform.position, hit.distance, Color.red);
             Debug.DrawRay(hit.position, Vector3.up, Color.red);
         }
+
+        if (_player != null)
+        {
+            Debug.Log("_currentShowTime: " + _currentShowTime);
+            if (_currentShowTime < _healthShowTime)
+            {
+                _canvasObject.GetComponent<Canvas>().enabled = true;
+
+                if (Vector3.Distance(_player.transform.position, transform.position) > _canvasFollowRange)
+                {
+                    _canvasObject.GetComponent<Canvas>().enabled = false;
+                }
+                else
+                {
+                    _canvasObject.GetComponent<Canvas>().enabled = true;
+                    _canvasObject.transform.LookAt(_player.transform);
+                }
+
+            }
+            else
+            {
+                _canvasObject.GetComponent<Canvas>().enabled = false;
+            }
+        }
+        else
+        {
+            _player = FindObjectOfType<PlayerStats>().gameObject;
+        }
     }
 
     #region Pathfinding
@@ -127,7 +167,7 @@ public class Enemy : MonoBehaviour
                 if (attackTimer <= 0)
                 {
                     attackTimer = _attackRate;
-                    player.GetComponent<PlayerStats>().TakeDamage(_attackDamage);
+                    _player.GetComponent<PlayerStats>().TakeDamage(_attackDamage);
                 }
                 else
                 {
@@ -136,7 +176,7 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                _agent.destination = player.transform.position;
+                _agent.destination = _player.transform.position;
 
                 // if (_agent.remainingDistance > 0.5f)
                 // {
@@ -177,7 +217,7 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                _agent.destination = player.transform.position;
+                _agent.destination = _player.transform.position;
                 chaseTimer -= Time.deltaTime;
             }
         }
@@ -220,7 +260,7 @@ public class Enemy : MonoBehaviour
             {
                 if (PlayerStats.Health > 0)
                 {
-                    player = colliders[i].GetComponentInParent<CharStateMachine>().gameObject;
+                    _player = colliders[i].GetComponentInParent<CharStateMachine>().gameObject;
                     return colliders[i];
                 }
                 else
@@ -233,7 +273,7 @@ public class Enemy : MonoBehaviour
     }
     #endregion
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         if (amount >= _health)
         {
@@ -241,7 +281,10 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            Debug.LogError("Damage Taken: " + amount);
             _health -= amount;
+            _healthSlider.value = _health;
+            _currentShowTime = 0;
         }
     }
 
@@ -254,7 +297,7 @@ public class Enemy : MonoBehaviour
 
     void DropLoot()
     {
-
+        Debug.Log("Dropped Loot");
     }
 
     private void OnDrawGizmos()

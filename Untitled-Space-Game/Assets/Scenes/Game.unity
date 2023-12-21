@@ -36026,7 +36026,7 @@ MonoBehaviour:
   _spawnLayer:
     serializedVersion: 2
     m_Bits: 64
-  _minSpawnDistanceFromPlayer: 30
+  _minSpawnDistanceFromPlayer: 10
   _maxSpawnDistanceFromPlayer: 100
   preferedEnemyCount: 6
   _minSpawnAmountOnStart: 2
@@ -40390,6 +40390,16 @@ PrefabInstance:
       propertyPath: _resourceSpawner
       value: 
       objectReference: {fileID: 1894735197}
+    - target: {fileID: 5780810857843024441, guid: cb8c93fd58847b54d918fa4e6fee0d46,
+        type: 3}
+      propertyPath: _attackSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5780810857843024441, guid: cb8c93fd58847b54d918fa4e6fee0d46,
+        type: 3}
+      propertyPath: _attackDamage
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 7074930114202059153, guid: cb8c93fd58847b54d918fa4e6fee0d46,
         type: 3}
       propertyPath: m_Name

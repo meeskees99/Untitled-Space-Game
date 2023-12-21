@@ -23,6 +23,15 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float _oxygenDepletionRate = 0.5f;
     [SerializeField] float _oxygenRegenerationRate = 0.7f;
 
+    [Header("Attacking")]
+    [SerializeField] float _attackDamage = 0.2f;
+    public float AttackDamage { get { return _attackDamage; } private set { } }
+
+    [SerializeField] float _attackSpeed = 0.2f;
+    public float AttackSpeed { get { return _attackSpeed; } private set { } }
+
+
+
     [Header("Action Bools")]
     public bool recievingOxygen;
     public bool healing;

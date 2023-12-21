@@ -1010,6 +1010,8 @@ MonoBehaviour:
   _maxOxygen: 50
   _oxygenDepletionRate: 0.5
   _oxygenRegenerationRate: 0.7
+  _attackDamage: 2
+  _attackSpeed: 0.2
   recievingOxygen: 1
   healing: 0
 --- !u!114 &5346347331115808523
@@ -1050,6 +1052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerInput: {fileID: 1923885567571685301}
+  _playerStats: {fileID: 0}
   _playerCam: {fileID: 3409230989293425413}
   _camDistance: 0
   _gatherTime: -1

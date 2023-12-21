@@ -11,6 +11,8 @@ public class InventoryKeybids : MonoBehaviour
     [SerializeField] PlayerInput _playerInput;
     public PlayerInput PlayerInput => _playerInput;
 
+    [SerializeField] PlayerStats _playerStats;
+
     #region Interactions
     [SerializeField] Transform _playerCam;
     [SerializeField] float _camDistance;
@@ -20,7 +22,9 @@ public class InventoryKeybids : MonoBehaviour
     [SerializeField] float _toolRange;
     [SerializeField] RaycastHit _toolHit;
     Transform _lastHitResource;
-    // [SerializeField] LayerMask _gatherMask;
+    Transform _lastHitEnemy;
+
+    bool _doingDamage;
 
     [Header("Interaction")]
     [SerializeField] GameObject _InteractPanel;
@@ -40,6 +44,7 @@ public class InventoryKeybids : MonoBehaviour
     [SerializeField] bool _onInventory;
     [SerializeField] bool _onInteract;
     [SerializeField] bool _onShoot;
+    [SerializeField] bool _onScroll;
 
 
     bool _canToggleInventory;
@@ -57,6 +62,10 @@ public class InventoryKeybids : MonoBehaviour
         _playerInput.actions.FindAction("Use").started += OnShoot;
         _playerInput.actions.FindAction("Use").performed += OnShoot;
         _playerInput.actions.FindAction("Use").canceled += OnShoot;
+
+        _playerInput.actions.FindAction("Hotbar").started += OnScroll;
+        _playerInput.actions.FindAction("Hotbar").performed += OnScroll;
+        _playerInput.actions.FindAction("Hotbar").canceled += OnScroll;
     }
 
 
@@ -79,7 +88,7 @@ public class InventoryKeybids : MonoBehaviour
 
     private void Start()
     {
-
+        _playerStats = GetComponent<PlayerStats>();
     }
 
     private void Update()
@@ -99,7 +108,10 @@ public class InventoryKeybids : MonoBehaviour
         {
             _canToggleInventory = true;
         }
+
         CheckInteractable();
+
+        #region On Shoot
         if (_onShoot)
         {
             CheckTool();
@@ -113,6 +125,13 @@ public class InventoryKeybids : MonoBehaviour
                     _lastHitResource.GetComponent<Outline>().enabled = false;
                     _lastHitResource = null;
                 }
+                if (_lastHitEnemy != null)
+                {
+                    // Debug.LogWarning("CancelInvoke(LaserEnemy)");
+                    CancelInvoke("LaserEnemy");
+                    _doingDamage = false;
+                    _lastHitEnemy = null;
+                }
                 return;
             }
             else if (InventoryManager.Instance.GetSelectedItem().name == "Pickaxe")
@@ -123,6 +142,7 @@ public class InventoryKeybids : MonoBehaviour
                     {
                         _lastHitResource = _toolHit.transform;
                         _lastHitResource.GetComponent<Outline>().enabled = true;
+                        return;
                     }
                     else
                     {
@@ -132,8 +152,30 @@ public class InventoryKeybids : MonoBehaviour
                             _lastHitResource = null;
                         }
                     }
+
+                    if (_toolHit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                    {
+                        _lastHitEnemy = _toolHit.transform;
+                        return;
+                    }
+                    else
+                    {
+                        if (_lastHitEnemy != null)
+                        {
+                            // Debug.LogWarning("CancelInvoke(LaserEnemy)");
+                            _doingDamage = false;
+                            CancelInvoke("LaserEnemy");
+                            _lastHitEnemy = null;
+                        }
+                    }
                 }
             }
+        }
+        #endregion
+
+        if (_onScroll)
+        {
+            ScrollSelect();
         }
 
         #endregion
@@ -144,8 +186,11 @@ public class InventoryKeybids : MonoBehaviour
     {
         if (InventoryManager.Instance == null || InventoryManager.Instance.GetSelectedItem() == null)
         {
+            // Debug.LogError("No selected Item or InventoryManager");
             return;
         }
+
+        // Debug.LogWarning("Checking Tool");
 
         _camDistance = Vector3.Distance(transform.position, _playerCam.position);
 
@@ -161,6 +206,8 @@ public class InventoryKeybids : MonoBehaviour
                 }
                 else if (_toolHit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                 {
+                    // Debug.Log("Hitting Enemy");
+                    _lastHitEnemy = _toolHit.transform;
                     WeaponTool();
                 }
                 else
@@ -171,6 +218,10 @@ public class InventoryKeybids : MonoBehaviour
                         _lastHitResource = null;
                     }
                 }
+            }
+            else
+            {
+                Debug.Log("Raycast Missed");
             }
         }
     }
@@ -195,13 +246,30 @@ public class InventoryKeybids : MonoBehaviour
 
     private void WeaponTool()
     {
-        // TODO - make weapon variables
-        // float rayDistance = _toolRange += Vector3.Distance(_playerCam.transform.position, _playerObj.transform.position);
-        // if (Physics.Raycast(_playerCam.position, Vector3.forward, out _toolHit, rayDistance, _gatherMask))
-        // {
-
-        // }
+        // Debug.LogWarning("InvokeRepeating(LaserEnemy)");
+        if (!_doingDamage)
+        {
+            InvokeRepeating("LaserEnemy", 0.01f, _playerStats.AttackSpeed);
+            _doingDamage = true;
+        }
     }
+
+    void LaserEnemy()
+    {
+        if (_onShoot)
+        {
+            _lastHitEnemy.GetComponent<Enemy>().TakeDamage(_playerStats.AttackDamage);
+            Debug.Log($"Enemy Health: {_lastHitEnemy.GetComponent<Enemy>().Health}");
+        }
+        else
+        {
+            // Debug.LogWarning("CancelInvoke(LaserEnemy)");
+            _doingDamage = false;
+            CancelInvoke("LaserEnemy");
+        }
+
+    }
+
     #endregion
 
     private void CheckInteractable()
@@ -284,6 +352,13 @@ public class InventoryKeybids : MonoBehaviour
         }
     }
 
+    float scrollValue;
+
+    void ScrollSelect()
+    {
+        print("Scroll Value: " + scrollValue);
+    }
+
     #region Inputs
 
     void OnInventory(InputAction.CallbackContext context)
@@ -300,5 +375,12 @@ public class InventoryKeybids : MonoBehaviour
     {
         _onShoot = context.ReadValueAsButton();
     }
+
+    void OnScroll(InputAction.CallbackContext context)
+    {
+        _onScroll = context.ReadValueAsButton();
+        scrollValue = context.ReadValue<float>();
+    }
+
     #endregion
 }

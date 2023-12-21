@@ -92,7 +92,8 @@ public abstract class CharBaseState
         }
         else if (_currentSuperState != null)
         {
-            Debug.Log("superstate with " + newState);
+            if (_ctx.DoDebugs)
+                Debug.Log("superstate with " + newState);
             _currentSuperState.SetSubState(newState);
         }
     }
