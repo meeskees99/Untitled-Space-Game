@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 1235280760983519955}
   - component: {fileID: 5377390095734334709}
   - component: {fileID: 4673201975027119373}
-  - component: {fileID: 1753659973035941888}
   m_Layer: 0
   m_Name: Default Enemy
   m_TagString: Untagged
@@ -192,22 +191,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
---- !u!208 &1753659973035941888
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 130471825295241938}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 0.5, y: 1, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 0
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &3501912633550452218
 GameObject:
   m_ObjectHideFlags: 0

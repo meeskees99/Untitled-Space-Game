@@ -38,6 +38,8 @@ public class Enemy : MonoBehaviour
 
     EnemySpawner _enemySpawner;
 
+    float spawnDelay = 3f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -98,7 +100,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    float timer;
+    #region Pathfinding
+
+    float waitTimer;
     float chaseTimer;
     float attackTimer;
 
@@ -133,21 +137,39 @@ public class Enemy : MonoBehaviour
             else
             {
                 _agent.destination = player.transform.position;
-                if (_agent.remainingDistance > 0.5f)
-                    _currentTravelTime += Time.deltaTime;
+
+                // if (_agent.remainingDistance > 0.5f)
+                // {
+                //     _currentTravelTime += Time.deltaTime;
+                // }
+                // if (_currentTravelTime > _maxTravelTime)
+                // {
+                //     GoToNextPoint();
+                // }
             }
             return;
         }
         else
         {
+            if (spawnDelay > 0)
+            {
+                spawnDelay -= Time.deltaTime;
+                return;
+            }
             if (chaseTimer <= 0)
             {
                 if (_agent.remainingDistance > 0.5f)
-                    _currentTravelTime += Time.deltaTime;
-                if (!_agent.pathPending && _agent.remainingDistance < 0.5f || _currentTravelTime > _maxTravelTime)
                 {
-                    timer -= Time.deltaTime;
-                    if (timer <= 0)
+                    _currentTravelTime += Time.deltaTime;
+                }
+                if (_currentTravelTime > _maxTravelTime)
+                {
+                    GoToNextPoint();
+                }
+                if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
+                {
+                    waitTimer -= Time.deltaTime;
+                    if (waitTimer <= 0)
                     {
                         GoToNextPoint();
                     }
@@ -175,7 +197,7 @@ public class Enemy : MonoBehaviour
 
     void GoToNextPoint()
     {
-        timer = Random.Range(_minWaitTime, _maxWaitTime);
+        waitTimer = Random.Range(_minWaitTime, _maxWaitTime);
 
         Vector3 randomDirection = Random.insideUnitSphere * _walkRadius;
 
@@ -191,7 +213,7 @@ public class Enemy : MonoBehaviour
 
     public Collider CheckPlayerInRange()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _enemyStats.chaseRadius);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _chaseRadius);
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].GetComponentInParent<CharStateMachine>())
@@ -208,6 +230,31 @@ public class Enemy : MonoBehaviour
             }
         }
         return null;
+    }
+    #endregion
+
+    public void TakeDamage(int amount)
+    {
+        if (amount >= _health)
+        {
+            Die();
+        }
+        else
+        {
+            _health -= amount;
+        }
+    }
+
+    void Die()
+    {
+        DropLoot();
+
+        Destroy(gameObject);
+    }
+
+    void DropLoot()
+    {
+
     }
 
     private void OnDrawGizmos()

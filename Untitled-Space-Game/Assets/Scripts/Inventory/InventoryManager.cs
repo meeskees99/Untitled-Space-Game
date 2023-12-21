@@ -18,7 +18,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] GameObject _inventoryItemPrefab;
     public GameObject InventoryItemPrefab { get { return _inventoryItemPrefab; } }
 
-    int selectedSlot = -1;
+    int _selectedSlot = -1;
 
     public List<ItemInfo> itemsInInventory = new();
 
@@ -27,7 +27,7 @@ public class InventoryManager : MonoBehaviour
     public InventoryItem heldItem;
     [SerializeField] InGameUIManager _uiManager;
 
-    [SerializeField] Item itemToSpawn;
+    [SerializeField] Item _itemToSpawn;
 
     private void Awake()
     {
@@ -48,12 +48,13 @@ public class InventoryManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.U))
         {
             UpdateItemsInfoList();
+            Debug.LogWarning("Manually Called UpdateItemInfoList (KeyCode.U)");
         }
 
         if (Input.inputString != null)
         {
             bool isNumber = int.TryParse(Input.inputString, out int number);
-            if (isNumber && number > 0 && number < 3)
+            if (isNumber && number > 0 && number <= _toolbarSlots.Length)
             {
                 ChangeSelectedSlot(number - 1);
             }
@@ -62,27 +63,27 @@ public class InventoryManager : MonoBehaviour
 
     void ChangeSelectedSlot(int newSlot)
     {
-        if (selectedSlot == newSlot)
+        if (_selectedSlot == newSlot)
         {
-            _toolbarSlots[selectedSlot].Deselect();
-            selectedSlot = -1;
+            _toolbarSlots[_selectedSlot].Deselect();
+            _selectedSlot = -1;
             return;
         }
 
-        if (selectedSlot >= 0)
+        if (_selectedSlot >= 0)
         {
-            _toolbarSlots[selectedSlot].Deselect();
+            _toolbarSlots[_selectedSlot].Deselect();
         }
 
         _toolbarSlots[newSlot].Select();
-        selectedSlot = newSlot;
+        _selectedSlot = newSlot;
     }
 
     public Item GetSelectedItem()
     {
-        if (selectedSlot > -1)
+        if (_selectedSlot > -1)
         {
-            return _toolbarSlots[selectedSlot].GetInventoryItem().item;
+            return _toolbarSlots[_selectedSlot].GetInventoryItem().item;
         }
         else
         {
@@ -95,14 +96,14 @@ public class InventoryManager : MonoBehaviour
     {
         if (itemId < 0)
         {
-            itemToSpawn = null;
+            _itemToSpawn = null;
             return false;
         }
         for (int i = 0; i < _allItems.Length; i++)
         {
             if (_allItems[i].itemID == itemId)
             {
-                itemToSpawn = _allItems[i];
+                _itemToSpawn = _allItems[i];
                 Debug.Log($"Adding Item {_allItems[i]}");
             }
         }
@@ -113,7 +114,7 @@ public class InventoryManager : MonoBehaviour
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
 
 
-            if (itemInSlot != null && itemInSlot.item == itemToSpawn && itemInSlot.count < itemInSlot.item.maxStack)
+            if (itemInSlot != null && itemInSlot.item == _itemToSpawn && itemInSlot.count < itemInSlot.item.maxStack)
             {
                 itemInSlot.count++;
                 itemInSlot.RefreshCount();
@@ -135,7 +136,7 @@ public class InventoryManager : MonoBehaviour
         //Check for empty Slot
         for (int i = 0; i < inventorySlots.Count; i++)
         {
-            if (inventorySlots[i].isHudSlot && !itemToSpawn.canBeInHudSlot && !itemToSpawn.isPlacable)
+            if (inventorySlots[i].isHudSlot && !_itemToSpawn.canBeInHudSlot && !_itemToSpawn.isPlacable)
             {
                 Debug.Log("Can't Spawn This Item Here As it Is BlackListed");
                 DropItem(itemId, amount);
@@ -309,7 +310,7 @@ public class InventoryManager : MonoBehaviour
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
 
-            if (itemInSlot != null && itemInSlot.item == itemToSpawn && itemInSlot.count + amount < itemInSlot.item.maxStack)
+            if (itemInSlot != null && itemInSlot.item == _itemToSpawn && itemInSlot.count + amount < itemInSlot.item.maxStack)
             {
                 return true;
             }
@@ -317,7 +318,7 @@ public class InventoryManager : MonoBehaviour
         //Check for empty Slot
         for (int i = 0; i < inventorySlots.Count; i++)
         {
-            if (inventorySlots[i].isHudSlot && !itemToSpawn.canBeInHudSlot)
+            if (inventorySlots[i].isHudSlot && !_itemToSpawn.canBeInHudSlot)
             {
                 return false;
             }
