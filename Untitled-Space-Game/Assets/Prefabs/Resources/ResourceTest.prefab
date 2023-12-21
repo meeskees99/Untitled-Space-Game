@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 8552571534794409634}
   - component: {fileID: 4927135352823793613}
   - component: {fileID: 7260349588475650038}
+  - component: {fileID: 2157272528220591692}
   m_Layer: 7
   m_Name: ResourceTest
   m_TagString: Untagged
@@ -305,6 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resource: {fileID: 11400000, guid: 7684b21f127478546b7fdee4ce8d1ec7, type: 2}
+  resourceIndex: 0
 --- !u!65 &4927135352823793613
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -342,6 +344,24 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0.03516081, y: -0.0004935339, z: -0.01886851}
   m_TimeToStationary: 0.5
+--- !u!114 &2157272528220591692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670279295205404173}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.7202714, b: 0, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &4303921918420144071
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,6 +539,7 @@ GameObject:
   - component: {fileID: 4123082578354107271}
   - component: {fileID: 5789879478842820966}
   - component: {fileID: 4939913386605818832}
+  - component: {fileID: 3338246550721078901}
   m_Layer: 7
   m_Name: Chunk
   m_TagString: Untagged
@@ -591,6 +612,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3338246550721078901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7036866405370863350}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &8176988600584189291
 GameObject:
   m_ObjectHideFlags: 0

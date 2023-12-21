@@ -192,13 +192,13 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
         }
         if (_itemInThisSlot == null)
         {
-            Debug.Log("didnt find Item in slot: " + slotId);
+            // Debug.Log("didnt find Item in slot: " + slotId);
 
             data.itemId[slotId] = -1;
             data.itemAmount[slotId] = 0;
             return;
         }
-        Debug.Log("found Item in slot: " + slotId);
+        // Debug.Log("found Item in slot: " + slotId);
         data.itemId[slotId] = _itemInThisSlot.item.itemID;
         data.itemAmount[slotId] = _itemInThisSlot.count;
     }

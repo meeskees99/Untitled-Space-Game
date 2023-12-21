@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class InventoryKeybids : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class InventoryKeybids : MonoBehaviour
 
     [SerializeField] float _toolRange;
     [SerializeField] RaycastHit _toolHit;
+    Transform _lastHitResource;
     // [SerializeField] LayerMask _gatherMask;
 
     [Header("Interaction")]
@@ -102,6 +104,37 @@ public class InventoryKeybids : MonoBehaviour
         {
             CheckTool();
         }
+        else
+        {
+            if (InventoryManager.Instance == null || InventoryManager.Instance.GetSelectedItem() == null)
+            {
+                if (_lastHitResource != null)
+                {
+                    _lastHitResource.GetComponent<Outline>().enabled = false;
+                    _lastHitResource = null;
+                }
+                return;
+            }
+            else if (InventoryManager.Instance.GetSelectedItem().name == "Pickaxe")
+            {
+                if (Physics.Raycast(_playerCam.position, _playerCam.forward, out _toolHit, _toolRange + _camDistance))
+                {
+                    if (_toolHit.transform.gameObject.layer == LayerMask.NameToLayer("Resource"))
+                    {
+                        _lastHitResource = _toolHit.transform;
+                        _lastHitResource.GetComponent<Outline>().enabled = true;
+                    }
+                    else
+                    {
+                        if (_lastHitResource != null)
+                        {
+                            _lastHitResource.GetComponent<Outline>().enabled = false;
+                            _lastHitResource = null;
+                        }
+                    }
+                }
+            }
+        }
 
         #endregion
     }
@@ -123,10 +156,20 @@ public class InventoryKeybids : MonoBehaviour
                 if (_toolHit.transform.gameObject.layer == LayerMask.NameToLayer("Resource"))
                 {
                     GatherTool();
+                    _lastHitResource = _toolHit.transform;
+                    _lastHitResource.GetComponent<Outline>().enabled = true;
                 }
                 else if (_toolHit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                 {
                     WeaponTool();
+                }
+                else
+                {
+                    if (_lastHitResource != null)
+                    {
+                        _lastHitResource.GetComponent<Outline>().enabled = false;
+                        _lastHitResource = null;
+                    }
                 }
             }
         }

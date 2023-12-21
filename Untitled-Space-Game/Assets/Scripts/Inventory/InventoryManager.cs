@@ -180,22 +180,22 @@ public class InventoryManager : MonoBehaviour
         UpdateItemsInfoList();
     }
 
-    public void SpawnNewItemMining(int itemID, int itemCount, int slotID)
-    {
-        GameObject newItemGO = Instantiate(_inventoryItemPrefab, _miningSlots[slotID].transform);
-        InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
-        inventoryItem.count = itemCount;
-        for (int i = 0; i < _allItems.Length; i++)
-        {
-            if (_allItems[i].itemID == itemID)
-            {
-                Debug.Log($"Id was found as {_allItems[i].itemID}. Initializing Item {_allItems[i]}");
-                inventoryItem.InitializeItem(_allItems[i], itemCount);
-                break;
-            }
-        }
-        inventoryItem.RefreshCount();
-    }
+    // public void SpawnNewItemMining(int itemID, int itemCount, int slotID)
+    // {
+    //     GameObject newItemGO = Instantiate(_inventoryItemPrefab, _miningSlots[slotID].transform);
+    //     InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
+    //     inventoryItem.count = itemCount;
+    //     for (int i = 0; i < _allItems.Length; i++)
+    //     {
+    //         if (_allItems[i].itemID == itemID)
+    //         {
+    //             Debug.Log($"Id was found as {_allItems[i].itemID}. Initializing Item {_allItems[i]}");
+    //             inventoryItem.InitializeItem(_allItems[i], itemCount);
+    //             break;
+    //         }
+    //     }
+    //     inventoryItem.RefreshCount();
+    // }
 
     public void UseItem(int itemID, int itemCount)
     {

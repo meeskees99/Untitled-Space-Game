@@ -40327,18 +40327,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9e340448c4b6940a79235b06de402e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &22885084876323623 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1923885567571685301, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-    type: 3}
-  m_PrefabInstance: {fileID: 5824906559881518195}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5824906559881518195
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40347,63 +40335,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 326353519104146748, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: 6c27623a7ae27784991a92d52a7e5ba1,
-        type: 2}
-    - target: {fileID: 1848872264807487912, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: 6c27623a7ae27784991a92d52a7e5ba1,
-        type: 2}
-    - target: {fileID: 1923885567571685301, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1923885567571685301, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: m_DefaultActionMap
-      value: Game
-      objectReference: {fileID: 0}
-    - target: {fileID: 1923885567571685301, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 1923885567571685301, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[15].m_ActionId
-      value: 079933af-5f45-4e56-bc3a-cda262cea395
-      objectReference: {fileID: 0}
-    - target: {fileID: 1923885567571685301, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[16].m_ActionId
-      value: df465f20-4cc1-4a69-b92d-bea62ea49823
-      objectReference: {fileID: 0}
-    - target: {fileID: 1923885567571685301, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[17].m_ActionId
-      value: 9e0c5a1f-ce11-41f6-912e-25b0a75f1b42
-      objectReference: {fileID: 0}
-    - target: {fileID: 1923885567571685301, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[15].m_ActionName
-      value: Game/Inventory[/Keyboard/i]
-      objectReference: {fileID: 0}
-    - target: {fileID: 1923885567571685301, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[16].m_ActionName
-      value: Game/Interact[/Keyboard/e]
-      objectReference: {fileID: 0}
-    - target: {fileID: 1923885567571685301, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[17].m_ActionName
-      value: Menu/Inventory[/Keyboard/i]
-      objectReference: {fileID: 0}
     - target: {fileID: 3080552579979813999, guid: cb8c93fd58847b54d918fa4e6fee0d46,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -40454,71 +40385,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3163338748016036251, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: _runSpeed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3163338748016036251, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: _walkSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3163338748016036251, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: _crouchSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3163338748016036251, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: _playerInput
-      value: 
-      objectReference: {fileID: 22885084876323623}
-    - target: {fileID: 3163338748016036251, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: _InteractPanel
-      value: 
-      objectReference: {fileID: 1717348020}
-    - target: {fileID: 3163338748016036251, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: _interactableTxt
-      value: 
-      objectReference: {fileID: 1652768383}
-    - target: {fileID: 3409230989293425413, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.8999996
-      objectReference: {fileID: 0}
-    - target: {fileID: 3409230989293425413, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3409230989293425413, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.09853753
-      objectReference: {fileID: 0}
-    - target: {fileID: 3645057230936235546, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.8999996
-      objectReference: {fileID: 0}
-    - target: {fileID: 3645057230936235546, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3645057230936235546, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.09853753
-      objectReference: {fileID: 0}
-    - target: {fileID: 4714099479504013333, guid: cb8c93fd58847b54d918fa4e6fee0d46,
-        type: 3}
-      propertyPath: _playerInput
-      value: 
-      objectReference: {fileID: 22885084876323623}
     - target: {fileID: 5346347331115808523, guid: cb8c93fd58847b54d918fa4e6fee0d46,
         type: 3}
       propertyPath: _resourceSpawner
