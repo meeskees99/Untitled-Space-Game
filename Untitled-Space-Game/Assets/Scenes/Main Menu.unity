@@ -530,7 +530,7 @@ GameObject:
   - component: {fileID: 30977597}
   - component: {fileID: 30977596}
   m_Layer: 5
-  m_Name: Sprint reset button
+  m_Name: SprintResetButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -864,7 +864,7 @@ GameObject:
   - component: {fileID: 32282448}
   - component: {fileID: 32282447}
   m_Layer: 5
-  m_Name: Title
+  m_Name: JumpTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1030,7 +1030,7 @@ GameObject:
   - component: {fileID: 36155255}
   - component: {fileID: 36155254}
   m_Layer: 5
-  m_Name: Inventory input button
+  m_Name: InventoryInputButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1470,9 +1470,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 73841810}
-  - component: {fileID: 73841811}
   m_Layer: 5
-  m_Name: Move left
+  m_Name: MoveLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1502,35 +1501,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -264.00003}
   m_SizeDelta: {x: 1002, y: 76}
   m_Pivot: {x: 0.5, y: 0.49999952}
---- !u!114 &73841811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73841809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1644407741}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
 --- !u!1 &95373698
 GameObject:
   m_ObjectHideFlags: 0
@@ -1579,7 +1549,7 @@ GameObject:
   - component: {fileID: 95903634}
   - component: {fileID: 95903633}
   m_Layer: 5
-  m_Name: Title
+  m_Name: CrouchTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1845,7 +1815,7 @@ GameObject:
   - component: {fileID: 112051909}
   - component: {fileID: 112051908}
   m_Layer: 5
-  m_Name: SprintTxt
+  m_Name: SprintInputTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1890,7 +1860,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Left Shift
+  m_text: Shift
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 33f7ea847500cad4cb3fb68eeafb607e, type: 2}
   m_sharedMaterial: {fileID: -5784896513870302698, guid: 33f7ea847500cad4cb3fb68eeafb607e,
@@ -1982,7 +1952,7 @@ GameObject:
   - component: {fileID: 119228899}
   - component: {fileID: 119228898}
   m_Layer: 5
-  m_Name: Sprint input button
+  m_Name: SprintInputButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3796,7 +3766,7 @@ GameObject:
   - component: {fileID: 267998170}
   - component: {fileID: 267998169}
   m_Layer: 5
-  m_Name: Title
+  m_Name: InteractTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4160,7 +4130,7 @@ GameObject:
   - component: {fileID: 281393971}
   - component: {fileID: 281393970}
   m_Layer: 5
-  m_Name: Interact reset button
+  m_Name: InteractResetButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4334,7 +4304,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 289363075}
-  - component: {fileID: 289363076}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -4366,35 +4335,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.4326172, y: -940.46}
   m_SizeDelta: {x: 1002, y: 75}
   m_Pivot: {x: 0.5, y: 0.49999952}
---- !u!114 &289363076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289363074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 407649794}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
 --- !u!1 &295579808
 GameObject:
   m_ObjectHideFlags: 0
@@ -4749,9 +4689,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 323233091}
-  - component: {fileID: 323233092}
   m_Layer: 5
-  m_Name: Move right
+  m_Name: MoveRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4781,35 +4720,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -339.50006}
   m_SizeDelta: {x: 1002, y: 75}
   m_Pivot: {x: 0.5, y: 0.49999952}
---- !u!114 &323233092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 323233090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1291607559}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
 --- !u!1 &329304902
 GameObject:
   m_ObjectHideFlags: 0
@@ -5204,7 +5114,7 @@ GameObject:
   - component: {fileID: 339340699}
   - component: {fileID: 339340698}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: UseInputTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5249,7 +5159,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: LMB
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 33f7ea847500cad4cb3fb68eeafb607e, type: 2}
   m_sharedMaterial: {fileID: -5784896513870302698, guid: 33f7ea847500cad4cb3fb68eeafb607e,
@@ -5664,8 +5574,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 979386196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.30487576}
-  m_AnchorMax: {x: 1, y: 0.9999993}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6448,9 +6358,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 417743920}
-  - component: {fileID: 417743921}
   m_Layer: 5
-  m_Name: Left mouse
+  m_Name: Use
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6480,35 +6389,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -715.4602}
   m_SizeDelta: {x: 1002, y: 75}
   m_Pivot: {x: 0.5, y: 0.49999952}
---- !u!114 &417743921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 417743919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1289753417}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
 --- !u!1 &419247435
 GameObject:
   m_ObjectHideFlags: 0
@@ -6682,6 +6562,24 @@ MonoBehaviour:
     _actionName: Run
     _excludeMouse: 1
     _actionTxt: {fileID: 112051908}
+  - _inputActionReference: {fileID: -2989811997316082994, guid: 48e8b518112b8844a87e9c7d4c8c40b2,
+      type: 3}
+    _actionIndex: 0
+    _actionName: Use
+    _excludeMouse: 0
+    _actionTxt: {fileID: 339340698}
+  - _inputActionReference: {fileID: -7073116603431777307, guid: 48e8b518112b8844a87e9c7d4c8c40b2,
+      type: 3}
+    _actionIndex: 0
+    _actionName: Interact
+    _excludeMouse: 0
+    _actionTxt: {fileID: 1082984352}
+  - _inputActionReference: {fileID: 1280902077666847240, guid: 48e8b518112b8844a87e9c7d4c8c40b2,
+      type: 3}
+    _actionIndex: 0
+    _actionName: Inventory
+    _excludeMouse: 1
+    _actionTxt: {fileID: 1181256856}
   _controllerKeybinds: []
   _combinedKeybinds: []
 --- !u!1 &423398364
@@ -6693,7 +6591,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 423398365}
-  - component: {fileID: 423398366}
   m_Layer: 5
   m_Name: Interact
   m_TagString: Untagged
@@ -6725,35 +6622,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -865.4602}
   m_SizeDelta: {x: 1002, y: 75}
   m_Pivot: {x: 0.5, y: 0.49999952}
---- !u!114 &423398366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 423398364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 822409982}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
 --- !u!1 &436505605
 GameObject:
   m_ObjectHideFlags: 0
@@ -6769,7 +6637,7 @@ GameObject:
   - component: {fileID: 436505608}
   - component: {fileID: 436505607}
   m_Layer: 5
-  m_Name: Left mouse reset button
+  m_Name: UseInputResetButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7296,7 +7164,7 @@ GameObject:
   - component: {fileID: 501851857}
   - component: {fileID: 501851856}
   m_Layer: 5
-  m_Name: Move right reset button
+  m_Name: MoveRightResetButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8033,7 +7901,7 @@ GameObject:
   - component: {fileID: 539575237}
   - component: {fileID: 539575236}
   m_Layer: 5
-  m_Name: Inventory reset button
+  m_Name: InventoryResetButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8658,7 +8526,7 @@ GameObject:
   - component: {fileID: 628958751}
   - component: {fileID: 628958750}
   m_Layer: 5
-  m_Name: Devider
+  m_Name: DeviderImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8996,7 +8864,7 @@ GameObject:
   - component: {fileID: 645855070}
   - component: {fileID: 645855069}
   m_Layer: 5
-  m_Name: Jump input button
+  m_Name: JumpInputButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9313,7 +9181,7 @@ GameObject:
   - component: {fileID: 693108269}
   - component: {fileID: 693108268}
   m_Layer: 5
-  m_Name: MoveRightTxt
+  m_Name: MoveRightInputTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9445,7 +9313,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 701347309}
-  - component: {fileID: 701347310}
   m_Layer: 5
   m_Name: Jump
   m_TagString: Untagged
@@ -9477,35 +9344,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -415.03995}
   m_SizeDelta: {x: 1002, y: 75.51993}
   m_Pivot: {x: 0.5, y: 0.49999952}
---- !u!114 &701347310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701347308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 135529383}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
 --- !u!1 &709573230
 GameObject:
   m_ObjectHideFlags: 0
@@ -9804,7 +9642,7 @@ GameObject:
   m_Component:
   - component: {fileID: 733302880}
   m_Layer: 5
-  m_Name: Player title
+  m_Name: PlayerTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10956,7 +10794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &797809120
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11230,7 +11068,7 @@ GameObject:
   - component: {fileID: 853045898}
   - component: {fileID: 853045897}
   m_Layer: 5
-  m_Name: Interact input button
+  m_Name: InteractInputButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11926,7 +11764,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 895648213}
-  - component: {fileID: 895648214}
   m_Layer: 5
   m_Name: Sprint
   m_TagString: Untagged
@@ -11958,35 +11795,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -565.5}
   m_SizeDelta: {x: 1002, y: 75}
   m_Pivot: {x: 0.5, y: 0.49999952}
---- !u!114 &895648214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 895648212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 63878552}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
 --- !u!1 &905177693
 GameObject:
   m_ObjectHideFlags: 0
@@ -12681,7 +12489,7 @@ GameObject:
   - component: {fileID: 937459216}
   - component: {fileID: 937459215}
   m_Layer: 5
-  m_Name: JumpTxt
+  m_Name: JumpInputTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12903,7 +12711,7 @@ GameObject:
   m_Component:
   - component: {fileID: 954997073}
   m_Layer: 5
-  m_Name: Player movement title
+  m_Name: PlayerMovementTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13594,7 +13402,7 @@ GameObject:
   - component: {fileID: 1038506146}
   - component: {fileID: 1038506145}
   m_Layer: 5
-  m_Name: Title
+  m_Name: MoveRightTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14554,7 +14362,7 @@ GameObject:
   - component: {fileID: 1082984353}
   - component: {fileID: 1082984352}
   m_Layer: 5
-  m_Name: InteractTxt
+  m_Name: InteractInputTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14599,7 +14407,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: E
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 33f7ea847500cad4cb3fb68eeafb607e, type: 2}
   m_sharedMaterial: {fileID: -5784896513870302698, guid: 33f7ea847500cad4cb3fb68eeafb607e,
@@ -15107,7 +14915,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1124749483}
-  - component: {fileID: 1124749484}
   m_Layer: 5
   m_Name: Crouch
   m_TagString: Untagged
@@ -15139,35 +14946,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -490.50003}
   m_SizeDelta: {x: 1002, y: 75}
   m_Pivot: {x: 0.5, y: 0.49999952}
---- !u!114 &1124749484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1124749482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 10013799}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
 --- !u!1 &1130901382
 GameObject:
   m_ObjectHideFlags: 0
@@ -15180,7 +14958,7 @@ GameObject:
   - component: {fileID: 1130901385}
   - component: {fileID: 1130901384}
   m_Layer: 5
-  m_Name: Devider
+  m_Name: DeviderImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15256,7 +15034,7 @@ GameObject:
   - component: {fileID: 1140235850}
   - component: {fileID: 1140235849}
   m_Layer: 5
-  m_Name: Title
+  m_Name: SprintTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15817,7 +15595,7 @@ GameObject:
   - component: {fileID: 1160525745}
   - component: {fileID: 1160525744}
   m_Layer: 5
-  m_Name: Move left reset button
+  m_Name: MoveLeftResetButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16099,7 +15877,7 @@ GameObject:
   - component: {fileID: 1181256857}
   - component: {fileID: 1181256856}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: InventoryInputTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16144,7 +15922,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: I
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 33f7ea847500cad4cb3fb68eeafb607e, type: 2}
   m_sharedMaterial: {fileID: -5784896513870302698, guid: 33f7ea847500cad4cb3fb68eeafb607e,
@@ -18514,7 +18292,7 @@ GameObject:
   - component: {fileID: 1422950314}
   - component: {fileID: 1422950313}
   m_Layer: 5
-  m_Name: Title
+  m_Name: UseTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18851,7 +18629,7 @@ GameObject:
   - component: {fileID: 1453735312}
   - component: {fileID: 1453735311}
   m_Layer: 5
-  m_Name: Crouch input button
+  m_Name: CrouchInputButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19720,9 +19498,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1551223379}
-  - component: {fileID: 1551223380}
   m_Layer: 5
-  m_Name: Right mouse
+  m_Name: '|||NOT NEEDED|||'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19752,35 +19529,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -790.4602}
   m_SizeDelta: {x: 1002, y: 75}
   m_Pivot: {x: 0.5, y: 0.49999952}
---- !u!114 &1551223380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1551223378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 751970050}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
 --- !u!1 &1561451116
 GameObject:
   m_ObjectHideFlags: 0
@@ -19796,7 +19544,7 @@ GameObject:
   - component: {fileID: 1561451119}
   - component: {fileID: 1561451118}
   m_Layer: 5
-  m_Name: Crouch reset button
+  m_Name: CrouchResetButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20168,7 +19916,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1586873313
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20564,7 +20312,7 @@ GameObject:
   - component: {fileID: 1609720579}
   - component: {fileID: 1609720578}
   m_Layer: 5
-  m_Name: Move left input button
+  m_Name: MoveLeftInputButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21542,7 +21290,7 @@ GameObject:
   - component: {fileID: 1680531466}
   - component: {fileID: 1680531465}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: PlayerMovementTitleTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21982,7 +21730,7 @@ GameObject:
   - component: {fileID: 1752877988}
   - component: {fileID: 1752877987}
   m_Layer: 5
-  m_Name: Title
+  m_Name: InventoryTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22408,7 +22156,7 @@ GameObject:
   - component: {fileID: 1779085898}
   - component: {fileID: 1779085897}
   m_Layer: 5
-  m_Name: Left mouse input button
+  m_Name: UseInputButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23153,7 +22901,7 @@ GameObject:
   - component: {fileID: 1840133573}
   - component: {fileID: 1840133572}
   m_Layer: 5
-  m_Name: MoveLeftTxt
+  m_Name: MoveLeftInputTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23290,7 +23038,7 @@ GameObject:
   - component: {fileID: 1844010045}
   - component: {fileID: 1844010044}
   m_Layer: 5
-  m_Name: Move right input button
+  m_Name: MoveRightInputButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23919,7 +23667,7 @@ GameObject:
   - component: {fileID: 1874399627}
   - component: {fileID: 1874399626}
   m_Layer: 5
-  m_Name: Jump reset button
+  m_Name: JumpResetButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25888,7 +25636,7 @@ GameObject:
   - component: {fileID: 2003533464}
   - component: {fileID: 2003533463}
   m_Layer: 5
-  m_Name: CrouchTxt
+  m_Name: CrouchInputTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26500,7 +26248,7 @@ GameObject:
   - component: {fileID: 2076687898}
   - component: {fileID: 2076687897}
   m_Layer: 5
-  m_Name: Title
+  m_Name: MoveLeftTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26870,7 +26618,7 @@ GameObject:
   - component: {fileID: 2093954345}
   - component: {fileID: 2093954344}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: PlayerTitleTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27446,9 +27194,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8268907053058692844}
-  - component: {fileID: 2028981109840627162}
   m_Layer: 5
-  m_Name: Move forward
+  m_Name: MoveForward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27565,7 +27312,7 @@ GameObject:
   - component: {fileID: 5161822786273864958}
   - component: {fileID: 9007385888434886318}
   m_Layer: 5
-  m_Name: Title
+  m_Name: MoveForwardTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27620,7 +27367,7 @@ GameObject:
   - component: {fileID: 6789435090185797401}
   - component: {fileID: 3332311212112662378}
   m_Layer: 5
-  m_Name: MoveForwardTxt
+  m_Name: MoveForwardInputTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28096,7 +27843,7 @@ GameObject:
   - component: {fileID: 4023781401471108184}
   - component: {fileID: 6007501483625387034}
   m_Layer: 5
-  m_Name: Move Backwards input button
+  m_Name: MoveBackwardsInputButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28666,7 +28413,7 @@ GameObject:
   - component: {fileID: 6265182564459863031}
   - component: {fileID: 6640424638901397427}
   m_Layer: 5
-  m_Name: Move Backwards reset button
+  m_Name: MoveBackwardsResetButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29230,35 +28977,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5190628113834000143}
   m_CullTransparentMesh: 1
---- !u!114 &2028981109840627162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 68400629308691848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4638524472244817516}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
 --- !u!114 &2034570237946171773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29718,7 +29436,7 @@ GameObject:
   - component: {fileID: 2034570237946171773}
   - component: {fileID: 8698007524789502271}
   m_Layer: 5
-  m_Name: Move forward input button
+  m_Name: MoveForwardInputButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30224,7 +29942,7 @@ RectTransform:
   m_Father: {fileID: 825687200544249851}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -0.80319214, y: 0}
   m_SizeDelta: {x: 8.4589, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -30260,7 +29978,7 @@ GameObject:
   - component: {fileID: 8490272906931595836}
   - component: {fileID: 420477864959908431}
   m_Layer: 5
-  m_Name: MoveBackwardTxt
+  m_Name: MoveBackwardInputTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30329,7 +30047,7 @@ GameObject:
   - component: {fileID: 7802789263136897499}
   - component: {fileID: 6263311610355925899}
   m_Layer: 5
-  m_Name: Title
+  m_Name: MoveBackwardsTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30393,9 +30111,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6425060109605815241}
-  - component: {fileID: 4018066933715308799}
   m_Layer: 5
-  m_Name: Move Backwards
+  m_Name: MoveBackwards
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31569,35 +31286,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
---- !u!114 &4018066933715308799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3105349612886868141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 7760881288982338377}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
 --- !u!114 &4023781401471108184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31787,7 +31475,7 @@ GameObject:
   - component: {fileID: 9014253028651732690}
   - component: {fileID: 8632536275446362774}
   m_Layer: 5
-  m_Name: Move forward reset button
+  m_Name: MoveForwardResetButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
