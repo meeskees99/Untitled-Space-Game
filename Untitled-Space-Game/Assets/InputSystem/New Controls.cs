@@ -243,9 +243,9 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""right"",
-                    ""id"": ""9c22567e-d93a-4c67-a639-62b485977f59"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""name"": ""down"",
+                    ""id"": ""4239d4b6-2864-4774-bff9-d659d0ef36b7"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -254,9 +254,9 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""down"",
-                    ""id"": ""4239d4b6-2864-4774-bff9-d659d0ef36b7"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""name"": ""right"",
+                    ""id"": ""9c22567e-d93a-4c67-a639-62b485977f59"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",

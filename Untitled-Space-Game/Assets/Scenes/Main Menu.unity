@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 11796609}
   - component: {fileID: 11796608}
   m_Layer: 5
-  m_Name: Image
+  m_Name: MachineImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1845,7 +1845,7 @@ GameObject:
   - component: {fileID: 112051909}
   - component: {fileID: 112051908}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: SprintTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1890,7 +1890,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Shift
+  m_text: Left Shift
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 33f7ea847500cad4cb3fb68eeafb607e, type: 2}
   m_sharedMaterial: {fileID: -5784896513870302698, guid: 33f7ea847500cad4cb3fb68eeafb607e,
@@ -2088,7 +2088,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2322,7 +2322,7 @@ GameObject:
   m_Component:
   - component: {fileID: 141526733}
   m_Layer: 5
-  m_Name: Game title
+  m_Name: GameTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5578,7 +5578,7 @@ GameObject:
   - component: {fileID: 362839034}
   - component: {fileID: 362839035}
   m_Layer: 5
-  m_Name: Game buttons
+  m_Name: GameButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5665,7 +5665,7 @@ RectTransform:
   m_Father: {fileID: 979386196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.30487576}
-  m_AnchorMax: {x: 1, y: 0.99999946}
+  m_AnchorMax: {x: 1, y: 0.9999993}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5740,7 +5740,7 @@ RectTransform:
   m_Father: {fileID: 520774144}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -0.80319214, y: 0}
   m_SizeDelta: {x: 8.4589, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6657,7 +6657,7 @@ MonoBehaviour:
     _actionIndex: 3
     _actionName: Move
     _excludeMouse: 1
-    _actionTxt: {fileID: 937459215}
+    _actionTxt: {fileID: 1840133572}
   - _inputActionReference: {fileID: 8743197934302689349, guid: 48e8b518112b8844a87e9c7d4c8c40b2,
       type: 3}
     _actionIndex: 4
@@ -7816,7 +7816,7 @@ GameObject:
   - component: {fileID: 529691683}
   - component: {fileID: 529691682}
   m_Layer: 5
-  m_Name: Settings panels
+  m_Name: SettingsPanels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9691,7 +9691,7 @@ GameObject:
   m_Component:
   - component: {fileID: 724019738}
   m_Layer: 5
-  m_Name: Configuration buttons
+  m_Name: ConfigurationButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10842,7 +10842,7 @@ GameObject:
   - component: {fileID: 794005226}
   - component: {fileID: 794005225}
   m_Layer: 5
-  m_Name: Image
+  m_Name: GameTitleImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10951,7 +10951,7 @@ GameObject:
   m_Component:
   - component: {fileID: 797809120}
   m_Layer: 5
-  m_Name: Controls panel
+  m_Name: ControlsKeyboard panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11328,7 +11328,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1973201540}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 419247440}
+        m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
+        m_MethodName: KeyboardRebindBtn
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 9
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &853045899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11713,7 +11725,7 @@ GameObject:
   - component: {fileID: 884453681}
   - component: {fileID: 884453680}
   m_Layer: 5
-  m_Name: Machine inputfield
+  m_Name: MachineInputfield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12669,7 +12681,7 @@ GameObject:
   - component: {fileID: 937459216}
   - component: {fileID: 937459215}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: JumpTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12967,7 +12979,7 @@ GameObject:
   - component: {fileID: 979579508}
   - component: {fileID: 979579507}
   m_Layer: 5
-  m_Name: Title
+  m_Name: MachineTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14285,7 +14297,7 @@ GameObject:
   - component: {fileID: 1078089117}
   - component: {fileID: 1078089116}
   m_Layer: 5
-  m_Name: Machine slider
+  m_Name: MachineSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14542,7 +14554,7 @@ GameObject:
   - component: {fileID: 1082984353}
   - component: {fileID: 1082984352}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: InteractTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18081,7 +18093,7 @@ GameObject:
   - component: {fileID: 1400312314}
   - component: {fileID: 1400312313}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: GameTitleTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18289,7 +18301,7 @@ GameObject:
   - component: {fileID: 1416635247}
   - component: {fileID: 1416635246}
   m_Layer: 5
-  m_Name: Settings panel
+  m_Name: SettingsPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19479,7 +19491,7 @@ GameObject:
   - component: {fileID: 1489989410}
   - component: {fileID: 1489989411}
   m_Layer: 5
-  m_Name: Settings buttons
+  m_Name: SettingsButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19635,7 +19647,7 @@ GameObject:
   - component: {fileID: 1508633852}
   - component: {fileID: 1508633851}
   m_Layer: 5
-  m_Name: Load game panel
+  m_Name: LoadGamePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20156,7 +20168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1586873313
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20658,7 +20670,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -22494,7 +22506,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 196963209}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 419247440}
+        m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
+        m_MethodName: KeyboardRebindBtn
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1779085899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22543,7 +22567,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1805288466}
   m_Layer: 5
-  m_Name: General panel
+  m_Name: GeneralPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22879,12 +22903,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1825941336}
   m_Layer: 5
-  m_Name: Audio panel
+  m_Name: AudioPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1825941336
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23174,7 +23198,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: D
+  m_text: S
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 33f7ea847500cad4cb3fb68eeafb607e, type: 2}
   m_sharedMaterial: {fileID: -5784896513870302698, guid: 33f7ea847500cad4cb3fb68eeafb607e,
@@ -23372,7 +23396,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -24782,7 +24806,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1926784636}
   m_Layer: 5
-  m_Name: Display title
+  m_Name: DisplayTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25756,7 +25780,7 @@ GameObject:
   - component: {fileID: 1990895964}
   - component: {fileID: 1990895965}
   m_Layer: 5
-  m_Name: Machine volume
+  m_Name: MachineVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25864,7 +25888,7 @@ GameObject:
   - component: {fileID: 2003533464}
   - component: {fileID: 2003533463}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CrouchTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26322,7 +26346,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 919659352}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 419247440}
+        m_TargetAssemblyTypeName: KeyRebinding, Assembly-CSharp
+        m_MethodName: KeyboardRebindBtn
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 8
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2042301305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26755,7 +26791,7 @@ GameObject:
   - component: {fileID: 2093571000}
   - component: {fileID: 2093570999}
   m_Layer: 5
-  m_Name: New game panel
+  m_Name: NewGamePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27710,7 +27746,7 @@ GameObject:
   - component: {fileID: 3718069970014559289}
   - component: {fileID: 65268132079653707}
   m_Layer: 5
-  m_Name: Title
+  m_Name: VsyncTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27839,7 +27875,7 @@ GameObject:
   - component: {fileID: 2328561395146345635}
   - component: {fileID: 7987103160144485611}
   m_Layer: 5
-  m_Name: SFX inputfield
+  m_Name: SFXInputfield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27931,7 +27967,7 @@ GameObject:
   - component: {fileID: 5592177768052031807}
   - component: {fileID: 6134528680764446466}
   m_Layer: 5
-  m_Name: Title
+  m_Name: ResolutionTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28817,7 +28853,7 @@ GameObject:
   - component: {fileID: 5416514680259624347}
   - component: {fileID: 4582109960336924093}
   m_Layer: 5
-  m_Name: Music slider
+  m_Name: MusicSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28835,7 +28871,7 @@ GameObject:
   - component: {fileID: 4772035320358445272}
   - component: {fileID: 5123732312132475295}
   m_Layer: 5
-  m_Name: Image
+  m_Name: SFXImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28898,7 +28934,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8480798753354816965}
   m_Layer: 5
-  m_Name: Audio title
+  m_Name: AudioTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28971,7 +29007,7 @@ GameObject:
   - component: {fileID: 6374852201826525862}
   - component: {fileID: 4344177202182260168}
   m_Layer: 5
-  m_Name: Title
+  m_Name: ScreenModeTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29093,7 +29129,7 @@ GameObject:
   - component: {fileID: 7751395687839051738}
   - component: {fileID: 6811200444260705712}
   m_Layer: 5
-  m_Name: Text + Toggle
+  m_Name: Vsync
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29174,7 +29210,7 @@ RectTransform:
   m_Father: {fileID: 4090183516989318798}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -0.80319214, y: 0}
   m_SizeDelta: {x: 8.4589, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -30188,7 +30224,7 @@ RectTransform:
   m_Father: {fileID: 825687200544249851}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -0.80319214, y: 0}
   m_SizeDelta: {x: 8.4589, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -30395,7 +30431,7 @@ GameObject:
   - component: {fileID: 5293547689399592657}
   - component: {fileID: 7116749392831015291}
   m_Layer: 5
-  m_Name: SFX volume
+  m_Name: SFXVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30782,7 +30818,7 @@ RectTransform:
   m_Father: {fileID: 1235106523397852068}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -0.80319214, y: 0}
   m_SizeDelta: {x: 8.4589, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -31613,7 +31649,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -31913,7 +31949,7 @@ GameObject:
   - component: {fileID: 7119040429453725873}
   - component: {fileID: 1618576023673286807}
   m_Layer: 5
-  m_Name: Master slider
+  m_Name: MasterSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32773,7 +32809,7 @@ RectTransform:
   m_Father: {fileID: 7411978165718618131}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -0.80319214, y: 0}
   m_SizeDelta: {x: 8.4589, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -32788,7 +32824,7 @@ GameObject:
   - component: {fileID: 2657046191343821113}
   - component: {fileID: 1110710293655301779}
   m_Layer: 5
-  m_Name: Title + Slider + Input
+  m_Name: FramesPerSecond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33017,7 +33053,7 @@ GameObject:
   - component: {fileID: 2028394670966920773}
   - component: {fileID: 1802782938124431106}
   m_Layer: 5
-  m_Name: Image
+  m_Name: MasterImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34051,7 +34087,7 @@ GameObject:
   - component: {fileID: 7142561893609647352}
   - component: {fileID: 139096749728375046}
   m_Layer: 5
-  m_Name: Title
+  m_Name: MasterTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35348,7 +35384,7 @@ GameObject:
   - component: {fileID: 9101586433506851390}
   - component: {fileID: 3515067078138505846}
   m_Layer: 5
-  m_Name: 'Master inputfield '
+  m_Name: 'MasterInputfield '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35437,7 +35473,7 @@ GameObject:
   - component: {fileID: 4506183043693231462}
   - component: {fileID: 1530271507716174540}
   m_Layer: 5
-  m_Name: Music volume
+  m_Name: MusicVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35732,7 +35768,7 @@ GameObject:
   - component: {fileID: 3952983174699521002}
   - component: {fileID: 9019228539291490623}
   m_Layer: 5
-  m_Name: Screen mode
+  m_Name: ScreenMode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35769,7 +35805,7 @@ GameObject:
   - component: {fileID: 3875053767710522223}
   - component: {fileID: 3523080918474506792}
   m_Layer: 5
-  m_Name: Image
+  m_Name: MusicImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35787,7 +35823,7 @@ GameObject:
   - component: {fileID: 4383140907061978668}
   - component: {fileID: 5217900322496759306}
   m_Layer: 5
-  m_Name: SFX slider
+  m_Name: SFXSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35947,7 +35983,7 @@ GameObject:
   - component: {fileID: 5812269349411528077}
   - component: {fileID: 3627655957140476019}
   m_Layer: 5
-  m_Name: Title
+  m_Name: FramesPerSecondTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37054,7 +37090,7 @@ GameObject:
   - component: {fileID: 6318530802394814228}
   - component: {fileID: 1812905594520487772}
   m_Layer: 5
-  m_Name: Music inputfield
+  m_Name: MusicInputfield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37322,7 +37358,7 @@ GameObject:
   - component: {fileID: 6046085352295966605}
   - component: {fileID: 714595651530385701}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: AudioTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37387,7 +37423,7 @@ GameObject:
   - component: {fileID: 1687046043836010572}
   - component: {fileID: 4385423285030559718}
   m_Layer: 5
-  m_Name: Master volume
+  m_Name: MasterVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37738,7 +37774,7 @@ GameObject:
   - component: {fileID: 5404250117055431122}
   - component: {fileID: 2886404029260450860}
   m_Layer: 5
-  m_Name: Title
+  m_Name: MusicTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
