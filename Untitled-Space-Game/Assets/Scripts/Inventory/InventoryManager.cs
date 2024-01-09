@@ -83,7 +83,9 @@ public class InventoryManager : MonoBehaviour
     {
         if (_selectedSlot > -1)
         {
-            return _toolbarSlots[_selectedSlot].GetInventoryItem().item;
+            if (_toolbarSlots[_selectedSlot].GetInventoryItem() != null)
+                return _toolbarSlots[_selectedSlot].GetInventoryItem().item;
+            else return null;
         }
         else
         {

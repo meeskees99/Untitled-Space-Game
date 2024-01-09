@@ -75,11 +75,16 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         isDragging = true;
         InventoryManager.Instance.heldItem = eventData.pointerDrag.GetComponent<InventoryItem>();
         InventoryManager.Instance.UpdateItemsInfoList();
-        if (lastInventorySlot.isMachineSlot)
+
+        if (lastInventorySlot == null)
+        {
+            return;
+        }
+        else if (lastInventorySlot.isMachineSlot)
         {
             MiningPanelManager.Instance.currentDigger.ItemAmount = 0;
         }
-        if (lastInventorySlot.isFuelSlot)
+        else if (lastInventorySlot.isFuelSlot)
         {
             MiningPanelManager.Instance.currentDigger.FuelAmount = 0;
             // MiningPanelManager.Instance.currentDigger.FuelType = null;

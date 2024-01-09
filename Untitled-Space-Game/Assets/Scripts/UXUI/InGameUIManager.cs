@@ -115,7 +115,7 @@ public class InGameUIManager : MonoBehaviour
                     _inventorySlotImages[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
                     if (_inventorySlotImages[i].GetComponent<InventorySlot>().GetInventoryItem().count > 1)
                     {
-                        //Check and pri nt
+                        //Check and print
                         Debug.Log($"Item Count:{_inventorySlotImages[i].GetComponent<InventorySlot>().GetInventoryItem().count}");
                         _inventorySlotImages[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
                     }
