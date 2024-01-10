@@ -22,4 +22,5 @@ MonoBehaviour:
   isTool: 0
   isPlacable: 0
   isFuel: 0
+  isSmeltable: 1
   fuelTime: 2
