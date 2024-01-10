@@ -14,9 +14,10 @@ public class Item : ScriptableObject
     public int maxStack = 1;
     public bool canBeInHudSlot = false;
 
-    [Header("Gameplaye Settings")]
+    [Header("Gameplay Settings")]
     public bool isTool;
     public bool isPlacable;
     public bool isFuel;
+    public bool isSmeltable;
     public float fuelTime = 2;
 }
