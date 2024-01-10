@@ -128,6 +128,15 @@ public class SmeltingMachine : MonoBehaviour
         {
             Debug.LogError("Progress Slider Not Set");
         }
+
+        if (fuelLeftSlider != null && SmeltingPanelManager.Instance._currentSmelter == this)
+        {
+            fuelLeftSlider.value = _fuelLeft;
+        }
+        else if (progressSlider == null && SmeltingPanelManager.Instance._currentSmelter == this)
+        {
+            Debug.LogError("FuelLeft Slider Not Set");
+        }
     }
 
     public void AddMachineItem(bool isFuel, Item item = null, int amount = 0, bool calledFromPanel = false)
