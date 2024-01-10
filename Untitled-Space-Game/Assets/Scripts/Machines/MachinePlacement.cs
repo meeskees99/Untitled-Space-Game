@@ -125,6 +125,8 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
 
         _selectedPrefab = null;
         _selectedIndex = -1;
+
+        QuestManager.Instance.CheckPlace(spawnedMachine);
     }
 
     void SpawnMachines(int spawnIndex)

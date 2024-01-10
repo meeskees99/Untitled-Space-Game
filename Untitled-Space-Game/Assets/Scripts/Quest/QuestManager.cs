@@ -4,11 +4,21 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
+    public static QuestManager Instance;
     [SerializeField] Quest[] _quests;
     [SerializeField] int _questsIndex;
     [SerializeField] Quest _currentQuest;
     [SerializeField] string _currentQuestName;
     [SerializeField] ItemInfo[] _questRequirements;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Instance = this;
+        }
+    }
+
     public void StartNewQuest()
     {
         _questsIndex++;
@@ -23,7 +33,6 @@ public class QuestManager : MonoBehaviour
         {
             case Quest.QuestType.PLACE:
                 {
-                    CheckPlace();
                     break;
                 }
             case Quest.QuestType.INVENTORY:
@@ -39,9 +48,12 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public void CheckPlace()
+    public void CheckPlace(GameObject machineToLookFor)
     {
-
+        if (machineToLookFor == _currentQuest.machinesNeeded)
+        {
+            StartNewQuest();
+        }
     }
 
     public bool CheckInventory()

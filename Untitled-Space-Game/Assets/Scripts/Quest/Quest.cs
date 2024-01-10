@@ -9,7 +9,9 @@ public class Quest : ScriptableObject
     public bool isQuestLine;
     public string questLineName;
     public Quest nextQuest;
+
     public ItemInfo[] itemsNeeded;
+    public GameObject machinesNeeded;
 
     public enum QuestType
     {
