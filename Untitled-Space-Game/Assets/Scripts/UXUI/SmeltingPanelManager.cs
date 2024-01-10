@@ -8,7 +8,7 @@ public class SmeltingPanelManager : MonoBehaviour
 {
     public static SmeltingPanelManager Instance;
 
-    SmeltingMachine _currentSmelter;
+    public SmeltingMachine _currentSmelter;
 
     [SerializeField] PlayerInput _playerInput;
 
@@ -16,6 +16,7 @@ public class SmeltingPanelManager : MonoBehaviour
     public InventorySlot resourceInputSlot;
     public InventorySlot outputSlot;
     public Slider fuelLeftSlider;
+    public Slider progressSlider;
 
     public bool panelActive;
     // Start is called before the first frame update
@@ -70,6 +71,8 @@ public class SmeltingPanelManager : MonoBehaviour
                 Destroy(outputSlot.GetInventoryItem().gameObject);
             }
 
+            smeltingMachine.fuelLeftSlider = fuelLeftSlider;
+            smeltingMachine.progressSlider = progressSlider;
             GetComponent<Canvas>().enabled = !GetComponent<Canvas>().enabled;
             GetComponent<GraphicRaycaster>().enabled = !GetComponent<GraphicRaycaster>().enabled;
             panelActive = GetComponent<GraphicRaycaster>().enabled;

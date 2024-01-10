@@ -25,6 +25,7 @@ public class SmeltingMachine : MonoBehaviour
     [SerializeField] InventorySlot _fuelInputSlot;
     [SerializeField] InventorySlot _itemOutputSlot;
     public Slider fuelLeftSlider;
+    public Slider progressSlider;
 
     float _currentSmeltProgression;
 
@@ -117,6 +118,17 @@ public class SmeltingMachine : MonoBehaviour
         return false;
     }
 
+    private void Update()
+    {
+        if (progressSlider != null && SmeltingPanelManager.Instance._currentSmelter == this)
+        {
+            progressSlider.value = _currentSmeltProgression;
+        }
+        else if (progressSlider == null && SmeltingPanelManager.Instance._currentSmelter == this)
+        {
+            Debug.LogError("Progress Slider Not Set");
+        }
+    }
 
     public void AddMachineItem(bool isFuel, Item item = null, int amount = 0, bool calledFromPanel = false)
     {
