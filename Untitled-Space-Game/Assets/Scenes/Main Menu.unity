@@ -1498,7 +1498,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -264.00003}
+  m_AnchoredPosition: {x: 0.4326172, y: -188.5}
   m_SizeDelta: {x: 1002, y: 76}
   m_Pivot: {x: 0.5, y: 0.49999952}
 --- !u!1 &95373698
@@ -6531,13 +6531,13 @@ MonoBehaviour:
     _actionIndex: 2
     _actionName: Move
     _excludeMouse: 1
-    _actionTxt: {fileID: 420477864959908431}
+    _actionTxt: {fileID: 1840133572}
   - _inputActionReference: {fileID: 8743197934302689349, guid: 48e8b518112b8844a87e9c7d4c8c40b2,
       type: 3}
     _actionIndex: 3
     _actionName: Move
     _excludeMouse: 1
-    _actionTxt: {fileID: 1840133572}
+    _actionTxt: {fileID: 420477864959908431}
   - _inputActionReference: {fileID: 8743197934302689349, guid: 48e8b518112b8844a87e9c7d4c8c40b2,
       type: 3}
     _actionIndex: 4
@@ -9226,7 +9226,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: D
+  m_text: J
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 33f7ea847500cad4cb3fb68eeafb607e, type: 2}
   m_sharedMaterial: {fileID: -5784896513870302698, guid: 33f7ea847500cad4cb3fb68eeafb607e,
@@ -20418,7 +20418,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -22946,7 +22946,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: S
+  m_text: G
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 33f7ea847500cad4cb3fb68eeafb607e, type: 2}
   m_sharedMaterial: {fileID: -5784896513870302698, guid: 33f7ea847500cad4cb3fb68eeafb607e,
@@ -27519,7 +27519,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: A
+  m_text: H
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 33f7ea847500cad4cb3fb68eeafb607e, type: 2}
   m_sharedMaterial: {fileID: -5784896513870302698, guid: 33f7ea847500cad4cb3fb68eeafb607e,
@@ -30302,7 +30302,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: W
+  m_text: Y
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 33f7ea847500cad4cb3fb68eeafb607e, type: 2}
   m_sharedMaterial: {fileID: -5784896513870302698, guid: 33f7ea847500cad4cb3fb68eeafb607e,
@@ -31337,7 +31337,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -34718,7 +34718,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -188.50003}
+  m_AnchoredPosition: {x: -0.4326172, y: -264.5}
   m_SizeDelta: {x: 1002, y: 75}
   m_Pivot: {x: 0.5, y: 0.49999952}
 --- !u!114 &6425065142777125608
