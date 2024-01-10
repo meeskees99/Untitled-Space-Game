@@ -12,8 +12,8 @@ public class SmeltingPanelManager : MonoBehaviour
 
     [SerializeField] PlayerInput _playerInput;
 
-    public GameObject miningPanel;
-    public InventorySlot inputSlot;
+    public InventorySlot fuelInputSlot;
+    public InventorySlot resourceInputSlot;
     public InventorySlot outputSlot;
     public Slider fuelLeftSlider;
 
@@ -43,13 +43,13 @@ public class SmeltingPanelManager : MonoBehaviour
         if (_currentSmelter == smeltingMachine)
         {
             _currentSmelter = null;
-            if (inputSlot.GetInventoryItem() != null)
-                Destroy(inputSlot.GetInventoryItem().gameObject);
+            if (fuelInputSlot.GetInventoryItem() != null)
+                Destroy(fuelInputSlot.GetInventoryItem().gameObject);
             if (outputSlot.GetInventoryItem() != null)
                 Destroy(outputSlot.GetInventoryItem().gameObject);
-            miningPanel.GetComponent<Canvas>().enabled = !miningPanel.GetComponent<Canvas>().enabled;
-            miningPanel.GetComponent<GraphicRaycaster>().enabled = !miningPanel.GetComponent<GraphicRaycaster>().enabled;
-            panelActive = miningPanel.GetComponent<GraphicRaycaster>().enabled;
+            GetComponent<Canvas>().enabled = !GetComponent<Canvas>().enabled;
+            GetComponent<GraphicRaycaster>().enabled = !GetComponent<GraphicRaycaster>().enabled;
+            panelActive = GetComponent<GraphicRaycaster>().enabled;
             _playerInput.currentActionMap = _playerInput.actions.FindActionMap("Game");
             Debug.Log("Changed Actionmap To " + _playerInput.currentActionMap.name);
             return;
@@ -57,11 +57,11 @@ public class SmeltingPanelManager : MonoBehaviour
         else
         {
             _currentSmelter = smeltingMachine;
-            if (inputSlot.GetInventoryItem() != null)
+            if (fuelInputSlot.GetInventoryItem() != null)
             {
                 Debug.Log("destroy");
 
-                Destroy(inputSlot.GetInventoryItem().gameObject);
+                Destroy(fuelInputSlot.GetInventoryItem().gameObject);
             }
             if (outputSlot.GetInventoryItem() != null)
             {
@@ -70,9 +70,9 @@ public class SmeltingPanelManager : MonoBehaviour
                 Destroy(outputSlot.GetInventoryItem().gameObject);
             }
 
-            miningPanel.GetComponent<Canvas>().enabled = !miningPanel.GetComponent<Canvas>().enabled;
-            miningPanel.GetComponent<GraphicRaycaster>().enabled = !miningPanel.GetComponent<GraphicRaycaster>().enabled;
-            panelActive = miningPanel.GetComponent<GraphicRaycaster>().enabled;
+            GetComponent<Canvas>().enabled = !GetComponent<Canvas>().enabled;
+            GetComponent<GraphicRaycaster>().enabled = !GetComponent<GraphicRaycaster>().enabled;
+            panelActive = GetComponent<GraphicRaycaster>().enabled;
 
             if (smeltingMachine.ItemType != null && smeltingMachine.ItemAmount > 0)
             {
