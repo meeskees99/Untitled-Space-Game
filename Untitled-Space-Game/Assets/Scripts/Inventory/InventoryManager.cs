@@ -256,7 +256,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void DropItem(int itemId, int amount)
+    public void DropItem(int itemId, int amount, Transform spawnposition = null)
     {
         Item itemToDrop;
         for (int i = 0; i < _allItems.Length; i++)
@@ -264,7 +264,15 @@ public class InventoryManager : MonoBehaviour
             if (itemId == _allItems[i].itemID)
             {
                 itemToDrop = _allItems[i];
-                GameObject droppedItem = Instantiate(itemToDrop.itemPrefab, player.transform.position, Quaternion.identity);
+                GameObject droppedItem;
+                if (spawnposition != null)
+                {
+                    droppedItem = Instantiate(itemToDrop.itemPrefab, spawnposition.position, Quaternion.identity);
+                }
+                else
+                {
+                    droppedItem = Instantiate(itemToDrop.itemPrefab, player.transform.position, Quaternion.identity);
+                }
                 droppedItem.transform.GetComponent<DroppedItem>()._item = itemToDrop;
                 droppedItem.transform.GetComponent<DroppedItem>()._amount = amount;
                 Debug.Log($"Succesfully Dropped {amount} {itemToDrop}.");

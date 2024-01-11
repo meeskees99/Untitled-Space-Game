@@ -19,6 +19,7 @@ public class Item : ScriptableObject
     public bool isTool;
     public bool isPlacable;
     public bool isFuel;
-    public bool isSmeltable;
     public float fuelTime = 2;
+    public bool isSmeltable;
+    public float smeltTime = 4;
 }

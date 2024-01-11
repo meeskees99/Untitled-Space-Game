@@ -7,7 +7,7 @@ public class SmeltingMachine : MonoBehaviour
 {
     [Header("Info")]
     [SerializeField] Resource _resourceToSmelt;
-    [SerializeField] bool _isDigging;
+    [SerializeField] bool _isSmelting;
     [SerializeField] Item _itemType;
     [SerializeField] int _itemAmount;
     [SerializeField] Item _fuelType;
@@ -15,10 +15,6 @@ public class SmeltingMachine : MonoBehaviour
 
     [SerializeField] bool _resourceInitialized;
     [SerializeField] bool _fuelInitialized;
-
-    [Header("Miner Settings")]
-    [SerializeField] float _miningRange = 3f;
-    [SerializeField] LayerMask _resourceLayer;
 
     [Header("SmeltingInventory")]
     [SerializeField] InventorySlot _resourceInputSlot;

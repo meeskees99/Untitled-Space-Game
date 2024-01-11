@@ -12,15 +12,24 @@ public class DroppedItem : MonoBehaviour
     [SerializeField] float _rotationSpeed;
     [SerializeField] float _floatAmount;
 
+    [SerializeField] float _mergeDelay = 3f;
+
     bool _canPickup;
 
     Transform _child;
 
     GameObject _lastCollidedObject;
 
+    float timer;
+
     private void Start()
     {
         _child = GetComponentInChildren<Transform>();
+
+        if (_item.name == "Clay")
+        {
+            timer = _item.smeltTime * 2;
+        }
     }
 
     private void Update()
@@ -38,31 +47,49 @@ public class DroppedItem : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        if (_mergeDelay > 0)
+        {
+            _mergeDelay -= Time.deltaTime;
+        }
+        if (_item.name == "Clay")
+        {
+            if (timer > 0)
+            {
+                timer -= Time.deltaTime;
+            }
+            else
+            {
+                InventoryManager.Instance.DropItem(_item.itemToGetAfterSmelt.itemID, _amount, transform);
+                Destroy(gameObject);
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         _lastCollidedObject = other.gameObject;
         print("On Enter Triggered With " + other.gameObject.name);
-        if (other.GetComponentInParent<CharStateMachine>() && _canPickup)
-        {
-            if (InventoryManager.Instance.HasSpace(_item.itemID, _amount))
-            {
-                InventoryManager.Instance.AddItem(_item.itemID, _amount);
-                Destroy(gameObject);
-            }
-            else
-            {
-                Debug.Log("Player Has No Space!");
-            }
-        }
-        else if (other.GetComponent<DroppedItem>())
+
+        if (other.GetComponent<DroppedItem>())
         {
             if (other.GetComponent<DroppedItem>()._item == _item)
             {
-                _amount += other.GetComponent<DroppedItem>()._amount;
-                Destroy(other.gameObject);
-                Debug.Log("Merged Two Dropped Items Together");
+                if (_mergeDelay <= 0)
+                {
+                    if (_amount + other.GetComponent<DroppedItem>()._amount <= _item.maxStack)
+                    {
+                        _amount += other.GetComponent<DroppedItem>()._amount;
+                        Destroy(other.gameObject);
+                    }
+                    else
+                    {
+                        int extra = _amount + other.GetComponent<DroppedItem>()._amount - _item.maxStack;
+                        _amount = _item.maxStack;
+                        other.GetComponent<DroppedItem>()._amount = extra;
+                    }
+
+                    Debug.Log("Merged Two Dropped Items Together");
+                }
             }
         }
     }

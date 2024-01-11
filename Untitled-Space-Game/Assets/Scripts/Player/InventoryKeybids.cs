@@ -342,6 +342,28 @@ public class InventoryKeybids : MonoBehaviour
 
                 }
             }
+            else if (_interactableHit.transform.tag == "CraftingTable")
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    InGameUIManager.Instance.ToggleCrafting();
+                    _InteractPanel.SetActive(!_InteractPanel.activeSelf);
+                    _didUiInteraction = !_didUiInteraction;
+                    Debug.Log($"Pressed E To Open Mining Panel");
+                }
+                if (!_didUiInteraction)
+                {
+                    _interactableTxt.text = "Press (E) to open the crafting table";
+                    _InteractPanel.SetActive(true);
+
+                }
+                else
+                {
+                    _interactableTxt.text = "";
+                    _InteractPanel.SetActive(false);
+
+                }
+            }
         }
         else
         {
