@@ -29,6 +29,11 @@ public class InventoryManager : MonoBehaviour
 
     [SerializeField] Item _itemToSpawn;
 
+    [Header("Canvas Information")]
+    public EventSystem eventSystem;
+    public GraphicRaycaster graphicRaycaster;
+    public RectTransform rectTransform;
+
     private void Awake()
     {
         if (Instance != null)

@@ -173,16 +173,15 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         {
             if (_raycaster == null)
             {
-                // _raycaster = FindObjectOfType<GraphicRaycaster>();
-                _raycaster = GameObject.FindGameObjectWithTag("MainCanvas").transform.GetComponent<GraphicRaycaster>();
+                _raycaster = inventoryManager.graphicRaycaster;
             }
             if (_eventSystem == null)
             {
-                _eventSystem = FindObjectOfType<EventSystem>();
+                _eventSystem = inventoryManager.eventSystem;
             }
             if (_canvasRect == null)
             {
-                _canvasRect = GameObject.Find("PlayerCanvas").GetComponent<RectTransform>();
+                _canvasRect = inventoryManager.rectTransform;
             }
             List<RaycastResult> results = new();
             _pointerEventData = new PointerEventData(_eventSystem);
