@@ -21,7 +21,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     InventoryManager inventoryManager;
 
-    bool dropOnDrop;
+    [SerializeField] bool dropOnDrop;
 
     private void Start()
     {
@@ -61,7 +61,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         if (dropOnDrop)
         {
-            Debug.Log("destroy");
+            Debug.Log("Dropping " + count + " " + item.name);
 
             InventoryManager.Instance.DropItem(item.itemID, count);
             Destroy(gameObject);
@@ -173,7 +173,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         {
             if (_raycaster == null)
             {
-                _raycaster = FindObjectOfType<GraphicRaycaster>();
+                // _raycaster = FindObjectOfType<GraphicRaycaster>();
+                _raycaster = GameObject.FindGameObjectWithTag("MainCanvas").transform.GetComponent<GraphicRaycaster>();
             }
             if (_eventSystem == null)
             {
