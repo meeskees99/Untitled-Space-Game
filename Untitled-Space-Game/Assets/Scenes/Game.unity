@@ -9105,7 +9105,7 @@ PrefabInstance:
     - target: {fileID: 3402430684912650702, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 301
+      value: 1001
       objectReference: {fileID: 0}
     - target: {fileID: 3493278075471695923, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
         type: 3}
@@ -9263,7 +9263,17 @@ PrefabInstance:
     - target: {fileID: 5432743264667587301, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 300
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5554532766108399794, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
+        type: 3}
+      propertyPath: m_VerticalFit
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5554532766108399794, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
+        type: 3}
+      propertyPath: m_HorizontalFit
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5557697035433105949, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
         type: 3}
@@ -9524,7 +9534,7 @@ PrefabInstance:
     - target: {fileID: 7391291276263583936, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 203
+      value: 205
       objectReference: {fileID: 0}
     - target: {fileID: 7394505615208212714, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
         type: 3}
@@ -9714,7 +9724,7 @@ PrefabInstance:
     - target: {fileID: 8240196895187686460, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 201
+      value: 203
       objectReference: {fileID: 0}
     - target: {fileID: 8371379787277456613, guid: 448772a45b7c7464b9c1f7da9ddc5bf7,
         type: 3}
@@ -12245,6 +12255,18 @@ PrefabInstance:
       propertyPath: allRecipes.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4736489283703529182, guid: b5571641752b8614b953b48588a01074,
+        type: 3}
+      propertyPath: allRecipes.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: ea48cb5c6b58c004b8666ffdd70024c2,
+        type: 2}
+    - target: {fileID: 4736489283703529182, guid: b5571641752b8614b953b48588a01074,
+        type: 3}
+      propertyPath: allRecipes.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: f5b325289dc3cf248bd29488c7562bde,
+        type: 2}
     - target: {fileID: 4736489283703529182, guid: b5571641752b8614b953b48588a01074,
         type: 3}
       propertyPath: allRecipes.Array.data[3]
@@ -35078,7 +35100,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1794980922}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
@@ -35118,7 +35140,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1794980922}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}

@@ -103,6 +103,8 @@ public class CraftingManager : MonoBehaviour
         {
             if (allRecipes[r].itemToCraft.itemID == itemID)
             {
+                AddRecipe(allRecipes[r]);
+
                 if (_currentRecipes.Contains(allRecipes[r]))
                 {
                     Debug.LogError($"There is already a recipe for {allRecipes[r]}");

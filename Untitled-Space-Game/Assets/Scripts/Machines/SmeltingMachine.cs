@@ -31,8 +31,9 @@ public class SmeltingMachine : MonoBehaviour
 
     public int ItemAmount { get { return _itemAmount; } set { _itemAmount = value; } }
     public int FuelAmount { get { return _fuelAmount; } set { _fuelAmount = value; } }
-    public InventorySlot ItemSlot { get { return _resourceInputSlot; } set { _resourceInputSlot = value; } }
-    public InventorySlot FuelSlot { get { return _fuelInputSlot; } set { _fuelInputSlot = value; } }
+    public InventorySlot ResourceInputSlot { get { return _resourceInputSlot; } set { _resourceInputSlot = value; } }
+    public InventorySlot FuelInputSlot { get { return _fuelInputSlot; } set { _fuelInputSlot = value; } }
+    public InventorySlot ItemOutputSlot { get { return _itemOutputSlot; } set { _itemOutputSlot = value; } }
     public Item ItemType { get { return _itemType; } set { _itemType = value; } }
     public Item FuelType { get { return _fuelType; } set { _fuelType = value; } }
     public bool ResourceInitialized { get { return _resourceInitialized; } set { _resourceInitialized = value; } }
@@ -40,6 +41,12 @@ public class SmeltingMachine : MonoBehaviour
 
     [SerializeField] bool _fuelTimeInitialized;
     [SerializeField] float _fuelLeft;
+
+
+    private void Start()
+    {
+        SmeltingPanelManager.Instance.SetSmelterInfo(this);
+    }
 
     public bool HandleFuel()
     {
@@ -97,12 +104,14 @@ public class SmeltingMachine : MonoBehaviour
                 return false;
             }
         }
-        else if (_fuelLeft > 0)
+        else if (_fuelLeft > 0 && _resourceInputSlot.GetInventoryItem().item.isSmeltable)
         {
             _fuelLeft -= Time.deltaTime;
-            fuelLeftSlider.value = _fuelLeft;
-            return true;
+            _currentSmeltProgression += Time.deltaTime;
 
+            fuelLeftSlider.value = _fuelLeft;
+            progressSlider.value = _currentSmeltProgression;
+            return true;
         }
         else if (_fuelLeft <= 0)
         {
@@ -112,6 +121,11 @@ public class SmeltingMachine : MonoBehaviour
         else if (_fuelType == null && _fuelLeft <= 0)
         {
             _fuelTimeInitialized = false;
+            return false;
+        }
+        else if (!_resourceInputSlot.GetInventoryItem().item.isSmeltable && _fuelLeft > 0)
+        {
+            Debug.Log("Item Is Not Smeltable!");
             return false;
         }
         Debug.Log("Digger Has No Fuel");
@@ -165,28 +179,28 @@ public class SmeltingMachine : MonoBehaviour
                     SpawnMachineItem(item, amount);
                     Debug.Log($"Spawned {amount} {item}");
                 }
-                else if (_resourceInputSlot.GetInventoryItem() != null)
+                else if (_itemOutputSlot.GetInventoryItem() != null)
                 {
                     if (amount == 0)
                     {
                         _itemAmount++;
-                        _resourceInputSlot.GetInventoryItem().count++;
-                        _resourceInputSlot.GetInventoryItem().RefreshCount();
+                        _itemOutputSlot.GetInventoryItem().count++;
+                        _itemOutputSlot.GetInventoryItem().RefreshCount();
                     }
                     else
                     {
                         _itemAmount += amount;
-                        _resourceInputSlot.GetInventoryItem().count += amount;
-                        _resourceInputSlot.GetInventoryItem().RefreshCount();
+                        _itemOutputSlot.GetInventoryItem().count += amount;
+                        _itemOutputSlot.GetInventoryItem().RefreshCount();
                     }
                 }
                 else
                 {
                     if (amount == 0)
                     {
-                        SpawnMachineItem(_resourceToSmelt.item, 1);
+                        SpawnMachineItem(_resourceToSmelt.item.itemToGetAfterSmelt, 1);
                         // _itemAmount += _collectedResource.recourceAmount;
-                        Debug.Log("Spawned First Of " + _resourceToSmelt.item);
+                        Debug.Log("Spawned First Of " + _resourceToSmelt.item.itemToGetAfterSmelt);
                         // Debug.Log("Had No resources to spawn");
                     }
                     else
@@ -288,5 +302,14 @@ public class SmeltingMachine : MonoBehaviour
             return;
         }
         InitializeFuelType();
+    }
+
+    bool HasSmeltableResource()
+    {
+        if (_resourceInputSlot.GetInventoryItem() && _resourceInputSlot.GetInventoryItem().item.isSmeltable)
+        {
+            return true;
+        }
+        return false;
     }
 }

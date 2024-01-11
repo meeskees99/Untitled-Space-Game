@@ -15,6 +15,7 @@ public class SmeltingPanelManager : MonoBehaviour
     public InventorySlot fuelInputSlot;
     public InventorySlot resourceInputSlot;
     public InventorySlot outputSlot;
+
     public Slider fuelLeftSlider;
     public Slider progressSlider;
 
@@ -34,20 +35,28 @@ public class SmeltingPanelManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void SetSmelterInfo(SmeltingMachine smeltingMachine)
     {
+        smeltingMachine.ResourceInputSlot = resourceInputSlot;
+        smeltingMachine.FuelInputSlot = fuelInputSlot;
+        smeltingMachine.ItemOutputSlot = outputSlot;
 
+        smeltingMachine.fuelLeftSlider = fuelLeftSlider;
+        smeltingMachine.progressSlider = progressSlider;
     }
 
     public void ToggleSmeltingPanel(SmeltingMachine smeltingMachine)
     {
+        if (fuelInputSlot.GetInventoryItem() != null)
+            Destroy(fuelInputSlot.GetInventoryItem().gameObject);
+        if (outputSlot.GetInventoryItem() != null)
+            Destroy(outputSlot.GetInventoryItem().gameObject);
+        if (resourceInputSlot.GetInventoryItem() != null)
+            Destroy(resourceInputSlot.GetInventoryItem().gameObject);
+
         if (_currentSmelter == smeltingMachine)
         {
             _currentSmelter = null;
-            if (fuelInputSlot.GetInventoryItem() != null)
-                Destroy(fuelInputSlot.GetInventoryItem().gameObject);
-            if (outputSlot.GetInventoryItem() != null)
-                Destroy(outputSlot.GetInventoryItem().gameObject);
             GetComponent<Canvas>().enabled = !GetComponent<Canvas>().enabled;
             GetComponent<GraphicRaycaster>().enabled = !GetComponent<GraphicRaycaster>().enabled;
             panelActive = GetComponent<GraphicRaycaster>().enabled;
@@ -58,18 +67,6 @@ public class SmeltingPanelManager : MonoBehaviour
         else
         {
             _currentSmelter = smeltingMachine;
-            if (fuelInputSlot.GetInventoryItem() != null)
-            {
-                Debug.Log("destroy");
-
-                Destroy(fuelInputSlot.GetInventoryItem().gameObject);
-            }
-            if (outputSlot.GetInventoryItem() != null)
-            {
-                Debug.Log("destroy");
-
-                Destroy(outputSlot.GetInventoryItem().gameObject);
-            }
 
             smeltingMachine.fuelLeftSlider = fuelLeftSlider;
             smeltingMachine.progressSlider = progressSlider;
@@ -77,17 +74,15 @@ public class SmeltingPanelManager : MonoBehaviour
             GetComponent<GraphicRaycaster>().enabled = !GetComponent<GraphicRaycaster>().enabled;
             panelActive = GetComponent<GraphicRaycaster>().enabled;
 
-            if (smeltingMachine.ItemType != null && smeltingMachine.ItemAmount > 0)
-            {
-                // smeltingMachine.AddMachineItem(false, smeltingMachine.ItemType, smeltingMachine.ItemAmount, true);
-                Debug.Log("look ma i spawned something");
-            }
-            if (smeltingMachine.FuelType != null && smeltingMachine.FuelAmount > 0)
-            {
-                // smeltingMachine.AddMachineItem(true, smeltingMachine.FuelType, smeltingMachine.FuelAmount, true);
-            }
-
-
+            // if (smeltingMachine.ItemType != null && smeltingMachine.ItemAmount > 0)
+            // {
+            //     // smeltingMachine.AddMachineItem(false, smeltingMachine.ItemType, smeltingMachine.ItemAmount, true);
+            //     // Debug.Log("look ma i spawned something");
+            // }
+            // if (smeltingMachine.FuelType != null && smeltingMachine.FuelAmount > 0)
+            // {
+            //     // smeltingMachine.AddMachineItem(true, smeltingMachine.FuelType, smeltingMachine.FuelAmount, true);
+            // }
         }
 
         if (panelActive)

@@ -13,6 +13,7 @@ public class Item : ScriptableObject
     public Sprite image;
     public int maxStack = 1;
     public bool canBeInHudSlot = false;
+    public Item itemToGetAfterSmelt;
 
     [Header("Gameplay Settings")]
     public bool isTool;
