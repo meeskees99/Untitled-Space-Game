@@ -31,6 +31,8 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
 
     GameObject _spawnedBlueprint;
 
+    public bool _machineQuest;
+
     private void Start()
     {
         _selectedIndex = -1;
@@ -126,7 +128,10 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
         _selectedPrefab = null;
         _selectedIndex = -1;
 
-        QuestManager.Instance.CheckPlace(spawnedMachine);
+        if (_machineQuest)
+        {
+            QuestManager.Instance.CheckPlace();
+        }
     }
 
     void SpawnMachines(int spawnIndex)

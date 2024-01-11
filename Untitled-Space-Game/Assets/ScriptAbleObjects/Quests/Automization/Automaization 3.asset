@@ -10,7 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
-  m_Name: ShipQuest 2
+  m_Name: Automaization 3
   m_EditorClassIdentifier: 
-  itemsNeeded: []
-  amountToCraft: 0
+  questName: Automatization 3/4
+  questInfo: Craft a mining machine
+  isQuestLine: 1
+  questLineName: Automatization
+  nextQuest: {fileID: 11400000, guid: 1537990f81abdd54a8e65a17075d3b9e, type: 2}
+  itemsNeeded:
+  - item: {fileID: 11400000, guid: f93fc59c24986be4390d898a56ebaec8, type: 2}
+    amount: 1
+  machinesNeeded: []
+  questType: 0

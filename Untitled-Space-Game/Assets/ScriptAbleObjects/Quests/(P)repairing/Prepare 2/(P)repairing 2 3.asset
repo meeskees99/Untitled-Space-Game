@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
+  m_Name: (P)repairing 2 3
+  m_EditorClassIdentifier: 
+  questName: (P)reparing 3/4
+  questInfo: Make a wiring kit
+  isQuestLine: 1
+  questLineName: (P)repairing
+  nextQuest: {fileID: 11400000, guid: 7005b3405f6b6ca46876274f50ef9124, type: 2}
+  itemsNeeded:
+  - item: {fileID: 11400000, guid: adbc8e0ec2ca0db429a1469ad933ba75, type: 2}
+    amount: 1
+  machinesNeeded: []
+  questType: 0

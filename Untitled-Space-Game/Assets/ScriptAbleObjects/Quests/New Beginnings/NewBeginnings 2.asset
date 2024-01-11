@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
+  m_Name: NewBeginnings 2
+  m_EditorClassIdentifier: 
+  questName: New Beginnings 2/4
+  questInfo: Drop your clay and wait for it to turn into bricks
+  isQuestLine: 1
+  questLineName: New Beginnings
+  nextQuest: {fileID: 11400000, guid: a78433bbecca2754bad2e4fede22b2a1, type: 2}
+  itemsNeeded:
+  - item: {fileID: 11400000, guid: c86af5229e658714597b03118b924f70, type: 2}
+    amount: 8
+  machinesNeeded: []
+  questType: 0

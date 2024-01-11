@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
+  m_Name: Automaization 4
+  m_EditorClassIdentifier: 
+  questName: Automatization4/4
+  questInfo: Place the mining machine on some iron or copper
+  isQuestLine: 1
+  questLineName: Automatization
+  nextQuest: {fileID: 11400000, guid: a4f0803e5af9fb046a5b3db1999fcf25, type: 2}
+  itemsNeeded: []
+  machinesNeeded:
+  - {fileID: 2802134608837746400, guid: c80958d8b6fbe42418d1cdfa8b488c43, type: 3}
+  questType: 2
