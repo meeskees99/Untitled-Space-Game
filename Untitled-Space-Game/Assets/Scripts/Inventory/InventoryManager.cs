@@ -114,6 +114,10 @@ public class InventoryManager : MonoBehaviour
                 Debug.Log($"Adding Item {_allItems[i]}");
             }
         }
+        if (!HasSpace(itemId, amount))
+        {
+            Debug.Log("Inventory Was Full, Could Not Add " + _itemToSpawn);
+        }
         //Check for stackable slot
         for (int i = 0; i < inventorySlots.Count; i++)
         {
