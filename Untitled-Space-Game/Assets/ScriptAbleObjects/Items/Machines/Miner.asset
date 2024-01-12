@@ -19,7 +19,14 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 3b8db7241fc8ff54e9dea6fc64cfd7e5, type: 3}
   maxStack: 1
   canBeInHudSlot: 0
+  itemToGetAfterSmelt: {fileID: 0}
   isTool: 0
   isPlacable: 1
   isFuel: 0
   fuelTime: 2
+  isSmeltable: 0
+  smeltTime: 4
+  machinePrefab: {fileID: 2802134608837746400, guid: c80958d8b6fbe42418d1cdfa8b488c43,
+    type: 3}
+  machineBlueprint: {fileID: 2802134608837746400, guid: d0ce1168123c3b14da6e62a86462cbc1,
+    type: 3}

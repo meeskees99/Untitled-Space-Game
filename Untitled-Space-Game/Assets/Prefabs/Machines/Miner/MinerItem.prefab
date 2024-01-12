@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4541802308326812802}
   - component: {fileID: 6924365272660718565}
   m_Layer: 0
-  m_Name: MiningMachineItem
+  m_Name: MinerItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

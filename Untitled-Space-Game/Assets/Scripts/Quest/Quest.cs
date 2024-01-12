@@ -16,6 +16,8 @@ public class Quest : ScriptableObject
     public ItemInfo[] itemsNeeded;
     public GameObject[] machinesNeeded;
 
+    public Recipe[] recipesToUnlock;
+
     public enum QuestType
     {
         INVENTORY,

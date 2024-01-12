@@ -26,3 +26,7 @@ MonoBehaviour:
   fuelTime: 0
   isSmeltable: 0
   smeltTime: 4
+  machinePrefab: {fileID: 7905719996261257981, guid: 7bd6f3aadb0bbc148971ef5f5f642b69,
+    type: 3}
+  machineBlueprint: {fileID: 7905719996261257981, guid: 52f0104616a0f0947bce0c6c92a147ae,
+    type: 3}

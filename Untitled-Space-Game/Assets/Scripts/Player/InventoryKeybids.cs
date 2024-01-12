@@ -11,6 +11,8 @@ public class InventoryKeybids : MonoBehaviour
     [SerializeField] PlayerInput _playerInput;
     public PlayerInput PlayerInput => _playerInput;
 
+    [SerializeField] MachinePlacement machinePlacement;
+
     [SerializeField] PlayerStats _playerStats;
 
     #region Interactions
@@ -26,17 +28,23 @@ public class InventoryKeybids : MonoBehaviour
 
     bool _doingDamage;
 
+    [SerializeField] float _rayRange;
+    [SerializeField] float _rayRadius;
+
     [Header("Interaction")]
     [SerializeField] GameObject _InteractPanel;
     [SerializeField] TMP_Text _interactableTxt;
 
-    [SerializeField] float _interactableRadius;
     [SerializeField] RaycastHit _interactableHit;
-    [SerializeField] float _interactableRange;
     [SerializeField] LayerMask _interactableMask;
 
     [SerializeField] bool _didUiInteraction;
     public bool DidUiInteraction { get { return _didUiInteraction; } private set { _didUiInteraction = value; } }
+
+    [Header("Placing")]
+    [SerializeField] RaycastHit _placeableHit;
+    [SerializeField] LayerMask _placeableMask;
+
 
     #endregion
 
@@ -114,7 +122,7 @@ public class InventoryKeybids : MonoBehaviour
         #region On Shoot
         if (_onShoot)
         {
-            CheckTool();
+            CheckUsable();
         }
         else
         {
@@ -170,6 +178,11 @@ public class InventoryKeybids : MonoBehaviour
                     }
                 }
             }
+            else if (InventoryManager.Instance.GetSelectedItem().name == "Smelter" || InventoryManager.Instance.GetSelectedItem().name == "Miner")
+            {
+                CheckPlaceable();
+            }
+
         }
         #endregion
 
@@ -181,8 +194,7 @@ public class InventoryKeybids : MonoBehaviour
         #endregion
     }
 
-    #region Tools
-    private void CheckTool()
+    private void CheckUsable()
     {
         if (InventoryManager.Instance == null || InventoryManager.Instance.GetSelectedItem() == null)
         {
@@ -190,39 +202,49 @@ public class InventoryKeybids : MonoBehaviour
             return;
         }
 
-        // Debug.LogWarning("Checking Tool");
+        if (InventoryManager.Instance.GetSelectedItem().isTool)
+        {
+            CheckTool();
+        }
+        else if (InventoryManager.Instance.GetSelectedItem().isPlacable)
+        {
+            Place();
+        }
+
 
         _camDistance = Vector3.Distance(transform.position, _playerCam.position);
+    }
 
-        if (InventoryManager.Instance.GetSelectedItem().name == "Pickaxe")
+    #region Tools
+
+    private void CheckTool()
+    {
+        if (Physics.Raycast(_playerCam.position, _playerCam.forward, out _toolHit, _toolRange + _camDistance))
         {
-            if (Physics.Raycast(_playerCam.position, _playerCam.forward, out _toolHit, _toolRange + _camDistance))
+            if (_toolHit.transform.gameObject.layer == LayerMask.NameToLayer("Resource"))
             {
-                if (_toolHit.transform.gameObject.layer == LayerMask.NameToLayer("Resource"))
-                {
-                    GatherTool();
-                    _lastHitResource = _toolHit.transform;
-                    _lastHitResource.GetComponent<Outline>().enabled = true;
-                }
-                else if (_toolHit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-                {
-                    // Debug.Log("Hitting Enemy");
-                    _lastHitEnemy = _toolHit.transform;
-                    WeaponTool();
-                }
-                else
-                {
-                    if (_lastHitResource != null)
-                    {
-                        _lastHitResource.GetComponent<Outline>().enabled = false;
-                        _lastHitResource = null;
-                    }
-                }
+                GatherTool();
+                _lastHitResource = _toolHit.transform;
+                _lastHitResource.GetComponent<Outline>().enabled = true;
+            }
+            else if (_toolHit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                // Debug.Log("Hitting Enemy");
+                _lastHitEnemy = _toolHit.transform;
+                WeaponTool();
             }
             else
             {
-                Debug.Log("Raycast Missed");
+                if (_lastHitResource != null)
+                {
+                    _lastHitResource.GetComponent<Outline>().enabled = false;
+                    _lastHitResource = null;
+                }
             }
+        }
+        else
+        {
+            Debug.Log("Raycast Missed");
         }
     }
 
@@ -254,6 +276,7 @@ public class InventoryKeybids : MonoBehaviour
         }
     }
 
+
     void LaserEnemy()
     {
         if (_onShoot)
@@ -272,9 +295,14 @@ public class InventoryKeybids : MonoBehaviour
 
     #endregion
 
+    private void Place()
+    {
+        machinePlacement.PlaceMachine(_interactableHit.transform);
+    }
+
     private void CheckInteractable()
     {
-        if (Physics.SphereCast(_playerCam.transform.position, _interactableRadius, _playerCam.transform.forward, out _interactableHit, _interactableRange + _camDistance, _interactableMask))
+        if (Physics.SphereCast(_playerCam.transform.position, _rayRadius, _playerCam.transform.forward, out _interactableHit, _rayRange + _camDistance, _interactableMask))
         {
             if (_interactableHit.transform.GetComponent<DroppedItem>())
             {
@@ -342,14 +370,14 @@ public class InventoryKeybids : MonoBehaviour
 
                 }
             }
-            else if (_interactableHit.transform.tag == "CraftingTable")
+            else if (LayerMask.LayerToName(_interactableHit.transform.gameObject.layer) == "CraftingTable")
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     InGameUIManager.Instance.ToggleCrafting();
                     _InteractPanel.SetActive(!_InteractPanel.activeSelf);
                     _didUiInteraction = !_didUiInteraction;
-                    Debug.Log($"Pressed E To Open Mining Panel");
+                    Debug.Log($"Pressed E To Open Crafting Panel");
                 }
                 if (!_didUiInteraction)
                 {
@@ -371,6 +399,14 @@ public class InventoryKeybids : MonoBehaviour
             {
                 _InteractPanel.SetActive(false);
             }
+        }
+    }
+
+    private void CheckPlaceable()
+    {
+        if (Physics.SphereCast(_playerCam.transform.position, _rayRadius, _playerCam.transform.forward, out _placeableHit, _rayRange + _camDistance, _placeableMask))
+        {
+            machinePlacement.PickMachine(InventoryManager.Instance.GetSelectedItem(), _placeableHit);
         }
     }
 

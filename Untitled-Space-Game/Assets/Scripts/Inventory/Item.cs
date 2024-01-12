@@ -22,4 +22,8 @@ public class Item : ScriptableObject
     public float fuelTime = 2;
     public bool isSmeltable;
     public float smeltTime = 4;
+
+    [Header("Machine Specific")]
+    public GameObject machinePrefab;
+    public GameObject machineBlueprint;
 }

@@ -121,7 +121,7 @@ public class CraftingManager : MonoBehaviour
         Debug.LogError("Item Index Does Not Exist As Item");
     }
 
-    void AddRecipe(Recipe recipe)
+    public void AddRecipe(Recipe recipe)
     {
         GameObject spawnedRecipe = Instantiate(itemPrefab, recipeListTransform);
         spawnedRecipe.GetComponent<CraftButton>().recipe = recipe;

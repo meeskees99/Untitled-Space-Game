@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class MachinePlacement : MonoBehaviour, IDataPersistence
@@ -47,78 +48,114 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
     }
     void Update()
     {
-        if (_selectedPrefab != null)
-        {
-            if (Physics.Raycast(_shootPos.position, _shootPos.forward, out _hit, _placementRange))
-            {
-                if (_spawnedBlueprint == null)
-                {
-                    _spawnedBlueprint = Instantiate(_machineBlueprintPrefabs[_selectedIndex]);
-                }
-                if (_hit.transform.gameObject.layer == LayerMask.NameToLayer(_placementLayerName))
-                {
-                    // TODO - make the thing turn blue
-                    _spawnedBlueprint.transform.position = _hit.transform.position;
-                    _spawnedBlueprint.transform.GetComponentInChildren<MeshRenderer>().material.color = _canPlaceColor;
-                    if (Input.GetKeyDown(KeyCode.Mouse0))
-                    {
-                        Destroy(_spawnedBlueprint);
-                        PlaceMachine(_hit.transform);
-                    }
-                }
-                else
-                {
-                    // TODO - make the thing turn red
-                    _spawnedBlueprint.transform.position = _hit.point + _placementOffset;
-                    _spawnedBlueprint.transform.GetComponentInChildren<MeshRenderer>().material.color = _cantPlaceColor;
+        // if (_selectedPrefab != null)
+        // {
+        //     if (Physics.Raycast(_shootPos.position, _shootPos.forward, out _hit, _placementRange))
+        //     {
+        //         if (_spawnedBlueprint == null)
+        //         {
+        //             _spawnedBlueprint = Instantiate(_machineBlueprintPrefabs[_selectedIndex]);
+        //         }
+        //         if (_hit.transform.gameObject.layer == LayerMask.NameToLayer(_placementLayerName))
+        //         {
+        //             // TODO - make the thing turn blue
+        //             _spawnedBlueprint.transform.position = _hit.transform.position;
+        //             _spawnedBlueprint.transform.GetComponentInChildren<MeshRenderer>().material.color = _canPlaceColor;
+        //             if (Input.GetKeyDown(KeyCode.Mouse0))
+        //             {
+        //                 Destroy(_spawnedBlueprint);
+        //                 PlaceMachine(_hit.transform);
+        //             }
+        //         }
+        //         else
+        //         {
+        //             // TODO - make the thing turn red
+        //             _spawnedBlueprint.transform.position = _hit.point + _placementOffset;
+        //             _spawnedBlueprint.transform.GetComponentInChildren<MeshRenderer>().material.color = _cantPlaceColor;
 
-                    //UNCOMMENT IF YOU WANT TO STOP PLACING WHEN YOU MISS
-                    // if (Input.GetKeyDown(KeyCode.Mouse0))
-                    // {
-                    //     _selectedPrefab = null;
-                    //     _selectedIndex = -1;
-                    //     Destroy(_spawnedBlueprint);
-                    // }
-                }
-            }
-            else
-            {
-                Destroy(_spawnedBlueprint);
-            }
+        //             //UNCOMMENT IF YOU WANT TO STOP PLACING WHEN YOU MISS
+        //             // if (Input.GetKeyDown(KeyCode.Mouse0))
+        //             // {
+        //             //     _selectedPrefab = null;
+        //             //     _selectedIndex = -1;
+        //             //     Destroy(_spawnedBlueprint);
+        //             // }
+        //         }
+        //     }
+        //     else
+        //     {
+        //         Destroy(_spawnedBlueprint);
+        //     }
 
-        }
-        else
+        // }
+        // else
+        // {
+        //     if (_spawnedBlueprint != null)
+        //     {
+        //         Destroy(_spawnedBlueprint);
+        //     }
+        // }
+    }
+
+    public void PickMachine(Item machineItem, RaycastHit raycastHit)
+    {
+        if (machineItem == null)
         {
             if (_spawnedBlueprint != null)
             {
                 Destroy(_spawnedBlueprint);
             }
-        }
-    }
-
-    public void PickMachine(int machineIndex)
-    {
-        if (_selectedIndex == machineIndex)
-        {
-            _selectedIndex = -1;
-            _selectedPrefab = null;
             return;
-        }
-        if (machineIndex < 0)
-        {
-            _selectedIndex = -1;
-            _selectedPrefab = null;
         }
         else
         {
-            _selectedIndex = machineIndex;
-            _selectedPrefab = _machinePrefabs[_selectedIndex];
+            if (_spawnedBlueprint == null)
+            {
+                _spawnedBlueprint = Instantiate(machineItem.machineBlueprint, raycastHit.transform.position, raycastHit.transform.rotation);
+            }
+            else
+            {
+                _spawnedBlueprint.transform.position = raycastHit.transform.position + _placementOffset;
+                _spawnedBlueprint.transform.rotation = raycastHit.transform.rotation;
+                if (LayerMask.LayerToName(raycastHit.transform.gameObject.layer) == "Ground")
+                {
+                    _spawnedBlueprint.transform.GetComponentInChildren<MeshRenderer>().material.color = _canPlaceColor;
+                }
+                else
+                {
+                    _spawnedBlueprint.transform.GetComponentInChildren<MeshRenderer>().material.color = _cantPlaceColor;
+                }
+
+            }
+        }
+        if (machineItem.isPlacable)
+        {
+            _selectedPrefab = machineItem.machinePrefab;
+        }
+
+
+    }
+
+    public void PlaceMachine(Transform placePos)
+    {
+        if (_selectedPrefab == null)
+        {
+            return;
+        }
+
+        if (_selectedPrefab.transform.GetComponent<SmeltingMachine>())
+        {
+            PlaceSmelter(placePos);
+        }
+        else
+        {
+            PlaceMiner(placePos);
         }
     }
 
-    void PlaceMachine(Transform placePos)
+    public void PlaceMiner(Transform placePos)
     {
-        GameObject spawnedMachine = Instantiate(_machinePrefabs[_selectedIndex], placePos);
+        GameObject spawnedMachine = Instantiate(_selectedPrefab, placePos);
         spawnedMachine.transform.localPosition = _placementOffset;
 
         _placedDiggers.Add(spawnedMachine.GetComponent<DiggingMachine>());
@@ -126,13 +163,30 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
         diggerVeinIndex.Add(placePos.GetComponent<ResourceVein>().resourceIndex);
 
         _selectedPrefab = null;
-        _selectedIndex = -1;
 
         if (_machineQuest)
         {
             QuestManager.Instance.CheckPlace();
         }
     }
+
+    void PlaceSmelter(Transform placePos)
+    {
+        GameObject spawnedMachine = Instantiate(_selectedPrefab, placePos.position, placePos.rotation);
+        spawnedMachine.transform.localPosition = _placementOffset;
+
+        _placedDiggers.Add(spawnedMachine.GetComponent<DiggingMachine>());
+
+        diggerVeinIndex.Add(placePos.GetComponent<ResourceVein>().resourceIndex);
+
+        _selectedPrefab = null;
+
+        if (_machineQuest)
+        {
+            QuestManager.Instance.CheckPlace();
+        }
+    }
+
 
     void SpawnMachines(int spawnIndex)
     {
