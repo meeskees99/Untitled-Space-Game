@@ -8,6 +8,7 @@ TagManager:
   - CineMachine
   - MainCanvas
   - CraftingTable
+  - Machine
   layers:
   - Default
   - TransparentFX

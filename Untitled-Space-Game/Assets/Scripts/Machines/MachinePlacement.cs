@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -101,22 +102,24 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
     {
         if (machineItem == null)
         {
+            _selectedPrefab = null;
             if (_spawnedBlueprint != null)
             {
+                Debug.Log("Destroyed Blueprint");
                 Destroy(_spawnedBlueprint);
             }
             return;
         }
         else
         {
-            if (_spawnedBlueprint == null)
+            if (_spawnedBlueprint == null && _selectedPrefab != null)
             {
-                _spawnedBlueprint = Instantiate(machineItem.machineBlueprint, raycastHit.transform.position, raycastHit.transform.rotation);
+                _spawnedBlueprint = Instantiate(machineItem.machineBlueprint, raycastHit.point, Quaternion.identity);
             }
-            else
+            else if (_spawnedBlueprint != null && _selectedPrefab != null)
             {
-                _spawnedBlueprint.transform.position = raycastHit.transform.position + _placementOffset;
-                _spawnedBlueprint.transform.rotation = raycastHit.transform.rotation;
+                _spawnedBlueprint.transform.position = raycastHit.point + _placementOffset;
+                // _spawnedBlueprint.transform.rotation = raycastHit.transform.rotation;
                 if (LayerMask.LayerToName(raycastHit.transform.gameObject.layer) == "Ground")
                 {
                     _spawnedBlueprint.transform.GetComponentInChildren<MeshRenderer>().material.color = _canPlaceColor;
@@ -136,8 +139,9 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
 
     }
 
-    public void PlaceMachine(Transform placePos)
+    public void PlaceMachine(RaycastHit placePos)
     {
+        Debug.Log("place");
         if (_selectedPrefab == null)
         {
             return;
@@ -149,12 +153,13 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
         }
         else
         {
-            PlaceMiner(placePos);
+            PlaceMiner(placePos.transform);
         }
     }
 
     public void PlaceMiner(Transform placePos)
     {
+        Destroy(_spawnedBlueprint);
         GameObject spawnedMachine = Instantiate(_selectedPrefab, placePos);
         spawnedMachine.transform.localPosition = _placementOffset;
 
@@ -170,19 +175,20 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
         }
     }
 
-    void PlaceSmelter(Transform placePos)
+    void PlaceSmelter(RaycastHit placePos)
     {
-        GameObject spawnedMachine = Instantiate(_selectedPrefab, placePos.position, placePos.rotation);
-        spawnedMachine.transform.localPosition = _placementOffset;
+        Destroy(_spawnedBlueprint);
+        GameObject spawnedMachine = Instantiate(_selectedPrefab, placePos.point, Quaternion.identity);
+        // spawnedMachine.transform.localPosition = _placementOffset;
+        InventoryManager.Instance.UseItem(InventoryManager.Instance.GetSelectedItem().itemID, 1);
 
         _placedDiggers.Add(spawnedMachine.GetComponent<DiggingMachine>());
-
-        diggerVeinIndex.Add(placePos.GetComponent<ResourceVein>().resourceIndex);
 
         _selectedPrefab = null;
 
         if (_machineQuest)
         {
+            Debug.Log(QuestManager.Instance.gameObject.name);
             QuestManager.Instance.CheckPlace();
         }
     }

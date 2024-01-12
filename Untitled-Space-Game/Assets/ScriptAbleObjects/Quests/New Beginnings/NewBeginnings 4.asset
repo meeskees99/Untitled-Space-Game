@@ -19,5 +19,6 @@ MonoBehaviour:
   nextQuest: {fileID: 11400000, guid: ef7b4b20d477fb344be479182b686ab1, type: 2}
   itemsNeeded: []
   machinesNeeded:
-  - {fileID: 0}
+  - {fileID: 7905719996261257981, guid: 7bd6f3aadb0bbc148971ef5f5f642b69, type: 3}
+  recipesToUnlock: []
   questType: 2

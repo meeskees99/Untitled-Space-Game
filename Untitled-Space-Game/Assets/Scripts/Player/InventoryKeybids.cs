@@ -250,6 +250,7 @@ public class InventoryKeybids : MonoBehaviour
 
     private void GatherTool()
     {
+        Debug.Log("GatherTooling");
         if (_gatherTime == -1)
         {
             _gatherTime = _toolHit.transform.GetComponent<ResourceVein>().Resource.mineDuration;
@@ -297,31 +298,40 @@ public class InventoryKeybids : MonoBehaviour
 
     private void Place()
     {
-        machinePlacement.PlaceMachine(_interactableHit.transform);
+        Debug.Log(_interactableHit);
+        machinePlacement.PlaceMachine(_interactableHit);
     }
 
     private void CheckInteractable()
     {
-        if (Physics.SphereCast(_playerCam.transform.position, _rayRadius, _playerCam.transform.forward, out _interactableHit, _rayRange + _camDistance, _interactableMask))
+        if (Physics.SphereCast(_playerCam.transform.position, _rayRadius, _playerCam.transform.forward, out _interactableHit, _rayRange + _camDistance))
         {
             if (_interactableHit.transform.GetComponent<DroppedItem>())
             {
                 DroppedItem droppedItem = _interactableHit.transform.GetComponent<DroppedItem>();
-                _interactableTxt.text = $"Press ({_playerInput.actions.FindAction("Interact").GetBindingDisplayString()}) to pick up " + droppedItem._amount + " " +
-                droppedItem._item.name;
+                _interactableTxt.text = $"Press ({_playerInput.actions.FindAction("Interact").GetBindingDisplayString()}) to pick up " + droppedItem.amount + " " +
+                droppedItem.item.name;
                 _InteractPanel.SetActive(true);
 
                 if (_onInteract)
                 {
-                    if (InventoryManager.Instance.HasSpace(droppedItem._item.itemID, droppedItem._amount))
+                    if (droppedItem.amount > droppedItem.item.maxStack)
                     {
-                        InventoryManager.Instance.AddItem(droppedItem._item.itemID, droppedItem._amount);
+                        if (InventoryManager.Instance.HasSpace(droppedItem.item.itemID, droppedItem.item.maxStack))
+                        {
+                            InventoryManager.Instance.AddItem(droppedItem.item.itemID, droppedItem.amount);
+                            droppedItem.amount -= droppedItem.item.maxStack;
+                        }
+                    }
+                    else if (InventoryManager.Instance.HasSpace(droppedItem.item.itemID, droppedItem.amount))
+                    {
+                        InventoryManager.Instance.AddItem(droppedItem.item.itemID, droppedItem.amount);
                         Destroy(droppedItem.gameObject);
-                        Debug.Log($"Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Pick Up {droppedItem._amount} {droppedItem._item}");
+                        Debug.Log($"Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Pick Up {droppedItem.amount} {droppedItem.item}");
                     }
                     else
                     {
-                        Debug.Log($"[NO SPACE] Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Pick Up {droppedItem._amount} {droppedItem._item}, but had no room in inventory");
+                        Debug.Log($"[NO SPACE] Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Pick Up {droppedItem.amount} {droppedItem.item}, but had no room in inventory");
                     }
 
                 }
@@ -392,6 +402,11 @@ public class InventoryKeybids : MonoBehaviour
 
                 }
             }
+            else
+            {
+                _interactableTxt.text = "";
+                _InteractPanel.SetActive(false);
+            }
         }
         else
         {
@@ -404,9 +419,14 @@ public class InventoryKeybids : MonoBehaviour
 
     private void CheckPlaceable()
     {
-        if (Physics.SphereCast(_playerCam.transform.position, _rayRadius, _playerCam.transform.forward, out _placeableHit, _rayRange + _camDistance, _placeableMask))
+        if (Physics.SphereCast(_playerCam.transform.position, _rayRadius, _playerCam.transform.forward, out _placeableHit, _rayRange + _camDistance))
         {
+            print("PlacingMachine");
             machinePlacement.PickMachine(InventoryManager.Instance.GetSelectedItem(), _placeableHit);
+        }
+        else
+        {
+            machinePlacement.PickMachine(null, _placeableHit);
         }
     }
 

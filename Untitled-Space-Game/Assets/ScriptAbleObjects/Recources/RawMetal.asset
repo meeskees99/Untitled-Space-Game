@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: aa810773b15f1d543995106ac34d3d09, type: 2}
   mineDuration: 3
+  smeltDuration: 5
   recourceAmount: 1

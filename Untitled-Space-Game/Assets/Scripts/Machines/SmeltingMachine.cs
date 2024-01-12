@@ -130,20 +130,20 @@ public class SmeltingMachine : MonoBehaviour
 
     private void Update()
     {
-        if (progressSlider != null && SmeltingPanelManager.Instance._currentSmelter == this)
+        if (progressSlider != null && SmeltingPanelManager.Instance.currentSmelter == this)
         {
             progressSlider.value = _currentSmeltProgression;
         }
-        else if (progressSlider == null && SmeltingPanelManager.Instance._currentSmelter == this)
+        else if (progressSlider == null && SmeltingPanelManager.Instance.currentSmelter == this)
         {
             Debug.LogError("Progress Slider Not Set");
         }
 
-        if (fuelLeftSlider != null && SmeltingPanelManager.Instance._currentSmelter == this)
+        if (fuelLeftSlider != null && SmeltingPanelManager.Instance.currentSmelter == this)
         {
             fuelLeftSlider.value = _fuelLeft;
         }
-        else if (progressSlider == null && SmeltingPanelManager.Instance._currentSmelter == this)
+        else if (progressSlider == null && SmeltingPanelManager.Instance.currentSmelter == this)
         {
             Debug.LogError("FuelLeft Slider Not Set");
         }

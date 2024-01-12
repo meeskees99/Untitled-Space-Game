@@ -52,7 +52,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         }
         countText.text = count.ToString();
-        bool textActive = count > 1;
+        bool textActive = count > 1 && InGameUIManager.Instance.inventoryShown;
         countText.gameObject.SetActive(textActive);
         Debug.Log("Refreshed Count Of " + item);
     }
@@ -118,7 +118,14 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             InventoryManager.Instance.UpdateItemsInfoList();
             if (parentAfterDrag.GetComponent<InventorySlot>().isFuelSlot)
             {
-                MiningPanelManager.Instance.currentDigger.InitializeFuelType();
+                if (MiningPanelManager.Instance.currentDigger != null)
+                {
+                    MiningPanelManager.Instance.currentDigger.InitializeFuelType();
+                }
+                else if (SmeltingPanelManager.Instance.currentSmelter != null)
+                {
+                    SmeltingPanelManager.Instance.currentSmelter.InitializeFuelType();
+                }
             }
             Debug.Log(lastInventorySlot.isMachineSlot + " " + parentAfterDrag.GetComponent<InventorySlot>().isMachineSlot);
             if (lastInventorySlot.isMachineSlot && !parentAfterDrag.GetComponent<InventorySlot>().isMachineSlot)

@@ -8,7 +8,7 @@ public class SmeltingPanelManager : MonoBehaviour
 {
     public static SmeltingPanelManager Instance;
 
-    public SmeltingMachine _currentSmelter;
+    public SmeltingMachine currentSmelter;
 
     [SerializeField] PlayerInput _playerInput;
 
@@ -54,9 +54,9 @@ public class SmeltingPanelManager : MonoBehaviour
         if (resourceInputSlot.GetInventoryItem() != null)
             Destroy(resourceInputSlot.GetInventoryItem().gameObject);
 
-        if (_currentSmelter == smeltingMachine)
+        if (currentSmelter == smeltingMachine)
         {
-            _currentSmelter = null;
+            currentSmelter = null;
             GetComponent<Canvas>().enabled = !GetComponent<Canvas>().enabled;
             GetComponent<GraphicRaycaster>().enabled = !GetComponent<GraphicRaycaster>().enabled;
             panelActive = GetComponent<GraphicRaycaster>().enabled;
@@ -66,7 +66,7 @@ public class SmeltingPanelManager : MonoBehaviour
         }
         else
         {
-            _currentSmelter = smeltingMachine;
+            currentSmelter = smeltingMachine;
 
             smeltingMachine.fuelLeftSlider = fuelLeftSlider;
             smeltingMachine.progressSlider = progressSlider;

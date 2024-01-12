@@ -32,9 +32,13 @@ public class QuestManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
+        if (Instance == null)
         {
             Instance = this;
+        }
+        else
+        {
+            Destroy(this);
         }
         _machinePlacement = FindObjectOfType<MachinePlacement>();
 
@@ -124,11 +128,17 @@ public class QuestManager : MonoBehaviour
         GameObject[] placedMachines = GameObject.FindGameObjectsWithTag("Machine");
 
         bool[] machinesDone = new bool[_questMachineRequirements.Length];
+
         for (int i = 0; i < placedMachines.Length; i++)
         {
             for (int j = 0; j < _questMachineRequirements.Length; j++)
             {
-                if (placedMachines[i].name == _questMachineRequirements[j].name)
+                if (placedMachines[i].GetComponent<SmeltingMachine>() && _questMachineRequirements[j].GetComponent<SmeltingMachine>())
+                {
+                    machinesDone[j] = true;
+                    continue;
+                }
+                else if (placedMachines[i].GetComponent<DiggingMachine>() && _questMachineRequirements[j].GetComponent<DiggingMachine>())
                 {
                     machinesDone[j] = true;
                     continue;

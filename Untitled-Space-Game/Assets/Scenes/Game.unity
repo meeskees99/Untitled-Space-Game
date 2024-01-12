@@ -13986,7 +13986,7 @@ PrefabInstance:
     - target: {fileID: 4286826745754973780, guid: 26f639f77f59b7d41ab44fd90328e77b,
         type: 3}
       propertyPath: _allItems.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4286826745754973780, guid: 26f639f77f59b7d41ab44fd90328e77b,
         type: 3}
@@ -14044,6 +14044,12 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 4286826745754973780, guid: 26f639f77f59b7d41ab44fd90328e77b,
         type: 3}
+      propertyPath: _allItems.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: a4685f8f3dc23a4448eafa43274fb0d3,
+        type: 2}
+    - target: {fileID: 4286826745754973780, guid: 26f639f77f59b7d41ab44fd90328e77b,
+        type: 3}
       propertyPath: _miningSlots.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -14090,7 +14096,7 @@ PrefabInstance:
     - target: {fileID: 4286826745754973780, guid: 26f639f77f59b7d41ab44fd90328e77b,
         type: 3}
       propertyPath: itemsInInventory.Array.size
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4286826745754973780, guid: 26f639f77f59b7d41ab44fd90328e77b,
         type: 3}
@@ -35909,7 +35915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a067bdf441cca4791a8f6d56ffdc65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentSmelter: {fileID: 0}
+  currentSmelter: {fileID: 0}
   _playerInput: {fileID: 5824906559881518196}
   fuelInputSlot: {fileID: 133013482}
   resourceInputSlot: {fileID: 318772201}
@@ -43436,7 +43442,7 @@ PrefabInstance:
     - target: {fileID: 7509776067065908285, guid: cb8c93fd58847b54d918fa4e6fee0d46,
         type: 3}
       propertyPath: _rayRange
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7509776067065908285, guid: cb8c93fd58847b54d918fa4e6fee0d46,
         type: 3}

@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class DroppedItem : MonoBehaviour
 {
-    public Item _item;
-    public int _amount;
+    public Item item;
+    public int amount;
 
     [SerializeField] float _pickUpDelay = 1.5f;
     [SerializeField] float _rotationSpeed;
@@ -26,9 +26,9 @@ public class DroppedItem : MonoBehaviour
     {
         _child = GetComponentInChildren<Transform>();
 
-        if (_item.name == "Clay")
+        if (item.name == "Clay")
         {
-            timer = _item.smeltTime * 2;
+            timer = item.smeltTime * 2;
         }
     }
 
@@ -43,7 +43,7 @@ public class DroppedItem : MonoBehaviour
             _canPickup = true;
             if (_lastCollidedObject != null && _lastCollidedObject.GetComponent<CharStateMachine>())
             {
-                InventoryManager.Instance.AddItem(_item.itemID, _amount);
+                InventoryManager.Instance.AddItem(item.itemID, amount);
                 Destroy(gameObject);
             }
         }
@@ -51,7 +51,7 @@ public class DroppedItem : MonoBehaviour
         {
             _mergeDelay -= Time.deltaTime;
         }
-        if (_item.name == "Clay")
+        if (item.name == "Clay")
         {
             if (timer > 0)
             {
@@ -59,7 +59,7 @@ public class DroppedItem : MonoBehaviour
             }
             else
             {
-                InventoryManager.Instance.DropItem(_item.itemToGetAfterSmelt.itemID, _amount, transform);
+                InventoryManager.Instance.DropItem(item.itemToGetAfterSmelt.itemID, amount, transform);
                 Destroy(gameObject);
             }
         }
@@ -72,20 +72,20 @@ public class DroppedItem : MonoBehaviour
 
         if (other.GetComponent<DroppedItem>())
         {
-            if (other.GetComponent<DroppedItem>()._item == _item)
+            if (other.GetComponent<DroppedItem>().item == item)
             {
                 if (_mergeDelay <= 0)
                 {
-                    if (_amount + other.GetComponent<DroppedItem>()._amount <= _item.maxStack)
+                    if (amount + other.GetComponent<DroppedItem>().amount <= item.maxStack)
                     {
-                        _amount += other.GetComponent<DroppedItem>()._amount;
+                        amount += other.GetComponent<DroppedItem>().amount;
                         Destroy(other.gameObject);
                     }
                     else
                     {
-                        int extra = _amount + other.GetComponent<DroppedItem>()._amount - _item.maxStack;
-                        _amount = _item.maxStack;
-                        other.GetComponent<DroppedItem>()._amount = extra;
+                        int extra = amount + other.GetComponent<DroppedItem>().amount - item.maxStack;
+                        amount = item.maxStack;
+                        other.GetComponent<DroppedItem>().amount = extra;
                     }
 
                     Debug.Log("Merged Two Dropped Items Together");

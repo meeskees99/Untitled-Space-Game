@@ -101,7 +101,7 @@ public class InventoryManager : MonoBehaviour
 
     public bool AddItem(int itemId, int amount)
     {
-        if (itemId < 0)
+        if (itemId <= 0)
         {
             _itemToSpawn = null;
             return false;
@@ -128,7 +128,29 @@ public class InventoryManager : MonoBehaviour
 
             if (itemInSlot != null && itemInSlot.item == _itemToSpawn && itemInSlot.count < itemInSlot.item.maxStack)
             {
-                itemInSlot.count++;
+                if (itemInSlot.count + amount > itemInSlot.item.maxStack)
+                {
+                    int extra = itemInSlot.count + amount - itemInSlot.item.maxStack;
+                    Debug.Log("Exta: " + extra);
+                    itemInSlot.count = itemInSlot.item.maxStack;
+                    AddItem(itemId, extra);
+                    UpdateItemsInfoList();
+
+                    itemInSlot.RefreshCount();
+
+                    if (!_uiManager.inventoryShown)
+                    {
+                        if (!slot.isHudSlot)
+                            itemInSlot.transform.GetChild(0).gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        if (!slot.isHudSlot)
+                            itemInSlot.transform.GetChild(0).gameObject.SetActive(true);
+                    }
+                    return true;
+                }
+                itemInSlot.count += amount;
                 itemInSlot.RefreshCount();
                 UpdateItemsInfoList();
                 if (!_uiManager.inventoryShown)
@@ -273,8 +295,8 @@ public class InventoryManager : MonoBehaviour
                 {
                     droppedItem = Instantiate(itemToDrop.itemPrefab, player.transform.position, Quaternion.identity);
                 }
-                droppedItem.transform.GetComponent<DroppedItem>()._item = itemToDrop;
-                droppedItem.transform.GetComponent<DroppedItem>()._amount = amount;
+                droppedItem.transform.GetComponent<DroppedItem>().item = itemToDrop;
+                droppedItem.transform.GetComponent<DroppedItem>().amount = amount;
                 Debug.Log($"Succesfully Dropped {amount} {itemToDrop}.");
             }
         }
