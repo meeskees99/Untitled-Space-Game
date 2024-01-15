@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.64779866, g: 0.3647059, b: 0.3157509, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.21304722, g: 0.1665631, b: 0.14950658, a: 1}
+  m_IndirectSpecularColor: {r: 0.21886256, g: 0.16718727, b: 0.14929558, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -257,6 +257,36 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2266364014981065249, guid: 1522a8f37a4dd0d4d8c0f8380876f76a,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[0]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3427486871596433327, guid: 1522a8f37a4dd0d4d8c0f8380876f76a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.32069573
+      objectReference: {fileID: 0}
+    - target: {fileID: 3427486871596433327, guid: 1522a8f37a4dd0d4d8c0f8380876f76a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.9471823
+      objectReference: {fileID: 0}
+    - target: {fileID: 3427486871596433327, guid: 1522a8f37a4dd0d4d8c0f8380876f76a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3427486871596433327, guid: 1522a8f37a4dd0d4d8c0f8380876f76a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3427486871596433327, guid: 1522a8f37a4dd0d4d8c0f8380876f76a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 142.59
+      objectReference: {fileID: 0}
     - target: {fileID: 5732684953144554244, guid: 1522a8f37a4dd0d4d8c0f8380876f76a,
         type: 3}
       propertyPath: m_Name
