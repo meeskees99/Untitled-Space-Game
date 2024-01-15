@@ -50,6 +50,11 @@ public class QuestManager : MonoBehaviour
 
     public void StartNewQuest()
     {
+        for (int i = 0; i < _currentQuest.recipesToUnlock.Length; i++)
+        {
+            CraftingManager.Instance.AddRecipe(_currentQuest.recipesToUnlock[i]);
+        }
+
         _currentQuest = _currentQuest.nextQuest;
 
         UpdateQuest();
@@ -67,10 +72,7 @@ public class QuestManager : MonoBehaviour
         _questNameTxt.text = _currentQuestName;
         _questInfoTxt.text = _currentQuestInfo;
 
-        for (int i = 0; i < _currentQuest.recipesToUnlock.Length; i++)
-        {
-            CraftingManager.Instance.AddRecipe(_currentQuest.recipesToUnlock[i]);
-        }
+
     }
 
     public void UpdateItems()
@@ -88,7 +90,6 @@ public class QuestManager : MonoBehaviour
             temp.transform.GetComponentInChildren<TMP_Text>().text = _questItemRequirements[i].amount.ToString();
             temp.transform.GetComponentInChildren<TMP_Text>().enabled = true;
         }
-
     }
 
     private void Update()
