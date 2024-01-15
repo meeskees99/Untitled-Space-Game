@@ -6,38 +6,46 @@ using UnityEngine.UI;
 public class SmeltingMachine : MonoBehaviour
 {
     [Header("Info")]
-    [SerializeField] Resource _resourceToSmelt;
+    [SerializeField] Item _resourceToSmelt;
     [SerializeField] bool _isSmelting;
-    [SerializeField] Item _itemType;
-    [SerializeField] int _itemAmount;
+
+    [SerializeField] Item _resourceType;
+    [SerializeField] Item _outputType;
     [SerializeField] Item _fuelType;
+
+    [SerializeField] int _resourceAmount;
+    [SerializeField] int _outputAmount;
     [SerializeField] int _fuelAmount;
 
     [SerializeField] bool _resourceInitialized;
     [SerializeField] bool _fuelInitialized;
+    [SerializeField] bool _fuelTimeInitialized;
 
     [Header("SmeltingInventory")]
     [SerializeField] InventorySlot _resourceInputSlot;
-    [SerializeField] InventorySlot _fuelInputSlot;
     [SerializeField] InventorySlot _itemOutputSlot;
+    [SerializeField] InventorySlot _fuelInputSlot;
+
     public Slider fuelLeftSlider;
     public Slider progressSlider;
 
-    float _currentSmeltProgression;
-
-    public int ItemAmount { get { return _itemAmount; } set { _itemAmount = value; } }
-    public int FuelAmount { get { return _fuelAmount; } set { _fuelAmount = value; } }
-    public InventorySlot ResourceInputSlot { get { return _resourceInputSlot; } set { _resourceInputSlot = value; } }
-    public InventorySlot FuelInputSlot { get { return _fuelInputSlot; } set { _fuelInputSlot = value; } }
-    public InventorySlot ItemOutputSlot { get { return _itemOutputSlot; } set { _itemOutputSlot = value; } }
-    public Item ItemType { get { return _itemType; } set { _itemType = value; } }
-    public Item FuelType { get { return _fuelType; } set { _fuelType = value; } }
-    public bool ResourceInitialized { get { return _resourceInitialized; } set { _resourceInitialized = value; } }
-    public bool FuelInitialized { get { return _fuelInitialized; } set { _fuelInitialized = value; } }
-
-    [SerializeField] bool _fuelTimeInitialized;
+    [SerializeField] float _currentSmeltProgression;
     [SerializeField] float _fuelLeft;
 
+    public int ResourceAmount { get { return _resourceAmount; } set { _resourceAmount = value; } }
+    public int OutputAmount { get { return _outputAmount; } set { _outputAmount = value; } }
+    public int FuelAmount { get { return _fuelAmount; } set { _fuelAmount = value; } }
+
+    public InventorySlot ResourceInputSlot { get { return _resourceInputSlot; } set { _resourceInputSlot = value; } }
+    public InventorySlot ItemOutputSlot { get { return _itemOutputSlot; } set { _itemOutputSlot = value; } }
+    public InventorySlot FuelInputSlot { get { return _fuelInputSlot; } set { _fuelInputSlot = value; } }
+
+    public Item ResourceType { get { return _resourceType; } set { _resourceType = value; } }
+    public Item OutputType { get { return _outputType; } set { _outputType = value; } }
+    public Item FuelType { get { return _fuelType; } set { _fuelType = value; } }
+
+    public bool ResourceInitialized { get { return _resourceInitialized; } set { _resourceInitialized = value; } }
+    public bool FuelInitialized { get { return _fuelInitialized; } set { _fuelInitialized = value; } }
 
     private void Start()
     {
@@ -46,86 +54,127 @@ public class SmeltingMachine : MonoBehaviour
 
     public bool HandleFuel()
     {
-        if (!_fuelTimeInitialized && _fuelLeft <= 0)
+        //Check If Fuel Needs To Be Initialized
+        if (_fuelType == null && _fuelInputSlot.GetInventoryItem() && SmeltingPanelManager.Instance.currentSmelter == this)
         {
-            // Debug.Log("USE ITEM");
-            if (MiningPanelManager.Instance.panelActive && MiningPanelManager.Instance.currentDigger == this)
-            {
-                if (FuelAmount == 0 && _fuelLeft <= 0)
-                {
-                    _fuelTimeInitialized = false;
-                    return false;
-                }
-                else if (FuelAmount > 0)
-                {
-                    _fuelInputSlot.UseItem();
-                    _fuelAmount--;
-                    _fuelLeft = _fuelType.fuelTime;
-                    _fuelTimeInitialized = true;
-                    Debug.Log("Used Some Fuel, Fuel Items Left: " + FuelAmount);
-                    return true;
-                }
-            }
-            else
-            {
-                if (FuelAmount == 0 && _fuelLeft <= 0)
-                {
-                    _fuelTimeInitialized = false;
-                    return false;
-                }
-                _fuelAmount--;
-                _fuelLeft = _fuelType.fuelTime;
-                _fuelTimeInitialized = true;
-                return true;
-            }
-            if (_fuelType != null && _fuelAmount > 0 && _fuelLeft <= 0)
-            {
-                _fuelLeft = _fuelType.fuelTime;
-                _fuelTimeInitialized = true;
-                return true;
-            }
-            else if (_fuelAmount <= 0 && _fuelLeft <= 0)
-            {
-                _fuelTimeInitialized = false;
-                return false;
-            }
-            _fuelTimeInitialized = true;
-            return true;
+            InitializeFuelType();
         }
-        else if (_fuelType == null)
+        else if (_fuelType != null && !_fuelInputSlot.GetInventoryItem() && SmeltingPanelManager.Instance.currentSmelter == this)
         {
-            if (_fuelInputSlot.GetInventoryItem() != null)
-            {
-                InitializeFuelType();
-                return false;
-            }
+            //Reset FuelType When FuelSlot Is Empty
+            _fuelType = null;
+            _fuelInitialized = false;
         }
-        else if (_fuelLeft > 0 && _resourceInputSlot.GetInventoryItem().item.isSmeltable)
+        if (_resourceType == null && _resourceInputSlot.GetInventoryItem())
         {
-            _fuelLeft -= Time.deltaTime;
-            _currentSmeltProgression += Time.deltaTime;
+            if (SmeltingPanelManager.Instance.currentSmelter == this)
+                _resourceType = _resourceInputSlot.GetInventoryItem().item;
+        }
+        else if (_resourceType != null && !_resourceInputSlot.GetInventoryItem())
+        {
+            if (SmeltingPanelManager.Instance.currentSmelter == this)
+                _resourceType = null;
+            // _resourceAmount = 0;
+        }
 
-            fuelLeftSlider.value = _fuelLeft;
-            progressSlider.value = _currentSmeltProgression;
-            return true;
-        }
-        else if (_fuelLeft <= 0)
-        {
-            _fuelTimeInitialized = false;
-            return false;
-        }
-        else if (_fuelType == null && _fuelLeft <= 0)
-        {
-            _fuelTimeInitialized = false;
-            return false;
-        }
-        else if (!_resourceInputSlot.GetInventoryItem().item.isSmeltable && _fuelLeft > 0)
-        {
-            Debug.Log("Item Is Not Smeltable!");
-            return false;
-        }
-        Debug.Log("Digger Has No Fuel");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         return false;
+
+
+
+        // if (!_fuelTimeInitialized && _fuelLeft <= 0)
+        // {
+        //     // Debug.Log("USE ITEM");
+        //     if (SmeltingPanelManager.Instance.panelActive && SmeltingPanelManager.Instance.currentSmelter == this)
+        //     {
+        //         if (FuelAmount == 0 && _fuelLeft <= 0)
+        //         {
+        //             _fuelTimeInitialized = false;
+        //             return false;
+        //         }
+        //         else if (FuelAmount > 0)
+        //         {
+        //             _fuelInputSlot.UseItem();
+        //             _fuelAmount--;
+        //             _fuelLeft = _fuelType.fuelTime;
+        //             _fuelTimeInitialized = true;
+        //             Debug.Log("Used Some Fuel, Fuel Items Left: " + FuelAmount);
+        //             return true;
+        //         }
+        //     }
+        //     else
+        //     {
+        //         if (FuelAmount == 0 && _fuelLeft <= 0)
+        //         {
+        //             _fuelTimeInitialized = false;
+        //             return false;
+        //         }
+        //         _fuelAmount--;
+        //         _fuelLeft = _fuelType.fuelTime;
+        //         _fuelTimeInitialized = true;
+        //         return true;
+        //     }
+        //     if (_fuelType != null && _fuelAmount > 0 && _fuelLeft <= 0)
+        //     {
+        //         _fuelLeft = _fuelType.fuelTime;
+        //         _fuelTimeInitialized = true;
+        //         return true;
+        //     }
+        //     else if (_fuelAmount <= 0 && _fuelLeft <= 0)
+        //     {
+        //         _fuelTimeInitialized = false;
+        //         return false;
+        //     }
+        //     _fuelTimeInitialized = true;
+        //     return true;
+        // }
+        // else if (_fuelType == null)
+        // {
+        //     if (_fuelInputSlot.GetInventoryItem() != null)
+        //     {
+        //         InitializeFuelType();
+        //         return false;
+        //     }
+        // }
+        // else if (_fuelLeft > 0 && _resourceInputSlot.GetInventoryItem().item.isSmeltable)
+        // {
+        //     _fuelLeft -= Time.deltaTime;
+        //     _currentSmeltProgression += Time.deltaTime;
+
+        //     return true;
+        // }
+        // else if (_fuelLeft <= 0)
+        // {
+        //     _fuelTimeInitialized = false;
+        //     return false;
+        // }
+        // else if (_fuelType == null && _fuelLeft <= 0)
+        // {
+        //     _fuelTimeInitialized = false;
+        //     return false;
+        // }
+        // else if (!_resourceInputSlot.GetInventoryItem().item.isSmeltable && _fuelLeft > 0)
+        // {
+        //     Debug.Log("Item Is Not Smeltable!");
+        //     return false;
+        // }
+        // Debug.Log("Digger Has No Fuel");
+        // return false;
     }
 
     private void Update()
@@ -149,128 +198,130 @@ public class SmeltingMachine : MonoBehaviour
         }
     }
 
-    public void AddMachineItem(bool isFuel, Item item = null, int amount = 0, bool calledFromPanel = false)
+    public void AddMachineItem(InventorySlot slot, Item item = null, int amount = 0, bool calledFromPanel = false)
     {
-        if (!isFuel)
+        //Spawn All Current Items When Panel Got Opened
+        if (calledFromPanel)
         {
-            if (!MiningPanelManager.Instance.panelActive || MiningPanelManager.Instance.panelActive && MiningPanelManager.Instance.currentDigger != this)
-            {
-                if (amount == 0)
-                {
-                    _itemAmount++;
-                    _currentSmeltProgression = _resourceToSmelt.smeltDuration;
-                }
-                else
-                {
-                    _itemAmount += amount;
-                    _currentSmeltProgression = _resourceToSmelt.smeltDuration;
-                }
-                Debug.Log($"Added {amount} Item(s) When Panel Not Shown");
-                return;
-            }
-            else if (MiningPanelManager.Instance.panelActive && MiningPanelManager.Instance.currentDigger == this)
-            {
-                if (amount > 0 && _resourceInputSlot.GetInventoryItem() == null)
-                {
-                    SpawnMachineItem(item, amount);
-                    Debug.Log($"Spawned {amount} {item}");
-                }
-                else if (_itemOutputSlot.GetInventoryItem() != null)
-                {
-                    if (amount == 0)
-                    {
-                        _itemAmount++;
-                        _itemOutputSlot.GetInventoryItem().count++;
-                        _itemOutputSlot.GetInventoryItem().RefreshCount();
-                    }
-                    else
-                    {
-                        _itemAmount += amount;
-                        _itemOutputSlot.GetInventoryItem().count += amount;
-                        _itemOutputSlot.GetInventoryItem().RefreshCount();
-                    }
-                }
-                else
-                {
-                    if (amount == 0)
-                    {
-                        SpawnMachineItem(_resourceToSmelt.item.itemToGetAfterSmelt, 1);
-                        // _itemAmount += _collectedResource.recourceAmount;
-                        Debug.Log("Spawned First Of " + _resourceToSmelt.item.itemToGetAfterSmelt);
-                        // Debug.Log("Had No resources to spawn");
-                    }
-                    else
-                    {
-                        SpawnMachineItem(item, amount);
-                        Debug.Log($"Spawned {amount} {item.name}");
-                    }
-                }
-            }
-            if (calledFromPanel)
-            {
-
-            }
-            else
-            {
-                _itemAmount += amount;
-                _currentSmeltProgression = _resourceToSmelt.smeltDuration;
-            }
-
+            SpawnItem(slot, item, amount);
         }
         else
         {
-            if (!MiningPanelManager.Instance.panelActive || MiningPanelManager.Instance.panelActive && MiningPanelManager.Instance.currentDigger != this)
+            //Add Singular Item To Output
+            if (amount == 0)
             {
-                if (amount == 0)
+                //Add Item To Output When Panel Closed
+                if (!SmeltingPanelManager.Instance.panelActive || SmeltingPanelManager.Instance.panelActive && SmeltingPanelManager.Instance.currentSmelter != this)
                 {
-                    Debug.Log("Did absolutly nothing");
+                    _outputAmount++;
                 }
+                //Add Item To Output When Panel Opened
                 else
                 {
-                    _fuelAmount += amount;
+                    if (_outputAmount == 0)
+                    {
+                        //Spawn Item To Output
+                        SpawnItem(ItemOutputSlot, _resourceToSmelt.itemToGetAfterSmelt, 1);
+                    }
+                    else
+                    {
+                        //Add Item To Output
+                        _itemOutputSlot.GetInventoryItem().count++;
+                        _itemOutputSlot.GetInventoryItem().RefreshCount();
+
+                        _outputAmount++;
+                    }
                 }
-                Debug.Log($"Added {amount} {_fuelType} When Panel Not Shown");
-                return;
-            }
-            if (amount > 0)
-            {
-                SpawnMachineFuel(item, amount);
-            }
-            else if (_fuelInputSlot.GetInventoryItem() != null && amount > 0 && _fuelInputSlot.GetInventoryItem() == item)
-            {
-                _fuelInputSlot.GetInventoryItem().count += amount;
-                _fuelInputSlot.GetInventoryItem().RefreshCount();
             }
             else
             {
-                SpawnMachineFuel(item, _fuelAmount);
-            }
-            if (!calledFromPanel)
-            {
-                _currentSmeltProgression = _resourceToSmelt.smeltDuration;
+                Debug.LogError("This Shouldn't be called");
             }
         }
 
+        // if (!SmeltingPanelManager.Instance.panelActive || SmeltingPanelManager.Instance.panelActive && SmeltingPanelManager.Instance.currentSmelter != this)
+        // {
+        //     if (amount == 0)
+        //     {
+        //         _resourceAmount++;
+        //         _currentSmeltProgression = _resourceToSmelt.smeltTime;
+        //     }
+        //     else
+        //     {
+        //         _resourceAmount += amount;
+        //         _currentSmeltProgression = _resourceToSmelt.smeltTime;
+        //     }
+        //     Debug.Log($"Added {amount} Item(s) When Panel Not Shown");
+        //     return;
+        // }
+        // else if (MiningPanelManager.Instance.panelActive && MiningPanelManager.Instance.currentDigger == this)
+        // {
+        //     if (amount > 0 && _resourceInputSlot.GetInventoryItem() == null)
+        //     {
+        //         SpawnItem(slot, item, amount);
+        //         Debug.Log($"Spawned {amount} {item}");
+        //     }
+        //     else if (_itemOutputSlot.GetInventoryItem() != null)
+        //     {
+        //         if (amount == 0)
+        //         {
+        //             _resourceAmount++;
+        //             _itemOutputSlot.GetInventoryItem().count++;
+        //             _itemOutputSlot.GetInventoryItem().RefreshCount();
+        //         }
+        //         else
+        //         {
+        //             _resourceAmount += amount;
+        //             _itemOutputSlot.GetInventoryItem().count += amount;
+        //             _itemOutputSlot.GetInventoryItem().RefreshCount();
+        //         }
+        //     }
+        //     else
+        //     {
+        //         if (amount == 0)
+        //         {
+        //             SpawnItem(slot, _resourceToSmelt.itemToGetAfterSmelt, 1);
+        //             // _itemAmount += _collectedResource.recourceAmount;
+        //             Debug.Log("Spawned First Of " + _resourceToSmelt.itemToGetAfterSmelt);
+        //             // Debug.Log("Had No resources to spawn");
+        //         }
+        //         else
+        //         {
+        //             SpawnItem(slot, item, amount);
+        //             Debug.Log($"Spawned {amount} {item.name}");
+        //         }
+        //     }
+        // }
+
+
+        // if (!SmeltingPanelManager.Instance.panelActive || SmeltingPanelManager.Instance.panelActive && SmeltingPanelManager.Instance.currentSmelter != this)
+        // {
+        //     // TODO make this work for the smelter
+        // }
     }
 
-    public void SpawnMachineItem(Item item, int amount)
+    public void SpawnItem(InventorySlot slot, Item item, int amount)
     {
-        GameObject newItemGO = Instantiate(InventoryManager.Instance.InventoryItemPrefab, _resourceInputSlot.transform);
-        _resourceInputSlot.SetInventoryItem(newItemGO.GetComponent<InventoryItem>());
-        _resourceInputSlot.GetInventoryItem().lastInventorySlot = _resourceInputSlot;
-        _resourceInputSlot.GetInventoryItem().count = amount;
-        _resourceInputSlot.GetInventoryItem().InitializeItem(item, amount);
+        GameObject newItemGO = Instantiate(InventoryManager.Instance.InventoryItemPrefab, slot.transform);
+        slot.SetInventoryItem(newItemGO.GetComponent<InventoryItem>());
+        slot.GetInventoryItem().lastInventorySlot = _resourceInputSlot;
+        slot.GetInventoryItem().count = amount;
+        slot.GetInventoryItem().InitializeItem(item, amount);
 
-        Debug.Log("Resource was Initialized: " + newItemGO.name);
-
-        if (_resourceInitialized)
+        if (item.isFuel)
         {
-            Debug.Log("Resource was already Initialized");
-            return;
+            InitializeFuelType();
         }
-        _itemType = item;
-        _resourceInitialized = true;
-        _itemAmount = _resourceInputSlot.GetInventoryItem().count;
+        else if (item.isSmeltable)
+        {
+            _resourceToSmelt = item;
+            _resourceInitialized = true;
+            _resourceAmount = slot.GetInventoryItem().count;
+        }
+        else
+        {
+            Debug.Log($"Spawned {amount} {item} In Output Slot");
+        }
     }
 
     public void InitializeFuelType()
@@ -284,20 +335,6 @@ public class SmeltingMachine : MonoBehaviour
         _fuelAmount = _fuelInputSlot.GetInventoryItem().count;
         Debug.Log("Initialized fuel type: " + _fuelAmount + " " + _fuelType);
         _fuelInitialized = true;
-    }
-
-    void SpawnMachineFuel(Item item, int amount)
-    {
-        GameObject newItemGO = Instantiate(InventoryManager.Instance.InventoryItemPrefab, _fuelInputSlot.transform);
-        _fuelInputSlot.SetInventoryItem(newItemGO.GetComponent<InventoryItem>());
-        _fuelInputSlot.GetInventoryItem().count = amount;
-        _fuelInputSlot.GetInventoryItem().InitializeItem(item, amount);
-        if (_fuelInitialized)
-        {
-            Debug.Log("Fuel was already Initialized");
-            return;
-        }
-        InitializeFuelType();
     }
 
     bool HasSmeltableResource()

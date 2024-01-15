@@ -74,15 +74,19 @@ public class SmeltingPanelManager : MonoBehaviour
             GetComponent<GraphicRaycaster>().enabled = !GetComponent<GraphicRaycaster>().enabled;
             panelActive = GetComponent<GraphicRaycaster>().enabled;
 
-            // if (smeltingMachine.ItemType != null && smeltingMachine.ItemAmount > 0)
-            // {
-            //     // smeltingMachine.AddMachineItem(false, smeltingMachine.ItemType, smeltingMachine.ItemAmount, true);
-            //     // Debug.Log("look ma i spawned something");
-            // }
-            // if (smeltingMachine.FuelType != null && smeltingMachine.FuelAmount > 0)
-            // {
-            //     // smeltingMachine.AddMachineItem(true, smeltingMachine.FuelType, smeltingMachine.FuelAmount, true);
-            // }
+            if (smeltingMachine.ResourceType != null && smeltingMachine.ResourceAmount > 0)
+            {
+                smeltingMachine.AddMachineItem(resourceInputSlot, smeltingMachine.ResourceType, smeltingMachine.ResourceAmount, true);
+                // Debug.Log("look ma i spawned something");
+            }
+            if (smeltingMachine.FuelType != null && smeltingMachine.FuelAmount > 0)
+            {
+                smeltingMachine.AddMachineItem(fuelInputSlot, smeltingMachine.FuelType, smeltingMachine.FuelAmount, true);
+            }
+            if (smeltingMachine.OutputType != null && smeltingMachine.OutputAmount > 0)
+            {
+                smeltingMachine.AddMachineItem(outputSlot, smeltingMachine.OutputType, smeltingMachine.OutputAmount, true);
+            }
         }
 
         if (panelActive)

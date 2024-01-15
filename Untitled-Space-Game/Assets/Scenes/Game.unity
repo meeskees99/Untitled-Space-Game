@@ -35921,7 +35921,7 @@ MonoBehaviour:
   resourceInputSlot: {fileID: 318772201}
   outputSlot: {fileID: 164557279}
   fuelLeftSlider: {fileID: 1516211832}
-  progressSlider: {fileID: 0}
+  progressSlider: {fileID: 1873408375}
   panelActive: 0
 --- !u!114 &1794980924
 MonoBehaviour:
