@@ -3096,17 +3096,17 @@ PrefabInstance:
     - target: {fileID: 4495450270500660098, guid: 9247f7b0b1aedde4ba527230480a4448,
         type: 3}
       propertyPath: slotId
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4495450270500660098, guid: 9247f7b0b1aedde4ba527230480a4448,
         type: 3}
       propertyPath: isFuelSlot
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4495450270500660098, guid: 9247f7b0b1aedde4ba527230480a4448,
         type: 3}
       propertyPath: isMachineSlot
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4691528153092947757, guid: 9247f7b0b1aedde4ba527230480a4448,
         type: 3}
@@ -6600,6 +6600,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isMachineSlot
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495450270500660098, guid: 9247f7b0b1aedde4ba527230480a4448,
+        type: 3}
+      propertyPath: isResourceSlot
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4691528153092947757, guid: 9247f7b0b1aedde4ba527230480a4448,
         type: 3}

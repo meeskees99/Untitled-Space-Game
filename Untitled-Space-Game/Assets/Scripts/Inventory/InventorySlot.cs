@@ -20,7 +20,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
     public bool isHudSlot;
     public bool isMachineSlot;
     public bool isFuelSlot;
-
+    public bool isResourceSlot;
     private void Awake()
     {
         Deselect();

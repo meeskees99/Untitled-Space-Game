@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -82,13 +83,32 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
         else if (lastInventorySlot.isMachineSlot)
         {
-            MiningPanelManager.Instance.currentDigger.ItemAmount = 0;
+            if (MiningPanelManager.Instance.currentDigger != null)
+            {
+                MiningPanelManager.Instance.currentDigger.ItemAmount = 0;
+            }
+            else if (SmeltingPanelManager.Instance.currentSmelter != null)
+            {
+                SmeltingPanelManager.Instance.currentSmelter.OutputAmount = 0;
+            }
         }
         else if (lastInventorySlot.isFuelSlot)
         {
-            MiningPanelManager.Instance.currentDigger.FuelAmount = 0;
-            // MiningPanelManager.Instance.currentDigger.FuelType = null;
-            // MiningPanelManager.Instance.currentDigger.FuelInitialized = false;
+            if (MiningPanelManager.Instance.currentDigger != null)
+            {
+                MiningPanelManager.Instance.currentDigger.FuelAmount = 0;
+            }
+            else if (SmeltingPanelManager.Instance.currentSmelter != null)
+            {
+                SmeltingPanelManager.Instance.currentSmelter.FuelAmount = 0;
+            }
+        }
+        else if (lastInventorySlot.isResourceSlot)
+        {
+            if (SmeltingPanelManager.Instance.currentSmelter != null)
+            {
+                SmeltingPanelManager.Instance.currentSmelter.ResourceAmount = 0;
+            }
         }
     }
 
@@ -128,11 +148,11 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 }
             }
             Debug.Log(lastInventorySlot.isMachineSlot + " " + parentAfterDrag.GetComponent<InventorySlot>().isMachineSlot);
-            if (lastInventorySlot.isMachineSlot && !parentAfterDrag.GetComponent<InventorySlot>().isMachineSlot)
-            {
-                MiningPanelManager.Instance.currentDigger.ItemAmount = 0;
-                MiningPanelManager.Instance.currentDigger.InitializeFuelType();
-            }
+            // if (lastInventorySlot.isMachineSlot && !parentAfterDrag.GetComponent<InventorySlot>().isMachineSlot)
+            // {
+            //     MiningPanelManager.Instance.currentDigger.ItemAmount = 0;
+            //     MiningPanelManager.Instance.currentDigger.InitializeFuelType();
+            // }
             lastInventorySlot = GetComponentInParent<InventorySlot>();
         }
         else

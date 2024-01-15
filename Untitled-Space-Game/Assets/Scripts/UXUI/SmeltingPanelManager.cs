@@ -68,8 +68,8 @@ public class SmeltingPanelManager : MonoBehaviour
         {
             currentSmelter = smeltingMachine;
 
-            smeltingMachine.fuelLeftSlider = fuelLeftSlider;
-            smeltingMachine.progressSlider = progressSlider;
+            SetSmelterInfo(smeltingMachine);
+
             GetComponent<Canvas>().enabled = !GetComponent<Canvas>().enabled;
             GetComponent<GraphicRaycaster>().enabled = !GetComponent<GraphicRaycaster>().enabled;
             panelActive = GetComponent<GraphicRaycaster>().enabled;
