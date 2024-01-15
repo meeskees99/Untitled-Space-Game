@@ -5,9 +5,12 @@ using TMPro;
 using UnityEngine.InputSystem;
 using UnityEditor;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class InventoryKeybids : MonoBehaviour
 {
+    public static InventoryKeybids Instance;
+
     [SerializeField] PlayerInput _playerInput;
     public PlayerInput PlayerInput => _playerInput;
 
@@ -56,6 +59,19 @@ public class InventoryKeybids : MonoBehaviour
 
 
     bool _canToggleInventory;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
+    }
 
     private void OnEnable()
     {
@@ -106,10 +122,20 @@ public class InventoryKeybids : MonoBehaviour
         {
             if (_canToggleInventory)
             {
+                if (MiningPanelManager.Instance.panelActive)
+                {
+                    MiningPanelManager.Instance.ToggleMiningPanel(null);
+                }
+                else if (SmeltingPanelManager.Instance.panelActive)
+                {
+                    SmeltingPanelManager.Instance.ToggleSmeltingPanel(null);
+                }
+                else
+                {
+                    InGameUIManager.Instance.ToggleInventory();
+                }
                 _canToggleInventory = false;
-                InGameUIManager.Instance.ToggleInventory();
-                _playerInput.actions.FindAction("Inventory").started += OnInventory;
-                _playerInput.actions.FindAction("Inventory").canceled += OnInventory;
+
             }
         }
         else
@@ -461,4 +487,10 @@ public class InventoryKeybids : MonoBehaviour
     }
 
     #endregion
+
+    public void InventorySubscribe()
+    {
+        _playerInput.actions.FindAction("Inventory").started += OnInventory;
+        _playerInput.actions.FindAction("Inventory").canceled += OnInventory;
+    }
 }

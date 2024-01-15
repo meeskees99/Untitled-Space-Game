@@ -47,6 +47,13 @@ public class SmeltingPanelManager : MonoBehaviour
 
     public void ToggleSmeltingPanel(SmeltingMachine smeltingMachine)
     {
+        InGameUIManager.Instance.animator.SetTrigger("SwitchInventoryType");
+        if (!InGameUIManager.Instance.inventoryShown)
+        {
+            InGameUIManager.Instance.ToggleInventory();
+            InventoryKeybids.Instance.InventorySubscribe();
+        }
+
         if (fuelInputSlot.GetInventoryItem() != null)
             Destroy(fuelInputSlot.GetInventoryItem().gameObject);
         if (outputSlot.GetInventoryItem() != null)
@@ -54,7 +61,7 @@ public class SmeltingPanelManager : MonoBehaviour
         if (resourceInputSlot.GetInventoryItem() != null)
             Destroy(resourceInputSlot.GetInventoryItem().gameObject);
 
-        if (currentSmelter == smeltingMachine)
+        if (currentSmelter == smeltingMachine || smeltingMachine == null)
         {
             currentSmelter = null;
             GetComponent<Canvas>().enabled = !GetComponent<Canvas>().enabled;
