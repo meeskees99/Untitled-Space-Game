@@ -133,6 +133,7 @@ public class InventoryKeybids : MonoBehaviour
                 else
                 {
                     InGameUIManager.Instance.ToggleInventory();
+                    InventorySubscribe();
                 }
                 _canToggleInventory = false;
 
