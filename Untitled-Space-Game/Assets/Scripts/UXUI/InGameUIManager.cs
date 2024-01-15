@@ -145,11 +145,13 @@ public class InGameUIManager : MonoBehaviour
         }
         if (_craftingShown)
         {
+            FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Game");
             _craftingPanel.SetActive(false);
             _craftingShown = false;
         }
         else
         {
+            FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Menu");
             _craftingPanel.SetActive(true);
             _craftingShown = true;
         }
