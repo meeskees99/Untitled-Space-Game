@@ -30,6 +30,8 @@ public class QuestManager : MonoBehaviour
 
     [SerializeField] MachinePlacement _machinePlacement;
 
+    [SerializeField] bool _canSubmitQuest;
+
     private void Awake()
     {
         if (Instance == null)
@@ -99,11 +101,14 @@ public class QuestManager : MonoBehaviour
             case Quest.QuestType.PLACE:
                 {
                     _machinePlacement._machineQuest = true;
+                    _canSubmitQuest = false;
+
                     break;
                 }
             case Quest.QuestType.INVENTORY:
                 {
                     _machinePlacement._machineQuest = false;
+                    _canSubmitQuest = false;
 
                     if (CheckInventory())
                     {
@@ -115,6 +120,8 @@ public class QuestManager : MonoBehaviour
             case Quest.QuestType.REPAIR:
                 {
                     _machinePlacement._machineQuest = false;
+                    _canSubmitQuest = true;
+
                     if (CheckRepair())
                     {
                         StartNewQuest();
@@ -184,6 +191,26 @@ public class QuestManager : MonoBehaviour
 
     public bool CheckRepair()
     {
+        return false;
+    }
+
+    public bool SubmitQuestBtn()
+    {
+        if (_canSubmitQuest)
+        {
+            Debug.Log("Submit quest item");
+            for (int i = 0; i < _questItemRequirements.Length; i++)
+            {
+                for (int j = 0; j < InventoryManager.Instance.itemsInInventory.Count; j++)
+                {
+                    if (_questItemRequirements[i].item == InventoryManager.Instance.itemsInInventory[j].item)
+                    {
+                        InventoryManager.Instance.UseItem(_questItemRequirements[i].item.itemID, _questItemRequirements[i].amount);
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 }
