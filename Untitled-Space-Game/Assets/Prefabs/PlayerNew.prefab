@@ -876,6 +876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aabb4cc0bef95b4a90940794ccd6c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _doDebugs: 0
   _playerInput: {fileID: 1923885567571685301}
   _playerObj: {fileID: 8612339594470111087}
   _playerAnimator: {fileID: 7120952773097436498}
@@ -1010,8 +1011,8 @@ MonoBehaviour:
   _maxOxygen: 50
   _oxygenDepletionRate: 0.5
   _oxygenRegenerationRate: 0.7
-  _attackDamage: 2
-  _attackSpeed: 0.2
+  _attackDamage: 0.4
+  _attackSpeed: 0.05
   recievingOxygen: 1
   healing: 0
 --- !u!114 &5346347331115808523
@@ -1039,6 +1040,7 @@ MonoBehaviour:
   _placedDiggers: []
   diggerVeinIndex: 
   _shootPos: {fileID: 3409230989293425413}
+  _machineQuest: 0
 --- !u!114 &7509776067065908285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1052,22 +1054,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerInput: {fileID: 1923885567571685301}
-  _playerStats: {fileID: 0}
+  machinePlacement: {fileID: 5346347331115808523}
+  _playerStats: {fileID: 5780810857843024441}
   _playerCam: {fileID: 3409230989293425413}
   _camDistance: 0
   _gatherTime: -1
   _toolRange: 8
+  _rayRange: 8
+  _rayRadius: 0
   _InteractPanel: {fileID: 0}
   _interactableTxt: {fileID: 0}
-  _interactableRadius: 0
-  _interactableRange: 8
   _interactableMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
   _didUiInteraction: 0
+  _placeableMask:
+    serializedVersion: 2
+    m_Bits: 64
   _onInventory: 0
   _onInteract: 0
   _onShoot: 0
+  _onScroll: 0
 --- !u!1 &7229411513331528388
 GameObject:
   m_ObjectHideFlags: 0
