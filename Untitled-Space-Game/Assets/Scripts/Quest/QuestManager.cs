@@ -121,11 +121,6 @@ public class QuestManager : MonoBehaviour
                 {
                     _machinePlacement._machineQuest = false;
                     _canSubmitQuest = true;
-
-                    if (CheckRepair())
-                    {
-                        StartNewQuest();
-                    }
                     break;
                 }
         }
@@ -189,12 +184,7 @@ public class QuestManager : MonoBehaviour
         return true;
     }
 
-    public bool CheckRepair()
-    {
-        return false;
-    }
-
-    public bool SubmitQuestBtn()
+    public void SubmitQuestBtn()
     {
         if (_canSubmitQuest)
         {
@@ -206,11 +196,9 @@ public class QuestManager : MonoBehaviour
                     if (_questItemRequirements[i].item == InventoryManager.Instance.itemsInInventory[j].item)
                     {
                         InventoryManager.Instance.UseItem(_questItemRequirements[i].item.itemID, _questItemRequirements[i].amount);
-                        return true;
                     }
                 }
             }
         }
-        return false;
     }
 }
