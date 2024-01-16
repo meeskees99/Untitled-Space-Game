@@ -16,7 +16,10 @@ public class Quest : ScriptableObject
     public ItemInfo[] itemsNeeded;
     public GameObject[] machinesNeeded;
 
+    // Add thing for what repair the ship will get
+
     public Recipe[] recipesToUnlock;
+    public Item[] itemsToGet;
 
     public enum QuestType
     {
@@ -26,4 +29,6 @@ public class Quest : ScriptableObject
     }
 
     public QuestType questType;
+
+
 }
