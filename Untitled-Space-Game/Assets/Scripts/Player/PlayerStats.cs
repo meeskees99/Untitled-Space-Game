@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -30,6 +31,10 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float _attackSpeed = 0.2f;
     public float AttackSpeed { get { return _attackSpeed; } private set { } }
 
+    [Header("UI")]
+    [SerializeField] Transform _heartsHolder;
+    [SerializeField] Sprite _heartFilledImage;
+    [SerializeField] Sprite _heartDepletedImage;
 
 
     [Header("Action Bools")]
@@ -82,6 +87,15 @@ public class PlayerStats : MonoBehaviour
     void HandeHealth()
     {
         _currentHealth = Health;
+
+        if (_currentHealth <= _maxHealth / 3 * 2)
+        {
+            _heartsHolder.GetChild(2).GetComponent<Image>().sprite = _heartDepletedImage;
+        }
+        else
+        {
+            _heartsHolder.GetChild(2).GetComponent<Image>().sprite = _heartFilledImage;
+        }
         if (Health <= 0 && IsAlive)
         {
             Health = 0;
