@@ -49,7 +49,7 @@ public class GameData
     public GameData()
     {
         this.gameDifficulty = -1;
-        this.currentQuestId = -1;
+        this.currentQuestId = 0;
 
         for (int i = 0; i < itemId.Length; i++)
         {
