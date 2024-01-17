@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SmeltingMachine : MonoBehaviour, IDataPersistence
+public class SmeltingMachine : MonoBehaviour
+// , IDataPersistence
 {
     [Header("Info")]
     public int smelterIndex;
@@ -293,18 +294,18 @@ public class SmeltingMachine : MonoBehaviour, IDataPersistence
         return false;
     }
 
-    public void LoadData(GameData data)
-    {
-        this._currentSmeltProgression = data.smelterFuelTime[this.smelterIndex];
-        this._fuelType = data.smelterFuel[this.smelterIndex].item;
-        this._fuelAmount = data.smelterFuel[this.smelterIndex].amount;
-        // this._resourceType = data.smelterInput[this.smelterIndex];
-        // this.OutputType = data.smelterOutput[this.smelterIndex];
-    }
+    // public void LoadData(GameData data)
+    // {
+    //     this._currentSmeltProgression = data.smelterFuelTime[this.smelterIndex];
+    //     this._fuelType = data.smelterFuelId[this.smelterIndex].item;
+    //     this._fuelAmount = data.smelterFuelId[this.smelterIndex].amount;
+    //     // this._resourceType = data.smelterInput[this.smelterIndex];
+    //     // this.OutputType = data.smelterOutput[this.smelterIndex];
+    // }
 
-    public void SaveData(GameData data)
-    {
-        data.smelterFuel[this.smelterIndex].item = _fuelType;
-        data.smelterFuel[this.smelterIndex].amount = _fuelAmount;
-    }
+    // public void SaveData(GameData data)
+    // {
+    //     data.smelterFuelId[this.smelterIndex].item = _fuelType;
+    //     data.smelterFuelId[this.smelterIndex].amount = _fuelAmount;
+    // }
 }

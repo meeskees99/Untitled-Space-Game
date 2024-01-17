@@ -13,7 +13,8 @@ public class InventoryManager : MonoBehaviour
     public List<InventorySlot> inventorySlots = new();
 
     [SerializeField] InventorySlot[] _toolbarSlots;
-    [SerializeField] InventorySlot[] _miningSlots;
+    // [SerializeField] InventorySlot[] _miningSlots;
+    // [SerializeField] InventorySlot[] _smelterSlots;
 
     [SerializeField] GameObject _inventoryItemPrefab;
     public GameObject InventoryItemPrefab { get { return _inventoryItemPrefab; } }
@@ -22,7 +23,7 @@ public class InventoryManager : MonoBehaviour
 
     public List<ItemInfo> itemsInInventory = new();
 
-    public Item[] _allItems;
+    public Item[] allItems;
 
     public InventoryItem heldItem;
     [SerializeField] InGameUIManager _uiManager;
@@ -106,12 +107,12 @@ public class InventoryManager : MonoBehaviour
             _itemToSpawn = null;
             return false;
         }
-        for (int i = 0; i < _allItems.Length; i++)
+        for (int i = 0; i < allItems.Length; i++)
         {
-            if (_allItems[i].itemID == itemId)
+            if (allItems[i].itemID == itemId)
             {
-                _itemToSpawn = _allItems[i];
-                Debug.Log($"Adding Item {_allItems[i]}");
+                _itemToSpawn = allItems[i];
+                Debug.Log($"Adding Item {allItems[i]}");
             }
         }
         if (!HasSpace(itemId, amount))
@@ -178,12 +179,12 @@ public class InventoryManager : MonoBehaviour
         GameObject newItemGO = Instantiate(_inventoryItemPrefab, inventorySlots[slotID].transform);
         InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
         inventoryItem.count = itemCount;
-        for (int i = 0; i < _allItems.Length; i++)
+        for (int i = 0; i < allItems.Length; i++)
         {
-            if (_allItems[i].itemID == itemID)
+            if (allItems[i].itemID == itemID)
             {
-                Debug.Log($"Id was found as {_allItems[i].itemID}. Initializing Item {_allItems[i]}");
-                inventoryItem.InitializeItem(_allItems[i], itemCount);
+                Debug.Log($"Id was found as {allItems[i].itemID}. Initializing Item {allItems[i]}");
+                inventoryItem.InitializeItem(allItems[i], itemCount);
                 break;
             }
         }
@@ -195,22 +196,6 @@ public class InventoryManager : MonoBehaviour
         UpdateItemsInfoList();
     }
 
-    // public void SpawnNewItemMining(int itemID, int itemCount, int slotID)
-    // {
-    //     GameObject newItemGO = Instantiate(_inventoryItemPrefab, _miningSlots[slotID].transform);
-    //     InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
-    //     inventoryItem.count = itemCount;
-    //     for (int i = 0; i < _allItems.Length; i++)
-    //     {
-    //         if (_allItems[i].itemID == itemID)
-    //         {
-    //             Debug.Log($"Id was found as {_allItems[i].itemID}. Initializing Item {_allItems[i]}");
-    //             inventoryItem.InitializeItem(_allItems[i], itemCount);
-    //             break;
-    //         }
-    //     }
-    //     inventoryItem.RefreshCount();
-    // }
 
     public void UseItem(int itemID, int itemCount)
     {
@@ -228,17 +213,17 @@ public class InventoryManager : MonoBehaviour
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
 
-            for (int z = 0; z < _allItems.Length; z++)
+            for (int z = 0; z < allItems.Length; z++)
             {
-                if (_allItems[z].itemID == itemID)
+                if (allItems[z].itemID == itemID)
                 {
-                    if (itemInSlot != null && itemInSlot.item == _allItems[z])
+                    if (itemInSlot != null && itemInSlot.item == allItems[z])
                     {
                         if (itemInSlot.count >= itemCount)
                         {
                             itemInSlot.count -= itemCount;
                             itemsLeft -= itemCount;
-                            Debug.Log($"Used {itemCount} {_allItems[z].name}");
+                            Debug.Log($"Used {itemCount} {allItems[z].name}");
                             itemInSlot.RefreshCount();
                             UpdateItemsInfoList();
                             break;
@@ -248,7 +233,7 @@ public class InventoryManager : MonoBehaviour
                             itemsLeft -= itemInSlot.count;
                             itemInSlot.count = 0;
                         }
-                        Debug.Log($"Used {itemCount} {_allItems[z].name}");
+                        Debug.Log($"Used {itemCount} {allItems[z].name}");
                         itemInSlot.RefreshCount();
                         UpdateItemsInfoList();
                     }
@@ -261,11 +246,11 @@ public class InventoryManager : MonoBehaviour
     public void DropItem(int itemId, int amount, Transform spawnposition = null)
     {
         Item itemToDrop;
-        for (int i = 0; i < _allItems.Length; i++)
+        for (int i = 0; i < allItems.Length; i++)
         {
-            if (itemId == _allItems[i].itemID)
+            if (itemId == allItems[i].itemID)
             {
-                itemToDrop = _allItems[i];
+                itemToDrop = allItems[i];
                 GameObject droppedItem;
                 if (spawnposition != null)
                 {
@@ -286,10 +271,10 @@ public class InventoryManager : MonoBehaviour
     public void UpdateItemsInfoList()
     {
         itemsInInventory.Clear();
-        for (int i = 0; i < _allItems.Length; i++)
+        for (int i = 0; i < allItems.Length; i++)
         {
-            int amount = GetTotalItemAmount(inventorySlots, _allItems[i]);
-            itemsInInventory.Add(new(_allItems[i], amount));
+            int amount = GetTotalItemAmount(inventorySlots, allItems[i]);
+            itemsInInventory.Add(new(allItems[i], amount));
         }
         // for (int i = 0; i < inventorySlots.Count; i++)
         // {
@@ -354,4 +339,37 @@ public class InventoryManager : MonoBehaviour
         return false;
     }
 
+    // public void SpawnNewItemMining(int itemID, int itemCount, int slotID)
+    // {
+    //     GameObject newItemGO = Instantiate(_inventoryItemPrefab, _miningSlots[slotID].transform);
+    //     InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
+    //     inventoryItem.count = itemCount;
+    //     for (int i = 0; i < _allItems.Length; i++)
+    //     {
+    //         if (_allItems[i].itemID == itemID)
+    //         {
+    //             Debug.Log($"Id was found as {_allItems[i].itemID}. Initializing Item {_allItems[i]}");
+    //             inventoryItem.InitializeItem(_allItems[i], itemCount);
+    //             break;
+    //         }
+    //     }
+    //     inventoryItem.RefreshCount();
+    // }
+
+    // public void SpawnNewItemSmelting(int itemID, int itemCount, int slotID)
+    // {
+    //     GameObject newItemGO = Instantiate(_inventoryItemPrefab, _smelterSlots[slotID].transform);
+    //     InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
+    //     inventoryItem.count = itemCount;
+    //     for (int i = 0; i < _allItems.Length; i++)
+    //     {
+    //         if (_allItems[i].itemID == itemID)
+    //         {
+    //             Debug.Log($"Id was found as {_allItems[i].itemID}. Initializing Item {_allItems[i]}");
+    //             inventoryItem.InitializeItem(_allItems[i], itemCount);
+    //             break;
+    //         }
+    //     }
+    //     inventoryItem.RefreshCount();
+    // }
 }

@@ -28,11 +28,13 @@ public class GameData
     public List<Vector3> smelterPositions = new();
     public List<Quaternion> smelterRotations = new();
 
-    public List<ItemInfo> smelterFuel = new();
-    public List<int> smelterInput = new();
-    public List<int> smelterOutput = new();
+    public List<int> smelterFuelId = new();
+    public List<int> smelterResourceId = new();
+    public List<int> smelterOutputId = new();
 
-    public List<float> smelterFuelTime = new();
+    public List<int> smelterFuelAmount = new();
+    public List<int> smelterResourceAmount = new();
+    public List<int> smelterOutputAmount = new();
 
     // public int[] resourceId;
     // public List<int> itemAmounts = new();
@@ -73,10 +75,12 @@ public class GameData
         this.smelterPositions = new();
         this.smelterRotations = new();
 
-        this.smelterFuel = new();
-        this.smelterInput = new();
-        this.smelterOutput = new();
+        this.smelterFuelId = new();
+        this.smelterResourceId = new();
+        this.smelterOutputId = new();
 
-        this.smelterFuelTime = new();
+        this.smelterFuelAmount = new();
+        this.smelterResourceAmount = new();
+        this.smelterOutputAmount = new();
     }
 }

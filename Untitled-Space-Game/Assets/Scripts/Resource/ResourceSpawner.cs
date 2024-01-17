@@ -35,8 +35,6 @@ public class ResourceSpawner : MonoBehaviour, IDataPersistence
 
     private void Start()
     {
-        // NavMeshManager.Instance.UpdateNavMesh();
-
         if (_hasLoadData)
         {
             Debug.Log("Found Load Data");
@@ -52,8 +50,6 @@ public class ResourceSpawner : MonoBehaviour, IDataPersistence
                 CheckSpawnResource();
             }
         }
-
-        // NavMeshManager.Instance.UpdateNavMesh();
     }
     private void Update()
     {
@@ -66,7 +62,6 @@ public class ResourceSpawner : MonoBehaviour, IDataPersistence
     void CheckSpawnResource()
     {
         _randomPos = GetRandomPosition();
-        // _randomRot = GetRandomRotation();
         _randomResourceIndex = GetRandomResource();
 
         if (Physics.Raycast(_randomPos, Vector3.down, out _terrainHit, Mathf.Infinity, _terrainLayer))
@@ -91,13 +86,6 @@ public class ResourceSpawner : MonoBehaviour, IDataPersistence
 
         return randomPos;
     }
-
-    // Vector3 GetRandomRotation()
-    // {
-    //     Vector3 randomRot = new Vector3();
-    //     randomRot.y = Random.Range(0, 361);
-    //     return randomRot;
-    // }
 
     int GetRandomResource()
     {
