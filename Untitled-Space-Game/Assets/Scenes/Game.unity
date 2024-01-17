@@ -39100,6 +39100,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1919549431}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1929413217 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 212780261206863882, guid: cb8c93fd58847b54d918fa4e6fee0d46,
+    type: 3}
+  m_PrefabInstance: {fileID: 5824906559881518195}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1938172280
 GameObject:
   m_ObjectHideFlags: 0
@@ -44655,14 +44661,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!222 &2863012876232951392
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4091810288388405975}
-  m_CullTransparentMesh: 1
 --- !u!114 &2864968868206241124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45175,24 +45173,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &4091810288388405975
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8775756447875671350}
-  - component: {fileID: 2863012876232951392}
-  - component: {fileID: 7997254590499709145}
-  m_Layer: 5
-  m_Name: Background
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!114 &4094403231579609214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45811,7 +45791,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8775756447875671350}
   - {fileID: 1556142134}
   m_Father: {fileID: 1771776917}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -46043,6 +46022,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5346347331115808523, guid: cb8c93fd58847b54d918fa4e6fee0d46,
+        type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1929413217}
     - target: {fileID: 5346347331115808523, guid: cb8c93fd58847b54d918fa4e6fee0d46,
         type: 3}
       propertyPath: _resourceSpawner
@@ -47258,36 +47242,6 @@ MonoBehaviour:
   m_Spacing: {x: 100, y: 100}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!114 &7997254590499709145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4091810288388405975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!224 &8014859873879366877
 RectTransform:
   m_ObjectHideFlags: 0
@@ -47646,25 +47600,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8236369312363343554}
   m_CullTransparentMesh: 1
---- !u!224 &8775756447875671350
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4091810288388405975}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5368762394420854335}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.27740744}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.13998413}
-  m_SizeDelta: {x: 0, y: -0.27999878}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8828740862091278302
 MonoBehaviour:
   m_ObjectHideFlags: 0

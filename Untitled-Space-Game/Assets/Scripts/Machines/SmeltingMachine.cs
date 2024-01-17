@@ -60,7 +60,7 @@ public class SmeltingMachine : MonoBehaviour, IDataPersistence
     {
         Debug.Log("Handeling Fuel");
         // Use Fuel
-        if (_fuelLeft <= 0 && !_fuelTimeInitialized)
+        if (_fuelLeft <= 0 && !_fuelTimeInitialized && _outputAmount < _outputType.maxStack)
         {
             if (_fuelAmount > 0)
             {
