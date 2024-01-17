@@ -13,14 +13,18 @@ MonoBehaviour:
   m_Name: RawCopper
   m_EditorClassIdentifier: 
   itemID: 201
-  itemPrefab: {fileID: 5782093277417097196, guid: 9fc859e08189b99459e849940ec42fb3,
+  itemPrefab: {fileID: 5529104103952138696, guid: 22decb7d862ce8743917a0a01f89524b,
     type: 3}
   stackable: 1
   image: {fileID: 21300000, guid: 12ca2ef9c0539584e9354f29427b5ed2, type: 3}
   maxStack: 10
   canBeInHudSlot: 0
+  itemToGetAfterSmelt: {fileID: 0}
   isTool: 0
   isPlacable: 0
   isFuel: 0
-  isSmeltable: 1
   fuelTime: 0
+  isSmeltable: 1
+  smeltTime: 4
+  machinePrefab: {fileID: 0}
+  machineBlueprint: {fileID: 0}
