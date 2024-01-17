@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
   m_Name: (P)repairing 2 3
   m_EditorClassIdentifier: 
+  questId: 14
   questName: (P)reparing 2 3/4
   questInfo: Make a wiring kit
   isQuestLine: 1

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
   m_Name: (P)repairing 2 2
   m_EditorClassIdentifier: 
+  questId: 13
   questName: (P)reparing 2 2/4
   questInfo: Smelt 2 iron ores
   isQuestLine: 1

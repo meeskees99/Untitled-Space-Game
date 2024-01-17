@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
   m_Name: NewBeginnings 3
   m_EditorClassIdentifier: 
-  questId: 0
+  questId: 2
   questName: New Beginnings 3/4
   questInfo: Go to the ship and craft a smelter
   isQuestLine: 1

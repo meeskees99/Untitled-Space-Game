@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
   m_Name: (P)repairing 2
   m_EditorClassIdentifier: 
+  questId: 9
   questName: (P)reparing 2/4
   questInfo: Craft 18 iron rods
   isQuestLine: 1
@@ -21,4 +22,6 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: b06bffe9ba5108648b1986ac0fa7487c, type: 2}
     amount: 18
   machinesNeeded: []
+  recipesToUnlock: []
+  itemsToGet: []
   questType: 0

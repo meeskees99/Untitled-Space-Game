@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
   m_Name: (P)repairing 4
   m_EditorClassIdentifier: 
+  questId: 11
   questName: (P)reparing 4/4
   questInfo: Bring the pipes to the ship
   isQuestLine: 1
@@ -21,4 +22,6 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 6e42976c2942f724cbb88913598ea244, type: 2}
     amount: 9
   machinesNeeded: []
+  recipesToUnlock: []
+  itemsToGet: []
   questType: 1

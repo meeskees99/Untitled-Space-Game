@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
   m_Name: Automaization 1
   m_EditorClassIdentifier: 
+  questId: 4
   questName: Automatization 1/4
   questInfo: Collect 5 iron ingots
   isQuestLine: 1
@@ -21,4 +22,6 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: aa810773b15f1d543995106ac34d3d09, type: 2}
     amount: 5
   machinesNeeded: []
+  recipesToUnlock: []
+  itemsToGet: []
   questType: 0
