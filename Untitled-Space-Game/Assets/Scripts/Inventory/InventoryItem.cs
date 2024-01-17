@@ -229,6 +229,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 {
                     InventoryManager.Instance.DropItem(item.itemID, 1);
                     count--;
+                    RefreshCount();
                 }
                 Debug.Log("Results Count Was <= 0");
                 return;

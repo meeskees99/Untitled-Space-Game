@@ -26,6 +26,7 @@ public class GameData
 
     public List<int> smelterIndex = new();
     public List<Vector3> smelterPositions = new();
+    public List<Quaternion> smelterRotations = new();
 
     public List<ItemInfo> smelterFuel = new();
     public List<int> smelterInput = new();
@@ -68,7 +69,9 @@ public class GameData
         this.diggerOutput = new();
 
         this.smelterIndex = new();
+
         this.smelterPositions = new();
+        this.smelterRotations = new();
 
         this.smelterFuel = new();
         this.smelterInput = new();

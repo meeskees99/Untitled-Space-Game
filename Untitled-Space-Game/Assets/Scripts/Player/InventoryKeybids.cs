@@ -167,6 +167,10 @@ public class InventoryKeybids : MonoBehaviour
                     _doingDamage = false;
                     _lastHitEnemy = null;
                 }
+                if (machinePlacement.selectedPrefab != null)
+                {
+                    machinePlacement.PickMachine(null, _interactableHit);
+                }
                 return;
             }
             else if (InventoryManager.Instance.GetSelectedItem().name == "Pickaxe")
@@ -209,7 +213,6 @@ public class InventoryKeybids : MonoBehaviour
             {
                 CheckPlaceable();
             }
-
         }
         #endregion
 

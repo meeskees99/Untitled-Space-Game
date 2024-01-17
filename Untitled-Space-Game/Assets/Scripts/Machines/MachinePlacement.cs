@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -24,13 +25,16 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
     [SerializeField] List<SmeltingMachine> _placedSmelters = new();
     [SerializeField] List<int> diggerVeinIndex = new();
     [SerializeField] List<int> smelterIndex = new();
+    [SerializeField] List<Vector3> smelterPositions = new();
+    [SerializeField] List<Quaternion> smelterRotations = new();
+
 
     [SerializeField] Transform _shootPos;
     bool _hasLoadData;
 
     RaycastHit _hit;
 
-    GameObject _selectedPrefab;
+    public GameObject selectedPrefab;
 
     int _selectedIndex = -1;
 
@@ -48,16 +52,18 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
         {
             for (int i = 0; i < diggerVeinIndex.Count; i++)
             {
-                SpawnMachines(diggerVeinIndex[i]);
+                SpawnMiner(diggerVeinIndex[i]);
             }
+            SpawnSmelter();
         }
     }
 
     public void PickMachine(Item machineItem, RaycastHit raycastHit)
     {
+        // Debug.Log("Picking machine Item " + machineItem.name);
         if (machineItem == null)
         {
-            _selectedPrefab = null;
+            selectedPrefab = null;
             if (_spawnedBlueprint != null)
             {
                 Debug.Log("Destroyed Blueprint");
@@ -67,11 +73,11 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
         }
         else
         {
-            if (_spawnedBlueprint == null && _selectedPrefab != null)
+            if (_spawnedBlueprint == null && selectedPrefab != null)
             {
                 _spawnedBlueprint = Instantiate(machineItem.machineBlueprint, raycastHit.point, Quaternion.identity);
             }
-            else if (_spawnedBlueprint != null && _selectedPrefab != null)
+            else if (_spawnedBlueprint != null && selectedPrefab != null)
             {
                 _spawnedBlueprint.transform.position = raycastHit.point + _placementOffset;
 
@@ -92,7 +98,7 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
         }
         if (machineItem.isPlacable)
         {
-            _selectedPrefab = machineItem.machinePrefab;
+            selectedPrefab = machineItem.machinePrefab;
         }
 
 
@@ -105,12 +111,12 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
         {
             return;
         }
-        if (_selectedPrefab == null)
+        if (selectedPrefab == null)
         {
             return;
         }
 
-        if (_selectedPrefab.transform.GetComponent<SmeltingMachine>())
+        if (selectedPrefab.transform.GetComponent<SmeltingMachine>())
         {
             PlaceSmelter(placePos);
         }
@@ -123,7 +129,7 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
     public void PlaceMiner(Transform placePos)
     {
         Destroy(_spawnedBlueprint);
-        GameObject spawnedMachine = Instantiate(_selectedPrefab, placePos);
+        GameObject spawnedMachine = Instantiate(selectedPrefab, placePos);
         spawnedMachine.transform.localPosition = _placementOffset;
 
         // spawnedMachine.transform.rotation = Quaternion.Euler(0, , 0);
@@ -132,7 +138,7 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
 
         diggerVeinIndex.Add(placePos.GetComponent<ResourceVein>().resourceIndex);
 
-        _selectedPrefab = null;
+        selectedPrefab = null;
 
         if (_machineQuest)
         {
@@ -143,16 +149,20 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
     void PlaceSmelter(RaycastHit placePos)
     {
         Destroy(_spawnedBlueprint);
-        GameObject spawnedMachine = Instantiate(_selectedPrefab, placePos.point, Quaternion.identity);
+        GameObject spawnedMachine = Instantiate(selectedPrefab, placePos.point, Quaternion.identity);
         // spawnedMachine.transform.localPosition = _placementOffset;
         InventoryManager.Instance.UseItem(InventoryManager.Instance.GetSelectedItem().itemID, 1);
 
         _placedSmelters.Add(spawnedMachine.GetComponent<SmeltingMachine>());
 
-        smelterIndex.Add(_placedSmelters.Count);
-        spawnedMachine.GetComponent<SmeltingMachine>().smelterIndex = _placedSmelters.Count;
+        smelterIndex.Add(_placedSmelters.Count - 1);
 
-        _selectedPrefab = null;
+        smelterPositions.Add(spawnedMachine.transform.position);
+        smelterRotations.Add(spawnedMachine.transform.rotation);
+
+        spawnedMachine.GetComponent<SmeltingMachine>().smelterIndex = _placedSmelters.Count - 1;
+
+        selectedPrefab = null;
 
         if (_machineQuest)
         {
@@ -162,17 +172,28 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
     }
 
 
-    void SpawnMachines(int spawnIndex)
+    void SpawnMiner(int spawnIndex)
     {
         GameObject spawnedMachine = Instantiate(_machinePrefabs[0], _resourceSpawner._resourceGameObjects[spawnIndex].transform);
         spawnedMachine.transform.localPosition = _placementOffset;
+    }
+
+    void SpawnSmelter()
+    {
+        for (int i = 0; i < smelterIndex.Count; i++)
+        {
+            GameObject spawnedSmelter = Instantiate(_machinePrefabs[1], smelterPositions[i], Quaternion.identity);
+            spawnedSmelter.GetComponent<SmeltingMachine>().smelterIndex = smelterIndex[i];
+            _placedSmelters.Add(spawnedSmelter.GetComponent<SmeltingMachine>());
+        }
     }
 
     public void LoadData(GameData data)
     {
         diggerVeinIndex = data.diggerVeinIndex;
         smelterIndex = data.smelterIndex;
-
+        smelterPositions = data.smelterPositions;
+        smelterRotations = data.smelterRotations;
         if (diggerVeinIndex.Count > 0 || smelterIndex.Count > 0)
         {
             _hasLoadData = true;
@@ -183,5 +204,6 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
     {
         data.diggerVeinIndex = diggerVeinIndex;
         data.smelterIndex = smelterIndex;
+        data.smelterPositions = smelterPositions;
     }
 }

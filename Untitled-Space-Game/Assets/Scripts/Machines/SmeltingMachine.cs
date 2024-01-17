@@ -144,7 +144,6 @@ public class SmeltingMachine : MonoBehaviour, IDataPersistence
                 fuelLeftSlider.maxValue = _fuelType.fuelTime;
             }
             fuelLeftSlider.value = _fuelLeft;
-            Debug.Log($"Setting fuelLeftSlider.value To {_fuelLeft}");
         }
         else if (progressSlider == null && SmeltingPanelManager.Instance.currentSmelter == this)
         {
