@@ -12,15 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
   m_Name: (P)repairing 3 2
   m_EditorClassIdentifier: 
-  questName: (P)reparing 2 2/4
-  questInfo: Smelt 2 iron ores
+  questId: 0
+  questName: (P)reparing 3 2/2
+  questInfo: Bring the circuit board to the ship
   isQuestLine: 1
   questLineName: (P)repairing
-  nextQuest: {fileID: 11400000, guid: a1933c30664f5054ebaa35bf06944ade, type: 2}
-  itemsNeeded:
-  - item: {fileID: 11400000, guid: a4685f8f3dc23a4448eafa43274fb0d3, type: 2}
-    amount: 2
+  nextQuest: {fileID: 0}
+  itemsNeeded: []
   machinesNeeded: []
   recipesToUnlock: []
   itemsToGet: []
-  questType: 0
+  questType: 1

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SmeltingMachine : MonoBehaviour
+public class SmeltingMachine : MonoBehaviour, IDataPersistence
 {
     [Header("Info")]
+    public int smelterIndex;
+
     [SerializeField] Item _resourceToSmelt;
     [SerializeField] bool _isSmelting;
 
@@ -290,5 +292,20 @@ public class SmeltingMachine : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void LoadData(GameData data)
+    {
+        this._currentSmeltProgression = data.smelterFuelTime[this.smelterIndex];
+        this._fuelType = data.smelterFuel[this.smelterIndex].item;
+        this._fuelAmount = data.smelterFuel[this.smelterIndex].amount;
+        // this._resourceType = data.smelterInput[this.smelterIndex];
+        // this.OutputType = data.smelterOutput[this.smelterIndex];
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.smelterFuel[this.smelterIndex].item = _fuelType;
+        data.smelterFuel[this.smelterIndex].amount = _fuelAmount;
     }
 }

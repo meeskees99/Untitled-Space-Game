@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
   m_Name: (P)repairing 3 1
   m_EditorClassIdentifier: 
-  questName: (P)reparing 2 1/4
-  questInfo: Make 5 copper wires
+  questId: 0
+  questName: (P)reparing 3 1/2
+  questInfo: Make the circuit board
   isQuestLine: 1
   questLineName: (P)repairing
-  nextQuest: {fileID: 11400000, guid: ff21a462f29c9e5459254e92f37f87ae, type: 2}
+  nextQuest: {fileID: 11400000, guid: 69b080910d8eae8428c1ce75f90f6f59, type: 2}
   itemsNeeded:
   - item: {fileID: 11400000, guid: aca1b9d6f67d00942a798cc3253cff0c, type: 2}
     amount: 5

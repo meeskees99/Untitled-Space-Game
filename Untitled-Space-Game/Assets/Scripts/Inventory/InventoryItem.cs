@@ -195,38 +195,49 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     }
 
     [Header("UI Raycasting")]
-    [SerializeField] GraphicRaycaster _raycaster;
+    [SerializeField] List<GraphicRaycaster> _raycaster = new();
     PointerEventData _pointerEventData;
     [SerializeField] EventSystem _eventSystem;
-    [SerializeField] RectTransform _canvasRect;
+    // [SerializeField] RectTransform _canvasRect;
 
     private void Update()
     {
         if (isDragging)
         {
-            if (_raycaster == null)
+            if (!_raycaster.Any())
             {
-                _raycaster = inventoryManager.graphicRaycaster;
+                // for (int i = 0; i < inventoryManager.graphicRaycasters.Length; i++)
+                // {
+                // _raycaster.Add(inventoryManager.graphicRaycasters[i]);
+                // }
+                _raycaster = inventoryManager.graphicRaycasters;
             }
             if (_eventSystem == null)
             {
                 _eventSystem = inventoryManager.eventSystem;
             }
-            if (_canvasRect == null)
-            {
-                _canvasRect = inventoryManager.rectTransform;
-            }
-            List<RaycastResult> results = new();
+            // if (_canvasRect == null)
+            // {
+            //     _canvasRect = inventoryManager.rectTransform;
+            // }
+            List<RaycastResult> results1 = new();
             _pointerEventData = new PointerEventData(_eventSystem);
             _pointerEventData.position = transform.position;
-            _raycaster.Raycast(_pointerEventData, results);
 
-            if (results.Count <= 0)
+            for (int i = 0; i < _raycaster.Count; i++)
             {
+                Debug.Log($"Shooting Graphics Raycaster From {_raycaster[i].gameObject.name}");
+                _raycaster[i].Raycast(_pointerEventData, results1);
+            }
+
+            if (results1.Count <= 0)
+            {
+                dropOnDrop = true;
+                Debug.Log("DropOnDrop True");
                 Debug.Log("Results Count Was <= 0");
                 return;
             }
-            if (results[0].gameObject.transform.GetComponent<Button>())
+            if (results1[0].gameObject.transform.GetComponent<Button>())
             {
                 Debug.Log("DropOnDrop True");
                 dropOnDrop = true;
@@ -235,9 +246,9 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             dropOnDrop = false;
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
-                Debug.Log($"Hit {results[0].gameObject.name}");
+                Debug.Log($"Hit {results1[0].gameObject.name}");
                 InventorySlot slot;
-                results[0].gameObject.transform.TryGetComponent<InventorySlot>(out slot);
+                results1[0].gameObject.transform.TryGetComponent<InventorySlot>(out slot);
                 if (slot != null)
                 {
                     slot.AddItemToSlot(this);
@@ -246,7 +257,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 else
                 {
                     InventoryItem item;
-                    results[0].gameObject.transform.TryGetComponent<InventoryItem>(out item);
+                    results1[0].gameObject.transform.TryGetComponent<InventoryItem>(out item);
                     if (item != null)
                     {
                         if (item.count < item.item.maxStack)

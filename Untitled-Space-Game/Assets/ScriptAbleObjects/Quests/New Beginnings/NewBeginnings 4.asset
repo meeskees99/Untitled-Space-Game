@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
   m_Name: NewBeginnings 4
   m_EditorClassIdentifier: 
+  questId: 0
   questName: New Beginnings 4/4
   questInfo: Place the smelter
   isQuestLine: 1
@@ -19,6 +20,7 @@ MonoBehaviour:
   nextQuest: {fileID: 11400000, guid: ef7b4b20d477fb344be479182b686ab1, type: 2}
   itemsNeeded: []
   machinesNeeded:
-  - {fileID: 7905719996261257981, guid: 7bd6f3aadb0bbc148971ef5f5f642b69, type: 3}
+  - {fileID: 6261940974735757193, guid: 3b55af24590f90c42abbe82615264abc, type: 3}
   recipesToUnlock: []
+  itemsToGet: []
   questType: 2

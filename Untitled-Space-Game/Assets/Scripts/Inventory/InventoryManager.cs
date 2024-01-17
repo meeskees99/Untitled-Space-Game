@@ -31,7 +31,7 @@ public class InventoryManager : MonoBehaviour
 
     [Header("Canvas Information")]
     public EventSystem eventSystem;
-    public GraphicRaycaster graphicRaycaster;
+    public List<GraphicRaycaster> graphicRaycasters;
     public RectTransform rectTransform;
 
     private void Awake()

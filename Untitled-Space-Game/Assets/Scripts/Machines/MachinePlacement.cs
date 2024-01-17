@@ -20,7 +20,9 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
     [SerializeField] Color _cantPlaceColor;
 
     [SerializeField] List<DiggingMachine> _placedDiggers = new();
+    [SerializeField] List<SmeltingMachine> _placedSmelters = new();
     [SerializeField] List<int> diggerVeinIndex = new();
+    [SerializeField] List<int> smelterIndex = new();
 
     [SerializeField] Transform _shootPos;
     bool _hasLoadData;
@@ -182,7 +184,10 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
         // spawnedMachine.transform.localPosition = _placementOffset;
         InventoryManager.Instance.UseItem(InventoryManager.Instance.GetSelectedItem().itemID, 1);
 
-        _placedDiggers.Add(spawnedMachine.GetComponent<DiggingMachine>());
+        _placedSmelters.Add(spawnedMachine.GetComponent<SmeltingMachine>());
+
+        smelterIndex.Add(_placedSmelters.Count);
+        spawnedMachine.GetComponent<SmeltingMachine>().smelterIndex = _placedSmelters.Count;
 
         _selectedPrefab = null;
 
@@ -203,8 +208,9 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         diggerVeinIndex = data.diggerVeinIndex;
+        smelterIndex = data.smelterIndex;
 
-        if (diggerVeinIndex.Count > 0)
+        if (diggerVeinIndex.Count > 0 || smelterIndex.Count > 0)
         {
             _hasLoadData = true;
         }
@@ -213,5 +219,6 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
     public void SaveData(GameData data)
     {
         data.diggerVeinIndex = diggerVeinIndex;
+        data.smelterIndex = smelterIndex;
     }
 }

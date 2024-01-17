@@ -231,6 +231,5 @@ MonoBehaviour:
   isDragging: 0
   lastInventorySlot: {fileID: 0}
   dropOnDrop: 0
-  _raycaster: {fileID: 0}
+  _raycaster: []
   _eventSystem: {fileID: 0}
-  _canvasRect: {fileID: 0}

@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
   m_Name: (P)repairing 2 4
   m_EditorClassIdentifier: 
+  questId: 0
   questName: (P)reparing 2 4/4
   questInfo: Bring the wiring kit to the ship
   isQuestLine: 1
   questLineName: (P)repairing
-  nextQuest: {fileID: 11400000, guid: 82d6eafc81c2c844db505f8a3ac15373, type: 2}
+  nextQuest: {fileID: 11400000, guid: 32fbd341724e44346994092b2c70adfb, type: 2}
   itemsNeeded:
   - item: {fileID: 11400000, guid: adbc8e0ec2ca0db429a1469ad933ba75, type: 2}
     amount: 1

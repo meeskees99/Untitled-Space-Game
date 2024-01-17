@@ -172,7 +172,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
         {
             return;
         }
-        if (isMachineSlot || isFuelSlot)
+        if (isMachineSlot || isFuelSlot || isResourceSlot)
         {
             // InventoryManager.Instance.SpawnNewItemMining(data.itemId[slotId], data.itemAmount[slotId], this.slotId);
             return;
@@ -180,13 +180,13 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
         else
         {
             InventoryManager.Instance.SpawnNewItem(data.itemId[slotId], data.itemAmount[slotId], this.slotId);
-            Debug.Log($"Spawned New Item From Slot {slotId}");
+            Debug.Log($"Spawned New Item From Slot {slotId} On GameObject {gameObject.name}");
         }
     }
 
     public void SaveData(GameData data)
     {
-        if (isMachineSlot || isFuelSlot)
+        if (isMachineSlot || isFuelSlot || isResourceSlot)
         {
             //Not needed to save and load
             return;

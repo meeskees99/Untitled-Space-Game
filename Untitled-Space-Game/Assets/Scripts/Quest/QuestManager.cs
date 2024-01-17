@@ -6,10 +6,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class QuestManager : MonoBehaviour
+public class QuestManager : MonoBehaviour, IDataPersistence
 {
     [Header("Quest Info")]
     public static QuestManager Instance;
+
+    [SerializeField] Quest[] _allQuests;
 
     [SerializeField] Quest _startQuest;
 
@@ -200,5 +202,25 @@ public class QuestManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        if (_allQuests == null)
+        {
+            return;
+        }
+        for (int i = 0; i < _allQuests.Length; i++)
+        {
+            if (_allQuests[i].questId == data.currentQuestId)
+            {
+                _startQuest = _allQuests[i];
+            }
+        }
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.currentQuestId = _currentQuest.questId;
     }
 }
