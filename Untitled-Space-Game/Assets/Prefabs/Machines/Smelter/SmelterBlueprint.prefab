@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7905719996261257981
+--- !u!1 &7578800308271518216
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5172499533798914585}
-  - component: {fileID: 1948894453604727176}
-  - component: {fileID: 1143077756965339449}
-  - component: {fileID: 8832066481029202889}
+  - component: {fileID: 7090528478463084722}
+  - component: {fileID: 6181548380584036119}
+  - component: {fileID: 8227428674132685789}
   m_Layer: 0
-  m_Name: SmelterBlueprint
+  m_Name: FurnaceBlueprint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5172499533798914585
+--- !u!4 &7090528478463084722
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7905719996261257981}
+  m_GameObject: {fileID: 7578800308271518216}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 5172499533798914585}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1948894453604727176
+--- !u!33 &6181548380584036119
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7905719996261257981}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1143077756965339449
+  m_GameObject: {fileID: 7578800308271518216}
+  m_Mesh: {fileID: 6239881831769578202, guid: 98e85c326e3ea0840a79160fa20e1f75, type: 3}
+--- !u!23 &8227428674132685789
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7905719996261257981}
+  m_GameObject: {fileID: 7578800308271518216}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -62,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cdb49f42d476fbc41bfcc4fb73d80cb7, type: 2}
+  - {fileID: 2100000, guid: 8925cb4f959b34b45bea4ba58cc168d3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,30 +83,35 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8832066481029202889
-MonoBehaviour:
+--- !u!1 &7905719996261257981
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5172499533798914585}
+  m_Layer: 0
+  m_Name: SmelterBlueprint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5172499533798914585
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7905719996261257981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f27cb2a48cc22c4ebff458db766cf64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _resourceToSmelt: {fileID: 0}
-  _isSmelting: 0
-  _itemType: {fileID: 0}
-  _itemAmount: 0
-  _fuelType: {fileID: 0}
-  _fuelAmount: 0
-  _resourceInitialized: 0
-  _fuelInitialized: 0
-  _resourceInputSlot: {fileID: 0}
-  _fuelInputSlot: {fileID: 0}
-  _itemOutputSlot: {fileID: 0}
-  fuelLeftSlider: {fileID: 0}
-  progressSlider: {fileID: 0}
-  _fuelTimeInitialized: 0
-  _fuelLeft: 0
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7090528478463084722}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

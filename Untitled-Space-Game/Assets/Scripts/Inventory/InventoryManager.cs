@@ -138,31 +138,31 @@ public class InventoryManager : MonoBehaviour
 
                     itemInSlot.RefreshCount();
 
-                    if (!_uiManager.inventoryShown)
-                    {
-                        if (!slot.isHudSlot)
-                            itemInSlot.transform.GetChild(0).gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        if (!slot.isHudSlot)
-                            itemInSlot.transform.GetChild(0).gameObject.SetActive(true);
-                    }
+                    // if (!_uiManager.inventoryShown)
+                    // {
+                    //     if (!slot.isHudSlot)
+                    //         itemInSlot.transform.GetChild(0).gameObject.SetActive(false);
+                    // }
+                    // else
+                    // {
+                    //     if (!slot.isHudSlot)
+                    //         itemInSlot.transform.GetChild(0).gameObject.SetActive(true);
+                    // }
                     return true;
                 }
                 itemInSlot.count += amount;
                 itemInSlot.RefreshCount();
                 UpdateItemsInfoList();
-                if (!_uiManager.inventoryShown)
-                {
-                    if (!slot.isHudSlot)
-                        itemInSlot.transform.GetChild(0).gameObject.SetActive(false);
-                }
-                else
-                {
-                    if (!slot.isHudSlot)
-                        itemInSlot.transform.GetChild(0).gameObject.SetActive(true);
-                }
+                // if (!_uiManager.inventoryShown)
+                // {
+                //     if (!slot.isHudSlot)
+                //         itemInSlot.transform.GetChild(0).gameObject.SetActive(false);
+                // }
+                // else
+                // {
+                //     if (!slot.isHudSlot)
+                //         itemInSlot.transform.GetChild(0).gameObject.SetActive(true);
+                // }
                 return true;
             }
 
@@ -207,11 +207,11 @@ public class InventoryManager : MonoBehaviour
                 break;
             }
         }
-        if (!_uiManager.inventoryShown && !inventorySlots[slotID].isHudSlot)
-        {
-            inventoryItem.GetComponent<Image>().enabled = false;
-            inventoryItem.transform.GetChild(0).gameObject.SetActive(false);
-        }
+        // if (!_uiManager.inventoryShown && !inventorySlots[slotID].isHudSlot)
+        // {
+        //     inventoryItem.GetComponent<Image>().enabled = false;
+        //     inventoryItem.transform.GetChild(0).gameObject.SetActive(false);
+        // }
         UpdateItemsInfoList();
     }
 
@@ -320,7 +320,6 @@ public class InventoryManager : MonoBehaviour
 
     static int GetTotalItemAmount(List<InventorySlot> list, Item item)
     {
-
         int result = 0;
         foreach (var itm in list)
         {

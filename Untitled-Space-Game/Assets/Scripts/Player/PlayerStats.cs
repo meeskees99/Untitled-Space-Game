@@ -88,14 +88,15 @@ public class PlayerStats : MonoBehaviour
     {
         _currentHealth = Health;
 
-        if (_currentHealth <= _maxHealth / 3 * 2)
-        {
-            _heartsHolder.GetChild(2).GetComponent<Image>().sprite = _heartDepletedImage;
-        }
-        else
-        {
-            _heartsHolder.GetChild(2).GetComponent<Image>().sprite = _heartFilledImage;
-        }
+        // if (_currentHealth <= _maxHealth / 3 * 2)
+        // {
+        //     _heartsHolder.GetChild(2).GetComponent<Image>().sprite = _heartDepletedImage;
+        // }
+        // else
+        // {
+        //     _heartsHolder.GetChild(2).GetComponent<Image>().sprite = _heartFilledImage;
+        // }
+
         if (Health <= 0 && IsAlive)
         {
             Health = 0;

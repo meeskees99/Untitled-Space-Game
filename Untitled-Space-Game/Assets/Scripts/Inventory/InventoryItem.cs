@@ -53,7 +53,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         }
         countText.text = count.ToString();
-        bool textActive = count > 1 && InGameUIManager.Instance.inventoryShown;
+        bool textActive = count > 1;
         countText.gameObject.SetActive(textActive);
         Debug.Log("Refreshed Count Of " + item);
     }
@@ -155,7 +155,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             // }
             lastInventorySlot = GetComponentInParent<InventorySlot>();
         }
-        else
+        else if (parentAfterDrag != null)
         {
             Debug.Log($"{parentAfterDrag.name} already had a child!");
             if (parentAfterDrag.GetComponent<InventorySlot>().GetInventoryItem().count + count <= item.maxStack)
@@ -168,17 +168,22 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 parentAfterDrag.GetComponent<InventorySlot>().GetInventoryItem().count = item.maxStack;
                 InventoryManager.Instance.AddItem(item.itemID, overflow);
             }
-            if (lastInventorySlot.isMachineSlot && !parentAfterDrag.GetComponent<InventorySlot>().isMachineSlot)
-            {
-                Debug.Log("myballs");
-                MiningPanelManager.Instance.currentDigger.ItemAmount = 0;
-                MiningPanelManager.Instance.currentDigger.InitializeFuelType();
-                Debug.Log("itch");
-            }
+            // if (lastInventorySlot.isMachineSlot && !parentAfterDrag.GetComponent<InventorySlot>().isMachineSlot)
+            // {
+            //     Debug.Log("myballs");
+            //     MiningPanelManager.Instance.currentDigger.ItemAmount = 0;
+            //     MiningPanelManager.Instance.currentDigger.InitializeFuelType();
+            //     Debug.Log("itch");
+            // }
             parentAfterDrag.GetComponent<InventorySlot>().GetInventoryItem().RefreshCount();
             InventoryManager.Instance.UpdateItemsInfoList();
-            Debug.Log("destroy");
+            // Debug.Log("destroy");
 
+            Destroy(gameObject);
+        }
+        else
+        {
+            InventoryManager.Instance.AddItem(item.itemID, count);
             Destroy(gameObject);
         }
     }
@@ -217,6 +222,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
             if (results.Count <= 0)
             {
+                Debug.Log("Results Count Was <= 0");
                 return;
             }
             if (results[0].gameObject.transform.GetComponent<Button>())
