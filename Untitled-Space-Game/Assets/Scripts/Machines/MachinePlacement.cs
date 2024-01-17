@@ -185,30 +185,63 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
 
     void SpawnSmelter()
     {
+        bool hasFuel = false;
+        bool hasResource = false;
+        bool hasOutput = false;
+
         for (int i = 0; i < smelterIndex.Count; i++)
         {
             GameObject spawnedSmelter = Instantiate(_machinePrefabs[1], smelterPositions[i], Quaternion.identity);
             spawnedSmelter.GetComponent<SmeltingMachine>().smelterIndex = smelterIndex[i];
             _placedSmelters.Add(spawnedSmelter.GetComponent<SmeltingMachine>());
 
+            if (smelterFuelId[i] == -1)
+            {
+                Debug.Log($"No Fuel Found In Smelter {_placedSmelters[i].smelterIndex}");
+            }
+            else
+            {
+                hasFuel = true;
+                spawnedSmelter.GetComponent<SmeltingMachine>().FuelAmount = smelterFuelAmount[i];
+            }
+            if (smelterResourceId[i] == -1)
+            {
+                Debug.Log($"No Resource Found In Smelter {_placedSmelters[i].smelterIndex}");
+            }
+            else
+            {
+                hasResource = true;
+                spawnedSmelter.GetComponent<SmeltingMachine>().ResourceAmount = smelterResourceAmount[i];
+            }
+            if (smelterOutputId[i] == -1)
+            {
+                Debug.Log($"No Output Found In Smelter {_placedSmelters[i].smelterIndex}");
+            }
+            else
+            {
+                hasOutput = true;
+                spawnedSmelter.GetComponent<SmeltingMachine>().OutputAmount = smelterOutputAmount[i];
+            }
+
             for (int y = 0; y < InventoryManager.Instance.allItems.Length; y++)
             {
-                if (InventoryManager.Instance.allItems[y].itemID == smelterFuelId[i])
+                if (hasFuel && InventoryManager.Instance.allItems[y].itemID == smelterFuelId[i])
                 {
                     spawnedSmelter.GetComponent<SmeltingMachine>().FuelType = InventoryManager.Instance.allItems[y];
+                    Debug.Log("Set Fuel Type As " + InventoryManager.Instance.allItems[y].name);
                 }
-                if (InventoryManager.Instance.allItems[y].itemID == smelterResourceId[i])
+                if (hasResource && InventoryManager.Instance.allItems[y].itemID == smelterResourceId[i])
                 {
                     spawnedSmelter.GetComponent<SmeltingMachine>().ResourceType = InventoryManager.Instance.allItems[y];
+                    Debug.Log("Set Resource Type As " + InventoryManager.Instance.allItems[y].name);
                 }
-                if (InventoryManager.Instance.allItems[y].itemID == smelterOutputId[i])
+                if (hasOutput && InventoryManager.Instance.allItems[y].itemID == smelterOutputId[i])
                 {
                     spawnedSmelter.GetComponent<SmeltingMachine>().OutputType = InventoryManager.Instance.allItems[y];
+                    Debug.Log("Set Output Type As " + InventoryManager.Instance.allItems[y].name);
                 }
             }
-            spawnedSmelter.GetComponent<SmeltingMachine>().FuelAmount = smelterFuelAmount[i];
-            spawnedSmelter.GetComponent<SmeltingMachine>().ResourceAmount = smelterResourceAmount[i];
-            spawnedSmelter.GetComponent<SmeltingMachine>().OutputAmount = smelterOutputAmount[i];
+
         }
     }
 
@@ -225,6 +258,8 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
         }
         smelterFuelId = data.smelterFuelId;
         smelterFuelAmount = data.smelterFuelAmount;
+
+
     }
 
     public void SaveData(GameData data)
@@ -235,8 +270,38 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
 
         for (int i = 0; i < _placedSmelters.Count; i++)
         {
-            smelterFuelId.Add(_placedSmelters[i].FuelType.itemID);
-            smelterFuelAmount.Add(_placedSmelters[i].FuelAmount);
+            if (_placedSmelters[i].FuelType != null)
+            {
+                smelterFuelId.Add(_placedSmelters[i].FuelType.itemID);
+                smelterFuelAmount.Add(_placedSmelters[i].FuelAmount);
+            }
+            else
+            {
+                smelterFuelId.Add(-1);
+                smelterFuelAmount.Add(0);
+            }
+            if (_placedSmelters[i].ResourceType != null)
+            {
+                smelterResourceId.Add(_placedSmelters[i].ResourceType.itemID);
+                smelterResourceAmount.Add(_placedSmelters[i].ResourceAmount);
+            }
+            else
+            {
+                smelterResourceId.Add(-1);
+                smelterResourceAmount.Add(0);
+            }
+            if (_placedSmelters[i].OutputType != null)
+            {
+                smelterOutputId.Add(_placedSmelters[i].OutputType.itemID);
+                smelterOutputAmount.Add(_placedSmelters[i].OutputAmount);
+            }
+            else
+            {
+                smelterOutputId.Add(-1);
+                smelterOutputAmount.Add(0);
+            }
+
+
         }
 
         data.smelterFuelId = smelterFuelId;
