@@ -180,6 +180,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
         else
         {
             InventoryManager.Instance.SpawnNewItem(data.itemId[slotId], data.itemAmount[slotId], this.slotId);
+            Debug.Log($"Spawned New Item From Slot {slotId}");
         }
     }
 

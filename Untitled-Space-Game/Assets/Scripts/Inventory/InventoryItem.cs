@@ -183,6 +183,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
         else
         {
+            Debug.LogError("Had No ParentAfterDrag");
             InventoryManager.Instance.AddItem(item.itemID, count);
             Destroy(gameObject);
         }
