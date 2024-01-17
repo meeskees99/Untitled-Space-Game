@@ -138,31 +138,11 @@ public class InventoryManager : MonoBehaviour
 
                     itemInSlot.RefreshCount();
 
-                    // if (!_uiManager.inventoryShown)
-                    // {
-                    //     if (!slot.isHudSlot)
-                    //         itemInSlot.transform.GetChild(0).gameObject.SetActive(false);
-                    // }
-                    // else
-                    // {
-                    //     if (!slot.isHudSlot)
-                    //         itemInSlot.transform.GetChild(0).gameObject.SetActive(true);
-                    // }
                     return true;
                 }
                 itemInSlot.count += amount;
                 itemInSlot.RefreshCount();
                 UpdateItemsInfoList();
-                // if (!_uiManager.inventoryShown)
-                // {
-                //     if (!slot.isHudSlot)
-                //         itemInSlot.transform.GetChild(0).gameObject.SetActive(false);
-                // }
-                // else
-                // {
-                //     if (!slot.isHudSlot)
-                //         itemInSlot.transform.GetChild(0).gameObject.SetActive(true);
-                // }
                 return true;
             }
 

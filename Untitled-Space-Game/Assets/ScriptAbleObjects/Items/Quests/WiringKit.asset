@@ -13,14 +13,18 @@ MonoBehaviour:
   m_Name: WiringKit
   m_EditorClassIdentifier: 
   itemID: 400
-  itemPrefab: {fileID: 5782093277417097196, guid: 9fc859e08189b99459e849940ec42fb3,
+  itemPrefab: {fileID: 5782093277417097196, guid: 7b02a69c3c0819244a8cdec980c43881,
     type: 3}
   stackable: 1
   image: {fileID: 0}
   maxStack: 3
   canBeInHudSlot: 0
+  itemToGetAfterSmelt: {fileID: 0}
   isTool: 0
   isPlacable: 0
   isFuel: 0
-  isSmeltable: 0
   fuelTime: 0
+  isSmeltable: 0
+  smeltTime: 4
+  machinePrefab: {fileID: 0}
+  machineBlueprint: {fileID: 0}

@@ -157,7 +157,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
         else if (parentAfterDrag != null)
         {
-            Debug.Log($"{parentAfterDrag.name} already had a child!");
+            Debug.Log($"{parentAfterDrag.gameObject.name} already had a child!");
             if (parentAfterDrag.GetComponent<InventorySlot>().GetInventoryItem().count + count <= item.maxStack)
             {
                 parentAfterDrag.GetComponent<InventorySlot>().GetInventoryItem().count += count;
