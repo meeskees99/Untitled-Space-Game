@@ -21,6 +21,7 @@ MonoBehaviour:
   canBeInHudSlot: 0
   itemToGetAfterSmelt: {fileID: 11400000, guid: c86af5229e658714597b03118b924f70,
     type: 2}
+  amountToGetAfterSmelt: 2
   isTool: 0
   isPlacable: 0
   isFuel: 0

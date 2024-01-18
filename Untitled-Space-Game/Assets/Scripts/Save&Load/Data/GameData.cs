@@ -36,6 +36,9 @@ public class GameData
     public List<int> smelterResourceAmount = new();
     public List<int> smelterOutputAmount = new();
 
+    public List<float> smelterFuelLeft = new();
+    public List<float> smelterProgressAmount = new();
+
     // public int[] resourceId;
     // public List<int> itemAmounts = new();
 
@@ -82,5 +85,8 @@ public class GameData
         this.smelterFuelAmount = new();
         this.smelterResourceAmount = new();
         this.smelterOutputAmount = new();
+
+        this.smelterFuelLeft = new();
+        this.smelterProgressAmount = new();
     }
 }

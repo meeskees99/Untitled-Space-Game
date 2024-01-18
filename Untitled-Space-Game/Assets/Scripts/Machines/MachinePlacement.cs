@@ -38,6 +38,8 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
     [SerializeField] List<int> smelterResourceAmount = new();
     [SerializeField] List<int> smelterOutputAmount = new();
 
+    [SerializeField] List<float> smelterFuelLeft = new();
+    [SerializeField] List<float> smelterProgressAmount = new();
 
     [SerializeField] Transform _shootPos;
     bool _hasLoadData;
@@ -191,6 +193,7 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
 
         for (int i = 0; i < smelterIndex.Count; i++)
         {
+            Debug.Log($"Count == {smelterIndex.Count}  i == {i}");
             GameObject spawnedSmelter = Instantiate(_machinePrefabs[1], smelterPositions[i], Quaternion.identity);
             spawnedSmelter.GetComponent<SmeltingMachine>().smelterIndex = smelterIndex[i];
             _placedSmelters.Add(spawnedSmelter.GetComponent<SmeltingMachine>());
@@ -242,6 +245,9 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
                 }
             }
 
+            _placedSmelters[i].FuelLeft = smelterFuelLeft[i];
+            _placedSmelters[i].SmeltProgression = smelterProgressAmount[i];
+
         }
     }
 
@@ -259,7 +265,14 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
         smelterFuelId = data.smelterFuelId;
         smelterFuelAmount = data.smelterFuelAmount;
 
+        smelterOutputId = data.smelterOutputId;
+        smelterOutputAmount = data.smelterOutputAmount;
 
+        smelterResourceId = data.smelterResourceId;
+        smelterResourceAmount = data.smelterResourceAmount;
+
+        smelterFuelLeft = data.smelterFuelLeft;
+        smelterProgressAmount = data.smelterProgressAmount;
     }
 
     public void SaveData(GameData data)
@@ -267,6 +280,13 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
         data.diggerVeinIndex = diggerVeinIndex;
         data.smelterIndex = smelterIndex;
         data.smelterPositions = smelterPositions;
+
+        smelterFuelId.Clear();
+        smelterFuelAmount.Clear();
+        smelterResourceId.Clear();
+        smelterResourceAmount.Clear();
+        smelterOutputId.Clear();
+        smelterOutputAmount.Clear();
 
         for (int i = 0; i < _placedSmelters.Count; i++)
         {
@@ -300,11 +320,21 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
                 smelterOutputId.Add(-1);
                 smelterOutputAmount.Add(0);
             }
-
+            smelterFuelLeft.Add(_placedSmelters[i].FuelLeft);
+            smelterProgressAmount.Add(_placedSmelters[i].SmeltProgression);
 
         }
 
         data.smelterFuelId = smelterFuelId;
         data.smelterFuelAmount = smelterFuelAmount;
+
+        data.smelterResourceId = smelterResourceId;
+        data.smelterResourceAmount = smelterResourceAmount;
+
+        data.smelterOutputId = smelterOutputId;
+        data.smelterOutputAmount = smelterOutputAmount;
+
+        data.smelterFuelLeft = smelterFuelLeft;
+        data.smelterProgressAmount = smelterProgressAmount;
     }
 }

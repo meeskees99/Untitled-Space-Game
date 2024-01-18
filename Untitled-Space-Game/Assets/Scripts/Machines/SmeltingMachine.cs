@@ -47,6 +47,9 @@ public class SmeltingMachine : MonoBehaviour
     public Item OutputType { get { return _outputType; } set { _outputType = value; } }
     public Item FuelType { get { return _fuelType; } set { _fuelType = value; } }
 
+    public float FuelLeft { get { return _fuelLeft; } set { _fuelLeft = value; } }
+    public float SmeltProgression { get { return _currentSmeltProgression; } set { _currentSmeltProgression = value; } }
+
     public bool ResourceInitialized { get { return _resourceInitialized; } set { _resourceInitialized = value; } }
     public bool FuelInitialized { get { return _fuelInitialized; } set { _fuelInitialized = value; } }
 
@@ -121,6 +124,10 @@ public class SmeltingMachine : MonoBehaviour
 
                 _currentSmeltProgression = 0;
             }
+        }
+        else if (_currentSmeltProgression > 0)
+        {
+            _currentSmeltProgression -= Time.deltaTime;
         }
     }
 
@@ -228,7 +235,7 @@ public class SmeltingMachine : MonoBehaviour
                     if (_outputAmount == 0)
                     {
                         //Spawn Item To Output
-                        SpawnItem(ItemOutputSlot, _resourceToSmelt.itemToGetAfterSmelt, 1);
+                        SpawnItem(ItemOutputSlot, _resourceToSmelt.itemToGetAfterSmelt, _resourceToSmelt.amountToGetAfterSmelt);
                     }
                     else
                     {

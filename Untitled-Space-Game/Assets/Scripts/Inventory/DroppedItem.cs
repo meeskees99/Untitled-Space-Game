@@ -12,7 +12,7 @@ public class DroppedItem : MonoBehaviour
     [SerializeField] float _rotationSpeed;
     [SerializeField] float _floatAmount;
 
-    [SerializeField] float _mergeDelay = 3f;
+    [SerializeField] float _mergeDelay = 1f;
 
     bool _canPickup;
 

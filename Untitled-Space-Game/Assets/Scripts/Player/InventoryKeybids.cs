@@ -339,18 +339,17 @@ public class InventoryKeybids : MonoBehaviour
             if (_interactableHit.transform.GetComponent<DroppedItem>())
             {
                 DroppedItem droppedItem = _interactableHit.transform.GetComponent<DroppedItem>();
-                _interactableTxt.text = $"Press ({_playerInput.actions.FindAction("Interact").GetBindingDisplayString()}) to pick up " + droppedItem.amount + " " +
-                droppedItem.item.name;
+                _interactableTxt.text = $"Press ({_playerInput.actions.FindAction("Interact").GetBindingDisplayString()}) to pick up {droppedItem.amount} {droppedItem.item.name}";
                 _InteractPanel.SetActive(true);
 
                 if (_onInteract)
                 {
                     if (droppedItem.amount > droppedItem.item.maxStack)
                     {
-                        if (InventoryManager.Instance.HasSpace(droppedItem.item.itemID, droppedItem.item.maxStack))
+                        if (InventoryManager.Instance.HasSpace(droppedItem.item.itemID, droppedItem.amount))
                         {
                             InventoryManager.Instance.AddItem(droppedItem.item.itemID, droppedItem.amount);
-                            droppedItem.amount -= droppedItem.item.maxStack;
+                            droppedItem.amount -= droppedItem.amount;
                         }
                     }
                     else if (InventoryManager.Instance.HasSpace(droppedItem.item.itemID, droppedItem.amount))
@@ -373,11 +372,11 @@ public class InventoryKeybids : MonoBehaviour
                     MiningPanelManager.Instance.ToggleMiningPanel(_interactableHit.transform.GetComponent<DiggingMachine>());
                     _InteractPanel.SetActive(_InteractPanel.activeSelf);
                     _didUiInteraction = !_didUiInteraction;
-                    Debug.Log($"Pressed E To Open Mining Panel");
+                    Debug.Log($"Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Open Mining Panel");
                 }
                 if (!_didUiInteraction)
                 {
-                    _interactableTxt.text = "Press (E) to open miner";
+                    _interactableTxt.text = $"Press {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} to open miner";
                     _InteractPanel.SetActive(true);
 
                 }
@@ -395,11 +394,11 @@ public class InventoryKeybids : MonoBehaviour
                     SmeltingPanelManager.Instance.ToggleSmeltingPanel(_interactableHit.transform.GetComponent<SmeltingMachine>());
                     _InteractPanel.SetActive(_InteractPanel.activeSelf);
                     _didUiInteraction = !_didUiInteraction;
-                    Debug.Log($"Pressed E To Open Mining Panel");
+                    Debug.Log($"Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Open Mining Panel");
                 }
                 if (!_didUiInteraction)
                 {
-                    _interactableTxt.text = "Press (E) to open miner";
+                    _interactableTxt.text = $"Press {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} to open miner";
                     _InteractPanel.SetActive(true);
 
                 }
@@ -417,11 +416,11 @@ public class InventoryKeybids : MonoBehaviour
                     InGameUIManager.Instance.ToggleCrafting();
                     _InteractPanel.SetActive(!_InteractPanel.activeSelf);
                     _didUiInteraction = !_didUiInteraction;
-                    Debug.Log($"Pressed E To Open Crafting Panel");
+                    Debug.Log($"Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Open Crafting Panel");
                 }
                 if (!_didUiInteraction)
                 {
-                    _interactableTxt.text = "Press (E) to open the crafting table";
+                    _interactableTxt.text = $"Press {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} to open the crafting table";
                     _InteractPanel.SetActive(true);
 
                 }

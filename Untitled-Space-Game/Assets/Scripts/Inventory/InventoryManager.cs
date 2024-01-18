@@ -13,8 +13,6 @@ public class InventoryManager : MonoBehaviour
     public List<InventorySlot> inventorySlots = new();
 
     [SerializeField] InventorySlot[] _toolbarSlots;
-    // [SerializeField] InventorySlot[] _miningSlots;
-    // [SerializeField] InventorySlot[] _smelterSlots;
 
     [SerializeField] GameObject _inventoryItemPrefab;
     public GameObject InventoryItemPrefab { get { return _inventoryItemPrefab; } }
@@ -47,6 +45,7 @@ public class InventoryManager : MonoBehaviour
         }
 
         player = FindObjectOfType<CharStateMachine>().gameObject;
+        UpdateItemsInfoList();
     }
 
     private void Update()
@@ -161,8 +160,20 @@ public class InventoryManager : MonoBehaviour
 
             int slot = i;
             InventoryItem itemInSlot = inventorySlots[slot].GetComponentInChildren<InventoryItem>();
+
             if (itemInSlot == null)
             {
+                if (amount > _itemToSpawn.maxStack)
+                {
+                    int extra = amount - _itemToSpawn.maxStack;
+                    Debug.Log("Extra: " + extra);
+
+                    SpawnNewItem(itemId, _itemToSpawn.maxStack, slot);
+                    AddItem(itemId, extra);
+                    UpdateItemsInfoList();
+
+                    return true;
+                }
                 SpawnNewItem(itemId, amount, slot);
                 return true;
             }
@@ -188,11 +199,7 @@ public class InventoryManager : MonoBehaviour
                 break;
             }
         }
-        // if (!_uiManager.inventoryShown && !inventorySlots[slotID].isHudSlot)
-        // {
-        //     inventoryItem.GetComponent<Image>().enabled = false;
-        //     inventoryItem.transform.GetChild(0).gameObject.SetActive(false);
-        // }
+
         UpdateItemsInfoList();
     }
 
@@ -206,9 +213,10 @@ public class InventoryManager : MonoBehaviour
             {
                 break;
             }
-            if (itemsLeft < 0)
+            if (itemsLeft <= 0)
             {
                 Debug.LogError("Removed Too Many Items!");
+                return;
             }
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();

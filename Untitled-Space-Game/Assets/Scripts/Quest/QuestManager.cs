@@ -54,15 +54,34 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public void StartNewQuest()
     {
+        UpdateQuest();
+        UpdateItems();
+    }
+
+    public void EndQuest()
+    {
+        if (_currentQuest == null)
+        {
+            Debug.LogError("No Active Quest On EndQuest");
+            return;
+        }
+
         for (int i = 0; i < _currentQuest.recipesToUnlock.Length; i++)
         {
             CraftingManager.Instance.AddRecipe(_currentQuest.recipesToUnlock[i]);
         }
 
-        _currentQuest = _currentQuest.nextQuest;
+        if (_currentQuest.nextQuest != null)
+        {
+            _currentQuest = _currentQuest.nextQuest;
+        }
+        else
+        {
+            Debug.Log("No more Quests");
+            return;
+        }
 
-        UpdateQuest();
-        UpdateItems();
+        StartNewQuest();
     }
 
     public void UpdateQuest()
@@ -98,13 +117,17 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     private void Update()
     {
+        if (_currentQuest == null)
+        {
+            Debug.LogError("No Active Quest");
+            return;
+        }
         switch (_currentQuest.questType)
         {
             case Quest.QuestType.PLACE:
                 {
                     _machinePlacement._machineQuest = true;
                     _canSubmitQuest = false;
-
                     break;
                 }
             case Quest.QuestType.INVENTORY:
@@ -114,7 +137,8 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
                     if (CheckInventory())
                     {
-                        StartNewQuest();
+
+                        EndQuest();
                         Debug.LogWarning("Inventory Check was true");
                     }
                     break;
@@ -159,7 +183,11 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             }
         }
 
-        StartNewQuest();
+        for (int i = 0; i < _currentQuest.recipesToUnlock.Length; i++)
+        {
+            CraftingManager.Instance.AddRecipe(_currentQuest.recipesToUnlock[i]);
+        }
+        EndQuest();
     }
 
     public bool CheckInventory()
@@ -198,6 +226,11 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     if (_questItemRequirements[i].item == InventoryManager.Instance.itemsInInventory[j].item)
                     {
                         InventoryManager.Instance.UseItem(_questItemRequirements[i].item.itemID, _questItemRequirements[i].amount);
+                        for (int y = 0; y < _currentQuest.recipesToUnlock.Length; y++)
+                        {
+                            CraftingManager.Instance.AddRecipe(_currentQuest.recipesToUnlock[y]);
+                        }
+                        EndQuest();
                     }
                 }
             }
@@ -206,14 +239,16 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        if (_allQuests == null)
+        if (!_allQuests.Any())
         {
+            Debug.Log("has no Quests");
             return;
         }
         for (int i = 0; i < _allQuests.Length; i++)
         {
             if (_allQuests[i].questId == data.currentQuestId)
             {
+                Debug.Log($"quest id becomes {_allQuests[i].questId}");
                 _startQuest = _allQuests[i];
             }
         }
@@ -221,6 +256,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public void SaveData(GameData data)
     {
+        Debug.Log($"current quest id {_currentQuest.questId}");
         data.currentQuestId = _currentQuest.questId;
     }
 }
