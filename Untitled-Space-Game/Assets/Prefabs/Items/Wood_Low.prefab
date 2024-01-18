@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7992d659ab3efd249ab9424af9a8782d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 497.54645
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7992d659ab3efd249ab9424af9a8782d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1409736
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7992d659ab3efd249ab9424af9a8782d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 468.9398
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7992d659ab3efd249ab9424af9a8782d,
         type: 3}
@@ -36,12 +36,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7992d659ab3efd249ab9424af9a8782d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7992d659ab3efd249ab9424af9a8782d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7992d659ab3efd249ab9424af9a8782d,
         type: 3}
@@ -137,7 +137,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!114 &6533598567278721538
 MonoBehaviour:
