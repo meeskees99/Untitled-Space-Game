@@ -110,16 +110,20 @@ public class SmeltingMachine : MonoBehaviour
                 //Spawn Output Item
                 AddMachineItem(_itemOutputSlot, _outputType);
 
-                if (_resourceInputSlot.GetInventoryItem().count == 1)
+                if (_resourceInputSlot.GetInventoryItem() && _resourceInputSlot.GetInventoryItem().count == 1)
                 {
                     Destroy(_resourceInputSlot.GetInventoryItem());
                     _resourceAmount = 0;
                 }
-                else
+                else if (_resourceInputSlot.GetInventoryItem())
                 {
                     _resourceAmount--;
                     _resourceInputSlot.GetInventoryItem().count--;
                     _resourceInputSlot.GetInventoryItem().RefreshCount();
+                }
+                else
+                {
+                    _resourceAmount--;
                 }
 
                 _currentSmeltProgression = 0;
