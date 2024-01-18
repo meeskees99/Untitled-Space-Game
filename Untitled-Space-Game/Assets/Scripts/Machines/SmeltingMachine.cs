@@ -99,7 +99,7 @@ public class SmeltingMachine : MonoBehaviour
     private void HandleSmelt()
     {
         Debug.Log("Handeling Smelt");
-        if (HandleFuel() && HasSmeltableResource() && _outputAmount < _outputType.maxStack)
+        if (HasSmeltableResource() && HandleFuel() && _outputAmount < _outputType.maxStack)
         {
             if (_currentSmeltProgression < _resourceType.smeltTime)
             {
@@ -294,7 +294,7 @@ public class SmeltingMachine : MonoBehaviour
 
     bool HasSmeltableResource()
     {
-        if (_resourceInputSlot.GetInventoryItem() && _resourceInputSlot.GetInventoryItem().item.isSmeltable)
+        if (_resourceType != null && _resourceType.isSmeltable)
         {
             return true;
         }

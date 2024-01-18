@@ -23,6 +23,9 @@ public class Quest : ScriptableObject
     public Recipe[] recipesToUnlock;
     public Item[] itemsToGet;
 
+    public int[] repairIndex;
+    public int[] repairAmount;
+
     public enum QuestType
     {
         INVENTORY,

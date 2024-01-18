@@ -34,6 +34,10 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     [SerializeField] bool _canSubmitQuest;
 
+    [SerializeField] SkinnedMeshRenderer shipRenderer;
+
+    int[] _shipStateAmount = new int[5];
+
     private void Awake()
     {
         if (Instance == null)
@@ -69,6 +73,12 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         for (int i = 0; i < _currentQuest.recipesToUnlock.Length; i++)
         {
             CraftingManager.Instance.AddRecipe(_currentQuest.recipesToUnlock[i]);
+        }
+
+        for (int i = 0; i < _currentQuest.repairIndex.Length; i++)
+        {
+            shipRenderer.SetBlendShapeWeight(_currentQuest.repairIndex[i], _currentQuest.repairAmount[i]);
+            _shipStateAmount[i] = _currentQuest.repairAmount[i];
         }
 
         if (_currentQuest.nextQuest != null)
@@ -252,11 +262,14 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 _startQuest = _allQuests[i];
             }
         }
+        _shipStateAmount = data.shipState;
     }
 
     public void SaveData(GameData data)
     {
         Debug.Log($"current quest id {_currentQuest.questId}");
         data.currentQuestId = _currentQuest.questId;
+
+        data.shipState = _shipStateAmount;
     }
 }

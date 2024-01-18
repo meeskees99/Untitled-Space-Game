@@ -75,7 +75,10 @@ public class GameData
 
     public int currentQuestId;
 
+    public int[] shipState = new int[6];
+
     #endregion
+
 
     public int gameDifficulty;
 
