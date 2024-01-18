@@ -8,21 +8,35 @@ public class GameData
 {
     public long lastUpdated;
 
-    #region Resources
-    public List<Vector3> resourcePositions;
-    public List<Vector3> resourceRotations;
-    public List<int> resourceIndex;
-    #endregion
+
 
     #region Inventory
     public int[] itemId = new int[23];
     public int[] itemAmount = new int[23];
     #endregion
 
+    #region Player
+
+    public Vector3 playerPosition;
+    public Quaternion playerRotation;
+
+    public float playerHealth;
+    public float playerOxygen;
+
+    #endregion
+
     #region Machines
+
+    #region Digger
+
     public List<int> diggerVeinIndex = new();
+
     public List<int> diggerFuel = new();
     public List<int> diggerOutput = new();
+
+    #endregion
+
+    #region Smelter
 
     public List<int> smelterIndex = new();
     public List<Vector3> smelterPositions = new();
@@ -39,14 +53,29 @@ public class GameData
     public List<float> smelterFuelLeft = new();
     public List<float> smelterProgressAmount = new();
 
-    // public int[] resourceId;
-    // public List<int> itemAmounts = new();
-
-    // public int[] fuelId;
-    // public List<int> fuelAmounts = new();
     #endregion
 
+    #region Oxygen
+
+    public float oxygenRange;
+
+    #endregion
+
+    #endregion
+
+    #region Resources
+
+    public List<Vector3> resourcePositions;
+    public List<Vector3> resourceRotations;
+    public List<int> resourceIndex;
+
+    #endregion
+
+    #region Quest
+
     public int currentQuestId;
+
+    #endregion
 
     public int gameDifficulty;
 
@@ -62,6 +91,12 @@ public class GameData
             this.itemId[i] = -1;
             this.itemAmount[i] = -1;
         }
+
+        this.playerPosition = new();
+        this.playerPosition = new();
+
+        this.playerHealth = -1;
+        this.playerOxygen = -1;
 
         this.resourceIndex = new List<int>();
 

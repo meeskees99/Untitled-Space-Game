@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : MonoBehaviour, IDataPersistence
 {
     [Header("Stats")]
     public static float Health;
@@ -12,6 +12,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float _currentOxygen;
     public static bool IsAlive;
 
+    [Header("Setup")]
+    [SerializeField] Transform _spawnPoint;
 
     [Header("Health Settings")]
     [SerializeField] float _maxHealth = 100;
@@ -41,9 +43,14 @@ public class PlayerStats : MonoBehaviour
     public bool recievingOxygen;
     public bool healing;
 
+    bool _hasLoadData;
+
     void Start()
     {
-        ResetStats();
+        if (!_hasLoadData)
+        {
+            ResetStats();
+        }
     }
 
     void Update()
@@ -156,5 +163,35 @@ public class PlayerStats : MonoBehaviour
         Oxygen = _maxOxygen;
         IsAlive = true;
         Debug.Log("Reset Player Stats");
+    }
+
+    public void LoadData(GameData data)
+    {
+        if (data.playerHealth == -1)
+        {
+            _hasLoadData = false;
+
+            transform.position = _spawnPoint.position;
+            transform.rotation = _spawnPoint.rotation;
+            return;
+        }
+        _hasLoadData = true;
+
+
+        Health = data.playerHealth;
+        Oxygen = data.playerOxygen;
+
+        transform.position = data.playerPosition;
+        transform.rotation = data.playerRotation;
+
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.playerHealth = Health;
+        data.playerOxygen = Oxygen;
+
+        data.playerPosition = transform.position;
+        data.playerRotation = transform.rotation;
     }
 }
