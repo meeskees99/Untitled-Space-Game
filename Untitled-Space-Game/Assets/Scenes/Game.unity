@@ -45415,9 +45415,20 @@ PrefabInstance:
       objectReference: {fileID: 643365217}
     - target: {fileID: 5780810857843024441, guid: cb8c93fd58847b54d918fa4e6fee0d46,
         type: 3}
+      propertyPath: _heartsHolder
+      value: 
+      objectReference: {fileID: 1553561564}
+    - target: {fileID: 5780810857843024441, guid: cb8c93fd58847b54d918fa4e6fee0d46,
+        type: 3}
       propertyPath: recievingOxygen
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5780810857843024441, guid: cb8c93fd58847b54d918fa4e6fee0d46,
+        type: 3}
+      propertyPath: _heartFilledImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 27f32e94d3c19e54ab624c7900db16e4,
+        type: 3}
     - target: {fileID: 7074930114202059153, guid: cb8c93fd58847b54d918fa4e6fee0d46,
         type: 3}
       propertyPath: m_Name

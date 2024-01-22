@@ -95,14 +95,31 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
     {
         _currentHealth = Health;
 
-        // if (_currentHealth <= _maxHealth / 3 * 2)
-        // {
-        //     _heartsHolder.GetChild(2).GetComponent<Image>().sprite = _heartDepletedImage;
-        // }
-        // else
-        // {
-        //     _heartsHolder.GetChild(2).GetComponent<Image>().sprite = _heartFilledImage;
-        // }
+        if (_currentHealth < _maxHealth)
+        {
+            _heartsHolder.GetChild(2).GetComponent<Image>().sprite = _heartDepletedImage;
+            if (_currentHealth <= _maxHealth / 3 * 2)
+            {
+                _heartsHolder.GetChild(1).GetComponent<Image>().sprite = _heartDepletedImage;
+                if (_currentHealth <= _maxHealth / 3)
+                {
+                    _heartsHolder.GetChild(0).GetComponent<Image>().sprite = _heartDepletedImage;
+
+                }
+                else
+                {
+                    _heartsHolder.GetChild(0).GetComponent<Image>().sprite = _heartFilledImage;
+                }
+            }
+            else
+            {
+                _heartsHolder.GetChild(1).GetComponent<Image>().sprite = _heartFilledImage;
+            }
+        }
+        else
+        {
+            _heartsHolder.GetChild(2).GetComponent<Image>().sprite = _heartFilledImage;
+        }
 
         if (Health <= 0 && IsAlive)
         {
