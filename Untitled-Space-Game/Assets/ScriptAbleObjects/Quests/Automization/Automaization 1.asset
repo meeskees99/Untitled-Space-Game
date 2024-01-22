@@ -22,7 +22,7 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: aa810773b15f1d543995106ac34d3d09, type: 2}
     amount: 5
   - item: {fileID: 11400000, guid: 9a99ddadd8361bf4da199a6a4fc5c02a, type: 2}
-    amount: 3
+    amount: 5
   machinesNeeded: []
   recipesToUnlock: []
   itemsToGet: []
