@@ -17,10 +17,15 @@ MonoBehaviour:
     type: 3}
   stackable: 1
   image: {fileID: 0}
-  maxStack: 50
+  maxStack: 16
   canBeInHudSlot: 1
+  itemToGetAfterSmelt: {fileID: 0}
+  amountToGetAfterSmelt: 1
   isTool: 1
   isPlacable: 0
   isFuel: 0
-  isSmeltable: 0
   fuelTime: 0
+  isSmeltable: 0
+  smeltTime: 4
+  machinePrefab: {fileID: 0}
+  machineBlueprint: {fileID: 0}
