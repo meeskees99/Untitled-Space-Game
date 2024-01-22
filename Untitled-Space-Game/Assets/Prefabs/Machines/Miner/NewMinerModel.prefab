@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e4c00a53c5a78e04bb010365a47099d8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 497.64557
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e4c00a53c5a78e04bb010365a47099d8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4775639
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e4c00a53c5a78e04bb010365a47099d8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 467.81998
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e4c00a53c5a78e04bb010365a47099d8,
         type: 3}
@@ -36,12 +36,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e4c00a53c5a78e04bb010365a47099d8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e4c00a53c5a78e04bb010365a47099d8,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e4c00a53c5a78e04bb010365a47099d8,
         type: 3}
@@ -66,7 +66,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e4c00a53c5a78e04bb010365a47099d8,
         type: 3}
       propertyPath: m_Name
-      value: miner new
+      value: NewMinerModel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

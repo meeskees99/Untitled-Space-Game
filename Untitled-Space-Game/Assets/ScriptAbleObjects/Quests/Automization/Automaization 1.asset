@@ -14,14 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questId: 4
   questName: Automatization 1/4
-  questInfo: Collect 5 iron ingots
+  questInfo: Collect 5 iron ingots And 3 Wood
   isQuestLine: 1
   questLineName: Automatization
   nextQuest: {fileID: 11400000, guid: 8945c12b59d55434dafcd0f56e095f4f, type: 2}
   itemsNeeded:
   - item: {fileID: 11400000, guid: aa810773b15f1d543995106ac34d3d09, type: 2}
     amount: 5
+  - item: {fileID: 11400000, guid: 9a99ddadd8361bf4da199a6a4fc5c02a, type: 2}
+    amount: 3
   machinesNeeded: []
   recipesToUnlock: []
   itemsToGet: []
+  repairIndex: 
+  repairAmount: 
   questType: 0

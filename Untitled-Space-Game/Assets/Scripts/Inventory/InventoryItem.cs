@@ -147,7 +147,9 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                     SmeltingPanelManager.Instance.currentSmelter.InitializeFuelType();
                 }
             }
-            Debug.Log(lastInventorySlot.isMachineSlot + " " + parentAfterDrag.GetComponent<InventorySlot>().isMachineSlot);
+            // if (lastInventorySlot != null)
+            //     Debug.Log(lastInventorySlot.isMachineSlot + " " + parentAfterDrag.GetComponent<InventorySlot>().isMachineSlot);
+
             // if (lastInventorySlot.isMachineSlot && !parentAfterDrag.GetComponent<InventorySlot>().isMachineSlot)
             // {
             //     MiningPanelManager.Instance.currentDigger.ItemAmount = 0;

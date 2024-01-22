@@ -1,4 +1,13 @@
 using System.Collections;
+
+
+
+
+
+
+
+
+
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Unity.Mathematics;
@@ -83,14 +92,31 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
             }
             else if (_spawnedBlueprint != null && selectedPrefab != null)
             {
-                _spawnedBlueprint.transform.position = raycastHit.point + _placementOffset;
 
                 _spawnedBlueprint.transform.rotation = _player.transform.rotation;
-
-                if (LayerMask.LayerToName(raycastHit.transform.gameObject.layer) == "Ground")
+                if (machineItem.name == "Miner")
                 {
-                    _canPlace = true;
-                    _spawnedBlueprint.transform.GetComponentInChildren<MeshRenderer>().material.color = _canPlaceColor;
+                    if (LayerMask.LayerToName(raycastHit.transform.gameObject.layer) == "Resource")
+                    {
+                        _spawnedBlueprint.transform.SetParent(raycastHit.transform);
+                        _canPlace = true;
+                        _spawnedBlueprint.transform.GetComponentInChildren<MeshRenderer>().material.color = _canPlaceColor;
+                    }
+                    else
+                    {
+                        _spawnedBlueprint.transform.parent = null;
+                        _spawnedBlueprint.transform.position = raycastHit.point + _placementOffset;
+                    }
+
+                }
+                else if (machineItem.name == "Smelter")
+                {
+                    _spawnedBlueprint.transform.position = raycastHit.point + _placementOffset;
+                    if (LayerMask.LayerToName(raycastHit.transform.gameObject.layer) == "Ground")
+                    {
+                        _canPlace = true;
+                        _spawnedBlueprint.transform.GetComponentInChildren<MeshRenderer>().material.color = _canPlaceColor;
+                    }
                 }
                 else
                 {
@@ -136,6 +162,7 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
         GameObject spawnedMachine = Instantiate(selectedPrefab, placePos);
         spawnedMachine.transform.localPosition = _placementOffset;
 
+        InventoryManager.Instance.UseItem(InventoryManager.Instance.GetSelectedItem().itemID, 1);
         // spawnedMachine.transform.rotation = Quaternion.Euler(0, , 0);
 
         _placedDiggers.Add(spawnedMachine.GetComponent<DiggingMachine>());

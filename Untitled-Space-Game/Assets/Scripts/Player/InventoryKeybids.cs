@@ -132,7 +132,9 @@ public class InventoryKeybids : MonoBehaviour
                 }
                 else
                 {
+                    // if (InGameUIManager.Instance.inventoryShown)
                     InGameUIManager.Instance.ToggleInventory();
+
                     InventorySubscribe();
                 }
                 _canToggleInventory = false;
@@ -328,8 +330,15 @@ public class InventoryKeybids : MonoBehaviour
 
     private void Place()
     {
-        Debug.Log(_interactableHit);
-        machinePlacement.PlaceMachine(_interactableHit);
+        if (_interactableHit.point != null)
+        {
+            Debug.Log(_interactableHit);
+            machinePlacement.PlaceMachine(_interactableHit);
+        }
+        else
+        {
+            Debug.LogError($"Tried To Place Machine But _interactibleHit was Null");
+        }
     }
 
     private void CheckInteractable()
@@ -406,6 +415,7 @@ public class InventoryKeybids : MonoBehaviour
                 {
                     _interactableTxt.text = "";
                     _InteractPanel.SetActive(false);
+
 
                 }
             }

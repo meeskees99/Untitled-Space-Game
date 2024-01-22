@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6805032873332363404}
+  - component: {fileID: 8202053135328636909}
+  - component: {fileID: 5110855754633197458}
   m_Layer: 0
   m_Name: Miner
   m_TagString: Machine
@@ -29,10 +31,60 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5367804490453252504}
+  - {fileID: 1429216937006338877}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &7561196219419225964
+--- !u!114 &8202053135328636909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2802134608837746400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a390f7a32e28ec448abefbeb745878e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collectedResource: {fileID: 0}
+  _isDigging: 0
+  _itemType: {fileID: 0}
+  _itemAmount: 0
+  _fuelType: {fileID: 0}
+  _fuelAmount: 0
+  _resourceInitialized: 0
+  _fuelInitialized: 0
+  _miningRange: 3
+  _resourceLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _itemSlot: {fileID: 0}
+  _fuelSlot: {fileID: 0}
+  fuelLeftSlider: {fileID: 0}
+  _fuelTimeInitialized: 0
+  _fuelLeft: 0
+--- !u!65 &5110855754633197458
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2802134608837746400}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.1169028, y: 4.9991274, z: 4.702827}
+  m_Center: {x: 0, y: 2.0339346, z: 1.2914135}
+--- !u!1001 &2627697826209147890
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -40,69 +92,69 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6805032873332363404}
     m_Modifications:
-    - target: {fileID: 2490638306630702836, guid: 8a016d2e866cac3419f14f95fffc57df,
+    - target: {fileID: 4009026633108240591, guid: 1df5cd78d5c5b5949b06b7683adb397b,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2490638306630702836, guid: 8a016d2e866cac3419f14f95fffc57df,
+    - target: {fileID: 4009026633108240591, guid: 1df5cd78d5c5b5949b06b7683adb397b,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2490638306630702836, guid: 8a016d2e866cac3419f14f95fffc57df,
+    - target: {fileID: 4009026633108240591, guid: 1df5cd78d5c5b5949b06b7683adb397b,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2490638306630702836, guid: 8a016d2e866cac3419f14f95fffc57df,
+    - target: {fileID: 4009026633108240591, guid: 1df5cd78d5c5b5949b06b7683adb397b,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9997079
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2490638306630702836, guid: 8a016d2e866cac3419f14f95fffc57df,
+    - target: {fileID: 4009026633108240591, guid: 1df5cd78d5c5b5949b06b7683adb397b,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2490638306630702836, guid: 8a016d2e866cac3419f14f95fffc57df,
+    - target: {fileID: 4009026633108240591, guid: 1df5cd78d5c5b5949b06b7683adb397b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.024170484
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2490638306630702836, guid: 8a016d2e866cac3419f14f95fffc57df,
+    - target: {fileID: 4009026633108240591, guid: 1df5cd78d5c5b5949b06b7683adb397b,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2490638306630702836, guid: 8a016d2e866cac3419f14f95fffc57df,
+    - target: {fileID: 4009026633108240591, guid: 1df5cd78d5c5b5949b06b7683adb397b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2490638306630702836, guid: 8a016d2e866cac3419f14f95fffc57df,
+    - target: {fileID: 4009026633108240591, guid: 1df5cd78d5c5b5949b06b7683adb397b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 2.77
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2490638306630702836, guid: 8a016d2e866cac3419f14f95fffc57df,
+    - target: {fileID: 4009026633108240591, guid: 1df5cd78d5c5b5949b06b7683adb397b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3016099983842888782, guid: 8a016d2e866cac3419f14f95fffc57df,
+    - target: {fileID: 4389106210055348853, guid: 1df5cd78d5c5b5949b06b7683adb397b,
         type: 3}
       propertyPath: m_Name
-      value: Miner
+      value: miner new
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8a016d2e866cac3419f14f95fffc57df, type: 3}
---- !u!4 &5367804490453252504 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 1df5cd78d5c5b5949b06b7683adb397b, type: 3}
+--- !u!4 &1429216937006338877 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 2490638306630702836, guid: 8a016d2e866cac3419f14f95fffc57df,
+  m_CorrespondingSourceObject: {fileID: 4009026633108240591, guid: 1df5cd78d5c5b5949b06b7683adb397b,
     type: 3}
-  m_PrefabInstance: {fileID: 7561196219419225964}
+  m_PrefabInstance: {fileID: 2627697826209147890}
   m_PrefabAsset: {fileID: 0}

@@ -18,8 +18,9 @@ MonoBehaviour:
   stackable: 0
   image: {fileID: 21300000, guid: 3b8db7241fc8ff54e9dea6fc64cfd7e5, type: 3}
   maxStack: 1
-  canBeInHudSlot: 0
+  canBeInHudSlot: 1
   itemToGetAfterSmelt: {fileID: 0}
+  amountToGetAfterSmelt: 1
   isTool: 0
   isPlacable: 1
   isFuel: 0
