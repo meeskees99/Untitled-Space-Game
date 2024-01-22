@@ -92,8 +92,6 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
             }
             else if (_spawnedBlueprint != null && selectedPrefab != null)
             {
-
-                _spawnedBlueprint.transform.rotation = _player.transform.rotation;
                 if (machineItem.name == "Miner")
                 {
                     if (LayerMask.LayerToName(raycastHit.transform.gameObject.layer) == "Resource")
@@ -112,6 +110,7 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
                 else if (machineItem.name == "Smelter")
                 {
                     _spawnedBlueprint.transform.position = raycastHit.point + _placementOffset;
+                    _spawnedBlueprint.transform.rotation = _player.transform.rotation;
                     if (LayerMask.LayerToName(raycastHit.transform.gameObject.layer) == "Ground")
                     {
                         _canPlace = true;

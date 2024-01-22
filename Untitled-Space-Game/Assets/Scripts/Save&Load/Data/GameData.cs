@@ -8,7 +8,13 @@ public class GameData
 {
     public long lastUpdated;
 
+    #region Resources
 
+    public List<Vector3> resourcePositions;
+    public List<Vector3> resourceRotations;
+    public List<int> resourceIndex;
+
+    #endregion
 
     #region Inventory
     public int[] itemId = new int[23];
@@ -63,13 +69,6 @@ public class GameData
 
     #endregion
 
-    #region Resources
-
-    public List<Vector3> resourcePositions;
-    public List<Vector3> resourceRotations;
-    public List<int> resourceIndex;
-
-    #endregion
 
     #region Quest
 
