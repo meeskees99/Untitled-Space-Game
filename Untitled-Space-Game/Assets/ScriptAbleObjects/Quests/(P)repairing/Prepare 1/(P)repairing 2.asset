@@ -22,6 +22,9 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: b06bffe9ba5108648b1986ac0fa7487c, type: 2}
     amount: 18
   machinesNeeded: []
-  recipesToUnlock: []
+  recipesToUnlock:
+  - {fileID: 11400000, guid: 996c28a5e3137ec4284498fa2e0a71ce, type: 2}
   itemsToGet: []
+  repairIndex: 
+  repairAmount: 
   questType: 0

@@ -22,7 +22,8 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 6e42976c2942f724cbb88913598ea244, type: 2}
     amount: 9
   machinesNeeded: []
-  recipesToUnlock: []
+  recipesToUnlock:
+  - {fileID: 11400000, guid: 65d201a4c7752a147803b975735352c8, type: 2}
   itemsToGet: []
   repairIndex: 0500000004000000
   repairAmount: 0000000000000000
