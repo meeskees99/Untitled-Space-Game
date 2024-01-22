@@ -118,8 +118,15 @@ public class SmeltingMachine : MonoBehaviour
                 else if (_resourceInputSlot.GetInventoryItem())
                 {
                     _resourceAmount--;
-                    _resourceInputSlot.GetInventoryItem().count--;
-                    _resourceInputSlot.GetInventoryItem().RefreshCount();
+                    if (_resourceAmount == 1)
+                    {
+                        Destroy(_resourceInputSlot.GetInventoryItem().gameObject);
+                    }
+                    else
+                    {
+                        _resourceInputSlot.GetInventoryItem().count--;
+                        _resourceInputSlot.GetInventoryItem().RefreshCount();
+                    }
                 }
                 else
                 {
