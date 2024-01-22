@@ -60,6 +60,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
     {
         UpdateQuest();
         UpdateItems();
+        CheckQuestCompletion();
     }
 
     public void EndQuest()
@@ -264,6 +265,37 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             }
         }
         _shipStateAmount = data.shipState;
+    }
+
+    void CheckQuestCompletion()
+    {
+        switch (_currentQuest.questType)
+        {
+            case Quest.QuestType.PLACE:
+                {
+                    CheckPlace();
+                    break;
+                }
+            case Quest.QuestType.INVENTORY:
+                {
+                    _machinePlacement._machineQuest = false;
+                    _canSubmitQuest = false;
+
+                    if (CheckInventory())
+                    {
+
+                        EndQuest();
+                        Debug.LogWarning("Inventory Check was true");
+                    }
+                    break;
+                }
+            case Quest.QuestType.REPAIR:
+                {
+                    _machinePlacement._machineQuest = false;
+                    _canSubmitQuest = true;
+                    break;
+                }
+        }
     }
 
     public void SaveData(GameData data)

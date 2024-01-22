@@ -282,7 +282,6 @@ public class InventoryKeybids : MonoBehaviour
 
     private void GatherTool()
     {
-        Debug.Log("GatherTooling");
         if (_gatherTime == -1)
         {
             _gatherTime = _toolHit.transform.GetComponent<ResourceVein>().Resource.mineDuration;
