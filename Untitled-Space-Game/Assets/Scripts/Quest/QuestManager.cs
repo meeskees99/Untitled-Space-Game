@@ -140,6 +140,9 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 {
                     _machinePlacement._machineQuest = true;
                     _canSubmitQuest = false;
+
+                    InventoryManager.Instance.canCheckInventoryQuest = false;
+
                     break;
                 }
             case Quest.QuestType.INVENTORY:
@@ -147,17 +150,16 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     _machinePlacement._machineQuest = false;
                     _canSubmitQuest = false;
 
-                    if (CheckInventory())
-                    {
+                    InventoryManager.Instance.canCheckInventoryQuest = true;
 
-                        EndQuest();
-                        Debug.LogWarning("Inventory Check was true");
-                    }
+                    EndQuest();
+                    Debug.LogWarning("Inventory Check was true");
                     break;
                 }
             case Quest.QuestType.REPAIR:
                 {
                     _machinePlacement._machineQuest = false;
+                    InventoryManager.Instance.canCheckInventoryQuest = false;
                     _canSubmitQuest = true;
                     break;
                 }

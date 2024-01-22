@@ -33,6 +33,8 @@ public class InventoryManager : MonoBehaviour
     public List<GraphicRaycaster> graphicRaycasters;
     public RectTransform rectTransform;
 
+    public bool canCheckInventoryQuest;
+
     private void Awake()
     {
         if (Instance != null)
@@ -138,11 +140,21 @@ public class InventoryManager : MonoBehaviour
 
                     itemInSlot.RefreshCount();
 
+
+                    if (canCheckInventoryQuest)
+                    {
+                        QuestManager.Instance.CheckInventory();
+                    }
                     return true;
                 }
                 itemInSlot.count += amount;
                 itemInSlot.RefreshCount();
                 UpdateItemsInfoList();
+
+                if (canCheckInventoryQuest)
+                {
+                    QuestManager.Instance.CheckInventory();
+                }
                 return true;
             }
 
