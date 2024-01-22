@@ -403,11 +403,11 @@ public class InventoryKeybids : MonoBehaviour
                     SmeltingPanelManager.Instance.ToggleSmeltingPanel(_interactableHit.transform.GetComponent<SmeltingMachine>());
                     _InteractPanel.SetActive(_InteractPanel.activeSelf);
                     _didUiInteraction = !_didUiInteraction;
-                    Debug.Log($"Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Open Mining Panel");
+                    Debug.Log($"Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Open Smelting Panel");
                 }
                 if (!_didUiInteraction)
                 {
-                    _interactableTxt.text = $"Press {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} to open miner";
+                    _interactableTxt.text = $"Press {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} to open smelter";
                     _InteractPanel.SetActive(true);
 
                 }

@@ -113,6 +113,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         for (int i = 0; i < _itemParent.childCount; i++)
         {
             Destroy(_itemParent.GetChild(0).gameObject);
+            Debug.Log($"Destroyed item (total: {i + 1})");
         }
 
         for (int i = 0; i < _questItemRequirements.Length; i++)
