@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e1a1f391d27ae743843c3d422cfa505, type: 3}
+  m_Name: HealingSyringe
+  m_EditorClassIdentifier: 
+  itemToCraft: {fileID: 11400000, guid: 3ebb833f240a1894d893b9acd7f55a78, type: 2}
+  itemsNeeded:
+  - item: {fileID: 11400000, guid: ce9834405d2c72a4a87f38fc7959b39c, type: 2}
+    amount: 6
+  - item: {fileID: 11400000, guid: 7b8f7fab691d86c4fb9991baacf76445, type: 2}
+    amount: 1
+  amountToCraft: 2
