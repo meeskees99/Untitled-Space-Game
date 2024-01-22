@@ -113,7 +113,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         for (int i = _itemParent.childCount; i > 0; i--)
         {
             Destroy(_itemParent.GetChild(i - 1).gameObject);
-            Debug.Log($"Destroyed item {_itemParent.GetChild(i).GetComponent<Image>().sprite.name} (total: {i})");
+            Debug.Log($"Destroyed item {_itemParent.GetChild(i - 1).GetComponent<Image>().sprite.name} (total: {i})");
         }
 
         for (int i = 0; i < _questItemRequirements.Length; i++)
