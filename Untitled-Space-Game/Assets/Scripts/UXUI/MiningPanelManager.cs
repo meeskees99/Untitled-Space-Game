@@ -51,6 +51,11 @@ public class MiningPanelManager : MonoBehaviour
             InGameUIManager.Instance.ToggleInventory();
             InventoryKeybids.Instance.InventorySubscribe();
         }
+        else if (InGameUIManager.Instance.inventoryShown && panelActive)
+        {
+            InGameUIManager.Instance.ToggleInventory();
+            InventoryKeybids.Instance.InventorySubscribe();
+        }
 
         if (currentDigger == diggingMachine || diggingMachine == null)
         {
