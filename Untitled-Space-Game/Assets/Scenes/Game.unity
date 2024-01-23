@@ -28187,6 +28187,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startRange: 15
   _range: 15
+--- !u!137 &1396747134 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -3887185075125053422, guid: 2a2b06fe95ae93745bb3fbf9aad01e5a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1396747130}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1399561285
 GameObject:
   m_ObjectHideFlags: 0
@@ -47109,6 +47115,11 @@ PrefabInstance:
       propertyPath: _questNameTxt
       value: 
       objectReference: {fileID: 1114228895}
+    - target: {fileID: 4503848335251699706, guid: 06bcea58125b04241ad5825ca0b633c3,
+        type: 3}
+      propertyPath: _shipRenderer
+      value: 
+      objectReference: {fileID: 1396747134}
     - target: {fileID: 6264455475952719378, guid: 06bcea58125b04241ad5825ca0b633c3,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -122,7 +122,6 @@ public class DiggingMachine : MonoBehaviour, IDataPersistence
             _fuelTimeInitialized = false;
             return false;
         }
-        Debug.Log("Digger Has No Fuel");
         return false;
     }
 

@@ -219,7 +219,6 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
             for (int i = 0; i < _raycaster.Count; i++)
             {
-                Debug.Log($"Shooting Graphics Raycaster From {_raycaster[i].gameObject.name}");
                 _raycaster[i].Raycast(_pointerEventData, results1);
             }
 

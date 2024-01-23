@@ -34,7 +34,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     [SerializeField] bool _canSubmitQuest;
 
-    [SerializeField] SkinnedMeshRenderer shipRenderer;
+    [SerializeField] SkinnedMeshRenderer _shipRenderer;
 
     int[] _shipStateAmount = new int[5];
 
@@ -49,7 +49,6 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             Destroy(this);
         }
         _machinePlacement = FindObjectOfType<MachinePlacement>();
-
         _currentQuest = _startQuest;
 
         UpdateQuest();
@@ -87,7 +86,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         {
             for (int i = 0; i < _currentQuest.repairIndex.Length; i++)
             {
-                shipRenderer.SetBlendShapeWeight(_currentQuest.repairIndex[i], _currentQuest.repairAmount[i]);
+                _shipRenderer.SetBlendShapeWeight(_currentQuest.repairIndex[i], _currentQuest.repairAmount[i]);
                 _shipStateAmount[i] = _currentQuest.repairAmount[i];
             }
         }
@@ -241,10 +240,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     if (_questItemRequirements[i].item == InventoryManager.Instance.itemsInInventory[j].item)
                     {
                         InventoryManager.Instance.UseItem(_questItemRequirements[i].item.itemID, _questItemRequirements[i].amount);
-                        for (int y = 0; y < _currentQuest.recipesToUnlock.Length; y++)
-                        {
-                            CraftingManager.Instance.AddRecipe(_currentQuest.recipesToUnlock[y]);
-                        }
+
                         EndQuest();
                     }
                 }

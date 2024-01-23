@@ -459,7 +459,6 @@ public class InventoryKeybids : MonoBehaviour
     {
         if (Physics.SphereCast(_playerCam.transform.position, _rayRadius, _playerCam.transform.forward, out _placeableHit, _rayRange + _camDistance))
         {
-            print("PlacingMachine");
             machinePlacement.PickMachine(InventoryManager.Instance.GetSelectedItem(), _placeableHit);
         }
         else

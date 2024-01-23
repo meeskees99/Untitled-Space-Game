@@ -62,7 +62,6 @@ public class SmeltingMachine : MonoBehaviour
 
     public bool HandleFuel()
     {
-        Debug.Log("Handeling Fuel");
         // Use Fuel
         if (_fuelLeft <= 0 && !_fuelTimeInitialized && _outputAmount < _outputType.maxStack)
         {
@@ -98,7 +97,6 @@ public class SmeltingMachine : MonoBehaviour
 
     private void HandleSmelt()
     {
-        Debug.Log("Handeling Smelt");
         if (HasSmeltableResource() && HandleFuel() && _outputAmount < _outputType.maxStack)
         {
             if (_currentSmeltProgression < _resourceType.smeltTime)
