@@ -92,7 +92,6 @@ public class SmeltingMachine : MonoBehaviour
             }
         }
         return false;
-
     }
 
     private void HandleSmelt()
@@ -140,6 +139,7 @@ public class SmeltingMachine : MonoBehaviour
 
     private void Update()
     {
+        #region Slider Values
         if (progressSlider != null && SmeltingPanelManager.Instance.currentSmelter == this)
         {
             if (_outputType != null)
@@ -163,6 +163,7 @@ public class SmeltingMachine : MonoBehaviour
         {
             Debug.LogError("FuelLeft Slider Not Set");
         }
+        #endregion
 
         if (_fuelType != null && _resourceType != null)
         {
@@ -190,6 +191,7 @@ public class SmeltingMachine : MonoBehaviour
                 _fuelInitialized = false;
             }
 
+            // Check And Reset Resource Type
             if (_resourceType == null && _resourceInputSlot.GetInventoryItem())
             {
                 if (SmeltingPanelManager.Instance.currentSmelter == this)
@@ -197,10 +199,6 @@ public class SmeltingMachine : MonoBehaviour
                     _resourceType = _resourceInputSlot.GetInventoryItem().item;
                     _resourceAmount = _resourceInputSlot.GetInventoryItem().count;
                     _resourceInitialized = true;
-                }
-                if (_resourceType != null)
-                {
-                    _outputType = _resourceType.itemToGetAfterSmelt;
                     _resourceToSmelt = _resourceType;
                 }
             }
@@ -213,6 +211,25 @@ public class SmeltingMachine : MonoBehaviour
                     _resourceInitialized = false;
                 }
             }
+            else if (_resourceType != null && _resourceAmount <= 0)
+            {
+                _resourceType = null;
+                _resourceInitialized = false;
+            }
+
+            // Check And Reset Output Type
+            if (_outputType == null && _resourceType != null)
+            {
+                _outputType = _resourceType.itemToGetAfterSmelt;
+            }
+            else if (_outputType != null && _resourceType == null)
+            {
+                _outputType = null;
+            }
+            // else if (_outputType != null && _resourceType != null)
+            // {
+            //     _outputType = _resourceType.itemToGetAfterSmelt;
+            // }
         }
     }
 
