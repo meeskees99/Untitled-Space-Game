@@ -36,6 +36,15 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     [SerializeField] SkinnedMeshRenderer _shipRenderer;
 
+
+
+    [SerializeField] Transform _inventorySlotParent;
+    [SerializeField] GameObject _inventorySlotPrefab;
+
+    [SerializeField] List<InventorySlot> _shipRepairSubmitSlots = new();
+
+
+
     int[] _shipStateAmount = new int[5];
 
     private void Awake()
@@ -59,6 +68,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
     {
         UpdateQuest();
         UpdateItems();
+        UpdateRepairSlots();
         CheckQuestCompletion();
     }
 
@@ -114,8 +124,6 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
         _questNameTxt.text = _currentQuestName;
         _questInfoTxt.text = _currentQuestInfo;
-
-
     }
 
     public void UpdateItems()
@@ -133,6 +141,27 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             temp.GetComponent<Image>().enabled = true;
             temp.transform.GetComponentInChildren<TMP_Text>().text = _questItemRequirements[i].amount.ToString();
             temp.transform.GetComponentInChildren<TMP_Text>().enabled = true;
+        }
+    }
+
+    public void UpdateRepairSlots()
+    {
+        if (!_canSubmitQuest)
+        {
+            return;
+        }
+
+        _shipRepairSubmitSlots.Clear();
+        for (int i = _inventorySlotParent.childCount; i > 0; i--)
+        {
+            Destroy(_inventorySlotParent.GetChild(i - 1).gameObject);
+            Debug.Log($"Destroyed item {_inventorySlotParent.GetChild(i - 1).gameObject.name} (total: {i})");
+        }
+
+        for (int i = 0; i < _questItemRequirements.Length; i++)
+        {
+            GameObject temp = Instantiate(_inventorySlotPrefab, _inventorySlotParent);
+            _shipRepairSubmitSlots.Add(temp.GetComponent<InventorySlot>());
         }
     }
 
