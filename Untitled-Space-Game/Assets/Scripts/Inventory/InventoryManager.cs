@@ -140,21 +140,12 @@ public class InventoryManager : MonoBehaviour
 
                     itemInSlot.RefreshCount();
 
-
-                    if (canCheckInventoryQuest)
-                    {
-                        QuestManager.Instance.CheckInventory();
-                    }
                     return true;
                 }
                 itemInSlot.count += amount;
                 itemInSlot.RefreshCount();
                 UpdateItemsInfoList();
 
-                if (canCheckInventoryQuest)
-                {
-                    QuestManager.Instance.CheckInventory();
-                }
                 return true;
             }
 
@@ -293,10 +284,18 @@ public class InventoryManager : MonoBehaviour
     public void UpdateItemsInfoList()
     {
         itemsInInventory.Clear();
+
+
         for (int i = 0; i < allItems.Length; i++)
         {
             int amount = GetTotalItemAmount(inventorySlots, allItems[i]);
             itemsInInventory.Add(new(allItems[i], amount));
+        }
+
+        if (canCheckInventoryQuest)
+        {
+            Debug.Log("CheckInventoryQuest in manager");
+            QuestManager.Instance.CheckInventory();
         }
     }
 

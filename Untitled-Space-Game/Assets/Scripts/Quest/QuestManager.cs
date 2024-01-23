@@ -65,21 +65,31 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public void EndQuest()
     {
+        InventoryManager.Instance.canCheckInventoryQuest = false;
+        _machinePlacement._machineQuest = false;
+        _canSubmitQuest = false;
+
         if (_currentQuest == null)
         {
             Debug.LogError("No Active Quest On EndQuest");
             return;
         }
 
-        for (int i = 0; i < _currentQuest.recipesToUnlock.Length; i++)
+        if (_currentQuest.recipesToUnlock != null)
         {
-            CraftingManager.Instance.AddRecipe(_currentQuest.recipesToUnlock[i]);
+            for (int i = 0; i < _currentQuest.recipesToUnlock.Length; i++)
+            {
+                CraftingManager.Instance.AddRecipe(_currentQuest.recipesToUnlock[i]);
+            }
         }
 
-        for (int i = 0; i < _currentQuest.repairIndex.Length; i++)
+        if (_currentQuest.repairIndex != null)
         {
-            shipRenderer.SetBlendShapeWeight(_currentQuest.repairIndex[i], _currentQuest.repairAmount[i]);
-            _shipStateAmount[i] = _currentQuest.repairAmount[i];
+            for (int i = 0; i < _currentQuest.repairIndex.Length; i++)
+            {
+                shipRenderer.SetBlendShapeWeight(_currentQuest.repairIndex[i], _currentQuest.repairAmount[i]);
+                _shipStateAmount[i] = _currentQuest.repairAmount[i];
+            }
         }
 
         if (_currentQuest.nextQuest != null)
@@ -134,32 +144,22 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             Debug.LogError("No Active Quest");
             return;
         }
+
         switch (_currentQuest.questType)
         {
             case Quest.QuestType.PLACE:
                 {
                     _machinePlacement._machineQuest = true;
-                    _canSubmitQuest = false;
-
-                    InventoryManager.Instance.canCheckInventoryQuest = false;
 
                     break;
                 }
             case Quest.QuestType.INVENTORY:
                 {
-                    _machinePlacement._machineQuest = false;
-                    _canSubmitQuest = false;
-
                     InventoryManager.Instance.canCheckInventoryQuest = true;
-
-                    EndQuest();
-                    Debug.LogWarning("Inventory Check was true");
                     break;
                 }
             case Quest.QuestType.REPAIR:
                 {
-                    _machinePlacement._machineQuest = false;
-                    InventoryManager.Instance.canCheckInventoryQuest = false;
                     _canSubmitQuest = true;
                     break;
                 }
@@ -225,6 +225,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             }
         }
         Debug.LogWarning("Returned True On InventoryCheck");
+        EndQuest();
         return true;
     }
 
