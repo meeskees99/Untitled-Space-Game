@@ -12,14 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
   m_Name: House
   m_EditorClassIdentifier: 
+  questId: 0
   questName: test
   questInfo: test info
   isQuestLine: 0
   questLineName: test info name
-  nextQuest: {fileID: 11400000, guid: a4f0803e5af9fb046a5b3db1999fcf25, type: 2}
+  nextQuest: {fileID: 0}
   itemsNeeded:
   - item: {fileID: 11400000, guid: 8984ad60b8191114089bd04a918aa931, type: 2}
     amount: 5
+  - item: {fileID: 11400000, guid: 3cf766bc9da0fb1428e62c58543cf55a, type: 2}
+    amount: 12
   machinesNeeded: []
   recipesToUnlock: []
+  itemsToGet: []
+  repairIndex: 
+  repairAmount: 
   questType: 1

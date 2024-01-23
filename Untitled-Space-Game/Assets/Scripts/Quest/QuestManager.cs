@@ -32,7 +32,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     [SerializeField] MachinePlacement _machinePlacement;
 
-    [SerializeField] bool _canSubmitQuest;
+    [SerializeField] bool _shipRepairQuest;
 
     [SerializeField] SkinnedMeshRenderer _shipRenderer;
 
@@ -43,7 +43,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     [SerializeField] List<InventorySlot> _shipRepairSubmitSlots = new();
 
-
+    bool[] _currentRepairProgress;
 
     int[] _shipStateAmount = new int[5];
 
@@ -62,21 +62,26 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
         UpdateQuest();
         UpdateItems();
+        UpdateQuestType();
+        UpdateRepairSlots();
     }
 
     public void StartNewQuest()
     {
         UpdateQuest();
         UpdateItems();
+        UpdateQuestType();
         UpdateRepairSlots();
-        CheckQuestCompletion();
+
+        CheckPlace();
+        CheckInventory();
     }
 
     public void EndQuest()
     {
         InventoryManager.Instance.canCheckInventoryQuest = false;
         _machinePlacement._machineQuest = false;
-        _canSubmitQuest = false;
+        _shipRepairQuest = false;
 
         if (_currentQuest == null)
         {
@@ -124,6 +129,8 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
         _questNameTxt.text = _currentQuestName;
         _questInfoTxt.text = _currentQuestInfo;
+
+        _currentRepairProgress = new bool[_questItemRequirements.Length];
     }
 
     public void UpdateItems()
@@ -146,12 +153,14 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public void UpdateRepairSlots()
     {
-        if (!_canSubmitQuest)
+        if (!_shipRepairQuest)
         {
+            Debug.Log("No Ship Repair Quest Active");
             return;
         }
 
         _shipRepairSubmitSlots.Clear();
+
         for (int i = _inventorySlotParent.childCount; i > 0; i--)
         {
             Destroy(_inventorySlotParent.GetChild(i - 1).gameObject);
@@ -165,14 +174,8 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         }
     }
 
-    private void Update()
+    private void UpdateQuestType()
     {
-        if (_currentQuest == null)
-        {
-            Debug.LogError("No Active Quest");
-            return;
-        }
-
         switch (_currentQuest.questType)
         {
             case Quest.QuestType.PLACE:
@@ -188,7 +191,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 }
             case Quest.QuestType.REPAIR:
                 {
-                    _canSubmitQuest = true;
+                    _shipRepairQuest = true;
                     break;
                 }
         }
@@ -259,21 +262,55 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public void SubmitQuestBtn()
     {
-        if (_canSubmitQuest)
+        if (_shipRepairQuest)
         {
             Debug.Log("Submit quest item");
             for (int i = 0; i < _questItemRequirements.Length; i++)
             {
-                for (int j = 0; j < InventoryManager.Instance.itemsInInventory.Count; j++)
+                if (_currentRepairProgress[i] == true)
                 {
-                    if (_questItemRequirements[i].item == InventoryManager.Instance.itemsInInventory[j].item)
+                    Debug.Log($"Quest {i + 1} Was Already Completed");
+                    continue;
+                }
+                for (int j = 0; j < _shipRepairSubmitSlots.Count; j++)
+                {
+                    if (_shipRepairSubmitSlots[j].GetInventoryItem() && _questItemRequirements[i].item == _shipRepairSubmitSlots[j].GetInventoryItem().item)
                     {
-                        InventoryManager.Instance.UseItem(_questItemRequirements[i].item.itemID, _questItemRequirements[i].amount);
-
-                        EndQuest();
+                        if (_questItemRequirements[i].amount == _shipRepairSubmitSlots[j].GetInventoryItem().count)
+                        {
+                            Debug.Log("Had Exactly Enough Items And Destroyed Item");
+                            Destroy(_shipRepairSubmitSlots[j].GetInventoryItem().gameObject);
+                            // Destroy(_shipRepairSubmitSlots[j].gameObject);
+                            _currentRepairProgress[i] = true;
+                            continue;
+                        }
+                        else if (_questItemRequirements[i].amount < _shipRepairSubmitSlots[j].GetInventoryItem().count)
+                        {
+                            Debug.Log("Had Exactly Enough Items And Destroyed Item");
+                            _shipRepairSubmitSlots[j].GetInventoryItem().count -= _questItemRequirements[i].amount;
+                            _shipRepairSubmitSlots[j].GetInventoryItem().RefreshCount();
+                            _currentRepairProgress[i] = true;
+                            continue;
+                        }
+                        else
+                        {
+                            Debug.Log($"Did not have enough {_questItemRequirements[i].item.name}");
+                            return;
+                        }
                     }
                 }
             }
+
+            for (int i = 0; i < _currentRepairProgress.Length; i++)
+            {
+                if (_currentRepairProgress[i] == false)
+                {
+                    Debug.Log("Still Needs More Items To Complete Quest");
+                    return;
+                }
+            }
+            Debug.Log("all items have been submitted");
+            StartNewQuest();
         }
     }
 
@@ -295,36 +332,6 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         _shipStateAmount = data.shipState;
     }
 
-    void CheckQuestCompletion()
-    {
-        switch (_currentQuest.questType)
-        {
-            case Quest.QuestType.PLACE:
-                {
-                    CheckPlace();
-                    break;
-                }
-            case Quest.QuestType.INVENTORY:
-                {
-                    _machinePlacement._machineQuest = false;
-                    _canSubmitQuest = false;
-
-                    if (CheckInventory())
-                    {
-
-                        EndQuest();
-                        Debug.LogWarning("Inventory Check was true");
-                    }
-                    break;
-                }
-            case Quest.QuestType.REPAIR:
-                {
-                    _machinePlacement._machineQuest = false;
-                    _canSubmitQuest = true;
-                    break;
-                }
-        }
-    }
 
     public void SaveData(GameData data)
     {
