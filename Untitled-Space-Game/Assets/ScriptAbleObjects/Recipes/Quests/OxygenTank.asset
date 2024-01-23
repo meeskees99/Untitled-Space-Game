@@ -13,5 +13,13 @@ MonoBehaviour:
   m_Name: OxygenTank
   m_EditorClassIdentifier: 
   itemToCraft: {fileID: 0}
-  itemsNeeded: []
-  amountToCraft: 0
+  itemsNeeded:
+  - item: {fileID: 11400000, guid: a4685f8f3dc23a4448eafa43274fb0d3, type: 2}
+    amount: 3
+  - item: {fileID: 11400000, guid: b06bffe9ba5108648b1986ac0fa7487c, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 928fba13c2c1688418430f6674fc4004, type: 2}
+    amount: 2
+  - item: {fileID: 11400000, guid: 7b8f7fab691d86c4fb9991baacf76445, type: 2}
+    amount: 3
+  amountToCraft: 1
