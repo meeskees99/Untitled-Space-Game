@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class OxygenMachine : MonoBehaviour, IDataPersistence
 {
+    [SerializeField] float _startRange = 15f;
     [SerializeField] float _range = 15f;
 
     public float Range { get { return _range; } set { _range = value; } }
@@ -23,7 +24,7 @@ public class OxygenMachine : MonoBehaviour, IDataPersistence
 
         foreach (var collider in colliders)
         {
-            if (collider.GetComponent<PlayerStats>())
+            if (collider.GetComponentInParent<PlayerStats>())
             {
                 _playerStats.recievingOxygen = true;
                 return;
@@ -40,7 +41,14 @@ public class OxygenMachine : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        _range = data.oxygenRange;
+        if (data.oxygenRange > 0)
+        {
+            _range = data.oxygenRange;
+        }
+        else
+        {
+            _range = _startRange;
+        }
     }
 
     public void SaveData(GameData data)
