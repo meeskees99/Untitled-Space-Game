@@ -15,5 +15,5 @@ MonoBehaviour:
   itemToCraft: {fileID: 11400000, guid: c017a581195eb4545ae154a0917fda1f, type: 2}
   itemsNeeded:
   - item: {fileID: 11400000, guid: 3d916f9f5b0427c47a1dffb979fabfa2, type: 2}
-    amount: 0
+    amount: 1
   amountToCraft: 2

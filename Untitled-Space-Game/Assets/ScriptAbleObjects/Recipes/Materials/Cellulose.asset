@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1a1f391d27ae743843c3d422cfa505, type: 3}
   m_Name: Cellulose
   m_EditorClassIdentifier: 
-  itemToCraft: {fileID: 0}
+  itemToCraft: {fileID: 11400000, guid: 8780bb29c4721b94dbdd68086549aabb, type: 2}
   itemsNeeded:
   - item: {fileID: 11400000, guid: ce9834405d2c72a4a87f38fc7959b39c, type: 2}
     amount: 16
-  amountToCraft: 0
+  amountToCraft: 2
