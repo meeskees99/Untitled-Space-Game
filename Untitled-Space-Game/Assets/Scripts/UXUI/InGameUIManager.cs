@@ -12,6 +12,7 @@ public class InGameUIManager : MonoBehaviour
     [Header("Panels")]
     [SerializeField] GameObject _inventoryCanvas;
     [SerializeField] GameObject _craftingPanel;
+    [SerializeField] GameObject _shipRepairPanel;
     [SerializeField] GameObject _miningPanel;
     [SerializeField] Slider _fuelLeftSlider;
     [SerializeField] GameObject deathPanel;
@@ -25,6 +26,7 @@ public class InGameUIManager : MonoBehaviour
 
     [Header("Settings")]
     bool _craftingShown;
+    bool _shipRepairShown;
     public bool inventoryShown { get; private set; }
 
     public bool mouseLocked;
@@ -102,6 +104,24 @@ public class InGameUIManager : MonoBehaviour
             FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Menu");
             _craftingPanel.SetActive(true);
             _craftingShown = true;
+        }
+    }
+
+    public void ToggleShipRepair()
+    {
+        if (_shipRepairShown)
+        {
+            FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Game");
+            _shipRepairShown = false;
+            _shipRepairPanel.GetComponent<Canvas>().enabled = false;
+            _shipRepairPanel.GetComponent<GraphicRaycaster>().enabled = false;
+        }
+        else
+        {
+            FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Menu");
+            _shipRepairShown = true;
+            _shipRepairPanel.GetComponent<Canvas>().enabled = true;
+            _shipRepairPanel.GetComponent<GraphicRaycaster>().enabled = true;
         }
     }
 

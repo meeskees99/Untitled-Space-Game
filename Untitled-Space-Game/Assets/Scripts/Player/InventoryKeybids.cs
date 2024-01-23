@@ -92,8 +92,6 @@ public class InventoryKeybids : MonoBehaviour
         _playerInput.actions.FindAction("Hotbar").canceled += OnScroll;
     }
 
-
-
     // private void OnDisable()
     // {
     //     _playerInput.actions.FindAction("Inventory").started -= OnInventory;
@@ -430,6 +428,28 @@ public class InventoryKeybids : MonoBehaviour
                 if (!_didUiInteraction)
                 {
                     _interactableTxt.text = $"Press {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} to open the crafting table";
+                    _InteractPanel.SetActive(true);
+
+                }
+                else
+                {
+                    _interactableTxt.text = "";
+                    _InteractPanel.SetActive(false);
+
+                }
+            }
+            else if (LayerMask.LayerToName(_interactableHit.transform.gameObject.layer) == "Ship")
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    InGameUIManager.Instance.ToggleShipRepair();
+                    _InteractPanel.SetActive(!_InteractPanel.activeSelf);
+                    _didUiInteraction = !_didUiInteraction;
+                    Debug.Log($"Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Open Ship Panel");
+                }
+                if (!_didUiInteraction)
+                {
+                    _interactableTxt.text = $"Press {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} to open the ship repair";
                     _InteractPanel.SetActive(true);
 
                 }
