@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Herb
   m_EditorClassIdentifier: 
   itemID: 206
-  itemPrefab: {fileID: 5782093277417097196, guid: 9fc859e08189b99459e849940ec42fb3,
+  itemPrefab: {fileID: 5782093277417097196, guid: 7b02a69c3c0819244a8cdec980c43881,
     type: 3}
   stackable: 1
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 5188688288a5a0d4bbe6c8f80ea67a53, type: 3}
   maxStack: 16
   canBeInHudSlot: 1
   itemToGetAfterSmelt: {fileID: 0}

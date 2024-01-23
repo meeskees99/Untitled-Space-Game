@@ -8,25 +8,24 @@ using UnityEngine.UI;
 public class InGameUIManager : MonoBehaviour
 {
     public static InGameUIManager Instance;
-    [Header("Things To Disable When Not Opened")]
-    [SerializeField] GameObject _inventoryCanvas;
 
     [Header("Panels")]
+    [SerializeField] GameObject _inventoryCanvas;
     [SerializeField] GameObject _craftingPanel;
     [SerializeField] GameObject _miningPanel;
     [SerializeField] Slider _fuelLeftSlider;
+    [SerializeField] GameObject deathPanel;
+
+
+
 
 
     public Animator animator;
 
-    public GameObject deathPanel;
 
     [Header("Settings")]
     bool _craftingShown;
     public bool inventoryShown { get; private set; }
-
-
-    bool _initializedUI;
 
     public bool mouseLocked;
 
@@ -104,5 +103,20 @@ public class InGameUIManager : MonoBehaviour
             _craftingPanel.SetActive(true);
             _craftingShown = true;
         }
+    }
+
+    public void Die()
+    {
+        deathPanel.SetActive(true);
+    }
+
+    public void Respawn()
+    {
+        FindObjectOfType<PlayerStats>().ResetStats();
+    }
+
+    public void MainMenu()
+    {
+
     }
 }

@@ -17,7 +17,6 @@ public class DiggingMachine : MonoBehaviour, IDataPersistence
     [SerializeField] bool _fuelInitialized;
 
     [Header("Miner Settings")]
-    [SerializeField] float _miningRange = 3f;
     [SerializeField] LayerMask _resourceLayer;
 
     [Header("MinerInventory")]

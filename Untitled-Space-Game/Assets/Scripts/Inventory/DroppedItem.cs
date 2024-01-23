@@ -14,9 +14,6 @@ public class DroppedItem : MonoBehaviour
 
     [SerializeField] float _mergeDelay = 1f;
 
-    bool _canPickup;
-
-    Transform _child;
 
     GameObject _lastCollidedObject;
 
@@ -24,8 +21,6 @@ public class DroppedItem : MonoBehaviour
 
     private void Start()
     {
-        _child = GetComponentInChildren<Transform>();
-
         if (item.name == "Clay")
         {
             timer = item.smeltTime * 2;
@@ -40,7 +35,6 @@ public class DroppedItem : MonoBehaviour
         }
         else
         {
-            _canPickup = true;
             if (_lastCollidedObject != null && _lastCollidedObject.GetComponent<CharStateMachine>())
             {
                 InventoryManager.Instance.AddItem(item.itemID, amount);

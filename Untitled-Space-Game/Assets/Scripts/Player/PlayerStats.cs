@@ -168,13 +168,10 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
     {
         Debug.Log("You Died!");
         IsAlive = false;
-        if (InGameUIManager.Instance.deathPanel != null)
-        {
-            InGameUIManager.Instance.deathPanel.SetActive(true);
-        }
+        InGameUIManager.Instance.Die();
     }
 
-    void ResetStats()
+    public void ResetStats()
     {
         Health = _maxHealth;
         Oxygen = _maxOxygen;
@@ -190,6 +187,8 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
 
             transform.position = _spawnPoint.position;
             transform.rotation = _spawnPoint.rotation;
+
+            ResetStats();
             return;
         }
         _hasLoadData = true;
