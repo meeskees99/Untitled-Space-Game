@@ -324,7 +324,6 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        Debug.Log(" balls ");
         if (!_allQuests.Any())
         {
             Debug.Log("has no Quests");
@@ -333,7 +332,6 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
         for (int i = 0; i < _allQuests.Length; i++)
         {
-            Debug.Log("for loop");
             if (_allQuests[i].questId == data.currentQuestId)
             {
                 Debug.Log($"quest id becomes {_allQuests[i].questId}");

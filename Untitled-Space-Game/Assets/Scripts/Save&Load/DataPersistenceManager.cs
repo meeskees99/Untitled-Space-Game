@@ -70,6 +70,11 @@ public class DataPersistenceManager : MonoBehaviour
         LoadGame();
     }
 
+    public void DeleteSelectedProfileId(string newProfileId)
+    {
+        _dataHandler.Delete(newProfileId);
+    }
+
     public void NewGame()
     {
         this._gameData = new GameData();

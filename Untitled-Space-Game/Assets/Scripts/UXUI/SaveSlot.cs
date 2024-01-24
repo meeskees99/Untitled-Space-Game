@@ -21,6 +21,11 @@ public class SaveSlot : MonoBehaviour
     {
         get { return _saveFileButton; }
     }
+    [SerializeField] Button _deleteFileButton;
+    public Button DeleteFileButton
+    {
+        get { return _deleteFileButton; }
+    }
     [SerializeField] TMP_Text _saveFileNameTxt;
     [SerializeField] TMP_Text _saveFileLastPlayedTxt;
 

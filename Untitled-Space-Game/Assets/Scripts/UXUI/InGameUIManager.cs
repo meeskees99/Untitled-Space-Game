@@ -16,7 +16,8 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] GameObject _shipRepairPanel;
     [SerializeField] GameObject _miningPanel;
     [SerializeField] Slider _fuelLeftSlider;
-    [SerializeField] GameObject deathPanel;
+    [SerializeField] GameObject _deathPanel;
+    [SerializeField] Button _respawnBtn;
 
     [Header("Settings")]
     [SerializeField] string _sceneToLoad;
@@ -160,11 +161,16 @@ public class InGameUIManager : MonoBehaviour
         }
     }
 
-    public void Die()
+    public void Die(int gameDifficulty = -1)
     {
-        deathPanel.SetActive(true);
+
+        _deathPanel.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         mouseLocked = false;
+        if (gameDifficulty == 2)
+        {
+            _respawnBtn.interactable = false;
+        }
         FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Menu");
     }
 

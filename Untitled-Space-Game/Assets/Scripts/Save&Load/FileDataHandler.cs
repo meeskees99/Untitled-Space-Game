@@ -57,6 +57,11 @@ public class FileDataHandler
         return loadedData;
     }
 
+    public void Delete(string profileId)
+    {
+        Debug.Log(profileId);
+    }
+
     public void Save(GameData data, string profileId)
     {
         if (profileId == null)

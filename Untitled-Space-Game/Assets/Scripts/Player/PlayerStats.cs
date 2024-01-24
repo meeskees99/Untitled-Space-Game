@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour, IDataPersistence
 {
+    [SerializeField] int _gameDifficulty = 1;
+
     [Header("Stats")]
     public static float Health;
     public static float Oxygen;
@@ -15,13 +17,34 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
     [Header("Setup")]
     [SerializeField] Transform _spawnPoint;
 
-    [Header("Health Settings")]
+    [Header("Difficulty Settings")]
+
+    [Header("Classic")]
+    [SerializeField] float _classicMaxHealth = 100;
+    [SerializeField] float _classicMinOxygenAmountForRegen = 10f;
+    [SerializeField] float _classicSsufficationRate = 0.4f;
+    [SerializeField] float _classicHealthRegenerationRate = 0.4f;
+
+    [SerializeField] float _classicMaxOxygen = 100f;
+    [SerializeField] float _classicOxygenDepletionRate = 6f;
+    [SerializeField] float _classicOxygenRegenerationRate = 4.5f;
+    [Header("Hardcore")]
+    [SerializeField] float _hardcoreMaxHealth = 80;
+    [SerializeField] float _hardcoreMinOxygenAmountForRegen = 60f;
+    [SerializeField] float _hardcoreSsufficationRate = 8f;
+    [SerializeField] float _hardcoreHealthRegenerationRate = 2f;
+
+    [SerializeField] float _hardcoreMaxOxygen = 60.8f;
+    [SerializeField] float _hardcoreOxygenDepletionRate = 8f;
+    [SerializeField] float _hardcoreOxygenRegenerationRate = 2.5f;
+
+    [Header("Health Base")]
     [SerializeField] float _maxHealth = 100;
     [SerializeField] float _minOxygenAmountForRegen = 10f;
     [SerializeField] float _sufficationRate = 0.4f;
     [SerializeField] float _healthRegenerationRate = 0.4f;
 
-    [Header("Oxygen Settings")]
+    [Header("Oxygen Base")]
     [SerializeField] float _maxOxygen = 50f;
     [SerializeField] float _oxygenDepletionRate = 0.5f;
     [SerializeField] float _oxygenRegenerationRate = 0.7f;
@@ -47,6 +70,37 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
 
     void Start()
     {
+        if (FindAnyObjectByType<DifficultySetting>().gameDifficulty == -1)
+        {
+            _gameDifficulty = 1;
+        }
+
+        switch (_gameDifficulty)
+        {
+            case (0):
+                _maxHealth = _classicMaxHealth;
+                _minOxygenAmountForRegen = _classicMinOxygenAmountForRegen;
+                _sufficationRate = _classicSsufficationRate;
+                _healthRegenerationRate = _classicHealthRegenerationRate;
+
+                _maxOxygen = _classicMaxOxygen;
+                _oxygenDepletionRate = _classicOxygenDepletionRate;
+                _oxygenRegenerationRate = _classicOxygenRegenerationRate;
+                break;
+            case (1):
+                return;
+            case (2):
+                _maxHealth = _hardcoreMaxHealth;
+                _minOxygenAmountForRegen = _hardcoreMinOxygenAmountForRegen;
+                _sufficationRate = _hardcoreSsufficationRate;
+                _healthRegenerationRate = _hardcoreHealthRegenerationRate;
+
+                _maxOxygen = _hardcoreMaxOxygen;
+                _oxygenDepletionRate = _hardcoreOxygenDepletionRate;
+                _oxygenRegenerationRate = _hardcoreOxygenRegenerationRate;
+                break;
+        }
+
         if (!_hasLoadData)
         {
             ResetStats();
@@ -55,7 +109,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
 
     void Update()
     {
-        if (!IsAlive)
+        if (!IsAlive || _gameDifficulty == 1)
         {
             return;
         }
@@ -168,7 +222,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
     {
         Debug.Log("You Died!");
         IsAlive = false;
-        InGameUIManager.Instance.Die();
+        InGameUIManager.Instance.Die(_gameDifficulty);
     }
 
     public void ResetStats()
@@ -181,6 +235,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
+        _gameDifficulty = data.gameDifficulty;
         if (data.playerHealth == -1)
         {
             _hasLoadData = false;
@@ -204,6 +259,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
 
     public void SaveData(GameData data)
     {
+        data.gameDifficulty = _gameDifficulty;
         data.playerHealth = Health;
         data.playerOxygen = Oxygen;
 

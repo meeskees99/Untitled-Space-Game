@@ -51,6 +51,8 @@ public class MainMenuUIManager : MonoBehaviour
     [SerializeField] GameObject _saveSlotPrefab;
     [SerializeField] List<SaveSlot> _saveSlots = new List<SaveSlot>();
 
+    [SerializeField] GameObject _confirmSaveFileDeletePanel;
+
     #endregion
 
     [Header("Settings")]
@@ -117,6 +119,7 @@ public class MainMenuUIManager : MonoBehaviour
                 int index = i;
                 _saveSlots[index].ProfileId = _profileIds[index];
                 _saveSlots[index].SaveFileButton.onClick.AddListener(delegate { LoadSaveFileButton(_saveSlots[index]); });
+                _saveSlots[index].DeleteFileButton.onClick.AddListener(delegate { DeleteSaveFileButton(_saveSlots[index]); });
             }
         }
 
@@ -214,7 +217,7 @@ public class MainMenuUIManager : MonoBehaviour
     {
         Debug.Log("SELECT GAME DIFFICULTY " + index);
         gameDifficulty = index;
-
+        FindAnyObjectByType<DifficultySetting>().gameDifficulty = gameDifficulty;
         if (index == 0)
         {
             _classicDifficultySelected.SetActive(!_classicDifficultySelected.activeSelf);
@@ -277,11 +280,19 @@ public class MainMenuUIManager : MonoBehaviour
     {
         Debug.Log("load save: " + saveSlot.ProfileId);
 
+        DataPersistenceManager.instance.DeleteSelectedProfileId(saveSlot.ProfileId);
+
         DataPersistenceManager.instance.ChangeSelectedProfileId(saveSlot.ProfileId);
 
         DataPersistenceManager.instance.SaveGame();
 
         SceneManager.LoadSceneAsync(_sceneToLoad);
+    }
+
+    public void DeleteSaveFileButton(SaveSlot saveSlot)
+    {
+
+        DataPersistenceManager.instance.DeleteSelectedProfileId(saveSlot.ProfileId);
     }
 
     #endregion
