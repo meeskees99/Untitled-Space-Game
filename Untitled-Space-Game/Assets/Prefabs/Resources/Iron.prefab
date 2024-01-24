@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resource: {fileID: 11400000, guid: 7684b21f127478546b7fdee4ce8d1ec7, type: 2}
   resourceIndex: 0
+  acceptsMiner: 1
 --- !u!64 &32417464379316273
 MeshCollider:
   m_ObjectHideFlags: 0

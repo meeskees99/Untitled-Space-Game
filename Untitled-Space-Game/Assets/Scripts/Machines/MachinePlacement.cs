@@ -94,7 +94,7 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
             {
                 if (machineItem.name == "Miner")
                 {
-                    if (LayerMask.LayerToName(raycastHit.transform.gameObject.layer) == "Resource")
+                    if (LayerMask.LayerToName(raycastHit.transform.gameObject.layer) == "Resource" && raycastHit.transform.GetComponent<ResourceVein>().acceptsMiner)
                     {
                         _spawnedBlueprint.transform.SetParent(raycastHit.transform);
                         _canPlace = true;
@@ -102,6 +102,7 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
                     }
                     else
                     {
+                        _canPlace = false;
                         _spawnedBlueprint.transform.parent = null;
                         _spawnedBlueprint.transform.position = raycastHit.point + _placementOffset;
                     }
