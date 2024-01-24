@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-
 
 public class InGameUIManager : MonoBehaviour
 {
@@ -16,15 +15,13 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] GameObject _shipRepairPanel;
     [SerializeField] GameObject _miningPanel;
     [SerializeField] Slider _fuelLeftSlider;
-    [SerializeField] GameObject _deathPanel;
-    [SerializeField] Button _respawnBtn;
-
-    [Header("Settings")]
-    [SerializeField] string _sceneToLoad;
+    [SerializeField] GameObject deathPanel;
 
 
 
-    public Animator inventoryAnimator;
+
+
+    public Animator animator;
 
 
     [Header("Settings")]
@@ -47,12 +44,6 @@ public class InGameUIManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Game");
-        Cursor.lockState = CursorLockMode.Locked;
-        mouseLocked = true;
-    }
     // Update is called once per frame
     void Update()
     {
@@ -83,9 +74,6 @@ public class InGameUIManager : MonoBehaviour
             inventoryShown = false;
             _inventoryCanvas.GetComponent<Canvas>().enabled = false;
             _inventoryCanvas.GetComponent<GraphicRaycaster>().enabled = false;
-
-            Cursor.lockState = CursorLockMode.Locked;
-            mouseLocked = true;
         }
         else
         {
@@ -94,9 +82,6 @@ public class InGameUIManager : MonoBehaviour
 
             _inventoryCanvas.GetComponent<Canvas>().enabled = true;
             _inventoryCanvas.GetComponent<GraphicRaycaster>().enabled = true;
-
-            Cursor.lockState = CursorLockMode.None;
-            mouseLocked = false;
         }
     }
 
@@ -113,29 +98,20 @@ public class InGameUIManager : MonoBehaviour
             FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Game");
             _craftingPanel.SetActive(false);
             _craftingShown = false;
-
-            Cursor.lockState = CursorLockMode.Locked;
-            mouseLocked = true;
         }
         else
         {
             FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Menu");
             _craftingPanel.SetActive(true);
             _craftingShown = true;
-
-            Cursor.lockState = CursorLockMode.None;
-            mouseLocked = false;
         }
     }
 
     public void ToggleShipRepair()
     {
-        inventoryAnimator.SetTrigger("SwitchInventoryType");
+        animator.SetTrigger("SwitchInventoryType");
         if (_shipRepairShown)
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            mouseLocked = true;
-
             if (inventoryShown)
             {
                 ToggleInventory();
@@ -151,9 +127,6 @@ public class InGameUIManager : MonoBehaviour
             {
                 ToggleInventory();
             }
-            Cursor.lockState = CursorLockMode.None;
-            mouseLocked = false;
-
             FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Menu");
             _shipRepairShown = true;
             _shipRepairPanel.GetComponent<Canvas>().enabled = true;
@@ -161,33 +134,21 @@ public class InGameUIManager : MonoBehaviour
         }
     }
 
-    public void Die(int gameDifficulty = -1)
+    public void Die(int difficulty = -1)
     {
-
-        _deathPanel.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;
-        mouseLocked = false;
-        if (gameDifficulty == 2)
+        if (difficulty == 2)
         {
-            _respawnBtn.interactable = false;
         }
-        FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Menu");
+        deathPanel.SetActive(true);
     }
 
     public void Respawn()
     {
         FindObjectOfType<PlayerStats>().ResetStats();
-        FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Game");
-        Cursor.lockState = CursorLockMode.Locked;
-        mouseLocked = true;
     }
-
 
     public void MainMenu()
     {
-        DataPersistenceManager.instance.SaveGame();
 
-        SceneManager.LoadSceneAsync(_sceneToLoad);
     }
-
 }

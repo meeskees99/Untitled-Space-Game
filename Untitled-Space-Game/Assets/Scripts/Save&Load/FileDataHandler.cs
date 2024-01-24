@@ -59,11 +59,14 @@ public class FileDataHandler
 
     public void Delete(string profileId)
     {
-        string fullPath = Path.Combine(_dataDirPath, profileId);
+        string filePath = Path.Combine(_dataDirPath, profileId, _dataFileName);
+        string folderPath = Path.Combine(_dataDirPath, profileId);
 
-        File.Delete(fullPath);
+        Debug.Log($" Delete save: {profileId}\nPath: {filePath}");
+        Debug.Log($" Delete save: {profileId}\nPath: {folderPath}");
 
-        Debug.Log($" Delete save: {profileId}");
+        File.Delete(filePath);
+        Directory.Delete(folderPath);
     }
 
     public void Save(GameData data, string profileId)

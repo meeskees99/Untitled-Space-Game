@@ -47,7 +47,7 @@ public class SmeltingPanelManager : MonoBehaviour
 
     public void ToggleSmeltingPanel(SmeltingMachine smeltingMachine)
     {
-        InGameUIManager.Instance.inventoryAnimator.SetTrigger("SwitchInventoryType");
+        InGameUIManager.Instance.animator.SetTrigger("SwitchInventoryType");
         if (!InGameUIManager.Instance.inventoryShown && !panelActive)
         {
             InGameUIManager.Instance.ToggleInventory();

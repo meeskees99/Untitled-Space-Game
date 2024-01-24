@@ -298,6 +298,7 @@ public class MainMenuUIManager : MonoBehaviour
         if (_saveFileToDelete != null)
         {
             DataPersistenceManager.instance.DeleteSelectedProfileId(_saveFileToDelete.ProfileId);
+            Destroy(_saveFileToDelete.gameObject);
         }
     }
 
