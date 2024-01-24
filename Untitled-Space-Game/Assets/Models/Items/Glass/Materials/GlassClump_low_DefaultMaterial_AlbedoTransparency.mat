@@ -144,7 +144,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 1.1083671, g: 1.0095191, b: 0.7371686, a: 1}
-    - _GlassCOl: {r: 0.5585173, g: 0.63080233, b: 0.7264151, a: 0}
+    - _FresnelColor: {r: 0, g: 3.9843655, b: 5.3403134, a: 0}
+    - _GlassCOl: {r: 0, g: 0.56078434, b: 0.7490196, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
