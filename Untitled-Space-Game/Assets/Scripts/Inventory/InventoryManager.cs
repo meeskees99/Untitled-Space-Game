@@ -259,27 +259,21 @@ public class InventoryManager : MonoBehaviour
 
     public void DropItem(int itemId, int amount, Transform spawnposition = null)
     {
-        Item itemToDrop;
-        for (int i = 0; i < allItems.Length; i++)
+        Item itemToDrop = GetItemById(itemId);
+        GameObject droppedItem;
+
+        if (spawnposition != null)
         {
-            if (itemId == allItems[i].itemID)
-            {
-                itemToDrop = allItems[i];
-                GameObject droppedItem;
-                if (spawnposition != null)
-                {
-                    droppedItem = Instantiate(itemToDrop.itemPrefab, spawnposition.position, Quaternion.identity);
-                }
-                else
-                {
-                    droppedItem = Instantiate(itemToDrop.itemPrefab, player.transform.position, Quaternion.identity);
-                }
-                droppedItem.transform.GetComponent<DroppedItem>().item.Add(itemToDrop);
-                droppedItem.transform.GetComponent<DroppedItem>().amount.Add(amount);
-                Debug.Log($"Succesfully Dropped {amount} {itemToDrop}.");
-                break;
-            }
+            droppedItem = Instantiate(itemToDrop.itemPrefab, spawnposition.position, Quaternion.identity);
         }
+        else
+        {
+            droppedItem = Instantiate(itemToDrop.itemPrefab, player.transform.position, Quaternion.identity);
+        }
+        droppedItem.transform.GetComponent<DroppedItem>().item.Add(itemToDrop);
+        droppedItem.transform.GetComponent<DroppedItem>().amount.Add(amount);
+        Debug.Log($"Succesfully Dropped {amount} {itemToDrop}.");
+
 
     }
 
@@ -377,5 +371,18 @@ public class InventoryManager : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public Item GetItemById(int itemId)
+    {
+        for (int i = 0; i < allItems.Length; i++)
+        {
+            if (itemId == allItems[i].itemID)
+            {
+                return allItems[i];
+            }
+        }
+        Debug.LogError("Could Not Find Item By Id " + itemId);
+        return null;
     }
 }

@@ -350,7 +350,7 @@ public class InventoryKeybids : MonoBehaviour
                 }
                 else
                 {
-                    _interactableTxt.text = $"Press ({_playerInput.actions.FindAction("Interact").GetBindingDisplayString()}) to pick up {droppedItem.amount} {droppedItem.item[0].name}";
+                    _interactableTxt.text = $"Press ({_playerInput.actions.FindAction("Interact").GetBindingDisplayString()}) to pick up {droppedItem.amount[0]} {droppedItem.item[0].name}";
                 }
                 _InteractPanel.SetActive(true);
 
@@ -371,11 +371,11 @@ public class InventoryKeybids : MonoBehaviour
                         {
                             InventoryManager.Instance.AddItem(droppedItem.item[i].itemID, droppedItem.amount[i]);
                             Destroy(droppedItem.gameObject);
-                            Debug.Log($"Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Pick Up {droppedItem.amount} {droppedItem.item}");
+                            // Debug.Log($"Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Pick Up {droppedItem.amount} {droppedItem.item}");
                         }
                         else
                         {
-                            Debug.Log($"[NO SPACE] Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Pick Up {droppedItem.amount} {droppedItem.item}, but had no room in inventory");
+                            // Debug.Log($"[NO SPACE] Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Pick Up {droppedItem.amount} {droppedItem.item}, but had no room in inventory");
                         }
                     }
 

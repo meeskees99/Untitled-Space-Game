@@ -6,7 +6,7 @@ public class InventoryDevtools : MonoBehaviour
 {
     public InventoryManager inventoryManager;
 
-    public int spawnAmount = 1;
+    public int stackAmount = 1;
 
     private void Start()
     {
@@ -15,41 +15,28 @@ public class InventoryDevtools : MonoBehaviour
 
     public void PickupItem(int id)
     {
-        bool result = inventoryManager.AddItem(id, spawnAmount);
+        bool result = inventoryManager.AddItem(id, 1);
         if (result)
         {
-            Debug.Log("Item Added");
+            Debug.Log($"{inventoryManager.GetItemById(id).name} Added");
         }
         else
         {
-            Debug.Log("Can't Add Item");
+            Debug.Log($"Can't Add {inventoryManager.GetItemById(id).name}");
         }
     }
 
-    public void GetSelectedItem()
+    public void PickUpStack(int id)
     {
-        Item currentItem = inventoryManager.GetSelectedItem();
-        if (currentItem != null)
+        bool result = inventoryManager.AddItem(id, stackAmount);
+        if (result)
         {
-            print($"Currently Holding {currentItem.name}");
+            Debug.Log($"{inventoryManager.GetItemById(id).name} Stack Added");
         }
         else
         {
-            Debug.Log("No Item Being Held");
+            Debug.Log($"Can't Add {inventoryManager.GetItemById(id).name} Stack");
         }
     }
 
-    public void UseSelectedItem()
-    {
-        Item currentItem = inventoryManager.GetSelectedItem();
-        if (currentItem != null)
-        {
-            inventoryManager.UseItem(inventoryManager.GetSelectedItem().itemID, 1);
-            print($"Used Item: {currentItem.name}");
-        }
-        else
-        {
-            Debug.Log("No Item To Use!");
-        }
-    }
 }
