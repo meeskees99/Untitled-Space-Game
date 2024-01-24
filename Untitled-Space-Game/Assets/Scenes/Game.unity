@@ -721,7 +721,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -40, y: 0}
+  m_AnchoredPosition: {x: -75, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &104472689
@@ -9175,7 +9175,6 @@ GameObject:
   - component: {fileID: 2708607239227441446}
   - component: {fileID: 3091761574248204393}
   - component: {fileID: 5781195183722439803}
-  - component: {fileID: 4907203367389077652}
   m_Layer: 5
   m_Name: PlayerCanvas
   m_TagString: MainCanvas
@@ -10427,26 +10426,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4907203367389077652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2296550557691446073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b212cfdd38a1e2b41847b18633060fd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _inventoryCanvas: {fileID: 1771776913}
-  _craftingPanel: {fileID: 6226293083523965155}
-  _shipRepairPanel: {fileID: 1352637326}
-  _miningPanel: {fileID: 1825707611}
-  _fuelLeftSlider: {fileID: 1016928781}
-  deathPanel: {fileID: 0}
-  animator: {fileID: 1556142138}
-  mouseLocked: 0
 --- !u!224 &4930924385892755718
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11699,7 +11678,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4907203367389077652}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
         m_MethodName: ToggleInventory
         m_Mode: 1
@@ -12410,7 +12389,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4907203367389077652}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
         m_MethodName: ToggleCrafting
         m_Mode: 1
@@ -12660,7 +12639,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4907203367389077652}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
         m_MethodName: ToggleCrafting
         m_Mode: 1
@@ -12832,57 +12811,6 @@ PrefabInstance:
       propertyPath: _inventorySlotParent
       value: 
       objectReference: {fileID: 104472686}
-    - target: {fileID: 4503848335251699706, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: _inventorySlotPrefab
-      value: 
-      objectReference: {fileID: 1862359388836079347, guid: 9247f7b0b1aedde4ba527230480a4448,
-        type: 3}
-    - target: {fileID: 4905642184908049968, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: _maxSpawnRange
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 4905642184908049968, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: _minSpawnRange
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4905642184908049968, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: _resourcePrefabs.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4905642184908049968, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: _resourcePrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 1670279295205404173, guid: be9c7a7c316a6f54aafc6a42b4f7861e,
-        type: 3}
-    - target: {fileID: 4905642184908049968, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: _resourcePrefabs.Array.data[2]
-      value: 
-      objectReference: {fileID: 1670279295205404173, guid: c25d7e4c5896662489dbede490a35403,
-        type: 3}
-    - target: {fileID: 4905642184908049968, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: _resourcePrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 1670279295205404173, guid: 629593ccca837c34a942d3c62e4b4832,
-        type: 3}
-    - target: {fileID: 4905642184908049968, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: _resourcePrefabs.Array.data[4]
-      value: 
-      objectReference: {fileID: 1670279295205404173, guid: 3378abeaeb2e3cf44ad8bebee1081c4e,
-        type: 3}
-    - target: {fileID: 4905642184908049968, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: _resourcePrefabs.Array.data[5]
-      value: 
-      objectReference: {fileID: 1670279295205404173, guid: ec6d5bf90a506c54ba62c854bf384885,
-        type: 3}
     - target: {fileID: 6264455475952719378, guid: 06bcea58125b04241ad5825ca0b633c3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12937,7 +12865,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _uiManager
       value: 
-      objectReference: {fileID: 4907203367389077652}
+      objectReference: {fileID: 0}
     - target: {fileID: 6594912746191160083, guid: 06bcea58125b04241ad5825ca0b633c3,
         type: 3}
       propertyPath: eventSystem
@@ -12948,70 +12876,6 @@ PrefabInstance:
       propertyPath: rectTransform
       value: 
       objectReference: {fileID: 1771776917}
-    - target: {fileID: 6594912746191160083, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: allItems.Array.size
-      value: 22
-      objectReference: {fileID: 0}
-    - target: {fileID: 6594912746191160083, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: allItems.Array.data[13]
-      value: 
-      objectReference: {fileID: 11400000, guid: 797999f89c2677a449db576b41b23ef9,
-        type: 2}
-    - target: {fileID: 6594912746191160083, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: allItems.Array.data[14]
-      value: 
-      objectReference: {fileID: 11400000, guid: fc34cd0c33704dd40a714b9af99614bb,
-        type: 2}
-    - target: {fileID: 6594912746191160083, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: allItems.Array.data[15]
-      value: 
-      objectReference: {fileID: 11400000, guid: 6e42976c2942f724cbb88913598ea244,
-        type: 2}
-    - target: {fileID: 6594912746191160083, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: allItems.Array.data[16]
-      value: 
-      objectReference: {fileID: 11400000, guid: 0f1437c7fd57d484a8d8bb2a083e9879,
-        type: 2}
-    - target: {fileID: 6594912746191160083, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: allItems.Array.data[17]
-      value: 
-      objectReference: {fileID: 11400000, guid: aa810773b15f1d543995106ac34d3d09,
-        type: 2}
-    - target: {fileID: 6594912746191160083, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: allItems.Array.data[18]
-      value: 
-      objectReference: {fileID: 11400000, guid: 4a1ab40926dc9594db3a8463a5622be3,
-        type: 2}
-    - target: {fileID: 6594912746191160083, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: allItems.Array.data[19]
-      value: 
-      objectReference: {fileID: 11400000, guid: 761ee7204d9c2ca458607f0224fc86e7,
-        type: 2}
-    - target: {fileID: 6594912746191160083, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: allItems.Array.data[20]
-      value: 
-      objectReference: {fileID: 11400000, guid: adbc8e0ec2ca0db429a1469ad933ba75,
-        type: 2}
-    - target: {fileID: 6594912746191160083, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: allItems.Array.data[21]
-      value: 
-      objectReference: {fileID: 11400000, guid: 9a99ddadd8361bf4da199a6a4fc5c02a,
-        type: 2}
-    - target: {fileID: 6594912746191160083, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
-      propertyPath: inventorySlots.Array.size
-      value: 22
-      objectReference: {fileID: 0}
     - target: {fileID: 6594912746191160083, guid: 06bcea58125b04241ad5825ca0b633c3,
         type: 3}
       propertyPath: _toolbarSlots.Array.data[0]
@@ -13134,11 +12998,6 @@ PrefabInstance:
       objectReference: {fileID: 423989302}
     - target: {fileID: 6594912746191160083, guid: 06bcea58125b04241ad5825ca0b633c3,
         type: 3}
-      propertyPath: inventorySlots.Array.data[22]
-      value: 
-      objectReference: {fileID: 423989302}
-    - target: {fileID: 6594912746191160083, guid: 06bcea58125b04241ad5825ca0b633c3,
-        type: 3}
       propertyPath: graphicRaycasters.Array.data[0]
       value: 
       objectReference: {fileID: 1771776914}
@@ -13167,6 +13026,36 @@ PrefabInstance:
       propertyPath: recipeListTransform
       value: 
       objectReference: {fileID: 4969473359034376934}
+    - target: {fileID: 8852188676015675683, guid: 06bcea58125b04241ad5825ca0b633c3,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1556142138}
+    - target: {fileID: 8852188676015675683, guid: 06bcea58125b04241ad5825ca0b633c3,
+        type: 3}
+      propertyPath: _miningPanel
+      value: 
+      objectReference: {fileID: 1825707611}
+    - target: {fileID: 8852188676015675683, guid: 06bcea58125b04241ad5825ca0b633c3,
+        type: 3}
+      propertyPath: _craftingPanel
+      value: 
+      objectReference: {fileID: 6226293083523965155}
+    - target: {fileID: 8852188676015675683, guid: 06bcea58125b04241ad5825ca0b633c3,
+        type: 3}
+      propertyPath: _fuelLeftSlider
+      value: 
+      objectReference: {fileID: 1016928781}
+    - target: {fileID: 8852188676015675683, guid: 06bcea58125b04241ad5825ca0b633c3,
+        type: 3}
+      propertyPath: _inventoryCanvas
+      value: 
+      objectReference: {fileID: 1771776913}
+    - target: {fileID: 8852188676015675683, guid: 06bcea58125b04241ad5825ca0b633c3,
+        type: 3}
+      propertyPath: _shipRepairPanel
+      value: 
+      objectReference: {fileID: 1352637326}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
