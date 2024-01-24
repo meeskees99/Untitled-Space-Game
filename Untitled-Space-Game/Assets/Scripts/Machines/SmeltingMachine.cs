@@ -263,7 +263,7 @@ public class SmeltingMachine : MonoBehaviour
                     else
                     {
                         //Add Item To Output
-                        _itemOutputSlot.GetInventoryItem().count++;
+                        _itemOutputSlot.GetInventoryItem().count += _resourceToSmelt.amountToGetAfterSmelt;
                         _itemOutputSlot.GetInventoryItem().RefreshCount();
 
                         _outputAmount++;

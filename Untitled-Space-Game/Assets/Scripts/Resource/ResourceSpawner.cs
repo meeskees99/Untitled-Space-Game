@@ -103,8 +103,17 @@ public class ResourceSpawner : MonoBehaviour, IDataPersistence
         spawnedResource.transform.position = position;
         _resourcePositions.Add(position);
 
-        spawnedResource.transform.rotation = Quaternion.FromToRotation(Vector3.up, rotation);
-        _resourceRotations.Add(rotation);
+        if (_resourcePrefabs[resourceIndex].name != "Tree")
+        {
+            spawnedResource.transform.rotation = Quaternion.FromToRotation(Vector3.up, rotation);
+            _resourceRotations.Add(rotation);
+        }
+        else
+        {
+            Vector3 randomRot = new Vector3(0, Random.Range(0, 360), 0);
+            spawnedResource.transform.rotation = Quaternion.Euler(randomRot);
+            _resourceRotations.Add(randomRot);
+        }
 
         spawnedResource.GetComponent<ResourceVein>().resourceIndex = _resourceGameObjects.Count - 1;
     }
