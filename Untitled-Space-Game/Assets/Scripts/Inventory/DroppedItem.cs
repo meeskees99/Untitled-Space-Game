@@ -27,6 +27,10 @@ public class DroppedItem : MonoBehaviour
             {
                 timer = item[0].smeltTime * 2;
             }
+            if (item[0].name == "Sand")
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Sand
   m_EditorClassIdentifier: 
   itemID: 202
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 9039794087374075915, guid: 581fa7219457a3c4199c96c1303cfd35,
+    type: 3}
   stackable: 1
   image: {fileID: 21300000, guid: 4f0f6040ffbbd434c93551e9cf2cc75d, type: 3}
   maxStack: 16
