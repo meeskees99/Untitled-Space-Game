@@ -33,6 +33,8 @@ public class QuestManager : MonoBehaviour, IDataPersistence
     [SerializeField] MachinePlacement _machinePlacement;
 
     [SerializeField] bool _shipRepairQuest;
+    [SerializeField] GameObject _shipSubmitBtn;
+    [SerializeField] GameObject _shipTakeoffBtn;
 
     [SerializeField] SkinnedMeshRenderer _shipRenderer;
 
@@ -63,7 +65,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         UpdateQuest();
         UpdateItems();
         UpdateQuestType();
-        UpdateRepairSlots();
+        UpdateRepair();
     }
 
     public void StartNewQuest()
@@ -71,7 +73,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         UpdateQuest();
         UpdateItems();
         UpdateQuestType();
-        UpdateRepairSlots();
+        UpdateRepair();
 
         CheckPlace();
         CheckInventory();
@@ -151,7 +153,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         }
     }
 
-    public void UpdateRepairSlots()
+    public void UpdateRepair()
     {
         if (!_shipRepairQuest)
         {
@@ -172,6 +174,21 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             GameObject temp = Instantiate(_inventorySlotPrefab, _inventorySlotParent);
             _shipRepairSubmitSlots.Add(temp.GetComponent<InventorySlot>());
         }
+
+        for (int i = 0; i < _shipStateAmount.Length; i++)
+        {
+            if (_shipStateAmount[i] == 0)
+            {
+                continue;
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        _shipSubmitBtn.SetActive(false);
+        _shipTakeoffBtn.SetActive(true);
     }
 
     private void UpdateQuestType()
@@ -325,6 +342,12 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             Debug.Log("all items have been submitted");
             StartNewQuest();
         }
+    }
+
+    public void ShipTakeoffBtn()
+    {
+        // TODO add win
+        Debug.Log(" Win ");
     }
 
     public void LoadData(GameData data)

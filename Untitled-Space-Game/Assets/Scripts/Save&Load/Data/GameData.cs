@@ -94,6 +94,11 @@ public class GameData
             this.itemAmount[i] = -1;
         }
 
+        for (int i = 0; i < shipState.Length; i++)
+        {
+            shipState[i] = 100;
+        }
+
         this.playerPosition = new();
         this.playerPosition = new();
 

@@ -66,7 +66,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 52ec6cfc3f4612643add2fd975d054c0,
         type: 3}
       propertyPath: m_Name
-      value: OreResource
+      value: Clay
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -151,8 +151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76ea3db29f1e4334e9424652eae30d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
-  amount: 0
+  item: []
+  amount: 
   _pickUpDelay: 1.5
   _rotationSpeed: 0
   _floatAmount: 0
