@@ -80,7 +80,6 @@ public class InventoryKeybids : MonoBehaviour
         _playerInput.actions.FindAction("Inventory").canceled += OnInventory;
 
         _playerInput.actions.FindAction("Interact").started += OnInteract;
-        _playerInput.actions.FindAction("Interact").performed += OnInteract;
         _playerInput.actions.FindAction("Interact").canceled += OnInteract;
 
         _playerInput.actions.FindAction("Use").started += OnShoot;
@@ -357,6 +356,7 @@ public class InventoryKeybids : MonoBehaviour
 
                 if (_onInteract)
                 {
+                    _onInteract = false;
                     for (int i = 0; i < droppedItem.item.Count; i++)
                     {
                         if (droppedItem.amount[i] > droppedItem.item[i].maxStack)
@@ -383,9 +383,11 @@ public class InventoryKeybids : MonoBehaviour
             }
             else if (_interactableHit.transform.GetComponent<DiggingMachine>())
             {
-                if (Input.GetKeyDown(_playerInput.actions.FindAction("Interact").GetBindingDisplayString()))
+                if (_onInteract)
                 {
+                    _onInteract = false;
                     MiningPanelManager.Instance.ToggleMiningPanel(_interactableHit.transform.GetComponent<DiggingMachine>());
+                    InteractSubscribe();
                     _InteractPanel.SetActive(_InteractPanel.activeSelf);
                     _didUiInteraction = !_didUiInteraction;
                     Debug.Log($"Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Open Mining Panel");
@@ -405,9 +407,11 @@ public class InventoryKeybids : MonoBehaviour
             }
             else if (_interactableHit.transform.GetComponent<SmeltingMachine>())
             {
-                if (Input.GetKeyDown(_playerInput.actions.FindAction("Interact").GetBindingDisplayString()))
+                if (_onInteract)
                 {
+                    _onInteract = false;
                     SmeltingPanelManager.Instance.ToggleSmeltingPanel(_interactableHit.transform.GetComponent<SmeltingMachine>());
+                    InteractSubscribe();
                     _InteractPanel.SetActive(_InteractPanel.activeSelf);
                     _didUiInteraction = !_didUiInteraction;
                     Debug.Log($"Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Open Smelting Panel");
@@ -428,9 +432,12 @@ public class InventoryKeybids : MonoBehaviour
             }
             else if (LayerMask.LayerToName(_interactableHit.transform.gameObject.layer) == "CraftingTable")
             {
-                if (Input.GetKeyDown(_playerInput.actions.FindAction("Interact").GetBindingDisplayString()))
+                if (_onInteract)
                 {
+                    _onInteract = false;
+
                     InGameUIManager.Instance.ToggleCrafting();
+                    InteractSubscribe();
                     _InteractPanel.SetActive(!_InteractPanel.activeSelf);
                     _didUiInteraction = !_didUiInteraction;
                     Debug.Log($"Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Open Crafting Panel");
@@ -450,9 +457,11 @@ public class InventoryKeybids : MonoBehaviour
             }
             else if (LayerMask.LayerToName(_interactableHit.transform.gameObject.layer) == "Ship")
             {
-                if (Input.GetKeyDown(_playerInput.actions.FindAction("Interact").GetBindingDisplayString()))
+                if (_onInteract)
                 {
+                    _onInteract = false;
                     InGameUIManager.Instance.ToggleShipRepair();
+                    InteractSubscribe();
                     _InteractPanel.SetActive(!_InteractPanel.activeSelf);
                     _didUiInteraction = !_didUiInteraction;
                     Debug.Log($"Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Open Ship Panel");
@@ -533,5 +542,11 @@ public class InventoryKeybids : MonoBehaviour
     {
         _playerInput.actions.FindAction("Inventory").started += OnInventory;
         _playerInput.actions.FindAction("Inventory").canceled += OnInventory;
+    }
+
+    public void InteractSubscribe()
+    {
+        _playerInput.actions.FindAction("Interact").started += OnInteract;
+        _playerInput.actions.FindAction("Interact").canceled += OnInteract;
     }
 }

@@ -71,7 +71,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
 
     void Start()
     {
-        if (FindAnyObjectByType<DifficultySetting>().gameDifficulty == -1)
+        if (FindAnyObjectByType<DifficultySetting>() && FindAnyObjectByType<DifficultySetting>().gameDifficulty == -1)
         {
             _gameDifficulty = 1;
         }
