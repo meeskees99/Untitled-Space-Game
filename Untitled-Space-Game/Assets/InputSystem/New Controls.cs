@@ -372,6 +372,15 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""75f481d4-cdb0-4208-b220-79b20a02e7c7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -583,6 +592,17 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
                     ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d212e8c0-e8dd-4859-bf92-4d36c97d557d"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -639,6 +659,7 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
         m_Menu_MiddleClick = m_Menu.FindAction("MiddleClick", throwIfNotFound: true);
         m_Menu_RightClick = m_Menu.FindAction("RightClick", throwIfNotFound: true);
         m_Menu_Inventory = m_Menu.FindAction("Inventory", throwIfNotFound: true);
+        m_Menu_Interact = m_Menu.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -819,6 +840,7 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Menu_MiddleClick;
     private readonly InputAction m_Menu_RightClick;
     private readonly InputAction m_Menu_Inventory;
+    private readonly InputAction m_Menu_Interact;
     public struct MenuActions
     {
         private @NewControls m_Wrapper;
@@ -832,6 +854,7 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
         public InputAction @MiddleClick => m_Wrapper.m_Menu_MiddleClick;
         public InputAction @RightClick => m_Wrapper.m_Menu_RightClick;
         public InputAction @Inventory => m_Wrapper.m_Menu_Inventory;
+        public InputAction @Interact => m_Wrapper.m_Menu_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -868,6 +891,9 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
             @Inventory.started += instance.OnInventory;
             @Inventory.performed += instance.OnInventory;
             @Inventory.canceled += instance.OnInventory;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IMenuActions instance)
@@ -899,6 +925,9 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
             @Inventory.started -= instance.OnInventory;
             @Inventory.performed -= instance.OnInventory;
             @Inventory.canceled -= instance.OnInventory;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IMenuActions instance)
@@ -957,5 +986,6 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
         void OnMiddleClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
