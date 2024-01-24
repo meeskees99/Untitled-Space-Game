@@ -62,6 +62,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         if (lastInventorySlot.isToolSlot)
         {
+            parentAfterDrag = lastInventorySlot.transform;
             return;
         }
         // if (dropOnDrop)
@@ -118,12 +119,20 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (lastInventorySlot.isToolSlot)
+        {
+            return;
+        }
         transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, -15);
         InventoryManager.Instance.heldItem = eventData.pointerDrag.GetComponent<InventoryItem>();
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (lastInventorySlot.isToolSlot)
+        {
+            return;
+        }
         if (dropOnDrop)
         {
             InventoryManager.Instance.DropItem(item.itemID, count);
