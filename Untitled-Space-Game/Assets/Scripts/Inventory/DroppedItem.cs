@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class DroppedItem : MonoBehaviour
 {
-    public Item item;
-    public int amount;
+    public List<Item> item = new();
+    public List<int> amount = new();
 
     [SerializeField] float _pickUpDelay = 1.5f;
     [SerializeField] float _rotationSpeed;
@@ -21,40 +21,47 @@ public class DroppedItem : MonoBehaviour
 
     private void Start()
     {
-        if (item.name == "Clay")
+        if (item.Count == 1)
         {
-            timer = item.smeltTime * 2;
+            if (item[0].name == "Clay")
+            {
+                timer = item[0].smeltTime * 2;
+            }
         }
     }
 
     private void Update()
     {
-        if (_pickUpDelay > 0)
+        if (item.Count == 1)
         {
-            _pickUpDelay -= Time.deltaTime;
-        }
-        else
-        {
-            if (_lastCollidedObject != null && _lastCollidedObject.GetComponent<CharStateMachine>())
+            if (_pickUpDelay > 0)
             {
-                InventoryManager.Instance.AddItem(item.itemID, amount);
-                Destroy(gameObject);
-            }
-        }
-        if (_mergeDelay > 0)
-        {
-            _mergeDelay -= Time.deltaTime;
-        }
-        if (item.name == "Clay")
-        {
-            if (timer > 0)
-            {
-                timer -= Time.deltaTime;
+                _pickUpDelay -= Time.deltaTime;
             }
             else
             {
-                InventoryManager.Instance.DropItem(item.itemToGetAfterSmelt.itemID, amount, transform);
-                Destroy(gameObject);
+                if (_lastCollidedObject != null && _lastCollidedObject.GetComponent<CharStateMachine>())
+                {
+                    InventoryManager.Instance.AddItem(item[0].itemID, amount[0]);
+                    Destroy(gameObject);
+                }
+            }
+            if (_mergeDelay > 0)
+            {
+                _mergeDelay -= Time.deltaTime;
+            }
+
+            if (item[0].name == "Clay")
+            {
+                if (timer > 0)
+                {
+                    timer -= Time.deltaTime;
+                }
+                else
+                {
+                    InventoryManager.Instance.DropItem(item[0].itemToGetAfterSmelt.itemID, amount[0], transform);
+                    Destroy(gameObject);
+                }
             }
         }
     }
@@ -64,22 +71,22 @@ public class DroppedItem : MonoBehaviour
         _lastCollidedObject = other.gameObject;
         print("On Enter Triggered With " + other.gameObject.name);
 
-        if (other.GetComponent<DroppedItem>())
+        if (other.GetComponent<DroppedItem>() && amount.Count == 1)
         {
             if (other.GetComponent<DroppedItem>().item == item)
             {
                 if (_mergeDelay <= 0)
                 {
-                    if (amount + other.GetComponent<DroppedItem>().amount <= item.maxStack)
+                    if (amount[0] + other.GetComponent<DroppedItem>().amount[0] <= item[0].maxStack)
                     {
-                        amount += other.GetComponent<DroppedItem>().amount;
+                        amount[0] += other.GetComponent<DroppedItem>().amount[0];
                         Destroy(other.gameObject);
                     }
                     else
                     {
-                        int extra = amount + other.GetComponent<DroppedItem>().amount - item.maxStack;
-                        amount = item.maxStack;
-                        other.GetComponent<DroppedItem>().amount = extra;
+                        int extra = amount[0] + other.GetComponent<DroppedItem>().amount[0] - item[0].maxStack;
+                        amount[0] = item[0].maxStack;
+                        other.GetComponent<DroppedItem>().amount[0] = extra;
                     }
 
                     Debug.Log("Merged Two Dropped Items Together");

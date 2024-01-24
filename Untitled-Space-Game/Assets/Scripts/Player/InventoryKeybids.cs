@@ -345,28 +345,38 @@ public class InventoryKeybids : MonoBehaviour
             if (_interactableHit.transform.GetComponent<DroppedItem>())
             {
                 DroppedItem droppedItem = _interactableHit.transform.GetComponent<DroppedItem>();
-                _interactableTxt.text = $"Press ({_playerInput.actions.FindAction("Interact").GetBindingDisplayString()}) to pick up {droppedItem.amount} {droppedItem.item.name}";
+                if (droppedItem.item.Count > 1)
+                {
+                    _interactableTxt.text = $"Press ({_playerInput.actions.FindAction("Interact").GetBindingDisplayString()}) to pick up stack of items";
+                }
+                else
+                {
+                    _interactableTxt.text = $"Press ({_playerInput.actions.FindAction("Interact").GetBindingDisplayString()}) to pick up {droppedItem.amount} {droppedItem.item[0].name}";
+                }
                 _InteractPanel.SetActive(true);
 
                 if (_onInteract)
                 {
-                    if (droppedItem.amount > droppedItem.item.maxStack)
+                    for (int i = 0; i < droppedItem.item.Count; i++)
                     {
-                        if (InventoryManager.Instance.HasSpace(droppedItem.item.itemID, droppedItem.amount))
+                        if (droppedItem.amount[i] > droppedItem.item[i].maxStack)
                         {
-                            InventoryManager.Instance.AddItem(droppedItem.item.itemID, droppedItem.amount);
-                            droppedItem.amount -= droppedItem.amount;
+                            if (InventoryManager.Instance.HasSpace(droppedItem.item[i].itemID, droppedItem.amount[i]))
+                            {
+                                InventoryManager.Instance.AddItem(droppedItem.item[i].itemID, droppedItem.amount[i]);
+                                droppedItem.amount[i] -= droppedItem.amount[i];
+                            }
                         }
-                    }
-                    else if (InventoryManager.Instance.HasSpace(droppedItem.item.itemID, droppedItem.amount))
-                    {
-                        InventoryManager.Instance.AddItem(droppedItem.item.itemID, droppedItem.amount);
-                        Destroy(droppedItem.gameObject);
-                        Debug.Log($"Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Pick Up {droppedItem.amount} {droppedItem.item}");
-                    }
-                    else
-                    {
-                        Debug.Log($"[NO SPACE] Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Pick Up {droppedItem.amount} {droppedItem.item}, but had no room in inventory");
+                        else if (InventoryManager.Instance.HasSpace(droppedItem.item[i].itemID, droppedItem.amount[i]))
+                        {
+                            InventoryManager.Instance.AddItem(droppedItem.item[i].itemID, droppedItem.amount[i]);
+                            Destroy(droppedItem.gameObject);
+                            Debug.Log($"Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Pick Up {droppedItem.amount} {droppedItem.item}");
+                        }
+                        else
+                        {
+                            Debug.Log($"[NO SPACE] Pressed {_playerInput.actions.FindAction("Interact").GetBindingDisplayString()} To Pick Up {droppedItem.amount} {droppedItem.item}, but had no room in inventory");
+                        }
                     }
 
                 }

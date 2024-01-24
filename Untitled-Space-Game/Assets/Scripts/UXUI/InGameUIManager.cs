@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +10,8 @@ public class InGameUIManager : MonoBehaviour
 {
     public static InGameUIManager Instance;
 
+    public Animator inventoryAnimator;
+
     [Header("Panels")]
     [SerializeField] GameObject _inventoryCanvas;
     [SerializeField] GameObject _craftingPanel;
@@ -17,12 +20,9 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] Slider _fuelLeftSlider;
     [SerializeField] GameObject deathPanel;
 
-
-
-
-
-    public Animator animator;
-
+    [Header("UI")]
+    [SerializeField] TMP_Text _diedTxt;
+    [SerializeField] Button _respawnButton;
 
     [Header("Settings")]
     bool _craftingShown;
@@ -47,18 +47,19 @@ public class InGameUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (mouseLocked)
-            {
-                Cursor.lockState = CursorLockMode.None;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-            mouseLocked = Cursor.lockState == CursorLockMode.Locked;
-        }
+        mouseLocked = Cursor.lockState == CursorLockMode.Locked;
+
+        // if (Input.GetKeyDown(KeyCode.Escape))
+        // {
+        // if (mouseLocked)
+        // {
+        //     Cursor.lockState = CursorLockMode.None;
+        // }
+        // else
+        // {
+        //     Cursor.lockState = CursorLockMode.Locked;
+        // }
+        // }
     }
 
     public void ToggleInventory()
@@ -99,12 +100,14 @@ public class InGameUIManager : MonoBehaviour
         }
         if (_craftingShown)
         {
+            Cursor.lockState = CursorLockMode.Locked;
             FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Game");
             _craftingPanel.SetActive(false);
             _craftingShown = false;
         }
         else
         {
+            Cursor.lockState = CursorLockMode.None;
             FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Menu");
             _craftingPanel.SetActive(true);
             _craftingShown = true;
@@ -113,13 +116,14 @@ public class InGameUIManager : MonoBehaviour
 
     public void ToggleShipRepair()
     {
-        animator.SetTrigger("SwitchInventoryType");
+        inventoryAnimator.SetTrigger("SwitchInventoryType");
         if (_shipRepairShown)
         {
             if (inventoryShown)
             {
                 ToggleInventory();
             }
+            Cursor.lockState = CursorLockMode.Locked;
             FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Game");
             _shipRepairShown = false;
             _shipRepairPanel.GetComponent<Canvas>().enabled = false;
@@ -131,6 +135,7 @@ public class InGameUIManager : MonoBehaviour
             {
                 ToggleInventory();
             }
+            Cursor.lockState = CursorLockMode.None;
             FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Menu");
             _shipRepairShown = true;
             _shipRepairPanel.GetComponent<Canvas>().enabled = true;
@@ -140,10 +145,14 @@ public class InGameUIManager : MonoBehaviour
 
     public void Die(int difficulty = -1)
     {
+        Cursor.lockState = CursorLockMode.None;
+        FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Menu");
+
+        deathPanel.SetActive(true);
         if (difficulty == 2)
         {
+            _respawnButton.interactable = false;
         }
-        deathPanel.SetActive(true);
     }
 
     public void Respawn()

@@ -28,6 +28,8 @@ public class InventoryManager : MonoBehaviour
 
     [SerializeField] Item _itemToSpawn;
 
+    [SerializeField] GameObject _droppedBag;
+
     [Header("Canvas Information")]
     public EventSystem eventSystem;
     public List<GraphicRaycaster> graphicRaycasters;
@@ -272,13 +274,35 @@ public class InventoryManager : MonoBehaviour
                 {
                     droppedItem = Instantiate(itemToDrop.itemPrefab, player.transform.position, Quaternion.identity);
                 }
-                droppedItem.transform.GetComponent<DroppedItem>().item = itemToDrop;
-                droppedItem.transform.GetComponent<DroppedItem>().amount = amount;
+                droppedItem.transform.GetComponent<DroppedItem>().item.Add(itemToDrop);
+                droppedItem.transform.GetComponent<DroppedItem>().amount.Add(amount);
                 Debug.Log($"Succesfully Dropped {amount} {itemToDrop}.");
                 break;
             }
         }
 
+    }
+
+    public void DropAllItems()
+    {
+        GameObject droppedItem = null;
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            if (inventorySlots[i].GetInventoryItem())
+            {
+                if (droppedItem == null)
+                {
+                    droppedItem = Instantiate(_droppedBag, player.transform.position, Quaternion.identity);
+                    droppedItem.GetComponent<DroppedItem>().item.Add(inventorySlots[i].GetInventoryItem().item);
+                    droppedItem.GetComponent<DroppedItem>().amount.Add(inventorySlots[i].GetInventoryItem().count);
+                }
+                else
+                {
+                    droppedItem.GetComponent<DroppedItem>().item.Add(inventorySlots[i].GetInventoryItem().item);
+                    droppedItem.GetComponent<DroppedItem>().amount.Add(inventorySlots[i].GetInventoryItem().count);
+                }
+            }
+        }
     }
 
     public void UpdateItemsInfoList()

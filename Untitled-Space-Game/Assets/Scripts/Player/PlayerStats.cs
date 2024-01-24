@@ -1,4 +1,5 @@
 using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -223,6 +224,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
         Debug.Log("You Died!");
         IsAlive = false;
         InGameUIManager.Instance.Die(_gameDifficulty);
+        InventoryManager.Instance.DropAllItems();
     }
 
     public void ResetStats()
@@ -230,6 +232,8 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
         Health = _maxHealth;
         Oxygen = _maxOxygen;
         IsAlive = true;
+        transform.position = _spawnPoint.position;
+        transform.rotation = Quaternion.identity;
         Debug.Log("Reset Player Stats");
     }
 
