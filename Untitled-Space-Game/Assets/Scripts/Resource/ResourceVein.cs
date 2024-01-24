@@ -12,5 +12,6 @@ public class ResourceVein : MonoBehaviour
 
     public int resourceIndex;
 
+    public bool acceptsMiner;
 
 }

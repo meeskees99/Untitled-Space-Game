@@ -245,6 +245,11 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public bool CheckInventory()
     {
+        if (!InventoryManager.Instance.canCheckInventoryQuest)
+        {
+            return false;
+        }
+
         for (int i = 0; i < _questItemRequirements.Length; i++)
         {
             for (int j = 0; j < InventoryManager.Instance.itemsInInventory.Count; j++)

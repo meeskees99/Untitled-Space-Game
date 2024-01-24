@@ -842,7 +842,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2007, y: 0}
+  m_AnchoredPosition: {x: -2033, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &104472689
@@ -13165,6 +13165,17 @@ PrefabInstance:
       propertyPath: _inventorySlotParent
       value: 
       objectReference: {fileID: 104472686}
+    - target: {fileID: 4905642184908049968, guid: 06bcea58125b04241ad5825ca0b633c3,
+        type: 3}
+      propertyPath: _resourcePrefabs.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4905642184908049968, guid: 06bcea58125b04241ad5825ca0b633c3,
+        type: 3}
+      propertyPath: _resourcePrefabs.Array.data[6]
+      value: 
+      objectReference: {fileID: 1670279295205404173, guid: f32f2fb1bb472b742bd181d0178f38c2,
+        type: 3}
     - target: {fileID: 6264455475952719378, guid: 06bcea58125b04241ad5825ca0b633c3,
         type: 3}
       propertyPath: m_LocalPosition.x
