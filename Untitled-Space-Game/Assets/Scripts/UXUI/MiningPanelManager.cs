@@ -45,7 +45,7 @@ public class MiningPanelManager : MonoBehaviour
 
     public void ToggleMiningPanel(DiggingMachine diggingMachine)
     {
-        InGameUIManager.Instance.animator.SetTrigger("SwitchInventoryType");
+        InGameUIManager.Instance.inventoryAnimator.SetTrigger("SwitchInventoryType");
         if (!InGameUIManager.Instance.inventoryShown && !panelActive)
         {
             InGameUIManager.Instance.ToggleInventory();
