@@ -71,6 +71,7 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         if (FindAnyObjectByType<DifficultySetting>() && FindAnyObjectByType<DifficultySetting>().gameDifficulty == -1)
         {
             _gameDifficulty = 1;
