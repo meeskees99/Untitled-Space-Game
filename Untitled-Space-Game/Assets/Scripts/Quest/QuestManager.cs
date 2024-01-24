@@ -47,7 +47,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     int[] _shipStateAmount = new int[5];
 
-    private void Awake()
+    private void Start()
     {
         if (Instance == null)
         {
@@ -138,7 +138,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         for (int i = _itemParent.childCount; i > 0; i--)
         {
             Destroy(_itemParent.GetChild(i - 1).gameObject);
-            Debug.Log($"Destroyed item {_itemParent.GetChild(i - 1).GetComponent<Image>().sprite.name} (total: {i})");
+            // Debug.Log($"Destroyed item {_itemParent.GetChild(i - 1).GetComponent<Image>().sprite.name} (total: {i})");
         }
 
         for (int i = 0; i < _questItemRequirements.Length; i++)
@@ -155,7 +155,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
     {
         if (!_shipRepairQuest)
         {
-            Debug.Log("No Ship Repair Quest Active");
+            // Debug.Log("No Ship Repair Quest Active");
             return;
         }
 
@@ -199,6 +199,17 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public void CheckPlace()
     {
+        if (!_machinePlacement._machineQuest)
+        {
+            return;
+        }
+
+        if (!_questMachineRequirements.Any())
+        {
+            Debug.Log("did not find any machine requirements");
+            return;
+        }
+
         GameObject[] placedMachines = GameObject.FindGameObjectsWithTag("Machine");
 
         bool[] machinesDone = new bool[_questMachineRequirements.Length];
@@ -228,10 +239,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             }
         }
 
-        for (int i = 0; i < _currentQuest.recipesToUnlock.Length; i++)
-        {
-            CraftingManager.Instance.AddRecipe(_currentQuest.recipesToUnlock[i]);
-        }
+        Debug.Log("Check place was true");
         EndQuest();
     }
 
@@ -316,13 +324,16 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
+        Debug.Log(" balls ");
         if (!_allQuests.Any())
         {
             Debug.Log("has no Quests");
             return;
         }
+
         for (int i = 0; i < _allQuests.Length; i++)
         {
+            Debug.Log("for loop");
             if (_allQuests[i].questId == data.currentQuestId)
             {
                 Debug.Log($"quest id becomes {_allQuests[i].questId}");

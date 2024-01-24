@@ -109,8 +109,13 @@ public class InGameUIManager : MonoBehaviour
 
     public void ToggleShipRepair()
     {
+        animator.SetTrigger("SwitchInventoryType");
         if (_shipRepairShown)
         {
+            if (inventoryShown)
+            {
+                ToggleInventory();
+            }
             FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Game");
             _shipRepairShown = false;
             _shipRepairPanel.GetComponent<Canvas>().enabled = false;
@@ -118,6 +123,10 @@ public class InGameUIManager : MonoBehaviour
         }
         else
         {
+            if (!inventoryShown)
+            {
+                ToggleInventory();
+            }
             FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Menu");
             _shipRepairShown = true;
             _shipRepairPanel.GetComponent<Canvas>().enabled = true;

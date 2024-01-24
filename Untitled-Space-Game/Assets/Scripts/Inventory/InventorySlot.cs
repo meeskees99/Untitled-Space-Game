@@ -21,6 +21,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
     public bool isMachineSlot;
     public bool isFuelSlot;
     public bool isResourceSlot;
+    public bool isToolSlot;
     private void Awake()
     {
         Deselect();
@@ -168,13 +169,13 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        if (data.itemId[slotId] == -1)
-        {
-            return;
-        }
-        if (isMachineSlot || isFuelSlot || isResourceSlot)
+        if (isMachineSlot || isFuelSlot || isResourceSlot || isToolSlot)
         {
             // InventoryManager.Instance.SpawnNewItemMining(data.itemId[slotId], data.itemAmount[slotId], this.slotId);
+            return;
+        }
+        if (data.itemId[slotId] == -1)
+        {
             return;
         }
         else
@@ -186,7 +187,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IDataPersistence
 
     public void SaveData(GameData data)
     {
-        if (isMachineSlot || isFuelSlot || isResourceSlot)
+        if (isMachineSlot || isFuelSlot || isResourceSlot || isToolSlot)
         {
             //Not needed to save and load
             return;

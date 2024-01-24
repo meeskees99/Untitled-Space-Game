@@ -55,18 +55,22 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         countText.text = count.ToString();
         bool textActive = count > 1;
         countText.gameObject.SetActive(textActive);
-        Debug.Log("Refreshed Count Of " + item);
+        // Debug.Log("Refreshed Count Of " + item);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (dropOnDrop)
+        if (lastInventorySlot.isToolSlot)
         {
-            Debug.Log("Dropping " + count + " " + item.name);
-
-            InventoryManager.Instance.DropItem(item.itemID, count);
-            Destroy(gameObject);
+            return;
         }
+        // if (dropOnDrop)
+        // {
+        //     Debug.Log("Dropping " + count + " " + item.name);
+
+        //     InventoryManager.Instance.DropItem(item.itemID, count);
+        //     Destroy(gameObject);
+        // }
         InventorySlot slot = transform.GetComponentInParent<InventorySlot>();
         slot.SetInventoryItem(null);
         image.raycastTarget = false;

@@ -17,8 +17,8 @@ public class GameData
     #endregion
 
     #region Inventory
-    public int[] itemId = new int[23];
-    public int[] itemAmount = new int[23];
+    public int[] itemId = new int[22];
+    public int[] itemAmount = new int[22];
     #endregion
 
     #region Player
