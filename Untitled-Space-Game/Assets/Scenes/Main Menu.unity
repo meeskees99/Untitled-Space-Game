@@ -6837,7 +6837,9 @@ MonoBehaviour:
   _saveSlotPrefab: {fileID: 2919919894733286032, guid: fe095ba175123554fa629f851470c9dd,
     type: 3}
   _saveSlots: []
-  _confirmSaveFileDeletePanel: {fileID: 0}
+  _saveFileToDelete: {fileID: 0}
+  _confirmSaveFileDeletePanel: {fileID: 919438945}
+  _firstConfirmSaveFileDeleteButton: {fileID: 769885761}
   _settingsPanel: {fileID: 1416635244}
   _firstSettingsButton: {fileID: 1057771609}
   _audioPanel: {fileID: 1825941335}
@@ -12893,8 +12895,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 120445260}
-  - {fileID: 1345334141}
   - {fileID: 769885762}
+  - {fileID: 1345334141}
   m_Father: {fileID: 1508633850}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -18045,10 +18047,10 @@ MonoBehaviour:
       - m_Target: {fileID: 419247436}
         m_TargetAssemblyTypeName: MainMenuUIManager, Assembly-CSharp
         m_MethodName: DeleteSaveFileButton
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: SaveSlot, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -20469,7 +20471,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1508633850
 RectTransform:
   m_ObjectHideFlags: 0

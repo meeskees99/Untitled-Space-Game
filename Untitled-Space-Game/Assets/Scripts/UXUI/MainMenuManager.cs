@@ -41,7 +41,7 @@ public class MainMenuUIManager : MonoBehaviour
     #endregion
 
     [Header("Load Game")]
-    #region Load Game
+    #region Save File
     [SerializeField] GameObject _loadGamePanel;
     [SerializeField] GameObject _firstLoadButton;
 
@@ -51,7 +51,11 @@ public class MainMenuUIManager : MonoBehaviour
     [SerializeField] GameObject _saveSlotPrefab;
     [SerializeField] List<SaveSlot> _saveSlots = new List<SaveSlot>();
 
+
+    [SerializeField] SaveSlot _saveFileToDelete;
     [SerializeField] GameObject _confirmSaveFileDeletePanel;
+    [SerializeField] GameObject _firstConfirmSaveFileDeleteButton;
+
 
     #endregion
 
@@ -119,7 +123,7 @@ public class MainMenuUIManager : MonoBehaviour
                 int index = i;
                 _saveSlots[index].ProfileId = _profileIds[index];
                 _saveSlots[index].SaveFileButton.onClick.AddListener(delegate { LoadSaveFileButton(_saveSlots[index]); });
-                _saveSlots[index].DeleteFileButton.onClick.AddListener(delegate { DeleteSaveFileButton(_saveSlots[index]); });
+                _saveSlots[index].DeleteFileButton.onClick.AddListener(delegate { ConfirmDeleteSaveFilePanel(_saveSlots[index]); });
             }
         }
 
@@ -261,7 +265,7 @@ public class MainMenuUIManager : MonoBehaviour
 
     #endregion
 
-    #region Load Game
+    #region Save File
 
     public void LoadGameButton()
     {
@@ -289,10 +293,21 @@ public class MainMenuUIManager : MonoBehaviour
         SceneManager.LoadSceneAsync(_sceneToLoad);
     }
 
-    public void DeleteSaveFileButton(SaveSlot saveSlot)
+    public void DeleteSaveFileButton()
     {
+        if (_saveFileToDelete != null)
+        {
+            DataPersistenceManager.instance.DeleteSelectedProfileId(_saveFileToDelete.ProfileId);
+        }
+    }
 
-        DataPersistenceManager.instance.DeleteSelectedProfileId(saveSlot.ProfileId);
+    public void ConfirmDeleteSaveFilePanel(SaveSlot saveSlot)
+    {
+        _saveFileToDelete = saveSlot;
+        _confirmSaveFileDeletePanel.SetActive(!_confirmSaveFileDeletePanel.activeSelf);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_firstConfirmSaveFileDeleteButton);
     }
 
     #endregion

@@ -391,6 +391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _profileId: 
   _saveFileButton: {fileID: 3966162808867439809}
+  _deleteFileButton: {fileID: 440153678474352591}
   _saveFileNameTxt: {fileID: 2255718985781285651}
   _saveFileLastPlayedTxt: {fileID: 8322254604219061290}
 --- !u!1 &5011120292106137596

@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 // using TMPro;
 // using Unity.VisualScripting;
@@ -536,7 +537,8 @@ public class CharStateMachine : MonoBehaviour
         //     Debug.Log("scroll down");
         // }
 
-
+        PlayerAnimator.SetFloat("WalkDirX", _currentMovementInput.x);
+        PlayerAnimator.SetFloat("WalkDirY", _currentMovementInput.y);
 
         if (Input.GetKey(KeyCode.O))
         {
