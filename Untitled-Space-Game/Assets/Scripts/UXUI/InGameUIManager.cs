@@ -70,6 +70,8 @@ public class InGameUIManager : MonoBehaviour
         }
         if (inventoryShown)
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            mouseLocked = true;
             FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Game");
             inventoryShown = false;
             _inventoryCanvas.GetComponent<Canvas>().enabled = false;
@@ -77,6 +79,8 @@ public class InGameUIManager : MonoBehaviour
         }
         else
         {
+            Cursor.lockState = CursorLockMode.None;
+            mouseLocked = false;
             FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Menu");
             inventoryShown = true;
 

@@ -373,7 +373,7 @@ public class InventoryKeybids : MonoBehaviour
             }
             else if (_interactableHit.transform.GetComponent<DiggingMachine>())
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(_playerInput.actions.FindAction("Interact").GetBindingDisplayString()))
                 {
                     MiningPanelManager.Instance.ToggleMiningPanel(_interactableHit.transform.GetComponent<DiggingMachine>());
                     _InteractPanel.SetActive(_InteractPanel.activeSelf);
@@ -395,7 +395,7 @@ public class InventoryKeybids : MonoBehaviour
             }
             else if (_interactableHit.transform.GetComponent<SmeltingMachine>())
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(_playerInput.actions.FindAction("Interact").GetBindingDisplayString()))
                 {
                     SmeltingPanelManager.Instance.ToggleSmeltingPanel(_interactableHit.transform.GetComponent<SmeltingMachine>());
                     _InteractPanel.SetActive(_InteractPanel.activeSelf);
@@ -418,7 +418,7 @@ public class InventoryKeybids : MonoBehaviour
             }
             else if (LayerMask.LayerToName(_interactableHit.transform.gameObject.layer) == "CraftingTable")
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(_playerInput.actions.FindAction("Interact").GetBindingDisplayString()))
                 {
                     InGameUIManager.Instance.ToggleCrafting();
                     _InteractPanel.SetActive(!_InteractPanel.activeSelf);
@@ -440,7 +440,7 @@ public class InventoryKeybids : MonoBehaviour
             }
             else if (LayerMask.LayerToName(_interactableHit.transform.gameObject.layer) == "Ship")
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(_playerInput.actions.FindAction("Interact").GetBindingDisplayString()))
                 {
                     InGameUIManager.Instance.ToggleShipRepair();
                     _InteractPanel.SetActive(!_InteractPanel.activeSelf);
