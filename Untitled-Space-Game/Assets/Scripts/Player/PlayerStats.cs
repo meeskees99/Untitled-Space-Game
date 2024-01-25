@@ -264,8 +264,8 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
         Health = data.playerHealth;
         Oxygen = data.playerOxygen;
 
-        transform.position = data.playerPosition;
-        transform.rotation = data.playerRotation;
+        this.GetComponent<Rigidbody>().position = data.playerPosition;
+        this.GetComponent<Rigidbody>().rotation = data.playerRotation;
 
     }
 
