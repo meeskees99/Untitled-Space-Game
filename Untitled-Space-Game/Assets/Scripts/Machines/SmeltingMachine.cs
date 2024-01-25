@@ -165,12 +165,12 @@ public class SmeltingMachine : MonoBehaviour
         }
         #endregion
 
-        if (!_fuelInputSlot.GetInventoryItem())
+        if (!_fuelInputSlot.GetInventoryItem() && SmeltingPanelManager.Instance.currentSmelter == this && FuelLeft <= 0 || FuelAmount == 0 && FuelLeft <= 0)
         {
             FuelType = null;
             FuelInitialized = false;
         }
-        if (!_resourceInputSlot.GetInventoryItem())
+        if (!_resourceInputSlot.GetInventoryItem() && SmeltingPanelManager.Instance.currentSmelter == this && ResourceAmount == 0 || ResourceAmount == 0)
         {
             ResourceType = null;
             ResourceInitialized = false;
@@ -298,12 +298,14 @@ public class SmeltingMachine : MonoBehaviour
         if (item.isFuel)
         {
             InitializeFuelType();
+            Debug.Log($"Spawned {amount} {item} In Fuel Slot");
         }
         else if (item.isSmeltable)
         {
             _resourceToSmelt = item;
             _resourceInitialized = true;
             _resourceAmount = slot.GetInventoryItem().count;
+            Debug.Log($"Spawned {amount} {item} In Resource Slot");
         }
         else
         {

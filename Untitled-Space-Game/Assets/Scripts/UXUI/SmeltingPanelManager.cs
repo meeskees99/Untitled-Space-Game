@@ -66,6 +66,9 @@ public class SmeltingPanelManager : MonoBehaviour
         if (resourceInputSlot.GetInventoryItem() != null)
             Destroy(resourceInputSlot.GetInventoryItem().gameObject);
 
+        fuelLeftSlider.value = 0;
+        progressSlider.value = 0;
+
         if (currentSmelter == smeltingMachine || smeltingMachine == null)
         {
             currentSmelter = null;
@@ -89,7 +92,6 @@ public class SmeltingPanelManager : MonoBehaviour
             if (smeltingMachine.ResourceType != null && smeltingMachine.ResourceAmount > 0)
             {
                 smeltingMachine.AddMachineItem(resourceInputSlot, smeltingMachine.ResourceType, smeltingMachine.ResourceAmount, true);
-                // Debug.Log("look ma i spawned something");
             }
             if (smeltingMachine.FuelType != null && smeltingMachine.FuelAmount > 0)
             {
