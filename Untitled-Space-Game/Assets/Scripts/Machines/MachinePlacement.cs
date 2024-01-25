@@ -143,8 +143,9 @@ public class MachinePlacement : MonoBehaviour, IDataPersistence
 
     public void PlaceMiner(Transform placePos)
     {
+        Debug.Log($"PLACE MACHINE ON {placePos}");
         Destroy(_spawnedBlueprint);
-        GameObject spawnedMachine = Instantiate(selectedPrefab, placePos.position, Quaternion.identity);
+        GameObject spawnedMachine = Instantiate(selectedPrefab, placePos);
         spawnedMachine.transform.localPosition = _placementOffset;
 
         InventoryManager.Instance.UseItem(InventoryManager.Instance.GetSelectedItem().itemID, 1);

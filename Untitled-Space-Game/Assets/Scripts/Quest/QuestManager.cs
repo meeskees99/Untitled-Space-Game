@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -51,6 +52,11 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     private void Start()
     {
+        for (int i = 0; i < _shipStateAmount.Length; i++)
+        {
+            _shipStateAmount[i] = 100;
+        }
+
         if (Instance == null)
         {
             Instance = this;
