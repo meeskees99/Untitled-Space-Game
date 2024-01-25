@@ -10,29 +10,46 @@ using UnityEngine.Audio;
 public class Settings : MonoBehaviour
 {
     [Header("Audio")]
-    [SerializeField] AudioMixer audioMixer;
+    [SerializeField] AudioMixer _audioMixer;
+    [SerializeField] TMP_InputField _masterInput;
+    [SerializeField] TMP_InputField _musicInput;
+    [SerializeField] TMP_InputField _sfxInput;
+
+    [SerializeField] Slider _masterSlider;
+    [SerializeField] Slider _musicSlider;
+    [SerializeField] Slider _sfxSlider;
 
     [Header("Video")]
-    List<Resolution> resolutions = new();
-    [SerializeField] TMP_Dropdown resDropDown;
-    [SerializeField] int currentRes;
-    int lastRes;
+    List<Resolution> _resolutions = new();
+    [SerializeField] TMP_Dropdown _resDropDown;
 
-    [SerializeField] TMP_Dropdown fullScreenDrowdown;
-    [SerializeField] int currentFullscreen;
-    int lastFullscreen;
+    [SerializeField] TMP_Dropdown _fullScreenDrowdown;
 
-    [SerializeField] Slider fpsSlider;
+    [SerializeField] Slider _fpsSlider;
+    [SerializeField] TMP_InputField _fpsInput;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
         GetAndSetResolution();
-        // StartSettingsChange();
+
+        #region Audio Start
+        _audioMixer.SetFloat("MasterVol", PlayerPrefs.GetFloat("MasterVol"));
+        _masterSlider.value = PlayerPrefs.GetFloat("MasterVol");
+        _masterInput.text = PlayerPrefs.GetFloat("MasterVol").ToString();
+
+        _audioMixer.SetFloat("MusicVol", PlayerPrefs.GetFloat("MusicVol"));
+        _masterSlider.value = PlayerPrefs.GetFloat("MusicVol");
+        _masterInput.text = PlayerPrefs.GetFloat("MusicVol").ToString();
+
+        _audioMixer.SetFloat("SFXVol", PlayerPrefs.GetFloat("SfxVol"));
+        _masterSlider.value = PlayerPrefs.GetFloat("SfxVol");
+        _masterInput.text = PlayerPrefs.GetFloat("SfxVol").ToString();
+        #endregion
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -41,83 +58,125 @@ public class Settings : MonoBehaviour
     #region Audio
     public void SetMasterVol(float masterLvl)
     {
-        audioMixer.SetFloat("MasterVol", Mathf.Log10(masterLvl) * 20);
+        _audioMixer.SetFloat("MasterVol", Mathf.Log10(masterLvl) * 20);
         PlayerPrefs.SetFloat("MasterVol", masterLvl);
     }
 
     public void SetMusicVol(float musicLvl)
     {
-        audioMixer.SetFloat("MusicVol", Mathf.Log10(musicLvl) * 20);
+        _audioMixer.SetFloat("MusicVol", Mathf.Log10(musicLvl) * 20);
         PlayerPrefs.SetFloat("MusicVol", musicLvl);
     }
     public void SetSFXVol(float sfxLvl)
     {
-        audioMixer.SetFloat("SFXVol", Mathf.Log10(sfxLvl) * 20);
+        _audioMixer.SetFloat("SFXVol", Mathf.Log10(sfxLvl) * 20);
         PlayerPrefs.SetFloat("SfxVol", sfxLvl);
+    }
+
+    public void SetMasterVolInput()
+    {
+        float f;
+
+        float.TryParse(_masterInput.text, out f);
+        if (f < _masterSlider.minValue)
+        {
+            f = _masterSlider.minValue;
+            _masterSlider.value = f;
+        }
+        else if (f > _masterSlider.maxValue)
+        {
+            f = _masterSlider.maxValue;
+            _masterSlider.value = f;
+        }
+    }
+
+    public void SetMusicVolInput()
+    {
+        float f;
+
+        float.TryParse(_musicInput.text, out f);
+        if (f < _musicSlider.minValue)
+        {
+            f = _musicSlider.minValue;
+            _musicSlider.value = f;
+        }
+        else if (f > _musicSlider.maxValue)
+        {
+            f = _musicSlider.maxValue;
+            _musicSlider.value = f;
+        }
+    }
+
+    public void SetSfxVolInput()
+    {
+        float f;
+
+        float.TryParse(_sfxInput.text, out f);
+        if (f < _sfxSlider.minValue)
+        {
+            f = _sfxSlider.minValue;
+            _sfxSlider.value = f;
+        }
+        else if (f > _sfxSlider.maxValue)
+        {
+            f = _sfxSlider.maxValue;
+            _sfxSlider.value = f;
+        }
     }
     #endregion
 
     #region Video
-    #region Resolution 
+
+    #region Resolution
+
     void GetAndSetResolution()
     {
         Resolution[] tempRes = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
 
         for (int i = tempRes.Length - 1; i > 0; i--)
         {
-            resolutions.Add(tempRes[i]);
+            _resolutions.Add(tempRes[i]);
         }
-        resDropDown.ClearOptions();
+        _resDropDown.ClearOptions();
 
         List<string> options = new();
 
-        for (int i = 0; i < resolutions.Count; i++)
+        for (int i = 0; i < _resolutions.Count; i++)
         {
-            string Option = resolutions[i].width + "x" + resolutions[i].height;
+            string Option = _resolutions[i].width + "x" + _resolutions[i].height;
             options.Add(Option);
         }
-        //options.Reverse();
-        resDropDown.AddOptions(options);
-        resDropDown.value = currentRes;
-        resDropDown.RefreshShownValue();
+        // options.Reverse();
+        _resDropDown.AddOptions(options);
+        _resDropDown.RefreshShownValue();
 
-        Screen.SetResolution(resolutions[currentRes].width, resolutions[currentRes].height, true);
-        fpsSlider.maxValue = Screen.resolutions[currentRes].refreshRate;
+        Screen.SetResolution(_resolutions[0].width, _resolutions[0].height, true);
+        _fpsSlider.maxValue = Screen.resolutions[0].refreshRate;
 
-        Application.targetFrameRate = Screen.resolutions[currentRes].refreshRate;
-        fpsSlider.value = fpsSlider.maxValue;
+        Application.targetFrameRate = Screen.resolutions[0].refreshRate;
+        _fpsSlider.value = _fpsSlider.maxValue;
 
+        SetScreenOptions(0);
     }
 
     void SetResolution(int index)
     {
-        PlayerPrefs.SetInt("ResolutionIndex", index);
-        Screen.SetResolution(resolutions[index].width, resolutions[index].height, Screen.fullScreen);
-        resDropDown.value = index;
-        resDropDown.RefreshShownValue();
-        SetScreenOptions(PlayerPrefs.GetInt("FullscreenIndex"));
-        currentRes = index;
-    }
-
-    void GetResolution()
-    {
-        if (PlayerPrefs.HasKey("ResolutionIndex"))
-        {
-            SetResolution(PlayerPrefs.GetInt("ResolutionIndex"));
-        }
-        else
-        {
-            SetResolution(0);
-        }
+        Screen.SetResolution(_resolutions[index].width, _resolutions[index].height, Screen.fullScreen);
+        _resDropDown.value = index;
+        _resDropDown.RefreshShownValue();
     }
 
     public void NewResolution(int index)
     {
-        resDropDown.value = index;
-        resDropDown.RefreshShownValue();
-    }
+        _resDropDown.value = index;
+        _resDropDown.RefreshShownValue();
 
-    void SetScreenOptions(int index)
+        SetResolution(index);
+    }
+    #endregion
+
+    #region Fullscreen
+    public void SetScreenOptions(int index)
     {
         switch (index)
         {
@@ -152,6 +211,43 @@ public class Settings : MonoBehaviour
         Screen.fullScreenMode = FullScreenMode.Windowed;
     }
     #endregion
+
+    public void DoVsync(bool value)
+    {
+        if (value)
+        {
+            QualitySettings.vSyncCount = 1;
+            Application.targetFrameRate = _resolutions[0].refreshRate;
+        }
+        else
+        {
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 0;
+        }
+    }
+
+    public void LimitFPS(float value)
+    {
+        if (QualitySettings.vSyncCount == 0)
+            Application.targetFrameRate = (int)value;
+    }
+
+    public void LimitFPSInput()
+    {
+        float f;
+
+        float.TryParse(_fpsInput.text, out f);
+        if (f < _fpsSlider.minValue)
+        {
+            f = _fpsSlider.minValue;
+            _fpsSlider.value = f;
+        }
+        else if (f > _fpsSlider.maxValue)
+        {
+            f = _fpsSlider.maxValue;
+            _fpsSlider.value = f;
+        }
+    }
 
     #endregion
 

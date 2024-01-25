@@ -1,19 +1,4 @@
-using System.Collections;
-
-
-
-
-
-
-
-
-
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class MachinePlacement : MonoBehaviour, IDataPersistence
