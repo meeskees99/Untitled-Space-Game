@@ -35,24 +35,20 @@ public class Settings : MonoBehaviour
     {
         GetAndSetResolution();
 
+
         #region Audio Start
         _audioMixer.SetFloat("MasterVol", PlayerPrefs.GetFloat("MasterVol"));
         _masterSlider.value = PlayerPrefs.GetFloat("MasterVol");
-        _masterInput.text = PlayerPrefs.GetFloat("MasterVol").ToString();
+        _masterInput.text = PlayerPrefs.GetFloat("MasterVol").ToString("0");
 
         _audioMixer.SetFloat("MusicVol", PlayerPrefs.GetFloat("MusicVol"));
         _masterSlider.value = PlayerPrefs.GetFloat("MusicVol");
-        _masterInput.text = PlayerPrefs.GetFloat("MusicVol").ToString();
+        _masterInput.text = PlayerPrefs.GetFloat("MusicVol").ToString("0");
 
         _audioMixer.SetFloat("SFXVol", PlayerPrefs.GetFloat("SfxVol"));
         _masterSlider.value = PlayerPrefs.GetFloat("SfxVol");
-        _masterInput.text = PlayerPrefs.GetFloat("SfxVol").ToString();
+        _masterInput.text = PlayerPrefs.GetFloat("SfxVol").ToString("0");
         #endregion
-    }
-
-    void Update()
-    {
-
     }
 
     #region Audio
@@ -60,17 +56,20 @@ public class Settings : MonoBehaviour
     {
         _audioMixer.SetFloat("MasterVol", Mathf.Log10(masterLvl) * 20);
         PlayerPrefs.SetFloat("MasterVol", masterLvl);
+        _masterInput.text = (_masterSlider.value * 100).ToString("0");
     }
 
     public void SetMusicVol(float musicLvl)
     {
         _audioMixer.SetFloat("MusicVol", Mathf.Log10(musicLvl) * 20);
         PlayerPrefs.SetFloat("MusicVol", musicLvl);
+        _musicInput.text = (_musicSlider.value * 100).ToString("0");
     }
     public void SetSFXVol(float sfxLvl)
     {
         _audioMixer.SetFloat("SFXVol", Mathf.Log10(sfxLvl) * 20);
         PlayerPrefs.SetFloat("SfxVol", sfxLvl);
+        _sfxInput.text = (_sfxSlider.value * 100).ToString("0");
     }
 
     public void SetMasterVolInput()
@@ -78,6 +77,7 @@ public class Settings : MonoBehaviour
         float f;
 
         float.TryParse(_masterInput.text, out f);
+        f /= 100;
         if (f < _masterSlider.minValue)
         {
             f = _masterSlider.minValue;
@@ -88,6 +88,7 @@ public class Settings : MonoBehaviour
             f = _masterSlider.maxValue;
             _masterSlider.value = f;
         }
+        _masterInput.text = (f * 100).ToString("0");
     }
 
     public void SetMusicVolInput()
@@ -95,6 +96,7 @@ public class Settings : MonoBehaviour
         float f;
 
         float.TryParse(_musicInput.text, out f);
+        f /= 100;
         if (f < _musicSlider.minValue)
         {
             f = _musicSlider.minValue;
@@ -105,6 +107,7 @@ public class Settings : MonoBehaviour
             f = _musicSlider.maxValue;
             _musicSlider.value = f;
         }
+        _musicInput.text = (f * 100).ToString("0");
     }
 
     public void SetSfxVolInput()
@@ -112,6 +115,7 @@ public class Settings : MonoBehaviour
         float f;
 
         float.TryParse(_sfxInput.text, out f);
+        f /= 100;
         if (f < _sfxSlider.minValue)
         {
             f = _sfxSlider.minValue;
@@ -122,6 +126,7 @@ public class Settings : MonoBehaviour
             f = _sfxSlider.maxValue;
             _sfxSlider.value = f;
         }
+        _sfxInput.text = (f * 100).ToString("0");
     }
     #endregion
 
@@ -230,6 +235,8 @@ public class Settings : MonoBehaviour
     {
         if (QualitySettings.vSyncCount == 0)
             Application.targetFrameRate = (int)value;
+
+        _fpsInput.text = value.ToString("0");
     }
 
     public void LimitFPSInput()

@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InGameUIManager : MonoBehaviour
@@ -64,7 +65,7 @@ public class InGameUIManager : MonoBehaviour
             Time.timeScale = 0;
             _pausePanel.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            // Cursor.visible = true;
             FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Menu");
         }
         else
@@ -72,7 +73,7 @@ public class InGameUIManager : MonoBehaviour
             Time.timeScale = 1;
             _pausePanel.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            // Cursor.visible = false;
             FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Game");
         }
         _gamePaused = !_gamePaused;
@@ -178,6 +179,7 @@ public class InGameUIManager : MonoBehaviour
 
     public void MainMenu()
     {
-
+        DataPersistenceManager.instance.SaveGame();
+        SceneManager.LoadScene("Main Menu");
     }
 }
