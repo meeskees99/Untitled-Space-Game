@@ -375,6 +375,15 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 _startQuest = _allQuests[i];
             }
         }
+
+        for (int i = 0; i < data.currentQuestId; i++)
+        {
+            for (int j = 0; j < _allQuests[i].recipesToUnlock.Length; j++)
+            {
+                CraftingManager.Instance.AddRecipe(_allQuests[i].recipesToUnlock[j]);
+            }
+        }
+
         _shipStateAmount = data.shipState;
     }
 
