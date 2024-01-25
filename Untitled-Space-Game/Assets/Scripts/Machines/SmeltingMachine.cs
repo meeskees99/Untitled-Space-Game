@@ -165,6 +165,16 @@ public class SmeltingMachine : MonoBehaviour
         }
         #endregion
 
+        if (!_fuelInputSlot.GetInventoryItem())
+        {
+            FuelType = null;
+            FuelInitialized = false;
+        }
+        if (!_resourceInputSlot.GetInventoryItem())
+        {
+            ResourceType = null;
+            ResourceInitialized = false;
+        }
         if (_fuelType != null && _resourceType != null)
         {
             HandleSmelt();
