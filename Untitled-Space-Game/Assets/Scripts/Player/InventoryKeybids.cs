@@ -129,7 +129,6 @@ public class InventoryKeybids : MonoBehaviour
                 }
                 else
                 {
-                    // if (InGameUIManager.Instance.inventoryShown)
                     InGameUIManager.Instance.ToggleInventory();
 
                     InventorySubscribe();
@@ -156,6 +155,19 @@ public class InventoryKeybids : MonoBehaviour
             {
                 if (_lastHitResource != null)
                 {
+                    List<Outline> allActiveOutlines = new();
+                    Outline[] allOutlines = FindObjectsOfType<Outline>();
+                    foreach (var outline in allOutlines)
+                    {
+                        if (outline.enabled)
+                        {
+                            allActiveOutlines.Add(outline);
+                        }
+                    }
+                    foreach (var activeOutline in allActiveOutlines)
+                    {
+                        activeOutline.enabled = false;
+                    }
                     _lastHitResource.GetComponent<Outline>().enabled = false;
                     _lastHitResource = null;
                 }
