@@ -2617,7 +2617,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3620.3599, y: 0}
+  m_AnchoredPosition: {x: -3651.3599, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &104472689
@@ -43821,7 +43821,7 @@ PrefabInstance:
     - target: {fileID: 4503848335251699706, guid: 06bcea58125b04241ad5825ca0b633c3,
         type: 3}
       propertyPath: _allQuests.Array.size
-      value: 24
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 4503848335251699706, guid: 06bcea58125b04241ad5825ca0b633c3,
         type: 3}
@@ -43857,31 +43857,31 @@ PrefabInstance:
         type: 3}
       propertyPath: _allQuests.Array.data[18]
       value: 
-      objectReference: {fileID: 11400000, guid: cbe2664d0588de14497b669e741f2747,
+      objectReference: {fileID: 11400000, guid: 8e7adb9b5d393ee4baa3a9dd59bd47c7,
         type: 2}
     - target: {fileID: 4503848335251699706, guid: 06bcea58125b04241ad5825ca0b633c3,
         type: 3}
       propertyPath: _allQuests.Array.data[19]
       value: 
-      objectReference: {fileID: 11400000, guid: 8e7adb9b5d393ee4baa3a9dd59bd47c7,
+      objectReference: {fileID: 11400000, guid: d823cbf2726a8d24cbffcad6a59fb8c6,
         type: 2}
     - target: {fileID: 4503848335251699706, guid: 06bcea58125b04241ad5825ca0b633c3,
         type: 3}
       propertyPath: _allQuests.Array.data[20]
       value: 
-      objectReference: {fileID: 11400000, guid: d823cbf2726a8d24cbffcad6a59fb8c6,
+      objectReference: {fileID: 11400000, guid: 5d110f7af0569b041bf1cb650ef0c80e,
         type: 2}
     - target: {fileID: 4503848335251699706, guid: 06bcea58125b04241ad5825ca0b633c3,
         type: 3}
       propertyPath: _allQuests.Array.data[21]
       value: 
-      objectReference: {fileID: 11400000, guid: 5d110f7af0569b041bf1cb650ef0c80e,
+      objectReference: {fileID: 11400000, guid: c6f11750b50429a4c8e2e33f0e63f3b8,
         type: 2}
     - target: {fileID: 4503848335251699706, guid: 06bcea58125b04241ad5825ca0b633c3,
         type: 3}
       propertyPath: _allQuests.Array.data[22]
       value: 
-      objectReference: {fileID: 11400000, guid: c6f11750b50429a4c8e2e33f0e63f3b8,
+      objectReference: {fileID: 11400000, guid: 0e79f8b1c52eb6b4e8618d7b424580f9,
         type: 2}
     - target: {fileID: 4503848335251699706, guid: 06bcea58125b04241ad5825ca0b633c3,
         type: 3}

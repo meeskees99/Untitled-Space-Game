@@ -284,8 +284,6 @@ public class MainMenuUIManager : MonoBehaviour
     {
         Debug.Log("load save: " + saveSlot.ProfileId);
 
-        DataPersistenceManager.instance.DeleteSelectedProfileId(saveSlot.ProfileId);
-
         DataPersistenceManager.instance.ChangeSelectedProfileId(saveSlot.ProfileId);
 
         DataPersistenceManager.instance.SaveGame();
