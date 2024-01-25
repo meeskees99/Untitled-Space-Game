@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questId: 5
   questName: Automatization 2/4
-  questInfo: Smelt 5 iron
+  questInfo: 'Smelt 5 raw iron '
   isQuestLine: 1
   questLineName: Automatization
   nextQuest: {fileID: 11400000, guid: aa59a0bec6eb704408dbb4b6fc0ff6f5, type: 2}

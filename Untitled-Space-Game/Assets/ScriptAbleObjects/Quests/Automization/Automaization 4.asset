@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Automaization 4
   m_EditorClassIdentifier: 
   questId: 7
-  questName: Automatization4/4
-  questInfo: Place the mining machine on some iron or copper
+  questName: Automatization 4/4
+  questInfo: Place the mining machine on an ore
   isQuestLine: 1
   questLineName: Automatization
   nextQuest: {fileID: 11400000, guid: a4f0803e5af9fb046a5b3db1999fcf25, type: 2}
@@ -23,4 +23,6 @@ MonoBehaviour:
   - {fileID: 2802134608837746400, guid: c80958d8b6fbe42418d1cdfa8b488c43, type: 3}
   recipesToUnlock: []
   itemsToGet: []
+  repairIndex: 
+  repairAmount: 
   questType: 2

@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
   m_Name: (P)repairing 5 2
   m_EditorClassIdentifier: 
-  questId: 23
+  questId: 22
   questName: (P)reparing 5 - 2/3
-  questInfo: 
-  isQuestLine: 0
-  questLineName: 
+  questInfo: 'Make 1 thruster '
+  isQuestLine: 1
+  questLineName: (P)repairing
   nextQuest: {fileID: 11400000, guid: 0e79f8b1c52eb6b4e8618d7b424580f9, type: 2}
-  itemsNeeded: []
+  itemsNeeded:
+  - item: {fileID: 11400000, guid: a2445c346f4f2c74aa5b4d95660a6040, type: 2}
+    amount: 1
   machinesNeeded: []
   recipesToUnlock: []
   itemsToGet: []

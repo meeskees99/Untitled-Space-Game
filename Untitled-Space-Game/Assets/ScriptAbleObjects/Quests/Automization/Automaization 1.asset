@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questId: 4
   questName: Automatization 1/4
-  questInfo: Collect 5 iron ingots And 3 Wood
+  questInfo: Collect 5 raw iron and 5 wood
   isQuestLine: 1
   questLineName: Automatization
   nextQuest: {fileID: 11400000, guid: 8945c12b59d55434dafcd0f56e095f4f, type: 2}

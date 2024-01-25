@@ -12,16 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
   m_Name: (P)repairing 3 2
   m_EditorClassIdentifier: 
-  questId: 17
+  questId: 16
   questName: (P)reparing 3 - 2/2
-  questInfo: Bring the circuit board to the ship
+  questInfo: Collect oil coal and cellulose
   isQuestLine: 1
   questLineName: (P)repairing
-  nextQuest: {fileID: 11400000, guid: 0412eed2cb93bf24dac613fcad23b24c, type: 2}
-  itemsNeeded: []
+  nextQuest: {fileID: 11400000, guid: 694c3bb1cb763df4b8690bb23ed380c8, type: 2}
+  itemsNeeded:
+  - item: {fileID: 11400000, guid: 7b8f7fab691d86c4fb9991baacf76445, type: 2}
+    amount: 1
   machinesNeeded: []
-  recipesToUnlock: []
+  recipesToUnlock:
+  - {fileID: 11400000, guid: 8a0d06a5f2e428049855184cab58568a, type: 2}
   itemsToGet: []
   repairIndex: 02000000
   repairAmount: 00000000
-  questType: 1
+  questType: 0

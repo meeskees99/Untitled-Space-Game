@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
   m_Name: (P)repairing 5 3
   m_EditorClassIdentifier: 
-  questId: 24
+  questId: 23
   questName: (P)reparing 5 - 3/3
-  questInfo: 
-  isQuestLine: 0
-  questLineName: 
+  questInfo: Use 2 thrusters and 100 oil to repair and fuel the ship
+  isQuestLine: 1
+  questLineName: (P)repairing
   nextQuest: {fileID: 0}
-  itemsNeeded: []
+  itemsNeeded:
+  - item: {fileID: 11400000, guid: a2445c346f4f2c74aa5b4d95660a6040, type: 2}
+    amount: 2
+  - item: {fileID: 11400000, guid: 869e13d5c1447024fac5482edc8ed1e2, type: 2}
+    amount: 100
   machinesNeeded: []
   recipesToUnlock: []
   itemsToGet: []

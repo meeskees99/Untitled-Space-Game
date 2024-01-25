@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
-  m_Name: (P)repairing 4 2
+  m_Name: (P)repairing 3 3
   m_EditorClassIdentifier: 
-  questId: 19
-  questName: (P)reparing 4 - 2/4
-  questInfo: 
-  isQuestLine: 0
-  questLineName: 
-  nextQuest: {fileID: 11400000, guid: 737650edc2111444eb7552c0b820c35b, type: 2}
-  itemsNeeded: []
+  questId: 17
+  questName: (P)reparing 3 - 1/2
+  questInfo: Make 1 plastic
+  isQuestLine: 1
+  questLineName: (P)repairing
+  nextQuest: {fileID: 11400000, guid: cbe2664d0588de14497b669e741f2747, type: 2}
+  itemsNeeded:
+  - item: {fileID: 11400000, guid: aca1b9d6f67d00942a798cc3253cff0c, type: 2}
+    amount: 5
   machinesNeeded: []
   recipesToUnlock: []
   itemsToGet: []

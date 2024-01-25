@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
   m_Name: NewBeginnings 1
   m_EditorClassIdentifier: 
+  questId: 0
   questName: New Beginnings 1/4
   questInfo: Find and mine 8 clay
   isQuestLine: 1
@@ -21,4 +22,8 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 8984ad60b8191114089bd04a918aa931, type: 2}
     amount: 8
   machinesNeeded: []
+  recipesToUnlock: []
+  itemsToGet: []
+  repairIndex: 
+  repairAmount: 
   questType: 0

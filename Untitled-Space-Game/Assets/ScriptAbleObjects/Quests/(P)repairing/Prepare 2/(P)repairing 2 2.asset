@@ -13,17 +13,16 @@ MonoBehaviour:
   m_Name: (P)repairing 2 2
   m_EditorClassIdentifier: 
   questId: 13
-  questName: (P)reparing 2 - 2/4
-  questInfo: Smelt 2 iron ores
+  questName: (P)reparing 2 - 2/3
+  questInfo: Make a wiring kit
   isQuestLine: 1
   questLineName: (P)repairing
-  nextQuest: {fileID: 11400000, guid: a1933c30664f5054ebaa35bf06944ade, type: 2}
+  nextQuest: {fileID: 11400000, guid: 7005b3405f6b6ca46876274f50ef9124, type: 2}
   itemsNeeded:
-  - item: {fileID: 11400000, guid: a4685f8f3dc23a4448eafa43274fb0d3, type: 2}
-    amount: 2
+  - item: {fileID: 11400000, guid: adbc8e0ec2ca0db429a1469ad933ba75, type: 2}
+    amount: 1
   machinesNeeded: []
-  recipesToUnlock:
-  - {fileID: 11400000, guid: 4dba759f96f2fd7478f0a107e320c56b, type: 2}
+  recipesToUnlock: []
   itemsToGet: []
   repairIndex: 
   repairAmount: 

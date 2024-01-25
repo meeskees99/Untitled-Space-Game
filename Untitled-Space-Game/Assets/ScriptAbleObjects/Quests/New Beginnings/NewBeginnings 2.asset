@@ -25,4 +25,6 @@ MonoBehaviour:
   recipesToUnlock:
   - {fileID: 11400000, guid: f5b325289dc3cf248bd29488c7562bde, type: 2}
   itemsToGet: []
+  repairIndex: 
+  repairAmount: 
   questType: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questId: 11
   questName: (P)reparing 4/4
-  questInfo: Bring the pipes to the ship
+  questInfo: 'Use the pipes to repair the ship '
   isQuestLine: 1
   questLineName: (P)repairing
   nextQuest: {fileID: 11400000, guid: c4f60df47292174468d81a56e5b3f048, type: 2}

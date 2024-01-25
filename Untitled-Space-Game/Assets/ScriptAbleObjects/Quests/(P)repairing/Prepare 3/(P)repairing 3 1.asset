@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
   m_Name: (P)repairing 3 1
   m_EditorClassIdentifier: 
-  questId: 16
+  questId: 15
   questName: (P)reparing 3 - 1/2
-  questInfo: Make the circuit board
+  questInfo: Collect herbs to make 3 cellulose
   isQuestLine: 1
   questLineName: (P)repairing
   nextQuest: {fileID: 11400000, guid: 69b080910d8eae8428c1ce75f90f6f59, type: 2}
   itemsNeeded:
-  - item: {fileID: 11400000, guid: aca1b9d6f67d00942a798cc3253cff0c, type: 2}
-    amount: 5
+  - item: {fileID: 11400000, guid: 8780bb29c4721b94dbdd68086549aabb, type: 2}
+    amount: 3
   machinesNeeded: []
-  recipesToUnlock: []
+  recipesToUnlock:
+  - {fileID: 11400000, guid: a84adc37fa6359e43a490109e2709c0a, type: 2}
   itemsToGet: []
   repairIndex: 
   repairAmount: 

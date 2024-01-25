@@ -13,17 +13,18 @@ MonoBehaviour:
   m_Name: (P)repairing 2 3
   m_EditorClassIdentifier: 
   questId: 14
-  questName: (P)reparing 2 - 3/4
-  questInfo: Make a wiring kit
+  questName: (P)reparing 2 - 3/3
+  questInfo: Use the wiring kit to repair the ship
   isQuestLine: 1
   questLineName: (P)repairing
-  nextQuest: {fileID: 11400000, guid: 7005b3405f6b6ca46876274f50ef9124, type: 2}
+  nextQuest: {fileID: 11400000, guid: 32fbd341724e44346994092b2c70adfb, type: 2}
   itemsNeeded:
   - item: {fileID: 11400000, guid: adbc8e0ec2ca0db429a1469ad933ba75, type: 2}
     amount: 1
   machinesNeeded: []
-  recipesToUnlock: []
+  recipesToUnlock:
+  - {fileID: 11400000, guid: 4ac5d2a65707fdf4c96b405984e0a81b, type: 2}
   itemsToGet: []
-  repairIndex: 
-  repairAmount: 
-  questType: 0
+  repairIndex: 03000000
+  repairAmount: 00000000
+  questType: 1

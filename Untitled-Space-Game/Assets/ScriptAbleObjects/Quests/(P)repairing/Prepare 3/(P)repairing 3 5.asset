@@ -10,21 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
-  m_Name: (P)repairing 2 4
+  m_Name: (P)repairing 3 5
   m_EditorClassIdentifier: 
-  questId: 15
-  questName: (P)reparing 2 - 4/4
-  questInfo: Bring the wiring kit to the ship
+  questId: 19
+  questName: (P)reparing 3 - 2/2
+  questInfo: Use the circuit board to repair the ship
   isQuestLine: 1
   questLineName: (P)repairing
-  nextQuest: {fileID: 11400000, guid: 32fbd341724e44346994092b2c70adfb, type: 2}
+  nextQuest: {fileID: 11400000, guid: d823cbf2726a8d24cbffcad6a59fb8c6, type: 2}
   itemsNeeded:
-  - item: {fileID: 11400000, guid: adbc8e0ec2ca0db429a1469ad933ba75, type: 2}
+  - item: {fileID: 11400000, guid: aca1b9d6f67d00942a798cc3253cff0c, type: 2}
     amount: 1
   machinesNeeded: []
-  recipesToUnlock:
-  - {fileID: 11400000, guid: 8a0d06a5f2e428049855184cab58568a, type: 2}
+  recipesToUnlock: []
   itemsToGet: []
-  repairIndex: 03000000
-  repairAmount: 00000000
+  repairIndex: 
+  repairAmount: 
   questType: 1

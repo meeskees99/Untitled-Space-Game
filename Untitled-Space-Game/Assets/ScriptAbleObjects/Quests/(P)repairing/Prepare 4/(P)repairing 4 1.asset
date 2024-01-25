@@ -12,16 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
   m_Name: (P)repairing 4 1
   m_EditorClassIdentifier: 
-  questId: 18
-  questName: (P)reparing 4 - 1/4
-  questInfo: 
-  isQuestLine: 0
-  questLineName: 
-  nextQuest: {fileID: 11400000, guid: 022a7b448c3fea548be1eb6b76cabec1, type: 2}
-  itemsNeeded: []
+  questId: 20
+  questName: (P)reparing 4 - 1/1
+  questInfo: 'Bring the iron 8, copper wire 5, and plastic 3 '
+  isQuestLine: 1
+  questLineName: (P)repairing
+  nextQuest: {fileID: 11400000, guid: 5d110f7af0569b041bf1cb650ef0c80e, type: 2}
+  itemsNeeded:
+  - item: {fileID: 11400000, guid: a4685f8f3dc23a4448eafa43274fb0d3, type: 2}
+    amount: 2
+  - item: {fileID: 11400000, guid: c017a581195eb4545ae154a0917fda1f, type: 2}
+    amount: 5
+  - item: {fileID: 11400000, guid: 7b8f7fab691d86c4fb9991baacf76445, type: 2}
+    amount: 3
   machinesNeeded: []
   recipesToUnlock: []
   itemsToGet: []
-  repairIndex: 
-  repairAmount: 
-  questType: 0
+  repairIndex: 01000000
+  repairAmount: 00000000
+  questType: 1

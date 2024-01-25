@@ -24,4 +24,6 @@ MonoBehaviour:
   machinesNeeded: []
   recipesToUnlock: []
   itemsToGet: []
+  repairIndex: 
+  repairAmount: 
   questType: 0
