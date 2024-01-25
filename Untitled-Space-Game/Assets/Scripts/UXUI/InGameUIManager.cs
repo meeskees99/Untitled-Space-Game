@@ -17,8 +17,8 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] GameObject _craftingPanel;
     [SerializeField] GameObject _shipRepairPanel;
     [SerializeField] GameObject _miningPanel;
-    [SerializeField] Slider _fuelLeftSlider;
-    [SerializeField] GameObject deathPanel;
+    [SerializeField] GameObject _deathPanel;
+    [SerializeField] GameObject _pausePanel;
 
     [Header("UI")]
     [SerializeField] TMP_Text _diedTxt;
@@ -30,6 +30,8 @@ public class InGameUIManager : MonoBehaviour
     public bool inventoryShown { get; private set; }
 
     public bool mouseLocked;
+
+    bool _gamePaused;
 
     private void Awake()
     {
@@ -49,17 +51,24 @@ public class InGameUIManager : MonoBehaviour
     {
         mouseLocked = Cursor.lockState == CursorLockMode.Locked;
 
-        // if (Input.GetKeyDown(KeyCode.Escape))
-        // {
-        // if (mouseLocked)
-        // {
-        //     Cursor.lockState = CursorLockMode.None;
-        // }
-        // else
-        // {
-        //     Cursor.lockState = CursorLockMode.Locked;
-        // }
-        // }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!_gamePaused)
+            {
+                Time.timeScale = 0;
+                _pausePanel.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
+                FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Menu");
+            }
+            else
+            {
+                Time.timeScale = 1;
+                _pausePanel.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+                FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Game");
+            }
+            _gamePaused = !_gamePaused;
+        }
     }
 
     public void ToggleInventory()
@@ -148,7 +157,7 @@ public class InGameUIManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Menu");
 
-        deathPanel.SetActive(true);
+        _deathPanel.SetActive(true);
         if (difficulty == 2)
         {
             _respawnButton.interactable = false;
