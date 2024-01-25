@@ -16,7 +16,7 @@ MonoBehaviour:
   itemPrefab: {fileID: 7417956737357288577, guid: 8d000262721971c4ca5afc120f8a37b6,
     type: 3}
   stackable: 1
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 2af5d3c1308bc5b48b1d7d04629b5ff0, type: 3}
   maxStack: 16
   canBeInHudSlot: 0
   itemToGetAfterSmelt: {fileID: 0}

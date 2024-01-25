@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Pipes
   m_EditorClassIdentifier: 
   itemID: 401
-  itemPrefab: {fileID: 289217372373441480, guid: 0ac2b2644682c9243a617762273f8d49,
+  itemPrefab: {fileID: 8176717505926634369, guid: 7c7bd3957c2b9a8499bfae6505aad1a2,
     type: 3}
   stackable: 1
-  image: {fileID: 21300000, guid: 12d264e6c9fe2dd4c9b134a99be1ee7c, type: 3}
+  image: {fileID: 21300000, guid: 9736fe1bc64d984438b1e5b6a22572da, type: 3}
   maxStack: 16
   canBeInHudSlot: 0
   itemToGetAfterSmelt: {fileID: 0}
