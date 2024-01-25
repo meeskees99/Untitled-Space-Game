@@ -9623,7 +9623,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1416635248}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: LimitFPS
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &669349329
 GameObject:
   m_ObjectHideFlags: 0
@@ -12940,7 +12952,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1416635248}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: LimitFPSInput
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -14203,7 +14227,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1416635248}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: SetScreenOptions
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1053489752
 MonoBehaviour:
@@ -18984,14 +19020,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7777d1a5ca1388f448b05b995601d08b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioMixer: {fileID: 0}
-  _masterInput: {fileID: 0}
-  _musicInput: {fileID: 0}
-  _sfxInput: {fileID: 0}
-  _resDropDown: {fileID: 0}
-  _fullScreenDrowdown: {fileID: 0}
-  _fpsSlider: {fileID: 0}
-  _fpsInput: {fileID: 0}
+  _audioMixer: {fileID: 24100000, guid: ff2a0576adb4fc941bce9254b8343532, type: 2}
+  _masterInput: {fileID: 9101586433506851390}
+  _musicInput: {fileID: 6318530802394814228}
+  _sfxInput: {fileID: 2328561395146345635}
+  _masterSlider: {fileID: 7119040429453725873}
+  _musicSlider: {fileID: 5416514680259624347}
+  _sfxSlider: {fileID: 4383140907061978668}
+  _resDropDown: {fileID: 1309625559262931680}
+  _fullScreenDrowdown: {fileID: 261008268953850325}
+  _fpsSlider: {fileID: 5872068926882668996}
+  _fpsInput: {fileID: 5618656962925824843}
 --- !u!1 &1416946839
 GameObject:
   m_ObjectHideFlags: 0
@@ -22285,7 +22324,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1416635248}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: NewResolution
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1746077051
 MonoBehaviour:
@@ -26693,7 +26744,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1416635248}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: DoVsync
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &2012428520
 GameObject:
@@ -28850,7 +28913,7 @@ GameObject:
   - component: {fileID: 5872068926882668996}
   - component: {fileID: 2720306459207926242}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: FpsSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30710,7 +30773,7 @@ GameObject:
   - component: {fileID: 1309625559262931680}
   - component: {fileID: 6211558206887929357}
   m_Layer: 5
-  m_Name: Dropdown
+  m_Name: ResDropdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32464,7 +32527,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -33867,7 +33930,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -36400,7 +36463,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -36870,7 +36933,7 @@ GameObject:
   - component: {fileID: 5618656962925824843}
   - component: {fileID: 251683696176077571}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: FpsInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37242,7 +37305,7 @@ GameObject:
   - component: {fileID: 261008268953850325}
   - component: {fileID: 465796911002652032}
   m_Layer: 5
-  m_Name: Dropdown
+  m_Name: FullScreenDropdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

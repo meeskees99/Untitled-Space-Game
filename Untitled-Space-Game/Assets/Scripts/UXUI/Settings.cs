@@ -88,6 +88,12 @@ public class Settings : MonoBehaviour
             f = _masterSlider.maxValue;
             _masterSlider.value = f;
         }
+        else
+        {
+            _masterSlider.value = f;
+        }
+
+        _audioMixer.SetFloat("MasterVol", Mathf.Log10(f) * 20);
         _masterInput.text = (f * 100).ToString("0");
     }
 
@@ -107,6 +113,11 @@ public class Settings : MonoBehaviour
             f = _musicSlider.maxValue;
             _musicSlider.value = f;
         }
+        else
+        {
+            _musicSlider.value = f;
+        }
+        _audioMixer.SetFloat("MusicVol", Mathf.Log10(f) * 20);
         _musicInput.text = (f * 100).ToString("0");
     }
 
@@ -126,6 +137,12 @@ public class Settings : MonoBehaviour
             f = _sfxSlider.maxValue;
             _sfxSlider.value = f;
         }
+        else
+        {
+            _sfxSlider.value = f;
+        }
+        _audioMixer.SetFloat("SFXVol", Mathf.Log10(f) * 20);
+
         _sfxInput.text = (f * 100).ToString("0");
     }
     #endregion
@@ -252,6 +269,10 @@ public class Settings : MonoBehaviour
         else if (f > _fpsSlider.maxValue)
         {
             f = _fpsSlider.maxValue;
+            _fpsSlider.value = f;
+        }
+        else
+        {
             _fpsSlider.value = f;
         }
     }
