@@ -62,6 +62,8 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
     [SerializeField] Sprite _heartFilledImage;
     [SerializeField] Sprite _heartDepletedImage;
 
+    [SerializeField] Material _oxygenMaterial;
+
 
     [Header("Action Bools")]
     public bool recievingOxygen;
@@ -123,6 +125,11 @@ public class PlayerStats : MonoBehaviour, IDataPersistence
     void HandleOxygen()
     {
         _currentOxygen = Oxygen;
+        float oxygenPrc = Oxygen / _maxOxygen;
+        // float calculateAmount = ;
+        Debug.Log($"Oxygen Percentage: {oxygenPrc}\nREMOVE THIS");
+
+        _oxygenMaterial.SetFloat("_Slider", oxygenPrc);
         if (!recievingOxygen)
         {
             if (Oxygen > 0)

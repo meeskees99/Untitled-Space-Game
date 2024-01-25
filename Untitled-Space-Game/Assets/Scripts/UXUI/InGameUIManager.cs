@@ -53,22 +53,29 @@ public class InGameUIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!_gamePaused)
-            {
-                Time.timeScale = 0;
-                _pausePanel.SetActive(true);
-                Cursor.lockState = CursorLockMode.None;
-                FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Menu");
-            }
-            else
-            {
-                Time.timeScale = 1;
-                _pausePanel.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
-                FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Game");
-            }
-            _gamePaused = !_gamePaused;
+            TogglePauseMenu();
         }
+    }
+
+    public void TogglePauseMenu()
+    {
+        if (!_gamePaused)
+        {
+            Time.timeScale = 0;
+            _pausePanel.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Menu");
+        }
+        else
+        {
+            Time.timeScale = 1;
+            _pausePanel.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Game");
+        }
+        _gamePaused = !_gamePaused;
     }
 
     public void ToggleInventory()
