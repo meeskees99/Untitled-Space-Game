@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: (P)repairing 2 3
   m_EditorClassIdentifier: 
   questId: 14
-  questName: (P)reparing 2 3/4
+  questName: (P)reparing 2 - 3/4
   questInfo: Make a wiring kit
   isQuestLine: 1
   questLineName: (P)repairing
@@ -24,4 +24,6 @@ MonoBehaviour:
   machinesNeeded: []
   recipesToUnlock: []
   itemsToGet: []
+  repairIndex: 
+  repairAmount: 
   questType: 0

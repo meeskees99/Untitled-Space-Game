@@ -10,20 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1d83e84b94d21b4fb761da5e9b24688, type: 3}
-  m_Name: (P)repairing 2 2
+  m_Name: (P)repairing 5 1
   m_EditorClassIdentifier: 
-  questId: 13
-  questName: (P)reparing 2 - 2/4
-  questInfo: Smelt 2 iron ores
-  isQuestLine: 1
-  questLineName: (P)repairing
-  nextQuest: {fileID: 11400000, guid: a1933c30664f5054ebaa35bf06944ade, type: 2}
-  itemsNeeded:
-  - item: {fileID: 11400000, guid: a4685f8f3dc23a4448eafa43274fb0d3, type: 2}
-    amount: 2
+  questId: 22
+  questName: (P)reparing 5 - 1/3
+  questInfo: 
+  isQuestLine: 0
+  questLineName: 
+  nextQuest: {fileID: 11400000, guid: c6f11750b50429a4c8e2e33f0e63f3b8, type: 2}
+  itemsNeeded: []
   machinesNeeded: []
-  recipesToUnlock:
-  - {fileID: 11400000, guid: 4dba759f96f2fd7478f0a107e320c56b, type: 2}
+  recipesToUnlock: []
   itemsToGet: []
   repairIndex: 
   repairAmount: 

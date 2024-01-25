@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: (P)repairing 3 1
   m_EditorClassIdentifier: 
   questId: 16
-  questName: (P)reparing 3 1/2
+  questName: (P)reparing 3 - 1/2
   questInfo: Make the circuit board
   isQuestLine: 1
   questLineName: (P)repairing

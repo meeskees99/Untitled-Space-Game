@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: (P)repairing 3 2
   m_EditorClassIdentifier: 
   questId: 17
-  questName: (P)reparing 3 2/2
+  questName: (P)reparing 3 - 2/2
   questInfo: Bring the circuit board to the ship
   isQuestLine: 1
   questLineName: (P)repairing
-  nextQuest: {fileID: 0}
+  nextQuest: {fileID: 11400000, guid: 0412eed2cb93bf24dac613fcad23b24c, type: 2}
   itemsNeeded: []
   machinesNeeded: []
   recipesToUnlock: []
   itemsToGet: []
+  repairIndex: 02000000
+  repairAmount: 00000000
   questType: 1

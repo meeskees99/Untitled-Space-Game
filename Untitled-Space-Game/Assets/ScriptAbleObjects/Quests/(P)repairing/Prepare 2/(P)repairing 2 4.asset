@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: (P)repairing 2 4
   m_EditorClassIdentifier: 
   questId: 15
-  questName: (P)reparing 2 4/4
+  questName: (P)reparing 2 - 4/4
   questInfo: Bring the wiring kit to the ship
   isQuestLine: 1
   questLineName: (P)repairing
@@ -25,6 +25,6 @@ MonoBehaviour:
   recipesToUnlock:
   - {fileID: 11400000, guid: 8a0d06a5f2e428049855184cab58568a, type: 2}
   itemsToGet: []
-  repairIndex: 
-  repairAmount: 
+  repairIndex: 03000000
+  repairAmount: 00000000
   questType: 1
