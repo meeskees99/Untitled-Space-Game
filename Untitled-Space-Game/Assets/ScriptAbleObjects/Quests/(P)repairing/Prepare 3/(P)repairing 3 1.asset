@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: (P)repairing 3 1
   m_EditorClassIdentifier: 
   questId: 15
-  questName: (P)reparing 3 - 1/2
+  questName: (P)reparing 3 - 1/4
   questInfo: Collect herbs to make 3 cellulose
   isQuestLine: 1
   questLineName: (P)repairing

@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: (P)repairing 3 3
   m_EditorClassIdentifier: 
   questId: 17
-  questName: (P)reparing 3 - 1/2
-  questInfo: Make 1 plastic
+  questName: (P)reparing 3 - 3/4
+  questInfo: Craft a circuit board
   isQuestLine: 1
   questLineName: (P)repairing
-  nextQuest: {fileID: 11400000, guid: cbe2664d0588de14497b669e741f2747, type: 2}
+  nextQuest: {fileID: 11400000, guid: 8e7adb9b5d393ee4baa3a9dd59bd47c7, type: 2}
   itemsNeeded:
   - item: {fileID: 11400000, guid: aca1b9d6f67d00942a798cc3253cff0c, type: 2}
-    amount: 5
+    amount: 1
   machinesNeeded: []
   recipesToUnlock: []
   itemsToGet: []

@@ -13,14 +13,18 @@ MonoBehaviour:
   m_Name: (P)repairing 3 2
   m_EditorClassIdentifier: 
   questId: 16
-  questName: (P)reparing 3 - 2/2
-  questInfo: Collect oil coal and cellulose
+  questName: (P)reparing 3 - 2/4
+  questInfo: Collect oil, coal and cellulose
   isQuestLine: 1
   questLineName: (P)repairing
   nextQuest: {fileID: 11400000, guid: 694c3bb1cb763df4b8690bb23ed380c8, type: 2}
   itemsNeeded:
-  - item: {fileID: 11400000, guid: 7b8f7fab691d86c4fb9991baacf76445, type: 2}
-    amount: 1
+  - item: {fileID: 11400000, guid: 3cf766bc9da0fb1428e62c58543cf55a, type: 2}
+    amount: 5
+  - item: {fileID: 11400000, guid: 869e13d5c1447024fac5482edc8ed1e2, type: 2}
+    amount: 2
+  - item: {fileID: 11400000, guid: 8780bb29c4721b94dbdd68086549aabb, type: 2}
+    amount: 3
   machinesNeeded: []
   recipesToUnlock:
   - {fileID: 11400000, guid: 8a0d06a5f2e428049855184cab58568a, type: 2}

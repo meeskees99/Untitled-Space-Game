@@ -116,6 +116,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
         if (_currentQuest.nextQuest != null)
         {
+            Debug.Log("NEXT QUEST");
             _currentQuest = _currentQuest.nextQuest;
         }
         else
@@ -180,6 +181,8 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             GameObject temp = Instantiate(_inventorySlotPrefab, _inventorySlotParent);
             _shipRepairSubmitSlots.Add(temp.GetComponent<InventorySlot>());
         }
+
+        Debug.Log("DO REPAIR");
 
         for (int i = 0; i < _shipStateAmount.Length; i++)
         {
@@ -346,7 +349,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 }
             }
             Debug.Log("all items have been submitted");
-            StartNewQuest();
+            EndQuest();
         }
     }
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: (P)repairing 3 5
   m_EditorClassIdentifier: 
   questId: 19
-  questName: (P)reparing 3 - 2/2
+  questName: (P)reparing 3 - 4/4
   questInfo: Use the circuit board to repair the ship
   isQuestLine: 1
   questLineName: (P)repairing
