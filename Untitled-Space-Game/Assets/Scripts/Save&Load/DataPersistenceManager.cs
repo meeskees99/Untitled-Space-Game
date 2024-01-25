@@ -129,7 +129,11 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        SaveGame();
+        if (SceneManager.GetActiveScene().name != "Main Menu")
+        {
+            Debug.Log($"{SceneManager.GetActiveScene().name}");
+            SaveGame();
+        }
     }
 
     public void SaveBtn()
